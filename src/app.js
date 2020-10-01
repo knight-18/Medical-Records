@@ -9,7 +9,6 @@ app.use(express.json());
 
 // using dotenv module for environment
 require("dotenv").config();
-//console.log(process.env.MONGODB_URL)
 
 //Configuring Port
 const PORT = process.env.PORT || 3000;
