@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const validator=require('validator');
-const passwordStrength=require('check-password-strength')
 const jwt=require('jsonwebtoken');
 const bcrypt=require('bcryptjs')
 require("dotenv").config();
@@ -32,11 +31,22 @@ const userSchema = mongoose.Schema({
         minlength:8,
         validate(value)
         {
-            if(passwordStrength(value).id < 1)
-            {
-                throw new Error('Password should contain a mix of lowercase,uppercase and special charcaters')
+            var strength=0
+            if(value.match(/[a-z]+/)){
+                strength+=1;
             }
-
+            if(value.match(/[A-Z]+/)){
+                strength+=1;
+            }
+            if(value.match(/[0-9]+/)){
+            strength+=1;}
+            if(value.match(/[#$&!@]+/)){
+                strength+=1;
+            }
+            if(strength<4)
+            {
+                throw new Error('The password must contain a mix of uppercase and lowercase alphabets along with numbers and special chacracters')
+            }
         }
     },
     phoneNumber:{
