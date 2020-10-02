@@ -20,7 +20,6 @@
   "homepage": "https://github.com/knight-18/Medical-Records#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "check-password-strength": "^1.0.15",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.5",
     "express": "^4.17.1",
