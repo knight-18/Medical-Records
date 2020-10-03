@@ -1,4 +1,5 @@
 var nodemailer = require("nodemailer");
+import _ from 'lodash';
 exports.sendMessage = function(req, res) 
 { 
           try {
