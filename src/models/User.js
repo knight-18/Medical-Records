@@ -24,7 +24,7 @@ const userSchema = mongoose.Schema({
             }
         }
     },
-    passsword:{
+    password:{
         type:String,
         trim:true,
         required:true,
@@ -55,13 +55,13 @@ const userSchema = mongoose.Schema({
         required:true,
         validate(value)
         {
-            if(!validator.isMobileNumber(value))
+            if(!validator.isMobilePhone(value))
             {
                 throw new Error('Invalid Mobile Number')
             }
         }
-    },
-    tokens:[
+    }
+    /*tokens:[
         {
             token:{
                 type:String,
@@ -69,30 +69,35 @@ const userSchema = mongoose.Schema({
             }
 
         }
-    ]
-},{
-    timestamps:true
-})
-
-userSchema.methods.generateAuthToken=async function(){
-    const user=this
-    const token=jwt.sign({_id:user._id.toString()},process.env.JWT_SECRET)
-    user.tokens=user.tokens.concat({token})
-    await user.save()
-    return token
-
+    ]*/
 }
+/*{
+    timestamps:true
+}*/);
 
-userSchema.pre('save',async function(next){
-    const user=this
-    if(user.isModified('password'))
-    {
-        user.passsword= await bcrypt.hash(user.passsword,8)
+
+
+// static method to login user
+userSchema.statics.login = async function(email, password) {
+    const user = await this.findOne({ email });
+    if (user) {
+      const auth = await bcrypt.compare(password, user.password);
+      if (auth) {
+        return user;
+      }
+      throw Error('incorrect password');
     }
-    next()
-})
+    throw Error('incorrect email');
+  };
 
-const User=mongoose.model('User',userSchema)
+// fire a function before doc saved to db
+userSchema.pre('save', async function(next) {
+    const salt = await bcrypt.genSalt();
+    this.password = await bcrypt.hash(this.password, salt);
+    next();
+  });
+
+const User=mongoose.model('User', userSchema)
 
 module.exports= User
 
