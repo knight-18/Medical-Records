@@ -1,7 +1,7 @@
 //Importing packages
 const express = require('express');
 const path = require('path');
-const cookieParser = require('cookie-parser');
+
 const mongoose = require('mongoose');
 const routes = require('./routes/user'); 
 const connect_flash = require('connect-flash'); 
@@ -49,7 +49,7 @@ app.use(function (req, res, next) {
 //Setup for rendering static pages
 const publicDirectory = path.join(__dirname,'../public');
 app.use(express.static(publicDirectory));
-app.use(cookieParser());
+
 
 //Routes
 app.use(routes);
