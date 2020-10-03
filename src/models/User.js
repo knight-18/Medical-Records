@@ -25,6 +25,7 @@ const userSchema = mongoose.Schema({
         }
     },
     passsword:{
+        defaultValue: false,
         type:String,
         trim:true,
         required:true,
