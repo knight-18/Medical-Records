@@ -177,3 +177,12 @@ body {
     margin: 3px 10px;
     font-size: 20px;
 }
+.form-group{
+    display: flex;
+    align-items: center;
+}
+i{
+    display: inline;
+    margin-left: -40px;
+    cursor: pointer;
+}
