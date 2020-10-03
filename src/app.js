@@ -1,6 +1,7 @@
 //Importing packages
 const express = require('express');
 const path = require('path');
+const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const routes = require('./routes/user'); 
 const connect_flash = require('connect-flash'); 
@@ -9,7 +10,9 @@ const cookieParser = require("cookie-parser");
 //Configuring App
 const app = express();
 app.use(express.json());
-
+app.use(express.static('public'));
+app.use(express.json());
+app.use(cookieParser());
 // using dotenv module for environment
 require("dotenv").config({ path: 'env' });
 
@@ -42,10 +45,12 @@ app.use(function (req, res, next) {
   next();
 });
 
+
 //Setup for rendering static pages
 const publicDirectory = path.join(__dirname,'../public');
 app.use(express.static(publicDirectory));
 app.use(cookieParser());
+
 //Routes
 app.use(routes);
 //Start the server

@@ -1,9 +1,9 @@
-const mongoose = require('mongoose');
-const validator=require('validator');
-const jwt=require('jsonwebtoken');
-const bcrypt=require('bcryptjs')
-require("dotenv").config();
- 
+const mongoose = require('mongoose')
+const validator = require('validator')
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs')
+require('dotenv').config()
+
 
 const userSchema = mongoose.Schema({
     name:{
@@ -86,6 +86,7 @@ userSchema.statics.login = async function(email, password) {
         return user;
       }
       throw Error('incorrect password');
+
     }
     throw Error('incorrect email');
   };
@@ -97,9 +98,7 @@ userSchema.pre('save', async function(next) {
     next();
   });
 
-const User=mongoose.model('User', userSchema)
-
-module.exports= User
+const User = mongoose.model('User', userSchema)
 
 
-
+module.exports = User
