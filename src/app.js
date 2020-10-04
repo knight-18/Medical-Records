@@ -8,7 +8,6 @@ const mongoose = require('mongoose');
 const app = express();
 app.use(express.json());
 app.use(express.static('public'));
-app.use(express.json());
 app.use(cookieParser());
 // using dotenv module for environment
 require("dotenv").config();
@@ -32,6 +31,10 @@ app.set('view engine','ejs');
 app.use(express.urlencoded({extended:true}));
 
 //Routes
+const indexRoutes = require('./routes/index');
+
+app.use('/api',indexRoutes);
+
 
 //Start the server
 app.listen(PORT,()=>{
