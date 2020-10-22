@@ -7,6 +7,7 @@ const routes = require('./routes/user');
 const connect_flash = require('connect-flash'); 
 const session = require('express-session');
 const cookieParser = require("cookie-parser"); 
+const expressLayouts = require('express-ejs-layouts');
 //Configuring App
 const app = express();
 app.use(express.json());
@@ -30,7 +31,7 @@ mongoose.connect(process.env.MONGODB_URL,{
 
 //Setting EJS view engine
 app.set('view engine','ejs');
-
+app.use(expressLayouts);
 //body parser
 app.use(express.urlencoded({extended:true}));
 app.use(session({
@@ -40,8 +41,14 @@ app.use(session({
   }));
 
 app.use(connect_flash());
-app.use(function (req, res, next) {
-  res.locals.messages = require('express-messages')(req, res);
+
+
+// global var
+app.use((req,res,next) => {
+  res.locals.success_msg=req.flash("success_msg");
+  res.locals.error_msg=req.flash("error_msg");
+  
+ 
   next();
 });
 
