@@ -7,16 +7,17 @@ require('dotenv').config();
 
 const requireAuth = (req, res, next) => {
   const token = req.cookies.jwt;
-  console.log(token);
+  //console.log(token);
   // check json web token exists & is verified
   if (token) {
-    jwt.verify(token, process.env.JWT_SECRET, (err, decodedToken) => {
+    jwt.verify(token, process.env.JWT_SECRET, async (err, decodedToken) => {
       if (err) {
         console.log(err.message);
         
         res.redirect('/login');
       } else {
-        console.log(decodedToken);
+        let user = await User.findById(decodedToken.id);
+        res.locals.user = user;  
         next();
       }
     });
@@ -26,7 +27,6 @@ const requireAuth = (req, res, next) => {
 };
 
 
-  
 
 module.exports =  requireAuth ;
 
