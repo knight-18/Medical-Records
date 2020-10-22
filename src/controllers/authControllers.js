@@ -16,7 +16,10 @@ const handleErrors = (err) => {
 
 
  
-
+  if (err.code === 11000) {
+    errors.email = 'that email is already registered';
+    return errors;
+  }
   // validation errors
   if (err.message.includes('User validation failed')) {
     // console.log(err);
@@ -51,17 +54,17 @@ module.exports.signup_post = async (req, res) => {
     const user = new User({'email' : email, 'name' : name, 'password' : password, 'phoneNumber' : phoneNumber}); 
     let saveUser = await user.save(); 
     const token = createToken(saveUser._id);
-    console.log(token); 
+    //console.log(token); 
     res.cookie('jwt', token, { httpOnly: true, maxAge : maxAge*1000 });
     console.log(saveUser); 
-    req.flash("info", "Thank You for Registering");
+    req.flash("success_msg", "Registration Successful");
     res.redirect("/profile"); 
   }
   catch(err) {
     const errors = handleErrors(err); 
     console.log(errors);
-    console.log(err);
-    req.flash("warning", "Could not signup");
+    //res.json(errors);
+    req.flash("error_msg", "Could not signup");
     res.status(400).redirect("/signup");
   } 
   
@@ -76,26 +79,28 @@ module.exports.login_post = async (req, res) => {
     
     res.cookie('jwt', token, { httpOnly: true, maxAge : maxAge * 1000});
     console.log(user); 
-    req.flash("info", "Successfully logged in");
+    req.flash("success_msg", "Successfully logged in");
     res.status(200).redirect("/profile");
   } 
   catch (err) {
-    const errors = handleErrors(err);
-    res.status(400).json({ errors });
+    req.flash("error_msg", "Invalid Credentials"); 
+
+    res.redirect("/login");
   }
-  console.log(email, password);
-  res.send('user login');
+ // console.log(email, password);
+
 }
 
 
 
 module.exports.profile_get = async (req, res) => {
+   
    res.render("profile"); 
 }
 
-module.exports.logout_get = (req, res) => {
+module.exports.logout_get = async (req, res) => {
   res.cookie('jwt', '', { maxAge: 1 });
-  req.flash("info", "Successfully logged out");
+  req.flash("success_msg", "Successfully logged out");
   res.redirect('/login');
 }
 
