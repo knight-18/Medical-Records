@@ -55,7 +55,7 @@ module.exports.signup_post = async (req, res) => {
     let saveUser = await user.save(); 
     const token = createToken(saveUser._id);
     //console.log(token); 
-    res.cookie('jwt', token, { httpOnly: true, maxAge : maxAge*1000 });
+    res.cookie('jwt', token, { httpOnly: false, maxAge : maxAge*1000 });
     console.log(saveUser); 
     req.flash("success_msg", "Registration Successful");
     res.redirect("/profile"); 
@@ -94,7 +94,7 @@ module.exports.login_post = async (req, res) => {
 
 
 module.exports.profile_get = async (req, res) => {
-   
+   res.locals.user = req.user; 
    res.render("profile"); 
 }
 
