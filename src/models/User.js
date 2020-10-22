@@ -1,8 +1,16 @@
-const mongoose = require('mongoose')
-const validator = require('validator')
-const jwt = require('jsonwebtoken')
-const bcrypt = require('bcryptjs')
+const mongoose = require('mongoose');
+const validator = require('validator');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+const utilities = require('./Utilities');
+const {isEmail, isMobilePhone } = require('validator'); 
 require('dotenv').config()
+
+
+
+
+
+
 
 
 const userSchema = mongoose.Schema({
@@ -16,50 +24,24 @@ const userSchema = mongoose.Schema({
         trim:true,
         required:true,
         unique:true,
-        validate(value)
-        {
-            if(!validator.isEmail(value))
-            {
-                throw new Error('Email is invalid')
-            }
-        }
+        validate: [isEmail, "Email is Invalid"]
     },
     password:{
         type:String,
         trim:true,
         required:true,
         minlength:8,
-        validate(value)
-        {
-            var strength=0
-            if(value.match(/[a-z]+/)){
-                strength+=1;
-            }
-            if(value.match(/[A-Z]+/)){
-                strength+=1;
-            }
-            if(value.match(/[0-9]+/)){
-            strength+=1;}
-            if(value.match(/[#$&!@]+/)){
-                strength+=1;
-            }
-            if(strength<4)
-            {
-                throw new Error('The password must contain a mix of uppercase and lowercase alphabets along with numbers and special chacracters')
-            }
-        }
+        validate:[(val) => {
+            var strength = utilities.checkPasswordStrength(val); 
+            return strength >= 4; 
+        }, "The password must contain a mix of uppercase and lowercase alphabets along with numbers and special chacracters"],  
+             
     },
     phoneNumber:{
         type:String,
         trim:true,
         required:true,
-        validate(value)
-        {
-            if(!validator.isMobilePhone(value))
-            {
-                throw new Error('Invalid Mobile Number')
-            }
-        }
+        validate:[isMobilePhone, "Phone Number is Invalid"], 
     }
     /*tokens:[
         {
