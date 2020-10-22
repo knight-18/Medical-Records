@@ -12,7 +12,6 @@ const expressLayouts = require('express-ejs-layouts');
 const app = express();
 app.use(express.json());
 app.use(express.static('public'));
-app.use(express.json());
 app.use(cookieParser());
 // using dotenv module for environment
 require("dotenv").config({ path: 'env' });
@@ -42,7 +41,6 @@ app.use(session({
 
 app.use(connect_flash());
 
-
 // global var
 app.use((req,res,next) => {
   res.locals.success_msg=req.flash("success_msg");
@@ -51,6 +49,16 @@ app.use((req,res,next) => {
  
   next();
 });
+
+
+
+//Routes
+const indexRoutes = require('./routes/index');
+
+app.use('/api',indexRoutes);
+
+
+
 
 
 //Setup for rendering static pages
