@@ -186,3 +186,7 @@ i{
     margin-left: -40px;
     cursor: pointer;
 }
+#LoginOption{
+    position:relative;
+    bottom:100px;
+}
