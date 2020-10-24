@@ -4,7 +4,7 @@ exports.sendMessage = function (req, res) {
   try {
     const emailToken = jwt.sign(
       {
-        user: _.pick(user, 'id'),
+        user: user.id,
       },
       process.env.Jwt_Secret,
       {
@@ -18,7 +18,7 @@ exports.sendMessage = function (req, res) {
       from: process.env.NODEMAILER_EMAIL,
       to: args.email,
       subject: 'Confirm Email',
-      html: `Please click this email to confirm your email: <a href="${url}">${url}</a>`,
+      html: `Please click this link to verify your email: <a href="${url}">Click here</a>`,
     });
   } catch (e) {
     console.log(e);
