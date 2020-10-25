@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
-const jwt = require('jsonwebtoken');
+//const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const utilities = require('./Utilities');
 const {isEmail, isMobilePhone } = require('validator'); 
@@ -39,8 +39,8 @@ const userSchema = mongoose.Schema({
         trim:true,
         required:true,
         validate:[isMobilePhone, "Phone Number is Invalid"], 
-    },
-    tokens:[
+    }
+    /*tokens:[
         {
             token:{
                 type:String,
@@ -48,7 +48,7 @@ const userSchema = mongoose.Schema({
             }
 
         }
-    ]
+    ]*/
 },
 {
     timestamps:true

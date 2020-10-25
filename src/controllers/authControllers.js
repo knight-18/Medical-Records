@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const jwt = require('jsonwebtoken');
+//const {signupMail}=require('../config/nodemailer')
 
 require('dotenv').config();
 
@@ -54,14 +55,11 @@ module.exports.signup_post = async (req, res) => {
     const user = new User({'email' : email, 'name' : name, 'password' : password, 'phoneNumber' : phoneNumber}); 
     let saveUser = await user.save(); 
     const token = createToken(saveUser._id.toString());
-    //const token= await user.generateAuthToken()
-    //console.log(token); 
-    /*user.tokens=user.tokens.concat({token})
-    await user.save()*/
+    //signupMail(saveUser)
     res.cookie('jwt', token, { httpOnly: false, maxAge : maxAge*1000 });
     console.log(saveUser); 
-    req.flash("success_msg", "Registration Successful");
-    res.redirect("/profile"); 
+    req.flash("success_msg", "Registration Successful now verify your email");
+    res.redirect("/"); 
   }
   catch(err) {
     const errors = handleErrors(err); 
@@ -112,7 +110,6 @@ module.exports.login_post = async (req, res) => {
   try {
     const user = await User.login(email, password);
     const token = createToken(user._id); 
-    //const token=await user.generateAuthToken()
     res.cookie('jwt', token, { httpOnly: true, maxAge : maxAge * 1000});
     console.log(user); 
     req.flash("success_msg", "Successfully logged in");
