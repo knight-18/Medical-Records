@@ -18,7 +18,6 @@ const requireAuth = (req, res, next) => {
       } else {
         let user = await User.findById(decodedToken.id);
         req.user = user;
-        req.token=token 
         
         next();
       }
