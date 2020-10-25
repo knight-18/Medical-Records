@@ -53,8 +53,11 @@ module.exports.signup_post = async (req, res) => {
   try {
     const user = new User({'email' : email, 'name' : name, 'password' : password, 'phoneNumber' : phoneNumber}); 
     let saveUser = await user.save(); 
-    const token = createToken(saveUser._id);
+    const token = createToken(saveUser._id.toString());
+    //const token= await user.generateAuthToken()
     //console.log(token); 
+    /*user.tokens=user.tokens.concat({token})
+    await user.save()*/
     res.cookie('jwt', token, { httpOnly: false, maxAge : maxAge*1000 });
     console.log(saveUser); 
     req.flash("success_msg", "Registration Successful");
@@ -70,13 +73,46 @@ module.exports.signup_post = async (req, res) => {
   
  
 }
+module.exports.emailVerify_get=async(req,res)=>{
+  if(req.protocol + "://" + req.get("host") == "http://" + req.get("host")){
+  const token=req.params.id
+  const decoded=jwt.verify(token,process.env.JWT_SECRET)
+  const user=await User.findOne({phoneNumber:decoded.phoneNumber})
+  if(!user)
+  {
+      console.log("user not found")
+      res.redirect("/")
+  }
+  else{
+    const activeUser=await User.findByIdAndUpdate(user._id,{active:true})
+    if(!activeUser)
+    {
+      console.log("Error occured while verifying")
+      req.flash("error_msg","error occured while verifying")
+      res.redirect("/")
+    }
+    else{
+      req.flash("succes_msg","User has been verified")
+      console.log("the user has been verified")
+    }
+  }
+  }
+  else
+  {
+    console.log("Unverified source")
+    res.redirect("/")
+  }
+
+}
+
 
 module.exports.login_post = async (req, res) => {
   const { email, password } = req.body;
+  console.log(email+" "+password)
   try {
     const user = await User.login(email, password);
     const token = createToken(user._id); 
-    
+    //const token=await user.generateAuthToken()
     res.cookie('jwt', token, { httpOnly: true, maxAge : maxAge * 1000});
     console.log(user); 
     req.flash("success_msg", "Successfully logged in");
@@ -103,4 +139,5 @@ module.exports.logout_get = async (req, res) => {
   req.flash("success_msg", "Successfully logged out");
   res.redirect('/login');
 }
+
 

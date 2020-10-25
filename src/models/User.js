@@ -6,13 +6,6 @@ const utilities = require('./Utilities');
 const {isEmail, isMobilePhone } = require('validator'); 
 require('dotenv').config()
 
-
-
-
-
-
-
-
 const userSchema = mongoose.Schema({
     name:{
         type:String,
@@ -25,6 +18,10 @@ const userSchema = mongoose.Schema({
         required:true,
         unique:true,
         validate: [isEmail, "Email is Invalid"]
+    },
+    active:{
+        type:Boolean,
+        default:false
     },
     password:{
         type:String,
@@ -42,8 +39,8 @@ const userSchema = mongoose.Schema({
         trim:true,
         required:true,
         validate:[isMobilePhone, "Phone Number is Invalid"], 
-    }
-    /*tokens:[
+    },
+    tokens:[
         {
             token:{
                 type:String,
@@ -51,15 +48,12 @@ const userSchema = mongoose.Schema({
             }
 
         }
-    ]*/
-}
-/*{
+    ]
+},
+{
     timestamps:true
-}*/);
+})
 
-
-
-// static method to login user
 userSchema.statics.login = async function(email, password) {
     const user = await this.findOne({ email });
     if (user) {
