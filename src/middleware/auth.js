@@ -1,11 +1,10 @@
-
 const jwt = require('jsonwebtoken')
 const User = require('../models/User')
 
-
-require('dotenv').config();
+require('dotenv').config()
 
 const requireAuth = (req, res, next) => {
+
   const token = req.cookies.jwt;
   //console.log(token);
   // check json web token exists & is verified

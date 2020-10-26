@@ -1,3 +1,4 @@
+
 const mongoose = require('mongoose');
 const validator = require('validator');
 //const jwt = require('jsonwebtoken');
@@ -40,41 +41,30 @@ const userSchema = mongoose.Schema({
         required:true,
         validate:[isMobilePhone, "Phone Number is Invalid"], 
     }
-    /*tokens:[
-        {
-            token:{
-                type:String,
-                required:true
-            }
-
-        }
-    ]*/
 },
 {
     timestamps:true
 })
 
-userSchema.statics.login = async function(email, password) {
-    const user = await this.findOne({ email });
+// static method to login user
+userSchema.statics.login = async function (email, password) {
+    const user = await this.findOne({ email })
     if (user) {
-      const auth = await bcrypt.compare(password, user.password);
-      if (auth) {
-        return user;
-      }
-      throw Error('Invalid Credentials');
-
+        const auth = await bcrypt.compare(password, user.password)
+        if (auth) {
+            return user
+        }
+        throw Error('Invalid Credentials')
     }
-    throw Error('Invalid Credentials');
-  };
+    throw Error('Invalid Credentials')
+}
 
-
-userSchema.pre('save', async function(next) {
-    const salt = await bcrypt.genSalt();
-    this.password = await bcrypt.hash(this.password, salt);
-    next();
-  });
+userSchema.pre('save', async function (next) {
+    const salt = await bcrypt.genSalt()
+    this.password = await bcrypt.hash(this.password, salt)
+    next()
+})
 
 const User = mongoose.model('User', userSchema)
-
 
 module.exports = User

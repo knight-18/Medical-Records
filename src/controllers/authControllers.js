@@ -52,7 +52,7 @@ module.exports.signup_post = async (req, res) => {
  
 
   try {
-    const user = new User({'email' : email, 'name' : name, 'password' : password, 'phoneNumber' : phoneNumber}); 
+    const user = new User({email, name, password, phoneNumber}); 
     let saveUser = await user.save(); 
     const token = createToken(saveUser._id.toString());
     //signupMail(saveUser)
@@ -130,7 +130,8 @@ module.exports.profile_get = async (req, res) => {
 }
 
 module.exports.logout_get = async (req, res) => {
-  res.cookie('jwt', '', { maxAge: 1 });
+  // res.cookie('jwt', '', { maxAge: 1 });
+  res.clearCookie("jwt");
   req.flash("success_msg", "Successfully logged out");
   res.redirect('/login');
 }
