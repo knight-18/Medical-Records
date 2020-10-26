@@ -135,3 +135,4 @@ module.exports.logout_get = async (req, res) => {
   req.flash("success_msg", "Successfully logged out");
   res.redirect('/login');
 }
+

@@ -32,7 +32,6 @@ const TOKEN = (data) => {
       link +
       ">Click here to verify</a>",
   };
-
   transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
       console.log("Error", error);
