@@ -55,7 +55,7 @@ module.exports.signup_post = async (req, res) => {
     const user = new User({email, name, password, phoneNumber}); 
     let saveUser = await user.save(); 
     const token = createToken(saveUser._id.toString());
-    //signupMail(saveUser)
+    //signupMail(saveUser,req.protocol,req.host)
     res.cookie('jwt', token, { httpOnly: false, maxAge : maxAge*1000 });
     console.log(saveUser); 
     req.flash("success_msg", "Registration Successful now verify your email");

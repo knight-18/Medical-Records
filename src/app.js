@@ -18,8 +18,7 @@ require('dotenv').config({ path: 'env' })
 const PORT = process.env.PORT || 3000
 
 //Mongoose connection
-mongoose
-    .connect(process.env.MONGODB_URL, {
+mongoose.connect(process.env.MONGODB_URL, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useFindAndModify: false,
