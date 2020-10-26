@@ -136,4 +136,3 @@ module.exports.logout_get = async (req, res) => {
   res.redirect('/login');
 }
 
-

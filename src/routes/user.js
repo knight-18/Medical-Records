@@ -1,4 +1,3 @@
-
 const express = require('express');
 const router = express.Router();
 const authController = require('../controllers/authControllers'); 
@@ -12,5 +11,3 @@ router.get("/profile", requireAuth, authController.profile_get);
 router.get("/verify/:id",authController.emailVerify_get);
 
 module.exports = router; 
-
-
