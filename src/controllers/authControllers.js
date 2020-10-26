@@ -1,6 +1,6 @@
 const User = require("../models/User");
 const jwt = require('jsonwebtoken');
-//const {signupMail}=require('../config/nodemailer')
+const {signupMail}=require('../config/nodemailer')
 
 require('dotenv').config();
 
@@ -55,10 +55,10 @@ module.exports.signup_post = async (req, res) => {
     const user = new User({email, name, password, phoneNumber}); 
     let saveUser = await user.save(); 
     const token = createToken(saveUser._id.toString());
-    //signupMail(saveUser,req.protocol,req.host)
     res.cookie('jwt', token, { httpOnly: false, maxAge : maxAge*1000 });
     console.log(saveUser); 
     req.flash("success_msg", "Registration Successful now verify your email");
+    signupMail(saveUser,req.hostname,req.protocol)
     res.redirect("/"); 
   }
   catch(err) {
@@ -71,11 +71,15 @@ module.exports.signup_post = async (req, res) => {
   
  
 }
-module.exports.emailVerify_get=async(req,res)=>{
+  module.exports.emailVerify_get = async(req,res)=>{
   if(req.protocol + "://" + req.get("host") == "http://" + req.get("host")){
   const token=req.params.id
-  const decoded=jwt.verify(token,process.env.JWT_SECRET)
-  const user=await User.findOne({phoneNumber:decoded.phoneNumber})
+  //console.log(token)
+  const decoded=jwt.verify(token,process.env.JWT_SECRET,{expiresIn:'3h'})
+  
+  //console.log(decoded)
+  const user=await User.findOne({_id:decoded.id})
+  console.log(user)
   if(!user)
   {
       console.log("user not found")
@@ -92,6 +96,8 @@ module.exports.emailVerify_get=async(req,res)=>{
     else{
       req.flash("succes_msg","User has been verified")
       console.log("the user has been verified")
+      //console.log(activeUser)
+      res.redirect("/")
     }
   }
   }
@@ -110,7 +116,8 @@ module.exports.login_post = async (req, res) => {
     const user = await User.login(email, password);
     const token = createToken(user._id); 
     res.cookie('jwt', token, { httpOnly: true, maxAge : maxAge * 1000});
-    console.log(user); 
+    //console.log(user); 
+    //signupMail(saveUser)
     req.flash("success_msg", "Successfully logged in");
     res.status(200).redirect("/profile");
   } 
@@ -135,5 +142,3 @@ module.exports.logout_get = async (req, res) => {
   req.flash("success_msg", "Successfully logged out");
   res.redirect('/login');
 }
-
-
