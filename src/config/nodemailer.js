@@ -1,5 +1,6 @@
 const nodemailer = require("nodemailer");
 require("dotenv").config();
+
 //const { JsonWebTokenError } = require("jsonwebtoken");
 const jwt = require("jsonwebtoken");
 //const { getMaxListeners } = require("../models/User");
@@ -14,13 +15,16 @@ const signupMail = (data,host,protocol) => {
   const PORT= process.env.PORT || 3000;
   const link = `${protocol}://${host}:${PORT}/user/verify/${data._id}?tkn=${TOKEN}`;
 
+
   var transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
     secure: true,
     auth: {
       user: process.env.NODEMAILER_EMAIL, //email id
+
       pass: process.env.NODEMAILER_PASSWORD, // gmail password
+
     },
   });
   var mailOptions = {
@@ -39,7 +43,7 @@ const signupMail = (data,host,protocol) => {
       console.log("Email sent: " + info.response);
     }
   });
-};
+
 module.exports = {
   signupMail,
 };
