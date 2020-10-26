@@ -1,3 +1,6 @@
+html,body{
+    overflow: hidden;
+}
 .containers{
     display: flex;
     width: 100vw;
