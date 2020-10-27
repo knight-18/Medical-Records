@@ -1,18 +1,20 @@
 const nodemailer = require("nodemailer");
 require("dotenv").config();
-const { JsonWebTokenError } = require("jsonwebtoken");
-const jwt = require("jsonwebtoken")
 
-const signupMail = (data) => {
+//const { JsonWebTokenError } = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
+//const { getMaxListeners } = require("../models/User");
+//const { getMaxListeners } = require("../models/User");
+
+const signupMail = (data,host,protocol) => {
   const maxAge = 3 * 60 * 60;
-const TOKEN = (data) => {
-  return jwt.sign({ data }, process.env.JWT_SECRET, {
-    expiresIn: maxAge
-  });
-};
-  const host = req.get("host");
+
+ const TOKEN=jwt.sign({id:data._id},process.env.JWT_SECRET,{expiresIn:maxAge})
+  //console.log(TOKEN)
+  //console.log(data)
   const PORT= process.env.PORT || 3000;
-  const link = `${req.protocol}://${req.hostname}:${PORT}/user/verify/${data._id}?tkn=${TOKEN}`;
+  const link = `${protocol}://${host}:${PORT}/user/verify/${data._id}?tkn=${TOKEN}`;
+
 
   var transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
@@ -20,7 +22,9 @@ const TOKEN = (data) => {
     secure: true,
     auth: {
       user: process.env.NODEMAILER_EMAIL, //email id
-      pass: process.env.NODEMAILER_PASSWORD, //my gmail password
+
+      pass: process.env.NODEMAILER_PASSWORD, // gmail password
+
     },
   });
   var mailOptions = {
@@ -39,7 +43,6 @@ const TOKEN = (data) => {
       console.log("Email sent: " + info.response);
     }
   });
-};
 
 module.exports = {
   signupMail,
