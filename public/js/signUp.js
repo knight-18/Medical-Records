@@ -23,8 +23,8 @@ const signupForm = document.getElementsByClassName("signup-form")
 const signupHere = document.getElementsByClassName("signup-link")
 const loginForm = document.getElementsByClassName("login-form")
 loginHere[0].addEventListener('click', () => {
-    signupForm[0].style.animation = "down 1.5s linear";
-    loginForm[0].style.animation = "left 1.5s linear";
+    signupForm[0].style.animation = "down 1.01s linear";
+    loginForm[0].style.animation = "left 0.5s linear";
 
     setTimeout(function(){
         signupForm[0].style.display = "none";
@@ -37,8 +37,8 @@ loginHere[0].addEventListener('click', () => {
 });
 
 signupHere[0].addEventListener('click', () => {
-    loginForm[0].style.animation = "right 2s linear";
-    signupForm[0].style.animation = "up 1.5s linear";
+    loginForm[0].style.animation = "right 1.01s linear";
+    signupForm[0].style.animation = "up 0.5s linear";
 
 
     setTimeout(function(){
