@@ -3,6 +3,7 @@ require("dotenv").config();
 
 //const { JsonWebTokenError } = require("jsonwebtoken");
 const jwt = require("jsonwebtoken");
+const { getMaxListeners } = require("../models/User");
 //const { getMaxListeners } = require("../models/User");
 //const { getMaxListeners } = require("../models/User");
 
@@ -21,9 +22,9 @@ const signupMail = (data,host,protocol) => {
     port: 465,
     secure: true,
     auth: {
-      user: process.env.NODEMAILER_EMAIL, //email id
+      user: 'rishirajkalita13@gmail.com', //email id
 
-      pass: process.env.NODEMAILER_PASSWORD, // gmail password
+      pass: 'rishirajkalita41@gmail.com', // gmail password
     },
   });
   var mailOptions = {
