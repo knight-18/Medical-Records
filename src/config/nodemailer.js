@@ -22,9 +22,9 @@ const signupMail = (data,host,protocol) => {
     port: 465,
     secure: true,
     auth: {
-      user: 'rishirajkalita13@gmail.com', //email id
+      user: process.env.NODEMAILER_EMAIL, //email id
 
-      pass: 'rishirajkalita41@gmail.com', // gmail password
+      pass: process.env.NODEMAILER_PASSWORD, // gmail password
     },
   });
   var mailOptions = {

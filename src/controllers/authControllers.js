@@ -49,17 +49,25 @@ module.exports.signup_post = async (req, res) => {
  
   const { name, email, password, phoneNumber } = req.body; 
 
- 
+  const userExists= await User.findOne({email})
+  if(userExists)
+    {
+      req.flash("success_msg",`${userExists.name}, we have sent you a link to verify your account kindly check your mail`)
+      signupMail(userExists,req.hostname,req.protocol)
+      res.redirect("/signup")
+      return 
+    }
 
   try {
     const user = new User({email, name, password, phoneNumber}); 
     let saveUser = await user.save(); 
+    
     const token = createToken(saveUser._id.toString());
     res.cookie('jwt', token, { httpOnly: false, maxAge : maxAge*1000 });
     //console.log(saveUser); 
     req.flash("success_msg", "Registration Successful now verify your email");
     signupMail(saveUser,req.hostname,req.protocol)
-    //res.send(saveUser)
+     //res.send(saveUser)
     res.redirect("/"); 
   }
   catch(err) {
@@ -79,6 +87,7 @@ module.exports.signup_post = async (req, res) => {
   try
   {
   const decoded=jwt.verify(token,process.env.JWT_SECRET,{expiresIn:'3h'})
+  
   //console.log(decoded)
   const user=await User.findOne({_id:decoded.id})
   console.log(user)
@@ -105,7 +114,9 @@ module.exports.signup_post = async (req, res) => {
   }
   catch(e)
   {
-    res.status(400).send(e)
+      req.flash("error_msg"," Your verify link has expired, try signing up once again")
+      //signupMail(user,req.hostname,req.protocol)
+      res.redirect("/signup")
   }
   }
   else
@@ -121,6 +132,14 @@ module.exports.login_post = async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await User.login(email, password);
+    if(!user.active)
+    {
+      req.flash("error_msg",`${user.name}, You have not verified your account please check your mail to get the verify link`)
+      signupMail(user,req.hostname,req.protocol)
+      res.redirect("/login")
+      return
+
+    }
     const token = createToken(user._id); 
     res.cookie('jwt', token, { httpOnly: true, maxAge : maxAge * 1000});
     //console.log(user); 
