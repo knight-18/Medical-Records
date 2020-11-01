@@ -1,0 +1,5 @@
+MONGODB_URL=mongodb+srv://root:medicalrecords@cluster0.wvvvp.mongodb.net/test?retryWrites=true&w=majority
+NODEMAILER_EMAIL=dscnits20@gmail.com
+NODEMAILER_SECONDARYEMAIL=jainujjawal1999@gmail.com
+NODEMAILER_PASSWORD=dscnits@2020
+JWT_SECRET = seaoftranquility
