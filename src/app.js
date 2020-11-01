@@ -2,7 +2,7 @@ const express = require('express')
 const path = require('path')
 
 const mongoose = require('mongoose')
-const routes = require('./routes/user')
+const routes = require('./routes/index.js')
 const connect_flash = require('connect-flash')
 const session = require('express-session')
 const cookieParser = require('cookie-parser')
@@ -54,8 +54,6 @@ app.use((req,res,next) => {
 });
 
 
-//Routes
-const indexRoutes = require('./routes/index')
 
 //app.use(indexRoutes);
 
