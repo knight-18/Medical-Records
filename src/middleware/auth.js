@@ -26,7 +26,31 @@ const requireAuth = (req, res, next) => {
   }
 };
 
+const isLoggedIn = (req, res, next) => {
+  const token = req.cookies.jwt; 
+  if (token)
+  {
+    jwt.verify(token, process.env.JWT_SECRET, async (err) => {
+                  if (err)
+                  { 
+                      res.redirect("/login"); 
+                  }
+                  else
+                  {
+                    res.redirect("/profile");
+                  }
+    });
+  }
+  else
+  {
+    next(); 
+  }
+}
 
 
-module.exports =  requireAuth ;
+
+module.exports = {
+  requireAuth, 
+  isLoggedIn
+}; 
 
