@@ -17,12 +17,9 @@ const handleErrors = (err) => {
 
 
  
-  if (err.code === 11000) {
-    errors.email = 'that email is already registered';
-    return errors;
-  }
+ 
   // validation errors
-  if (err.message.includes('User validation failed')) {
+  if (err.message.includes('validation failed')) {
     // console.log(err);
     Object.values(err.errors).forEach(({ properties }) => {
       // console.log(val);
@@ -52,6 +49,21 @@ module.exports.signup_post = async (req, res) => {
  
 
   try {
+    let existingUser = await User.findOne({ email:email }); 
+    if (existingUser)
+    {
+      if (existingUser.active)
+      {
+        req.flash("error_msg", "User with given email already exists");
+        req.redirect("/login");  
+      }
+      else
+      {
+        req.flash("error_msg", "User with given email already exists, but email has not been verified");
+        res.redirect("/login"); 
+      }
+    }
+    else {
     const user = new User({email, name, password, phoneNumber}); 
     let saveUser = await user.save(); 
     const token = createToken(saveUser._id.toString());
@@ -59,13 +71,17 @@ module.exports.signup_post = async (req, res) => {
     console.log(saveUser); 
     req.flash("success_msg", "Registration Successful now verify your email");
     signupMail(saveUser,req.hostname,req.protocol)
+    
     res.redirect("/"); 
+    }
+   
   }
   catch(err) {
     const errors = handleErrors(err); 
     console.log(errors);
     //res.json(errors);
-    req.flash("error_msg", "Could not signup");
+    let message = "Could not sign up" +  errors.email + '; ' + errors.password + '; ' + errors.phoneNumber; 
+    req.flash("error_msg", message);
     res.status(400).redirect("/signup");
   } 
   
@@ -122,8 +138,7 @@ module.exports.login_post = async (req, res) => {
     res.status(200).redirect("/profile");
   } 
   catch (err) {
-    req.flash("error_msg", "Invalid Credentials"); 
-
+    req.flash("error_msg", "Invalid Credentials");
     res.redirect("/login");
   }
 
