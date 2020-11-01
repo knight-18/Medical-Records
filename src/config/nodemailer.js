@@ -46,4 +46,5 @@ const signupMail = (data,host,protocol) => {
 
 module.exports = {
   signupMail,
+}
 };
