@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 
+
 const mongoose = require('mongoose');
 const routes = require('./routes/user'); 
 const connect_flash = require('connect-flash'); 
@@ -29,6 +30,7 @@ mongoose.connect(process.env.MONGODB_URL,{
 
 //Setting EJS view engine
 app.set('view engine','ejs');
+
 app.use(expressLayouts);
 //body parser
 app.use(express.urlencoded({extended:true}));
@@ -60,6 +62,7 @@ const indexRoutes = require('./routes/index');
 
 
 
+
 //Setup for rendering static pages
 const publicDirectory = path.join(__dirname,'../public');
 app.use(express.static(publicDirectory));
@@ -70,4 +73,6 @@ app.use(routes);
 //Start the server
 app.listen(PORT,()=>{
 	console.log('Server listening on port',PORT);
+
 })
+

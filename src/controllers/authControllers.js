@@ -56,9 +56,10 @@ module.exports.signup_post = async (req, res) => {
     let saveUser = await user.save(); 
     const token = createToken(saveUser._id.toString());
     res.cookie('jwt', token, { httpOnly: false, maxAge : maxAge*1000 });
-    console.log(saveUser); 
+    //console.log(saveUser); 
     req.flash("success_msg", "Registration Successful now verify your email");
     signupMail(saveUser,req.hostname,req.protocol)
+    //res.send(saveUser)
     res.redirect("/"); 
   }
   catch(err) {
@@ -75,8 +76,9 @@ module.exports.signup_post = async (req, res) => {
   if(req.protocol + "://" + req.get("host") == "http://" + req.get("host")){
   const token=req.params.id
   //console.log(token)
+  try
+  {
   const decoded=jwt.verify(token,process.env.JWT_SECRET,{expiresIn:'3h'})
-  
   //console.log(decoded)
   const user=await User.findOne({_id:decoded.id})
   console.log(user)
@@ -99,6 +101,11 @@ module.exports.signup_post = async (req, res) => {
       //console.log(activeUser)
       res.redirect("/")
     }
+  }
+  }
+  catch(e)
+  {
+    res.status(400).send(e)
   }
   }
   else
@@ -138,6 +145,7 @@ module.exports.profile_get = async (req, res) => {
 
 module.exports.logout_get = async (req, res) => {
   // res.cookie('jwt', '', { maxAge: 1 });
+  const cookie=req.cookies.jwt
   res.clearCookie("jwt");
   req.flash("success_msg", "Successfully logged out");
   res.redirect('/login');

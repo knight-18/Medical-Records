@@ -59,6 +59,16 @@ userSchema.statics.login = async function (email, password) {
     throw Error('Invalid Credentials')
 }
 
+//deleting the passsword before sending 
+userSchema.methods.toJSON= function(){
+    const user =this
+    const userObject= user.toObject()
+
+    delete userObject.password
+    return userObject
+}
+
+//To hash the password
 userSchema.pre('save', async function (next) {
     const salt = await bcrypt.genSalt()
     this.password = await bcrypt.hash(this.password, salt)
