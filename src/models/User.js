@@ -4,6 +4,7 @@ const validator = require('validator')
 const bcrypt = require('bcryptjs')
 const utilities = require('../utilities/Utilities')
 const { isEmail, isMobilePhone } = require('validator')
+const { loginError } = require('../config/variables')
 require('dotenv').config()
 
 const userSchema = mongoose.Schema(
@@ -57,9 +58,9 @@ userSchema.statics.login = async function (email, password) {
         if (auth) {
             return user
         }
-        throw Error('Invalid Credentials')
+        throw Error(loginError)
     }
-    throw Error('Invalid Credentials')
+    throw Error(loginError)
 }
 
 //deleting the passsword before sending

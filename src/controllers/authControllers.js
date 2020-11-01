@@ -1,10 +1,11 @@
 const User = require('../models/User')
 const jwt = require('jsonwebtoken')
 const { signupMail } = require('../config/nodemailer')
+const { maxAge, loginError } = require('../config/variables')
 
 require('dotenv').config()
 
-const maxAge = 30 * 24 * 60 * 60
+
 const createToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET, {
         expiresIn: maxAge,
@@ -209,7 +210,7 @@ module.exports.login_post = async (req, res) => {
     res.status(200).redirect("/profile");
   } 
   catch (err) {
-    req.flash("error_msg", "Invalid Credentials");
+    req.flash("error_msg", loginError);
     res.redirect("/login");
   }
 
