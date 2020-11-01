@@ -29,7 +29,7 @@ mongoose.connect(process.env.MONGODB_URL,{
 
 //Setting EJS view engine
 app.set('view engine','ejs');
-app.use(expressLayouts);
+
 //body parser
 app.use(express.urlencoded({extended:true}));
 app.use(session({
@@ -45,7 +45,7 @@ app.use((req,res,next) => {
   res.locals.success_msg=req.flash("success_msg");
   res.locals.error_msg=req.flash("error_msg");
   
- 
+   
   next();
 });
 
