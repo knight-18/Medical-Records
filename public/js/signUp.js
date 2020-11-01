@@ -52,4 +52,3 @@ signupHere[0].addEventListener('click', () => {
 
 }, 800);
 });
-
