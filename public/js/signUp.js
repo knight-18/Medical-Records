@@ -13,11 +13,12 @@ submit.addEventListener('click', function(e){
     const passwordVal=password.value;
     const confirmPasswordVal=confirmPassword.value;
     if (passwordVal != confirmPasswordVal) {
-      e.preventDefault();
+        e.preventDefault();
+        e.stopPropagation();
         alert("Passwords do not match.");
         confirmPassword.value="";
         confirmPassword.focus();
-        return false;
+        
     }
     return true;
 });
