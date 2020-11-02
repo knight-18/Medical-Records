@@ -8,13 +8,13 @@ const { getMaxListeners } = require("../models/User");
 //const { getMaxListeners } = require("../models/User");
 
 const signupMail = (data,host,protocol) => {
-  const maxAge = 3 * 60 * 60;
+  
 
- const TOKEN=jwt.sign({id:data._id},process.env.JWT_SECRET,{expiresIn:maxAge})
+ const TOKEN=jwt.sign({id:data._id},process.env.JWT_SECRET,{expiresIn:'3h'})
   //console.log(TOKEN)
   //console.log(data)
   const PORT= process.env.PORT || 3000;
-  const link = `${protocol}://${host}:${PORT}/user/verify/${data._id}?tkn=${TOKEN}`;
+  const link = `${protocol}://${host}:${PORT}/verify/?tkn=${TOKEN}`;
 
 
   var transporter = nodemailer.createTransport({
@@ -41,7 +41,7 @@ const signupMail = (data,host,protocol) => {
       console.log("Error", error);
     } else {
       console.log("Email sent: " + info.response);
-
+      console.log("LINK :" + link); 
     }
     
 }); 
