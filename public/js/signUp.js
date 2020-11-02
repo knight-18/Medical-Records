@@ -9,12 +9,16 @@ togglePassword.addEventListener('click', function (e) {
     // toggle the eye slash icon
     this.classList.toggle('fa-eye-slash');
 });
-submit.addEventListener('click', function(){
+submit.addEventListener('click', function(e){
     const passwordVal=password.value;
     const confirmPasswordVal=confirmPassword.value;
     if (passwordVal != confirmPasswordVal) {
+        e.preventDefault();
+        e.stopPropagation();
         alert("Passwords do not match.");
-        return false;
+        confirmPassword.value="";
+        confirmPassword.focus();
+        
     }
     return true;
 });
