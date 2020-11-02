@@ -1,15 +1,15 @@
-const User = require("../models/User");
-const jwt = require('jsonwebtoken');
-const {signupMail}=require('../config/nodemailer')
+const User = require('../models/User')
+const jwt = require('jsonwebtoken')
+const { signupMail } = require('../config/nodemailer')
 
-require('dotenv').config();
+require('dotenv').config()
 
-const maxAge = 30 * 24 * 60 * 60;
+const maxAge = 30 * 24 * 60 * 60
 const createToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: maxAge
-  });
-};
+    return jwt.sign({ id }, process.env.JWT_SECRET, {
+        expiresIn: maxAge,
+    })
+}
 
 const handleErrors = (err) => {
   
@@ -24,21 +24,20 @@ const handleErrors = (err) => {
     });
   }
 
-  return errors; 
- 
+    return errors
 }
 
 // controller actions
 module.exports.signup_get = (req, res) => {
-  res.render('signup');
+    res.render('signup')
 }
 
 module.exports.login_get = (req, res) => {
-  
-  res.render('login');
+    res.render('login')
 }
 
 module.exports.signup_post = async (req, res) => {
+
  
   const { name, email, password, phoneNumber } = req.body; 
 
@@ -104,6 +103,7 @@ module.exports.signup_post = async (req, res) => {
       console.log("Error occured while verifying")
       req.flash("error_msg","error occured while verifying")
       res.redirect("/")
+
     }
     else{
       req.flash("success_msg","User has been verified")
@@ -111,6 +111,7 @@ module.exports.signup_post = async (req, res) => {
       console.log("active",activeUser)
       res.redirect("/")
     }
+
   }
   })
   
@@ -125,7 +126,9 @@ module.exports.signup_post = async (req, res) => {
 }
 
 
+
 module.exports.login_post = async (req, res) => {
+
   const { email, password } = req.body;
   try {
     const user = await User.login(email, password);
@@ -150,19 +153,18 @@ module.exports.login_post = async (req, res) => {
     res.redirect("/login");
   }
 
+
 }
 
-
-
 module.exports.profile_get = async (req, res) => {
-   res.locals.user = req.user; 
-   res.render("profile"); 
+    res.locals.user = req.user
+    res.render('profile')
 }
 
 module.exports.logout_get = async (req, res) => {
-  // res.cookie('jwt', '', { maxAge: 1 });
-  const cookie=req.cookies.jwt
-  res.clearCookie("jwt");
-  req.flash("success_msg", "Successfully logged out");
-  res.redirect('/login');
+    // res.cookie('jwt', '', { maxAge: 1 });
+    // const cookie = req.cookies.jwt
+    res.clearCookie('jwt')
+    req.flash('success_msg', 'Successfully logged out')
+    res.redirect('/login')
 }

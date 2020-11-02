@@ -1,3 +1,4 @@
+
 const nodemailer = require("nodemailer");
 require("dotenv").config();
 
@@ -22,9 +23,9 @@ const signupMail = (data,host,protocol) => {
     port: 465,
     secure: true,
     auth: {
-      user: 'rishirajkalita13@gmail.com', //email id
+      user: process.env.NODEMAILER_EMAIL, //email id
 
-      pass: 'rishirajkalita41@gmail.com', // gmail password
+      pass: process.env.NODEMAILER_Password, // gmail password
     },
   });
   var mailOptions = {
@@ -36,16 +37,18 @@ const signupMail = (data,host,protocol) => {
       link +
       ">Click here to verify</a>",
   };
-  transporter.sendMail(mailOptions, function (error, info) {
-    if (error) {
-      console.log("Error", error);
-    } else {
-      console.log("Email sent: " + info.response);
-    }
-  });
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log('Error', error)
+        } else {
+            console.log('Email sent: ' + info.response)
+        }
+    })
+  }
+  
 
-};
+
+
 module.exports = {
-  signupMail,
-
-};
+    signupMail,
+}
