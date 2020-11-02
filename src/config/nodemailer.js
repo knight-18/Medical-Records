@@ -14,7 +14,7 @@ const signupMail = (data,host,protocol) => {
   //console.log(TOKEN)
   //console.log(data)
   const PORT= process.env.PORT || 3000;
-  const link = `${protocol}://${host}:${PORT}/user/verify/${data._id}?tkn=${TOKEN}`;
+  const link = `${protocol}://${host}:${PORT}/verify/${data._id}?tkn=${TOKEN}`;
 
 
   var transporter = nodemailer.createTransport({
@@ -22,9 +22,9 @@ const signupMail = (data,host,protocol) => {
     port: 465,
     secure: true,
     auth: {
-      user: process.env.NODEMAILER_EMAIL, //email id
+      user: 'rishirajkalita13@gmail.com', //email id
 
-      pass: process.env.NODEMAILER_PASSWORD, // gmail password
+      pass: 'rishirajkalita41@gmail.com', // gmail password
     },
   });
   var mailOptions = {

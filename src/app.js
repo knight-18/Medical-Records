@@ -31,7 +31,7 @@ mongoose.connect(process.env.MONGODB_URL,{
 //Setting EJS view engine
 app.set('view engine','ejs');
 
-app.use(expressLayouts);
+//app.use(expressLayouts);
 //body parser
 app.use(express.urlencoded({extended:true}));
 app.use(session({
@@ -75,4 +75,14 @@ app.listen(PORT,()=>{
 	console.log('Server listening on port',PORT);
 
 })
+
+/*const User= require('./models/User')
+const databasedlt= async()=>{
+   const user = await User.find()
+   user.forEach(async(data)=>{
+        await User.findByIdAndDelete(data._id)
+   })
+   console.log("deleted")
+}
+databasedlt()*/
 
