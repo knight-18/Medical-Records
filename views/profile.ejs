@@ -1,2 +1,20 @@
-<%- user.email %>'s PROFILE PAGE
 
+
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arogya</title>
+</head>
+<body>
+   <%- include('partials/message'); %>
+   <%- user.email %>'s PROFILE PAGE
+
+   <% if (!user.active) { %>
+      <a href = "/email">Get verified</a>
+   <% } else { %>
+       <p>You are verified</p>
+       <% } %>
+</body>
+</html>
