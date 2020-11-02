@@ -6,11 +6,11 @@ const { maxAge, loginError } = require('../config/variables')
 require('dotenv').config()
 
 
-const createToken = (id) => {
-    return jwt.sign({ id }, process.env.JWT_SECRET, {
-        expiresIn: maxAge,
-    })
-}
+// const createToken = (id) => {
+//     return jwt.sign({ id }, process.env.JWT_SECRET, {
+//         expiresIn: maxAge,
+//     })
+// }
 
 const handleErrors = (err) => {
     let errors = { email: '', password: '', phoneNumber: '' }
@@ -61,7 +61,7 @@ module.exports.signup_post = async (req, res) =>
         const newUser = await User.create({ name, email, phoneNumber, password }); 
 
         try {
-          const token = createToken(newUser._id); 
+          const token = newUser.createUserToken();  
         res.cookie("jwt", token, { httpOnly:true, maxAge:maxAge*1000 }); 
         req.flash("success_msg", "Successfully registered"); 
 
@@ -178,7 +178,7 @@ module.exports.login_post = async (req, res) => {
   try {
     const user = await User.login(email, password);
   
-    const token = createToken(user._id); 
+    const token = user.createUserToken();  
     res.cookie('jwt', token, { httpOnly: true, maxAge : maxAge * 1000});
     //console.log(user); 
     //signupMail(saveUser)

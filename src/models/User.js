@@ -1,10 +1,10 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
-//const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs')
 const utilities = require('../utilities/Utilities')
 const { isEmail, isMobilePhone } = require('validator')
-const { loginError } = require('../config/variables')
+const { loginError, maxAge } = require('../config/variables')
 require('dotenv').config()
 
 const userSchema = mongoose.Schema(
@@ -62,6 +62,17 @@ userSchema.statics.login = async function (email, password) {
     }
     throw Error(loginError)
 }
+
+
+userSchema.methods.createUserToken = function() 
+{
+    let id = this._id; 
+    return jwt.sign({ id }, process.env.JWT_SECRET, {
+        expiresIn: maxAge,
+    }); 
+}
+
+
 
 //deleting the passsword before sending
 userSchema.methods.toJSON = function () {
