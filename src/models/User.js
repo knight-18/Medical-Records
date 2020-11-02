@@ -62,10 +62,20 @@ userSchema.statics.login = async function (email, password) {
     throw Error('Invalid Credentials')
 }
 
-//deleting the passsword before sending
-userSchema.methods.toJSON = function () {
-    const user = this
-    const userObject = user.toObject()
+//creating token for the user
+/*userSchema.methods.createToken=function(){
+    const user= this
+    const maxAge = 30 * 24 * 60 * 60;
+    const token= jwt.sign({ _id: user._id.toString() }, process.env.JWT_SECRET, {
+        expiresIn: maxAge
+      });
+      return token
+}*/
+
+//deleting the passsword before sending 
+userSchema.methods.toJSON= function(){
+    const user =this
+    const userObject= user.toObject()
 
     delete userObject.password
     return userObject

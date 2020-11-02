@@ -1,1 +1,92 @@
-SIGN UP PAGE
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arogya</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/signUp.css">
+</head>
+<body>
+    <%- include('partials/message'); %>
+    <div class="containers center">
+     
+        <div class="logo-side">
+            <div class="wave1"></div>
+            <div class="main-img"></div>
+            <div class="row-logo">
+                <div class="wave3"></div>
+                <div class="wave2"></div>
+            </div>
+        </div>
+        <div class="details-side">    
+            <div class="signup-form">
+                <form action="/signup" method="post">
+                    <h2>Create an Account</h2>
+                    <p class="hint-text">Sign up with your social media account or email address</p>
+                    <p class="hint-text-2">Sign up using</p>
+
+                    <div class="social-btn text-center">
+                        <a href="#" class="btn btn-primary btn-lg"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+                        <a href="#" class="btn btn-danger btn-lg"><i class="fa fa-google"></i><span> Google </span></a>
+                    </div>
+                    <div class="or-seperator"><b>or</b></div>
+                    <div class="form-group">
+                        <input type="text" required class="form-control input-lg" name="name" placeholder="Full Name" required="required">
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" required class="form-control input-lg" name="phoneNumber" placeholder="Phone Number" required="required">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" required class="form-control input-lg" name="email" placeholder="Email Address" required="required">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="password" required class="form-control input-lg" name="password" placeholder="Password" required="required" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"><i class="far fa-eye" id="togglePassword"></i>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="confirmPassword" required class="form-control input-lg" name="confirm_password" placeholder="Confirm Password" required="required">
+                    </div>  
+                    <div class="form-group signup-button">
+                        <button type="submit" id="submit" class="btn btn-primary btn-lg btn-block signup-btn">Sign Up</button>
+                    </div>
+                </form>
+        
+                <div class="text-center">Already have an account? <a href="#" class="login-link">Login here</a></div>
+            </div>
+    
+            <div class="login-form">
+                <form action="/login" method="post" onsubmit="">
+                    <h2>Log into your Account</h2>
+                    <p class="hint-text">using social media or email address</p>
+                    <p class="hint-text-2">Log in using</p>
+
+                    <div class="social-btn text-center">
+                        <a href="#" class="btn btn-primary btn-lg"><i class="fa fa-facebook"></i><span class="span1"> Facebook</span></a>
+                        <a href="#" class="btn btn-danger btn-lg"><i class="fa fa-google"></i><span class="span1"> Google</span> </a>
+                    </div>
+                    <div class="or-seperator"><b>or</b></div>
+                        <div class="form-group">                        
+                            <input id="email" type="email" class="form-control form-rounded modify " name="email" placeholder="Email">
+                        </div>
+                        <div class="form-group">                        
+                            <input type="password" class="form-control form-rounded modify" name="password" id="password" placeholder="Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+                        </div>
+                    <div class="form-group login-button">
+                        <button type="submit" class="btn btn-success btn-lg btn-block login-btn">Log In</button>
+                    </div>
+                </form>
+                <div class="forgotOption"></div>
+                <p class="forgot text-center"><a href="#">Forgot Password</a></p>
+                <div class="text-center" id="login-text">Don't have an account? <a href="#" class="signup-link"> Sign Up</a></div>
+            </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+    <script src="./js/signUp.js"></script>
+</body>
+</html>
