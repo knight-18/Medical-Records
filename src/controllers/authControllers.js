@@ -1,6 +1,7 @@
 const User = require('../models/User')
 const jwt = require('jsonwebtoken')
 const { signupMail } = require('../config/nodemailer')
+const path= require('path')
 
 require('dotenv').config()
 
@@ -156,6 +157,12 @@ module.exports.login_post = async (req, res) => {
 
 }
 
+
+module.exports.upload_post= async(req,res)=>{
+    
+  res.status(200).send('successful')
+}
+
 module.exports.profile_get = async (req, res) => {
     res.locals.user = req.user
     res.render('profile')
@@ -168,3 +175,4 @@ module.exports.logout_get = async (req, res) => {
     req.flash('success_msg', 'Successfully logged out')
     res.redirect('/login')
 }
+
