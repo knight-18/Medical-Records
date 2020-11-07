@@ -53,10 +53,12 @@ app.use((req, res, next) => {
     next()
 })
 
+app.use(express.static(__dirname + '/public'));
+
 //Routes
 const indexRoutes = require('./routes/index')
 
-//app.use(indexRoutes);
+app.use(indexRoutes);
 
 //Setup for rendering static pages
 const publicDirectory = path.join(__dirname, '../public')

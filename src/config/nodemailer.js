@@ -25,7 +25,7 @@ const signupMail = (data,host,protocol) => {
     auth: {
       user: process.env.NODEMAILER_EMAIL, //email id
 
-      pass: process.env.NODEMAILER_Password, // gmail password
+      pass: process.env.NODEMAILER_PASSWORD, // gmail password
     },
   });
   var mailOptions = {
