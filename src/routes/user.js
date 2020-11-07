@@ -9,8 +9,8 @@ const mkdirp=require('mkdirp')
 const multer = require('multer')
 const storage = multer.diskStorage({
 destination: (req, file, cb) => {
-  const  userId = req.user._id
-  const dir =`./uploads/${userId}/`
+  const  userEmail = req.user.email
+  const dir =`./uploads/${userEmail}/`
   if(!fs.existsSync(dir))
   {
       fs.mkdirSync(dir,{recursive:true},(err)=>{
@@ -21,7 +21,7 @@ destination: (req, file, cb) => {
 },
 filename: (req, file, cb) => {
     const  userId = req.user._id
-  cb(null, `UserId-${userId}-File-${Date.now()}.png`)
+  cb(null, `File-${Date.now()}.png`)
 }
 })
 
