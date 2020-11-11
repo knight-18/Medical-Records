@@ -1,12 +1,22 @@
 
-.faqpart{
+/*.faqpart{
     width: 100%;
     justify-content: center;
-    background-image: url(images/faq-bg.png);
+    background-image: url(images/);
     background-size: 110%;
     background-repeat: no-repeat;
     padding:5% 10% 20% 10%;
     z-index: -1;
+}*/
+.faqpart {
+    width: 100%;
+    justify-content: center;
+    background-image: url('./images/doctor.gif');
+    background-position: bottom right;
+    background-repeat: no-repeat;
+    padding: 5% 10% 20% 10%;
+    z-index: -2;
+    font-family: 'Lato-Bold';
 }
 
 ::placeholder { 
@@ -42,6 +52,7 @@
     transition: width 0.4s linear
 }
 
+
 .faqsearch .faqsearch-input {
     padding: 10 10px;
     width: 100%;
@@ -68,6 +79,9 @@
     position: relative;
     border-radius: 10rem;
     z-index: 1;
+}
+h3 {
+    font-size:36px;
 }
 
 a:link {
