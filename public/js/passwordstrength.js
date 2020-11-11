@@ -20,10 +20,11 @@ function updateStrengthMeter(){
     strength += -5;
     backgroundSetter(strength)
 	strengthMeter.style.setProperty('--strength',strength);
+	reasonsContainer.innerHTML = '';
+
 }
 confirmpassword.addEventListener('click', () => {
     const weaknesses = calculateStrength(passwordInput.value);
-    reasonsContainer.innerHTML = '';
 	weaknesses.forEach(weakness =>{
         if(weakness!= null){
                 if(weakness.message!= null){
@@ -137,7 +138,7 @@ function checkTerms(value){
 	}
 } 
 const register = document.getElementsByClassName("register")[0]
-register.addEventListener("click", () => {
+register.addEventListener("click", (e) => {
 	weaknesses = []
 	weaknesses.push(samePassword(passwordInput.value, confirmpassword.value))
 	weaknesses.push(checkTerms(terms.checked))
@@ -153,14 +154,14 @@ register.addEventListener("click", () => {
             }
 		})
 	if(weaknesses.length ==0){
-		reasons.style.display = 'none'
 		document.forms['signUpform'].submit();
 
 	}
 	else{
-		returnToPreviousPage();
-		confirmpassword.addEventListener('click', () => {
-			reasonsContainer.style.display = 'none!important';
+		e.preventDefault();
+		e.stopPropagation();
+		confirmpassword.addEventListener('input', () => {
+			reasonsContainer.style.display = 'none';
 		})
 
 	}
