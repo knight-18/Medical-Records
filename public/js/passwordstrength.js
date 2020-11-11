@@ -135,7 +135,7 @@ function checkTerms(value){
 			message: `Please agree to the terms and conditions`
 		}
 	}
-}
+} 
 const register = document.getElementsByClassName("register")[0]
 register.addEventListener("click", () => {
 	weaknesses = []
