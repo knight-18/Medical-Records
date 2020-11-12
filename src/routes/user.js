@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const fs= require('fs')
 const path=require('path')
-const mkdirp=require('mkdirp')
+// const mkdirp=require('mkdirp')
 //const upload= require('../controllers/authControllers')
 
 //uploading files with multer
@@ -25,7 +25,25 @@ filename: (req, file, cb) => {
 }
 })
 
-const upload = multer({ storage })
+const upload=multer({
+  storage:storage,
+  limits:{fileSize:1000000000},
+  fileFilter:function(req,file,cb){
+      checkFileType(file,cb);
+  }
+});
+
+function checkFileType(file,cb){
+  const filetypes=/jpeg|jpg|png|gif|pdf/;
+  const extname=filetypes.test(path.extname
+      (file.originalname).toLowerCase());
+  const mimetype=filetypes.test(file.mimetype);
+  if(mimetype && extname){
+      return cb(null,true);
+  }else{
+      cb('Error');
+  }
+}
 
 //uploading finishes
 const authController = require('../controllers/authControllers')
@@ -37,6 +55,7 @@ router.get('/login', authController.login_get)
 router.post('/login', authController.login_post)
 router.get('/logout', requireAuth, authController.logout_get)
 router.get('/profile', requireAuth, authController.profile_get)
+// router.get('/user/upload',requireAuth,authController.upload_get)
 router.post('/user/upload',requireAuth,upload.single('upload'),authController.upload_post)
 
 module.exports = router

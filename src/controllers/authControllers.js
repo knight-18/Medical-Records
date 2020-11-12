@@ -13,7 +13,7 @@ const createToken = (id) => {
 }
 
 const handleErrors = (err) => {
-  
+  let errors = { email: '', password: '' };
  
   // validation errors
   if (err.message.includes('validation failed')) {
@@ -159,7 +159,6 @@ module.exports.login_post = async (req, res) => {
 
 
 module.exports.upload_post= async(req,res)=>{
-    
   res.status(200).send('successful')
 }
 
@@ -176,3 +175,6 @@ module.exports.logout_get = async (req, res) => {
     res.redirect('/login')
 }
 
+// module.exports.upload_get =async (req, res) => {
+//   res.render("multer")
+// }
