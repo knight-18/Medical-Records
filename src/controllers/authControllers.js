@@ -5,12 +5,7 @@ const path= require('path')
 
 require('dotenv').config()
 
-const maxAge = 30 * 24 * 60 * 60
-const createToken = (id) => {
-    return jwt.sign({ id }, process.env.JWT_SECRET, {
-        expiresIn: maxAge,
-    })
-}
+const maxAge = 30 * 24 * 60 * 60; 
 
 const handleErrors = (err) => {
   let errors = { email: '', password: '' };
@@ -141,7 +136,8 @@ module.exports.login_post = async (req, res) => {
       return
 
     }
-    const token = createToken(user._id); 
+    const token = user.generateAuthToken(maxAge); 
+    
     res.cookie('jwt', token, { httpOnly: true, maxAge : maxAge * 1000});
     //console.log(user); 
     //signupMail(saveUser)
@@ -150,7 +146,7 @@ module.exports.login_post = async (req, res) => {
   } 
   catch (err) {
     req.flash("error_msg", "Invalid Credentials"); 
-
+     console.log(err);
     res.redirect("/login");
   }
 

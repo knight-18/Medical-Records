@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
-//const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs')
 const utilities = require('../utilities/Utilities')
 const { isEmail, isMobilePhone } = require('validator')
@@ -62,15 +62,16 @@ userSchema.statics.login = async function (email, password) {
     throw Error('Invalid Credentials')
 }
 
+
 //creating token for the user
-/*userSchema.methods.createToken=function(){
-    const user= this
-    const maxAge = 30 * 24 * 60 * 60;
-    const token= jwt.sign({ _id: user._id.toString() }, process.env.JWT_SECRET, {
-        expiresIn: maxAge
-      });
-      return token
-}*/
+userSchema.methods.generateAuthToken=function generateAuthToken(maxAge){
+    let id = this._id;  
+    
+    return jwt.sign({ id }, process.env.JWT_SECRET, {
+        expiresIn: maxAge,
+    });
+      
+}
 
 //deleting the passsword before sending 
 userSchema.methods.toJSON= function(){
