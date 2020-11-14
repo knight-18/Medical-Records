@@ -183,7 +183,7 @@ background: rgba(244,0,255,0.65);
 @media (max-width: 1199px) {
     #arogya-main-nav::after {
         width: 670px;
-        
+
     }
 
     #arogya-footer {
@@ -194,7 +194,7 @@ background: rgba(244,0,255,0.65);
 @media (max-width: 991px) {
     #arogya-main-nav::after {
         width: 55%;
-        height:0.5vp;
+        height: 0.5vp;
         left: auto;
         right: 0;
     }
@@ -1241,6 +1241,8 @@ text-decoration:underline;
     }
 }
 
+/*================================================================*/
+/*=================================================================*/
 /*if map is added */
 /*
 .map-responsive{
@@ -1456,4 +1458,308 @@ a:link {
     .faqpart {
         background: white;
     }
+}
+
+/*==================== End of faq part ===============================*/
+/*=====================================================================*/
+
+
+
+
+
+
+
+
+/*--------------------------------------------------------------
+# Contact
+--------------------------------------------------------------*/
+.contact {
+    background: url("../img/map.png") left center no-repeat;
+    position: relative;
+}
+
+.contact:before {
+    content: "";
+    background: rgba(255, 255, 255, 0.7);
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.contact .container {
+    position: relative;
+}
+
+.contact .info {
+    width: 100%;
+}
+
+.contact .info i {
+    font-size: 20px;
+    background: #0880e8;
+    color: #fff;
+    float: left;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    transition: all 0.3s ease-in-out;
+}
+
+.contact .info h4 {
+    padding: 0 0 0 60px;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: #043c6d;
+}
+
+.contact .info p {
+    padding: 0 0 0 60px;
+    margin-bottom: 0;
+    font-size: 14px;
+    color: #444444;
+}
+
+.contact .info .email,
+.contact .info .phone {
+    margin-top: 40px;
+}
+
+.contact .arogya-email-form {
+    width: 100%;
+    background: transparent;
+}
+
+.contact .arogya-email-form .form-group {
+    padding-bottom: 8px;
+
+}
+
+.contact .arogya-email-form .validate {
+    display: none;
+    color: red;
+    margin: 0 0 15px 0;
+    font-weight: 400;
+    font-size: 13px;
+}
+
+.contact .arogya-email-form .error-message {
+    display: none;
+    color: #fff;
+    background: #ed3c0d;
+    text-align: left;
+    padding: 15px;
+    font-weight: 600;
+    font-size: 30px;
+}
+
+.contact .arogya-email-form .error-message br+br {
+    margin-top: 25px;
+}
+
+.contact .arogya-email-form .sent-message {
+    display: none;
+    color: #fff;
+    background: #4186c7;
+    text-align: center;
+    padding: 15px;
+    font-weight: 600;
+}
+
+.contact .arogya-email-form .loading {
+    display: none;
+    background: rgb(240, 240, 240);
+    text-align: center;
+    padding: 15px;
+}
+
+.contact .arogya-email-form .loading:before {
+    content: "";
+    display: inline-block;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    margin: 0 10px -6px 0;
+    border: 3px solid #186fd2;
+    border-top-color: rgb(0, 0, 0);
+    -webkit-animation: animate-loading 1s linear infinite;
+    animation: animate-loading 1s linear infinite;
+}
+
+.contact .arogya-email-form input,
+.contact .arogya-email-form textarea {
+    border-radius: 4px;
+    box-shadow: none;
+    font-size: 14px;
+    background: rgb(170, 235, 255);
+}
+
+.contact .arogya-email-form textarea::placeholder,
+.contact .arogya-email-form input::placeholder {
+    color: black;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.contact .arogya-email-form input:focus::-webkit-input-placeholder {
+    color: transparent;
+}
+
+.contact .arogya-email-form input:focus:-moz-placeholder {
+    color: transparent;
+}
+
+.contact .arogya-email-form input:focus::-moz-placeholder {
+    color: transparent;
+}
+
+.contact .arogya-email-form input:focus:-ms-input-placeholder {
+    color: transparent;
+}
+
+.contact .arogya-email-form textarea:focus::-webkit-input-placeholder {
+    color: transparent;
+}
+
+.contact .arogya-email-form textarea:focus:-moz-placeholder {
+    color: transparent;
+}
+
+.contact .arogya-email-form textarea:focus::-moz-placeholder {
+    color: transparent;
+}
+
+.contact .arogya-email-form textarea:focus:-ms-input-placeholder {
+    color: transparent;
+}
+
+
+
+.contact .arogya-email-form input {
+    height: 44px;
+    border-radius: 20px;
+}
+
+
+.contact .arogya-email-form textarea {
+    padding: 10px 12px;
+    border-radius: 20px;
+}
+
+.contact .arogya-email-form input:hover,
+.contact .arogya-email-form textarea:hover {
+
+    background: rgb(130, 168, 238);
+}
+
+.contact .arogya-email-form button[type="submit"] {
+    border: 0;
+    padding: 10px 32px;
+    color: #0880e8;
+    transition: 0.4s;
+    border-radius: 50px;
+    border: 2px solid #0880e8;
+    background: #fff;
+}
+
+.contact .arogya-email-form button[type="submit"]:hover {
+    background: #0f0e7e;
+    color: #fff;
+}
+
+/*
+  @-webkit-keyframes animate-loading {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes animate-loading {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+
+  */
+
+
+
+
+/*--------------------------------------------------------------
+  # Breadcrumbs
+  --------------------------------------------------------------*/
+/* .breadcrumbs {
+    padding: 15px 0;
+    background: #ecf6fe;
+    margin-top: 130px;
+  }
+  
+  @media (max-width: 992px) {
+    .breadcrumbs {
+      margin-top: 50px;
+    }
+  }
+  
+  .breadcrumbs h2 {
+    font-size: 26px;
+    font-weight: 600;
+    color: #043c6d;
+  }
+  
+  .breadcrumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0 0 10px 0;
+    margin: 0;
+    font-size: 14px;
+  }
+  
+  .breadcrumbs ol li + li {
+    padding-left: 10px;
+  }
+  
+  .breadcrumbs ol li + li::before {
+    display: inline-block;
+    padding-right: 10px;
+    color: #f8c255;
+    content: "/";
+  }*/
+section {
+    padding: 60px 0;
+    overflow: hidden;
+}
+
+.section-bg {
+    background-color: #f1f8ff;
+}
+
+.section-title {
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+.section-title h2 {
+    font-size: 32px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    padding-bottom: 0;
+    color: #054a85;
+}
+
+.section-title p {
+    margin-bottom: 0;
+    font-style: italic;
 }
