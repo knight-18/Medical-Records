@@ -4,7 +4,6 @@ const reasonsContainer = document.getElementById('reasons');
 const reasons = document.getElementsByClassName('reasons');
 const passwordRate = document.getElementsByClassName('password-rate')
 const terms = document.getElementById("terms")
-
 const confirmpassword = document.getElementById('confirmPwd');
 
 passwordInput.addEventListener('input',updateStrengthMeter);
@@ -27,9 +26,8 @@ function updateStrengthMeter(){
 	}
 	else{
 		strengthMeter.style.display = 'none'
+		passwordRate[0].style.display = 'none'
 	}
-
-    
 	reasonsContainer.innerHTML = '';
 
 }
@@ -48,16 +46,19 @@ confirmpassword.addEventListener('click', () => {
     })
 function backgroundSetter(strength){
     if(strength < 33){
-        document.body.style.setProperty('--newBackground', 'red');
+		document.body.style.setProperty('--newBackground', 'red');
+		passwordRate[0].style.display = 'block'
         passwordRate[0].innerHTML = 'Your Password is too weak!'
     }
     else if(strength >= 33 && strength < 69 ){
-        document.body.style.setProperty('--newBackground', '#FFC107');
-        passwordRate[0].innerHTML = 'Not bad, but you know you can do better!'
+		document.body.style.setProperty('--newBackground', '#FFC107');
+		passwordRate[0].style.display = 'block'
+		passwordRate[0].innerHTML = 'Not bad, but you know you can do better!'
 
     }
     else{
-        document.body.style.setProperty('--newBackground', 'green');
+		document.body.style.setProperty('--newBackground', 'green');
+		passwordRate[0].style.display = 'block'
         passwordRate[0].innerHTML = 'Good to go!'
     }
 }
@@ -173,8 +174,8 @@ register.addEventListener("click", (e) => {
 
 
 	if(weaknesses[0] == weaknesses[1] == weaknesses[2] == null){
-		reasonsContainer.innerHTML = '';
-
+		// reasonsContainer.innerHTML = '';
+		reasonsContainer.style.display = 'none'
 		document.forms['signUpform'].submit();
 
 	}

@@ -116,10 +116,10 @@ display:flex;
 margin-top:0;
 width:100vw;
 height:100vh;
-background-image: url("/medicalImage/signupDots.png");
-background-size:cover !important;
+background-image: url("../medicalImage/signupDots.png");
+background-size:cover;
 background-repeat: no-repeat;
-/* background-size:98vw 93vh; */
+background-size:98vw 93vh;
 }
 #design{
 margin-top:18vh;
@@ -253,6 +253,7 @@ color:#FFFFFF;
 font-family:Inter;
 text-align:center;
 font-size:1.1em;
+cursor: pointer;
 }
 #login{
 margin-top:5vh;
