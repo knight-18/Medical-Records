@@ -15,7 +15,7 @@ const requireAuth = (req, res, next) => {
                 res.redirect('/login')
             } else {
                 let user = await User.findById(decodedToken.id)
-                
+
                 req.user = user
                 //console.log("current user", req.user)
 
