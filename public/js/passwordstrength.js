@@ -18,7 +18,7 @@ function updateStrengthMeter(){
 		strength -= weakness.deduction;
 	});
 	strength += -5;
-	console.log(strength)
+	// console.log(strength)
 	if(strength > -6){
 		strengthMeter.style.display = 'block'
 		backgroundSetter(strength)
@@ -172,12 +172,11 @@ register.addEventListener("click", (e) => {
             }
 		})
 
-
-	if(weaknesses[0] == weaknesses[1] == weaknesses[2] == null){
+	if(weaknesses[0] === null && weaknesses[1] === null && weaknesses[2] === null){
 		// reasonsContainer.innerHTML = '';
 		reasonsContainer.style.display = 'none'
-		document.forms['signUpform'].submit();
-
+		console.log("i")
+		document.forms["signUpform"].submit()
 	}
 	else{
 		e.preventDefault();

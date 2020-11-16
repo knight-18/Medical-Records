@@ -2,7 +2,6 @@ const express = require('express')
 const path = require('path')
 
 const mongoose = require('mongoose')
-const routes = require('./routes/user')
 const connect_flash = require('connect-flash')
 const session = require('express-session')
 const cookieParser = require('cookie-parser')
@@ -13,7 +12,7 @@ app.use(express.json())
 app.use(express.static('public'))
 app.use(cookieParser())
 // using dotenv module for environment
-require('dotenv').config({ path: 'env' })
+require('dotenv').config()
 
 //Configuring Port
 const PORT = process.env.PORT || 3000
@@ -53,19 +52,21 @@ app.use((req, res, next) => {
     next()
 })
 
-app.use(express.static(__dirname + '/public'));
-
-//Routes
-const indexRoutes = require('./routes/index')
-
-app.use(indexRoutes);
+// app.use(express.static(__dirname + '/public'));
+// console.log(__dirname+'/public');
 
 //Setup for rendering static pages
 const publicDirectory = path.join(__dirname, '../public')
+// console.log(publicDirectory);
 app.use(express.static(publicDirectory))
 
 //Routes
+const indexRoutes = require('./routes/index')
+const routes = require('./routes/user')
+
+app.use(indexRoutes)
 app.use(routes)
+
 //Start the server
 app.listen(PORT, () => {
     console.log('Server listening on port', PORT)
@@ -80,4 +81,3 @@ const databasedlt= async()=>{
    console.log("deleted")
 }
 databasedlt()*/
-
