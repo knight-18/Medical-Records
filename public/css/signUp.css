@@ -117,9 +117,9 @@ margin-top:0;
 width:100vw;
 height:100vh;
 background-image: url("/medicalImage/signupDots.png");
-background-size:cover;
+background-size:cover !important;
 background-repeat: no-repeat;
-background-size:98vw 93vh;
+/* background-size:98vw 93vh; */
 }
 #design{
 margin-top:18vh;
@@ -202,7 +202,7 @@ top:8px;
 }*/
 #details{
 position:relative;
-top:3vh;
+top:1vh;
 left:12vw;
 }
 .label1{
@@ -234,9 +234,9 @@ display:inline-block;
 #terms1{
 padding-left:5px;
 }
-#confirmPwd{
+/* #confirmPwd{
 display:block !important;
-}
+} */
 #termLink{
 text-decoration: underline;
 }

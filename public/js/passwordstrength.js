@@ -9,17 +9,27 @@ const confirmpassword = document.getElementById('confirmPwd');
 
 passwordInput.addEventListener('input',updateStrengthMeter);
 function updateStrengthMeter(){
+	// strengthMeter.style.display = 'block'
     const weaknesses = calculateStrength(passwordInput.value);
-    reasonsContainer.style.display = 'none';
+	reasonsContainer.style.display = 'none';
     let strength = 100;
 	reasonsContainer.innerHTML = '';
 	weaknesses.forEach(weakness =>{
 		if(weakness == null) return 
 		strength -= weakness.deduction;
 	});
-    strength += -5;
-    backgroundSetter(strength)
-	strengthMeter.style.setProperty('--strength',strength);
+	strength += -5;
+	console.log(strength)
+	if(strength > -6){
+		strengthMeter.style.display = 'block'
+		backgroundSetter(strength)
+		strengthMeter.style.setProperty('--strength',strength);
+	}
+	else{
+		strengthMeter.style.display = 'none'
+	}
+
+    
 	reasonsContainer.innerHTML = '';
 
 }
@@ -69,6 +79,8 @@ function emptyPassword(password){
 			deduction: null
 		}
 	}
+	else
+	return null
 }
 
 function lengthWeaknesses(password){
@@ -126,6 +138,9 @@ function samePassword(password, confirmPassword){
 			message: `Your passwords do not match`
 		}
 	}
+	else{
+		return null
+	}
 }
 function checkTerms(value){
 	if(value == true){
@@ -139,6 +154,8 @@ function checkTerms(value){
 } 
 const register = document.getElementsByClassName("register")[0]
 register.addEventListener("click", (e) => {
+	reasonsContainer.innerHTML = '';
+
 	weaknesses = []
 	weaknesses.push(samePassword(passwordInput.value, confirmpassword.value))
 	weaknesses.push(checkTerms(terms.checked))
@@ -153,7 +170,11 @@ register.addEventListener("click", (e) => {
                 }
             }
 		})
-	if(weaknesses.length ==0){
+
+
+	if(weaknesses[0] == weaknesses[1] == weaknesses[2] == null){
+		reasonsContainer.innerHTML = '';
+
 		document.forms['signUpform'].submit();
 
 	}
