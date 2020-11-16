@@ -21,12 +21,14 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
+
     <!--==================================== Font awesome CSS =============================================================-->
     <!--===================================================================================================================-->
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
         integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="your_website_domain/css_root/flaticon.css">
     <script src="https://use.fontawesome.com/67912d8e88.js"></script>
 
     <!--===================================================================================================================-->
@@ -36,6 +38,10 @@
 
 
 </head>
+
+<!--================================Scroll to top button =====================================================-->
+
+<button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fa fa-arrow-up"></i></button>
 
 <!--================================ Navbar ==================================================================-->
 
@@ -51,7 +57,7 @@
                     <li class="nav-item"><a class="nav-link" href="#" id="homeOpt">HOME<span
                                 class="sr-only">(current)</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="#services">ABOUT US</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#about">SERVICES</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#service">SERVICES</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">CONTACT US</a></li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
@@ -105,11 +111,14 @@
         </div>
     </div>
     <div class="container-fluid arogya-feature" id="services">
+        <div class="line-mf"></div>
         <div class="container">
             <div class="row">
 
                 <div class="col-md-7">
                     <div class="cover">
+                        <div class="line-mf1"></div>
+
                         <div class="card">
                             <svg id="bg-services" width="100%" viewBox="0 0 1000 800">
                                 <defs>
@@ -146,8 +155,16 @@
                 <!-- ============================ About us page starts =========================================== -->
 
                 <div class="col-md-5">
+                    <div style="height: 80px;" class="line-mf1"></div>
                     <h1> <span>About us</span> </h1>
+                    <div style="background-color: blue;padding: 2px; width: 25vh;  margin: 0;
+                    position: absolute;
+                    justify-content: center;
+                    -ms-transform: translateY(-50%);
+                    transform: translateY(-50%);" class="line-mf2"></div>
+
                     <br>
+
 
                     <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. In rhoncus turpis nisl, vitae dictum mi
                         semper convallis. Ut sapien leo, varius ac dapibus a, cursus quis ante. </p>
@@ -163,7 +180,7 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid arogya-features" id="about">
+    <!--<div class="container-fluid arogya-features" id="about">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4">
@@ -232,11 +249,142 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
+
+    <!--============================================Services section start=====================================-->
+
+    <section id="service" class="services-mf pt-5 route">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div style="justify-content: center;" class="title-box text-center">
+                        <div class="line-mf"></div>
+                        <h3 class="title-a">
+                            Services
+                        </h3>
+
+                        <p id="p2" style="font-size: 2rem;">
+                            Explore Our services !
+                        </p>
+                        <div style="background-color: blue;padding: 2px; width: 25%;float:right;  margin: 0;
+            position: absolute;
+            left: 38%;
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);" class="line-mf1"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div style="background-color:rgb(211, 247, 247);" class="service-box">
+                        <div class="service-ico">
+                            <span class="ico-circle"><i class="fa fa-plus-circle"></i></span>
+                        </div>
+                        <div class="service-content">
+                            <h2 class="s-title">Emergency</h2>
+                            <p class="s-description text-center">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni adipisci eaque autem
+                                fugiat! Quia,
+                                provident vitae! Magni
+                                tempora perferendis eum non provident.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div style="background-color:rgb(211, 247, 247);" class="service-box">
+                        <div class="service-ico">
+                            <span class="ico-circle"><i class="fa fa-ambulance"></i></span>
+                        </div>
+                        <div class="service-content">
+                            <h2 class="s-title">Ambulance</h2>
+                            <p class="s-description text-center">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni adipisci eaque autem
+                                fugiat! Quia,
+                                provident vitae! Magni
+                                tempora perferendis eum non provident.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div style="background-color: rgb(211, 247, 247);" class="service-box">
+                        <div class="service-ico">
+                            <span class="ico-circle"><i class="fa fa-stethoscope"></i></i>
+
+                            </span>
+                        </div>
+                        <div class="service-content">
+                            <h2 class="s-title">Checkup</h2>
+                            <p class="s-description text-center">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni adipisci eaque autem
+                                fugiat! Quia,
+                                provident vitae! Magni
+                                tempora perferendis eum non provident.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div style="background-color: rgb(211, 247, 247);" class="service-box">
+                        <div class="service-ico">
+                            <span class="ico-circle"><i class="fa fa-user-md"></i></span>
+                        </div>
+                        <div class="service-content">
+                            <h2 class="s-title">Top Doctors</h2>
+                            <p class="s-description text-center">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni adipisci eaque autem
+                                fugiat! Quia,
+                                provident vitae! Magni
+                                tempora perferendis eum non provident.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div style="background-color:rgb(211, 247, 247);" class="service-box">
+                        <div class="service-ico">
+                            <span class="ico-circle">
+                                <i class="fa fa-credit-card"></i>
+                            </span>
+                        </div>
+                        <div class="service-content">
+                            <h2 class="s-title">Low Price</h2>
+                            <p class="s-description text-center">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni adipisci eaque autem
+                                fugiat! Quia,
+                                provident vitae! Magni
+                                tempora perferendis eum non provident.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div style="background-color:rgb(211, 247, 247);" class="service-box">
+                        <div class="service-ico">
+                            <span class="ico-circle"><i class="fa fa-medkit"></i></span>
+                        </div>
+                        <div class="service-content">
+                            <h2 class="s-title">Affordable</h2>
+                            <p class="s-description text-center">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni adipisci eaque autem
+                                fugiat! Quia,
+                                provident vitae! Magni
+                                tempora perferendis eum non provident.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
 
 
-    </div>
+
+
+
+
     <!--========================================= Faq part =========================================-->
 
     <div class="faqpart">
@@ -245,6 +393,12 @@
             <div class="col-md-10 col-xs-1">
                 <div class="faqcard p-0 mx-auto mt-3">
                     <h1 class="faqheading mt-4 pb-3 text-center"><b>Hi ! How can we help You?</b></h1>
+                    <div style="background-color: blue;padding: 2px; width: 25%;float:right;  margin: 0;
+            position: absolute;
+            left: 38%;
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);" class="line-mf3"></div>
+
                     <div class="d-flex justify-content-center px-5">
                         <div class="faqsearch"> <input type="text" class="faqsearch-input" placeholder="Search..."
                                 name=""> <a href=" " class="faqsearch-icon"><img src="./img/search.png" width=60%><i
@@ -285,9 +439,15 @@
     </div>
 
 
-    <!--====================================== Services ===================================================-->
+    <!--====================================== Features ===================================================-->
 
     <div class="container-fluid arogya-features-list">
+        <h2 style="text-align: center;">Features</h2>
+        <div style="background-color: blue;padding: 2px; width: 16%;float:right;  margin: 0;
+        position: absolute;
+        left: 42.5%;
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);" class="line-mf5"></div>
         <div class="container">
             <div class="row">
                 <div class="media col-md-6 col-lg-4">
@@ -346,6 +506,13 @@
     <div class="container-fluid arogya-news" id="news">
         <div class="container">
             <h2>News and Articles</h2>
+            <div style="background-color: blue;padding: 2px; width: 25%;float:right;  margin: 0;
+            position: absolute;
+            left: 38%;
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);" class="line-mf3"></div>
+            <br>
+
             <div class="owl-carousel owl-carousel2 owl-theme">
                 <div>
                     <div class="card text-center"><img class="card-img-top" src="./img/aboutus.png" alt="">
@@ -428,6 +595,12 @@
 
     <div class="container my-6" style="text-align: center;">
         <h2>Gallery</h2>
+        <div style="background-color: blue;padding: 2px; width: 25%;float:right;  margin: 0;
+            position: absolute;
+            left: 38%;
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);" class="line-mf3"></div>
+        <br>
         <!--Carousel Wrapper-->
         <!--<div id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel">
  
@@ -561,6 +734,7 @@
 
     <!--=======================================================================================================-->
     <section id="contact" class="contact">
+        <div class="line-mf"></div>
         <div class="container" data-aos="fade-up">
 
             <div class="section-title">
@@ -672,7 +846,7 @@
             </div>
         </div>
         <div class="footer-right col-md-4 col-sm-6">
-            <h2>Arogya<span> <img width="20%" height="20%" src="./img/logo.png" alt=""></span></h2>
+            <h2>Arogya<span> <img width="20%" height="20%" src="./img/medical1.png" alt=""></span></h2>
             <p class="menu">
                 <a href="#"> Home</a> |
                 <a href="#services"> About</a> |
@@ -683,7 +857,8 @@
         </div>
 
     </footer>
-
+   
+   
 
     <!--================================================================-->
     <!-- Footer -->
@@ -697,6 +872,11 @@
 
 
     </footer>
+    
+
+
+
+
     <!-- Footer -->
 
 
