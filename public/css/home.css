@@ -75,6 +75,8 @@ body {
     padding: 20px 0;
 }
 
+
+
 /*font-size: 36px;
   font-family: "Lato-Black";
   text-transform: uppercase;
@@ -92,6 +94,8 @@ background: rgba(244,0,255,0.65);
   -ms-text-fill-color: transparent;
   -o-text-fill-color: transparent;
 }*/
+
+
 
 #arogya-main-nav .bar1,
 #arogya-main-nav .bar2,
@@ -676,16 +680,7 @@ background: rgba(244,0,255,0.65);
     }
 }
 
-.arogya-testimonials {
-    position: relative;
-    margin-top: 200px;
-}
 
-@media (max-width: 767px) {
-    .arogya-testimonials {
-        margin-top: 100px;
-    }
-}
 
 .arogya-features-list {
     margin-top: 100px;
