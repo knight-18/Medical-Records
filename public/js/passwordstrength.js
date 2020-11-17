@@ -4,22 +4,30 @@ const reasonsContainer = document.getElementById('reasons');
 const reasons = document.getElementsByClassName('reasons');
 const passwordRate = document.getElementsByClassName('password-rate')
 const terms = document.getElementById("terms")
-
 const confirmpassword = document.getElementById('confirmPwd');
 
 passwordInput.addEventListener('input',updateStrengthMeter);
 function updateStrengthMeter(){
+	// strengthMeter.style.display = 'block'
     const weaknesses = calculateStrength(passwordInput.value);
-    reasonsContainer.style.display = 'none';
+	reasonsContainer.style.display = 'none';
     let strength = 100;
 	reasonsContainer.innerHTML = '';
 	weaknesses.forEach(weakness =>{
 		if(weakness == null) return 
 		strength -= weakness.deduction;
 	});
-    strength += -5;
-    backgroundSetter(strength)
-	strengthMeter.style.setProperty('--strength',strength);
+	strength += -5;
+	// console.log(strength)
+	if(strength > -6){
+		strengthMeter.style.display = 'block'
+		backgroundSetter(strength)
+		strengthMeter.style.setProperty('--strength',strength);
+	}
+	else{
+		strengthMeter.style.display = 'none'
+		passwordRate[0].style.display = 'none'
+	}
 	reasonsContainer.innerHTML = '';
 
 }
@@ -38,16 +46,19 @@ confirmpassword.addEventListener('click', () => {
     })
 function backgroundSetter(strength){
     if(strength < 33){
-        document.body.style.setProperty('--newBackground', 'red');
+		document.body.style.setProperty('--newBackground', 'red');
+		passwordRate[0].style.display = 'block'
         passwordRate[0].innerHTML = 'Your Password is too weak!'
     }
     else if(strength >= 33 && strength < 69 ){
-        document.body.style.setProperty('--newBackground', '#FFC107');
-        passwordRate[0].innerHTML = 'Not bad, but you know you can do better!'
+		document.body.style.setProperty('--newBackground', '#FFC107');
+		passwordRate[0].style.display = 'block'
+		passwordRate[0].innerHTML = 'Not bad, but you know you can do better!'
 
     }
     else{
-        document.body.style.setProperty('--newBackground', 'green');
+		document.body.style.setProperty('--newBackground', 'green');
+		passwordRate[0].style.display = 'block'
         passwordRate[0].innerHTML = 'Good to go!'
     }
 }
@@ -69,6 +80,8 @@ function emptyPassword(password){
 			deduction: null
 		}
 	}
+	else
+	return null
 }
 
 function lengthWeaknesses(password){
@@ -126,6 +139,9 @@ function samePassword(password, confirmPassword){
 			message: `Your passwords do not match`
 		}
 	}
+	else{
+		return null
+	}
 }
 function checkTerms(value){
 	if(value == true){
@@ -139,6 +155,8 @@ function checkTerms(value){
 } 
 const register = document.getElementsByClassName("register")[0]
 register.addEventListener("click", (e) => {
+	reasonsContainer.innerHTML = '';
+
 	weaknesses = []
 	weaknesses.push(samePassword(passwordInput.value, confirmpassword.value))
 	weaknesses.push(checkTerms(terms.checked))
@@ -153,9 +171,12 @@ register.addEventListener("click", (e) => {
                 }
             }
 		})
-	if(weaknesses.length ==0){
-		document.forms['signUpform'].submit();
 
+	if(weaknesses[0] === null && weaknesses[1] === null && weaknesses[2] === null){
+		// reasonsContainer.innerHTML = '';
+		reasonsContainer.style.display = 'none'
+		console.log("i")
+		document.forms["signUpform"].submit()
 	}
 	else{
 		e.preventDefault();
