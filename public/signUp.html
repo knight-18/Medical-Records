@@ -42,9 +42,13 @@
     	<p id="signUpText">Sign up with your social media account or email address</p>
 	    
     	<div id="details">
-            <form action="">
+        <form action="" name="signUpform">
     		<label class="label1">Email address*</label>
-    		<input type="email" placeholder="Write your email" class="inputDetails" required="required">
+        <input type="email" placeholder="Write your email" class="inputDetails" required="required">
+
+        <label class="label1">Phone Number*</label>
+        <input type="tel" placeholder="Write your phone number" class="inputDetails" required="required">
+        
         <label class="label1">Create password*</label>
         <div id="reasons" class="reasons"></div>
 
@@ -57,8 +61,8 @@
         <label class='label1'>Confirm password*</label>
 
         <input type="password" placeholder="Confirm password" class="inputDetails" id="confirmPwd" required="required" >
-
-    		<input type="checkbox" id="terms" required><label for="terms" id="terms1"> I agree to <a href="" id="termLink">terms & conditions</a></label>
+        <i class="fa fa-eye" aria-hidden="true" id="eyeIcon"></i>
+    		<div><input type="checkbox" id="terms" required><label for="terms" id="terms1"> I agree to <a href="" id="termLink">terms & conditions</a></label></div>
     		<button type="submit" id="submitbtn" class="register">Register Account</button>
         </form>
     	</div>
