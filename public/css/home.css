@@ -1792,7 +1792,7 @@ a {
 }
 
 a:hover {
-    color: #0078ff;
+    color: #ffffff;
     text-decoration: none;
     transition: all 0.5s ease-in-out;
 }
@@ -1865,20 +1865,6 @@ a {
     transition: all 0.5s ease-in-out;
 }
 
-a:hover {
-    color: #0078ff;
-    text-decoration: none;
-    transition: all 0.5s ease-in-out;
-}
-
-.p-r {
-    position: relative;
-}
-
-.color-a {
-    color: #0078ff;
-}
-
 .color-d {
     color: #f5f5f5;
 }
@@ -1912,19 +1898,7 @@ a:hover {
     line-height: 1.1;
 }
 
-.avatar {
-    width: 32px;
-    height: 32px;
-    margin-right: 4px;
-    overflow: hidden;
-}
 
-.bg-image {
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-    background-position: center center;
-}
 
 @media (max-width: 1024px) {
     .bg-image {
