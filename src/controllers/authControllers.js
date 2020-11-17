@@ -113,7 +113,7 @@ module.exports.emailVerify_get = async (req, res) => {
                     req.flash('error_msg', 'error occured while verifying')
                     res.redirect('/')
                 } else {
-                    req.flash('success_msg', 'User has been verified')
+                    req.flash('success_msg', 'User has been verified and can login now')
                     console.log('The user has been verified.')
                     console.log('active', activeUser)
                     res.redirect('/login')
