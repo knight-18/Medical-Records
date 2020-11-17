@@ -95,7 +95,7 @@ module.exports.emailVerify_get = async (req, res) => {
             if (err) {
                 req.flash(
                     'error_msg',
-                    ' Your verify link has expired we have sent you a verification link'
+                    ' Your verify link had expired. We have sent you another verification link'
                 )
                 signupMail(expiredTokenUser, req.hostname, req.protocol)
                 return res.redirect('/login')
@@ -110,7 +110,7 @@ module.exports.emailVerify_get = async (req, res) => {
                 })
                 if (!activeUser) {
                     console.log('Error occured while verifying')
-                    req.flash('error_msg', 'error occured while verifying')
+                    req.flash('error_msg', 'Error occured while verifying')
                     res.redirect('/')
                 } else {
                     req.flash('success_msg', 'User has been verified and can login now')
