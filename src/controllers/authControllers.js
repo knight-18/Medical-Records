@@ -29,13 +29,21 @@ module.exports.signup_get = (req, res) => {
 }
 
 module.exports.login_get = (req, res) => {
-    res.render('login')
+    res.render('signup')
 }
 
 module.exports.signup_post = async (req, res) => {
-    const { name, email, password, phoneNumber } = req.body
+    const { name, email, password, password2, phoneNumber } = req.body
+    if (password != password2)
+    {
+        req.flash("error_msg", "Passwords do not match. Try again"); 
+        res.status(400).redirect("/login")
+        return; 
+    }
 
-    const userExists = await User.findOne({ email })
+    try
+    {
+        const userExists = await User.findOne({ email })
     console.log('userexists', userExists)
     /*if(userExists && userExists.active== false)
     {
@@ -47,29 +55,35 @@ module.exports.signup_post = async (req, res) => {
     if (userExists) {
         req.flash(
             'success_msg',
-            'This email is already registered try loging in'
+            'This email is already registered. Try logging in'
         )
         return res.redirect('/login')
     }
 
-    try {
+    
         const user = new User({ email, name, password, phoneNumber })
         let saveUser = await user.save()
         //console.log(saveUser);
         req.flash(
             'success_msg',
-            'Registration Successful now verify your email'
+            'Registration successful. Check your inbox to verify your email'
         )
         signupMail(saveUser, req.hostname, req.protocol)
         //res.send(saveUser)
-        res.redirect('/')
-    } catch (err) {
+        res.redirect('/login')
+    
+    }
+    catch (err)
+    {
         const errors = handleErrors(err)
         console.log(errors)
         //res.json(errors);
         req.flash('error_msg', 'Could not signup')
-        res.status(400).redirect('/signup')
+        res.status(400).redirect('/signup') 
+         
     }
+
+    
 }
 module.exports.emailVerify_get = async (req, res) => {
     try {
@@ -81,7 +95,7 @@ module.exports.emailVerify_get = async (req, res) => {
             if (err) {
                 req.flash(
                     'error_msg',
-                    ' Your verify link has expired we have sent you a verification link'
+                    ' Your verify link had expired. We have sent you another verification link'
                 )
                 signupMail(expiredTokenUser, req.hostname, req.protocol)
                 return res.redirect('/login')
@@ -96,13 +110,13 @@ module.exports.emailVerify_get = async (req, res) => {
                 })
                 if (!activeUser) {
                     console.log('Error occured while verifying')
-                    req.flash('error_msg', 'error occured while verifying')
+                    req.flash('error_msg', 'Error occured while verifying')
                     res.redirect('/')
                 } else {
-                    req.flash('success_msg', 'User has been verified')
-                    console.log('the user has been verified')
+                    req.flash('success_msg', 'User has been verified and can login now')
+                    console.log('The user has been verified.')
                     console.log('active', activeUser)
-                    res.redirect('/')
+                    res.redirect('/login')
                 }
             }
         })

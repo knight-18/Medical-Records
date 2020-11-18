@@ -9,7 +9,7 @@ const expressLayouts = require('express-ejs-layouts')
 //Configuring App
 const app = express()
 app.use(express.json())
-app.use(express.static('public'))
+// app.use(express.static('public'))
 app.use(cookieParser())
 // using dotenv module for environment
 require('dotenv').config()
@@ -28,7 +28,13 @@ mongoose
     .then(() => console.log('Connected to mongo server'))
     .catch((err) => console.error(err))
 
+const publicDirectory = path.join(__dirname, '../public')
+    // console.log(publicDirectory);
+app.use(express.static(publicDirectory))
+
 //Setting EJS view engine
+app.set('views', path.join(__dirname, '../views'));
+
 app.set('view engine', 'ejs')
 
 //app.use(expressLayouts);
@@ -56,9 +62,7 @@ app.use((req, res, next) => {
 // console.log(__dirname+'/public');
 
 //Setup for rendering static pages
-const publicDirectory = path.join(__dirname, '../public')
-// console.log(publicDirectory);
-app.use(express.static(publicDirectory))
+
 
 //Routes
 const indexRoutes = require('./routes/index')
@@ -72,12 +76,12 @@ app.listen(PORT, () => {
     console.log('Server listening on port', PORT)
 })
 
-/*const User= require('./models/User')
-const databasedlt= async()=>{
-   const user = await User.find()
-   user.forEach(async(data)=>{
-        await User.findByIdAndDelete(data._id)
-   })
-   console.log("deleted")
-}
-databasedlt()*/
+// const User= require('./models/User')
+// const databasedlt= async()=>{
+//    const user = await User.find()
+//    user.forEach(async(data)=>{
+//         await User.findByIdAndDelete(data._id)
+//    })
+//    console.log("deleted")
+// }
+// databasedlt()
