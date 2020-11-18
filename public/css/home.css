@@ -426,7 +426,7 @@ background: rgba(244,0,255,0.65);
 .arogya-feature .card .squircle {
     width: 100%;
     height: 456px;
-    background: url(../images/aboutus.png) center/cover, #aaa;
+    background: url(../img/aboutus.png) center/cover, #aaa;
     clip-path: url(#clip-path);
     background-position-x: -50px;
 }
@@ -739,7 +739,7 @@ background: rgba(244,0,255,0.65);
 }
 
 .arogya-news {
-    background-image: url('../images/Frame2.png') no-repeat;
+    background-image: url('../img/Frame2.png') no-repeat;
     padding: 50px 0;
     margin: 30px auto;
 }
@@ -1282,7 +1282,7 @@ text-decoration:underline;
 }
 
 ::placeholder {
-    color: rgb(65, 65, 65);
+    color: #fffdfd;
     opacity: 1;
     padding-left: 10px;
 }
@@ -1321,7 +1321,7 @@ text-decoration:underline;
     caret-color: #000000;
     font-size: 19px;
     font-weight: 300;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     transition: width 0.4s linear;
 }
 
@@ -1388,7 +1388,7 @@ a:link {
 
 .faqimage {
     position: absolute;
-    size: 50%;
+    size: 60%;
     height: 10px;
     width: 10px;
     transform: scale(0.29);
