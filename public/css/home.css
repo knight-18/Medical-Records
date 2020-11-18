@@ -1277,7 +1277,7 @@ text-decoration:underline;
 }
 
 ::placeholder {
-    color: #fffdfd;
+    color: #181717;
     opacity: 1;
     padding-left: 10px;
 }
@@ -1359,6 +1359,7 @@ a:link {
 
 .faqcard-inner:hover {
     transform: scale(1.16);
+    color: #3b88f5;
 }
 
 .faqcard-inner img {
