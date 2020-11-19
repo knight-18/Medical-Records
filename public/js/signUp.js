@@ -27,4 +27,3 @@ loginLink.addEventListener('click', () => {
     signupPart.classList.toggle("fadeIn")
     
 });
-

@@ -75,6 +75,8 @@ body {
     padding: 20px 0;
 }
 
+
+
 /*font-size: 36px;
   font-family: "Lato-Black";
   text-transform: uppercase;
@@ -92,6 +94,8 @@ background: rgba(244,0,255,0.65);
   -ms-text-fill-color: transparent;
   -o-text-fill-color: transparent;
 }*/
+
+
 
 #arogya-main-nav .bar1,
 #arogya-main-nav .bar2,
@@ -676,16 +680,7 @@ background: rgba(244,0,255,0.65);
     }
 }
 
-.arogya-testimonials {
-    position: relative;
-    margin-top: 200px;
-}
 
-@media (max-width: 767px) {
-    .arogya-testimonials {
-        margin-top: 100px;
-    }
-}
 
 .arogya-features-list {
     margin-top: 100px;
@@ -1792,7 +1787,7 @@ a {
 }
 
 a:hover {
-    color: #0078ff;
+    color: #ffffff;
     text-decoration: none;
     transition: all 0.5s ease-in-out;
 }
@@ -1865,20 +1860,6 @@ a {
     transition: all 0.5s ease-in-out;
 }
 
-a:hover {
-    color: #0078ff;
-    text-decoration: none;
-    transition: all 0.5s ease-in-out;
-}
-
-.p-r {
-    position: relative;
-}
-
-.color-a {
-    color: #0078ff;
-}
-
 .color-d {
     color: #f5f5f5;
 }
@@ -1912,19 +1893,7 @@ a:hover {
     line-height: 1.1;
 }
 
-.avatar {
-    width: 32px;
-    height: 32px;
-    margin-right: 4px;
-    overflow: hidden;
-}
 
-.bg-image {
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-    background-position: center center;
-}
 
 @media (max-width: 1024px) {
     .bg-image {
