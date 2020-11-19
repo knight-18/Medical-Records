@@ -15,7 +15,7 @@ const requireAuth = (req, res, next) => {
                 res.redirect('/login')
             } else {
                 let user = await User.findById(decodedToken.id)
-                
+
                 req.user = user
                 //console.log("current user", req.user)
 
@@ -27,4 +27,18 @@ const requireAuth = (req, res, next) => {
     }
 }
 
-module.exports = requireAuth
+
+const redirectIfLoggedIn = (req, res, next) => {
+    const token = req.cookies.jwt 
+    if (token)
+    {
+        req.flash("error_msg", "You are already logged in.")
+        res.redirect("/profile")
+    }
+    else
+    {
+        next(); 
+    }
+}
+
+module.exports = { requireAuth, redirectIfLoggedIn }
