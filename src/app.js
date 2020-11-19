@@ -53,7 +53,7 @@ app.use((req, res, next) => {
     next()
 })
 
-app.use(express.static(__dirname + '/public'));
+
 
 //Routes
 const indexRoutes = require('./routes/index')
@@ -80,4 +80,3 @@ const databasedlt= async()=>{
    console.log("deleted")
 }
 databasedlt()*/
-

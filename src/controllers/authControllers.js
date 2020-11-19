@@ -34,8 +34,8 @@ module.exports.login_get = (req, res) => {
 
 module.exports.signup_post = async (req, res) => {
 
- 
   const { name, email, password, phoneNumber } = req.body; 
+  console.log("in signup route",req.body)
 
   const userExists= await User.findOne({email})
   console.log("userexists",userExists)
@@ -49,17 +49,17 @@ module.exports.signup_post = async (req, res) => {
      if (userExists)
     {
       req.flash("success_msg","This email is already registered try loging in")
-      return res.redirect("/login")
+      return res.redirect("/signup")
     }
 
   try {
-    const user = new User({email, name, password, phoneNumber}); 
+    const user = new User({email, password}); 
     let saveUser = await user.save(); 
     //console.log(saveUser); 
     req.flash("success_msg", "Registration Successful now verify your email");
     signupMail(saveUser,req.hostname,req.protocol)
      //res.send(saveUser)
-    res.redirect("/"); 
+    res.redirect("/signup"); 
   }
   catch(err) {
     const errors = handleErrors(err); 
@@ -125,14 +125,17 @@ module.exports.signup_post = async (req, res) => {
 
 module.exports.login_post = async (req, res) => {
 
+  console.log(req.body)
+
   const { email, password } = req.body;
   try {
+    console.log("in login route")
     const user = await User.login(email, password);
     if(!user.active)
     {
       req.flash("error_msg",`${user.name}, You have not verified your account please check your mail to get the verify link`)
       signupMail(user,req.hostname,req.protocol)
-      res.redirect("/login")
+      res.redirect("/signup")
       return
 
     }
@@ -147,7 +150,7 @@ module.exports.login_post = async (req, res) => {
   catch (err) {
     req.flash("error_msg", "Invalid Credentials"); 
      console.log(err);
-    res.redirect("/login");
+    res.redirect("/signup");
   }
 
 

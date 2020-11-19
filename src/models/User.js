@@ -11,7 +11,7 @@ const userSchema = mongoose.Schema(
         name: {
             type: String,
             trim: true,
-            required: true,
+            required: false,
         },
         email: {
             type: String,
@@ -40,7 +40,7 @@ const userSchema = mongoose.Schema(
         phoneNumber: {
             type: String,
             trim: true,
-            required: true,
+            required: false,
             validate: [isMobilePhone, 'Phone Number is Invalid'],
         },
     },
