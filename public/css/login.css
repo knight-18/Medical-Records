@@ -42,7 +42,8 @@
     color:#FFFFFF;
     font-family:Inter;
     text-align:center;
-    font-size:1.1em;
+	font-size:1.1em;
+	cursor: pointer;
   }
   .signuplink-section{
     margin: 0 20% 0 15%;
