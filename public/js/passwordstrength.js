@@ -45,6 +45,8 @@ function showreasonconfirmclick(){
 confirmpassword.addEventListener('click', showreasonconfirmclick)
 
 function backgroundSetter(strength){
+	let regex = /^(?=.[a-z])(?=.[A-Z])(?=.[0-9])(?=.[^0-9a-zA-Z\s]).+$/
+	console.log(regex.test(passwordInput.value));
     if(strength < 33){
 		document.body.style.setProperty('--newBackground', 'red');
 		passwordRate[0].style.display = 'block'
@@ -55,7 +57,12 @@ function backgroundSetter(strength){
 		passwordRate[0].style.display = 'block'
 		passwordRate[0].innerHTML = 'Not bad, but you know you can do better!'
 
-    }
+	}
+	else if(strength > 69 && !regex.test(passwordInput.value)){
+		document.body.style.setProperty('--newBackground', '#FFC107');
+		passwordRate[0].style.display = 'block'
+		passwordRate[0].innerHTML = 'Not bad, but you know you can do better!'
+	}
     else{
 		document.body.style.setProperty('--newBackground', 'green');
 		passwordRate[0].style.display = 'block'
@@ -198,4 +205,3 @@ register.addEventListener("click", (e) => {
 		})
 	}
 	})
-	
