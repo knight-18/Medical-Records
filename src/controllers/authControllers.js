@@ -29,12 +29,13 @@ module.exports.signup_get = (req, res) => {
 }
 
 module.exports.login_get = (req, res) => {
-    res.render('signup')
+    res.render('login')
 }
 
 module.exports.signup_post = async (req, res) => {
-    const { name, email, password, password2, phoneNumber } = req.body
-    if (password != password2)
+    const { name, email, password, confirmPwd, phoneNumber } = req.body
+    console.log("in sign up route",req.body);
+    if (password != confirmPwd)
     {
         req.flash("error_msg", "Passwords do not match. Try again"); 
         res.status(400).redirect("/login")
@@ -149,7 +150,7 @@ module.exports.login_post = async (req, res) => {
         res.status(200).redirect('/profile')
     } catch (err) {
         req.flash('error_msg', 'Invalid Credentials')
-        console.log(err)
+        //console.log(err)
         res.redirect('/login')
     }
 }
