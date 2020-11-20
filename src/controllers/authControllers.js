@@ -2,7 +2,7 @@ const User = require('../models/User')
 const jwt = require('jsonwebtoken')
 const { signupMail } = require('../config/nodemailer')
 const path = require('path')
-
+const bcrypt = require("bcryptjs")
 require('dotenv').config()
 
 const maxAge = 30 * 24 * 60 * 60
@@ -78,7 +78,7 @@ module.exports.signup_post = async (req, res) => {
         const errors = handleErrors(err)
         console.log(errors)
         //res.json(errors);
-        req.flash('error_msg', 'Could not signup')
+        req.flash('error_msg', 'Could not signup.' + ' ' + errors['email'] + ' ' + errors['password'] + ' '  + errors['phoneNumber'])
         res.status(400).redirect('/signup') 
          
     }
@@ -128,30 +128,73 @@ module.exports.emailVerify_get = async (req, res) => {
 }
 
 module.exports.login_post = async (req, res) => {
-    const { email, password } = req.body
-    try {
-        const user = await User.login(email, password)
-        if (!user.active) {
-            req.flash(
-                'error_msg',
-                `${user.name}, You have not verified your account please check your mail to get the verify link`
-            )
-            signupMail(user, req.hostname, req.protocol)
-            res.redirect('/login')
-            return
-        }
-        const token = user.generateAuthToken(maxAge)
+   const { email, password } = req.body; 
+   if (!email || !password)
+   {
+       req.flash("error_msg", "Email/Password field cannot be null"); 
+       res.redirect("/login")
+       return; 
+   }
 
-        res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
-        //console.log(user);
-        //signupMail(saveUser)
-        req.flash('success_msg', 'Successfully logged in')
-        res.status(200).redirect('/profile')
-    } catch (err) {
-        req.flash('error_msg', 'Invalid Credentials')
-        console.log(err)
-        res.redirect('/login')
+   try
+   {
+    const user = await User.findOne({ email:email })
+    if (user)
+    {
+         const pwdMatch = await bcrypt.compare(password, user.password); 
+         if (pwdMatch)
+         {
+            if (user.active == true)
+            {
+             const token = user.generateAuthToken(maxAge)
+ 
+             res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
+             
+             req.flash('success_msg', 'Successfully logged in')
+             res.status(200).redirect('/profile')
+            }
+            else
+            {
+             req.flash(
+                 'error_msg',
+                 `You have not verified your account please check your mail to get the verify link`
+             )
+             signupMail(user, req.hostname, req.protocol)
+             res.redirect('/login')
+             return
+ 
+            }
+         }
+         else
+         {
+             req.flash('error_msg', 'Invalid Credentials')
+        
+         res.redirect('/login')
+ 
+         }
+    } 
+    else
+    {
+ 
+     req.flash('error_msg', 'Invalid Credentials')
+        
+     res.redirect('/login')
+ 
+ 
+ 
     }
+   }
+
+   catch(e)
+   {
+       console.log(e)
+       req.flash("error_msg", "Could not login")
+       res.status(400).redirect("/login")
+   }
+
+
+   
+
 }
 
 module.exports.upload_post = async (req, res) => {

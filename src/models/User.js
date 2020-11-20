@@ -50,17 +50,17 @@ const userSchema = mongoose.Schema(
 )
 
 // static method to login user
-userSchema.statics.login = async function (email, password) {
-    const user = await this.findOne({ email })
-    if (user) {
-        const auth = await bcrypt.compare(password, user.password)
-        if (auth) {
-            return user
-        }
-        throw Error('Invalid Credentials')
-    }
-    throw Error('Invalid Credentials')
-}
+// userSchema.statics.login = async function (email, password) {
+//     const user = await this.findOne({ email })
+//     if (user) {
+//         const auth = await bcrypt.compare(password, user.password)
+//         if (auth) {
+//             return user
+//         }
+//         throw Error('Invalid Credentials')
+//     }
+//     throw Error('Invalid Credentials')
+// }
 
 //creating token for the user
 userSchema.methods.generateAuthToken = function generateAuthToken(maxAge) {
