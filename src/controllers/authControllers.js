@@ -29,7 +29,7 @@ module.exports.signup_get = (req, res) => {
 }
 
 module.exports.login_get = (req, res) => {
-    res.render('signup')
+    res.render('login')
 }
 
 module.exports.signup_post = async (req, res) => {
