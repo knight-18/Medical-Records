@@ -85,6 +85,7 @@
         <h2 id="heading1">Login Now</h2>
         <!-- <p id="logInText">Login with your social media account or email address</p> -->
         <div id="details1">
+          <div><%- include('partials/message'); %></div>
           <form action="/login" method="POST">
             <label class="label2">Your email*</label>
             <input type="email" placeholder="Write your email" class="inputDetails" required id="email" name="email"/>
