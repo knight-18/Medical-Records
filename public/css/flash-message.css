@@ -10,3 +10,7 @@
 .close:hover {
     background: #bbb;
 }
+
+.alignment{
+	text-align: center;	
+}

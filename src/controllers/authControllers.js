@@ -34,7 +34,7 @@ module.exports.login_get = (req, res) => {
 
 module.exports.signup_post = async (req, res) => {
     const { name, email, password, confirmPwd, phoneNumber } = req.body
-    console.log("in sign up route",req.body);
+    //console.log("in sign up route",req.body);
     if (password != confirmPwd)
     {
         req.flash("error_msg", "Passwords do not match. Try again"); 
@@ -45,7 +45,7 @@ module.exports.signup_post = async (req, res) => {
     try
     {
         const userExists = await User.findOne({ email })
-    console.log('userexists', userExists)
+    //console.log('userexists', userExists)
     /*if(userExists && userExists.active== false)
     {
       req.flash("success_msg",`${userExists.name}, we have sent you a link to verify your account kindly check your mail`)
@@ -91,7 +91,7 @@ module.exports.emailVerify_get = async (req, res) => {
         const userID = req.params.id
         const expiredTokenUser = await User.findOne({ _id: userID })
         const token = req.query.tkn
-        console.log(token)
+        //console.log(token)
         jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
             if (err) {
                 req.flash(
@@ -103,20 +103,20 @@ module.exports.emailVerify_get = async (req, res) => {
             }
             const user = await User.findOne({ _id: decoded.id })
             if (!user) {
-                console.log('user not found')
+                //console.log('user not found')
                 res.redirect('/')
             } else {
                 const activeUser = await User.findByIdAndUpdate(user._id, {
                     active: true,
                 })
                 if (!activeUser) {
-                    console.log('Error occured while verifying')
+                   // console.log('Error occured while verifying')
                     req.flash('error_msg', 'Error occured while verifying')
                     res.redirect('/')
                 } else {
                     req.flash('success_msg', 'User has been verified and can login now')
-                    console.log('The user has been verified.')
-                    console.log('active', activeUser)
+                    //console.log('The user has been verified.')
+                    //console.log('active', activeUser)
                     res.redirect('/login')
                 }
             }

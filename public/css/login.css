@@ -57,7 +57,7 @@
  	display:inline-block;
  }
  #signUpLink{
- 	text-decoration: underline;
+ 	text-decoration: none !important;
  	font-family:Inter;
  	font-size:1.2em;
  }

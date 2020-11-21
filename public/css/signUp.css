@@ -329,7 +329,7 @@ font-size:105%;
 display:inline-block;
 }
 #loginLink{
-text-decoration: underline;
+text-decoration: none !important;
 font-family:Inter;
 font-size:135%;
 }
