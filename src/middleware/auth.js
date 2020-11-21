@@ -4,6 +4,7 @@ const User = require('../models/User')
 require('dotenv').config()
 
 const requireAuth = (req, res, next) => {
+    try{
     const token = req.cookies.jwt
     //console.log(token);
     // check json web token exists & is verified
@@ -25,6 +26,10 @@ const requireAuth = (req, res, next) => {
     } else {
         res.redirect('/login')
     }
+}
+catch(error){
+    res.redirect("/login");
+}
 }
 
 
