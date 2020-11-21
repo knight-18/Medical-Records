@@ -79,7 +79,7 @@ module.exports.signup_post = async (req, res) => {
         const errors = handleErrors(err)
         console.log(errors)
         //res.json(errors);
-        req.flash('error_msg', 'Could not signup')
+        req.flash('error_msg', 'Could not signup.' + ' ' + errors['email'] + ' ' + errors['password'] + ' '  + errors['phoneNumber'])
         res.status(400).redirect('/signup') 
          
     }
