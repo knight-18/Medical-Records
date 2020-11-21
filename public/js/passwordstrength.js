@@ -27,8 +27,9 @@ function updateStrengthMeter(){
 		passwordRate[0].style.display = 'none'
 	}
 }
-function showreasonconfirmclick(){
+function showreasonconfirmclick(){	
 	reasonsContainer.innerHTML = '';
+
 	const weaknesses = calculateStrength(passwordInput.value);
 	weaknesses.forEach(weakness =>{
         if(weakness!= null){
@@ -40,11 +41,17 @@ function showreasonconfirmclick(){
                 }
             }
 		})
+		if(reasonsContainer.innerHTML !== ""){
+			reasonsContainer.style.display = 'block'
+		}
 	}
 
 confirmpassword.addEventListener('click', showreasonconfirmclick)
-
 function backgroundSetter(strength){
+	let regex = /(?=.\d)(?=.[a-z])(?=.[A-Z])(?=.\W)/g
+	// 	// let regex = /^(?=.[a-z])(?=.[A-Z])(?=.[0-9])(?=.[^0-9a-zA-Z\s]).+$/
+	//console.log(regex.test(passwordInput.value));
+	let  passwordValue = passwordInput.value;
     if(strength < 33){
 		document.body.style.setProperty('--newBackground', 'red');
 		passwordRate[0].style.display = 'block'
@@ -55,11 +62,16 @@ function backgroundSetter(strength){
 		passwordRate[0].style.display = 'block'
 		passwordRate[0].innerHTML = 'Not bad, but you know you can do better!'
 
-    }
+	}
+	else if(strength > 69 && !passwordValue.match(regex)){
+		document.body.style.setProperty('--newBackground', '#FFC107');
+		passwordRate[0].style.display = 'block'
+		passwordRate[0].innerHTML = 'Not bad, but you know you can do better!'
+	}
     else{
 		document.body.style.setProperty('--newBackground', 'green');
 		passwordRate[0].style.display = 'block'
-        passwordRate[0].innerHTML = 'Good to go!'
+       	 passwordRate[0].innerHTML = 'Good to go!'
     }
 }
 function calculateStrength(password){
@@ -81,7 +93,10 @@ function emptyPassword(password){
 		}
 	}
 	else
-	return null
+	return {
+		message: null,
+		deduction: null
+	}
 }
 
 function lengthWeaknesses(password){
@@ -100,7 +115,10 @@ function lengthWeaknesses(password){
 		
 	}
 	else 
-		return null
+		return {
+			message: null,
+			deduction: null
+		}
 	
 }
 
@@ -125,7 +143,10 @@ function characterTypeWeakness(password,regex,type){
 		}
 	}
 	else 
-		return null
+		return {
+			message: null,
+			deduction: null
+		}
 }
 
 function RepeatWeakness(password){
@@ -140,7 +161,10 @@ function RepeatWeakness(password){
 
 	}
 	else
-		return  null		
+		return  {
+			message: null,
+			deduction: null
+		}		
 		
 
 }
@@ -151,12 +175,18 @@ function samePassword(password, confirmPassword){
 		}
 	}
 	else{
-		return null
+		return {
+			message: null,
+			deduction: null
+		}
 	}
 }
 function checkTerms(value){
 	if(value == true){
-		return null
+		return {
+			message: null,
+			deduction: null
+		}
 	}
 	else{
 		return{
@@ -181,10 +211,16 @@ register.addEventListener("click", (e) => {
                 }
             }
 		})
-	 all = checkNull(weaknesses)
-	 function checkNull(weaknesses){
-		return weaknesses.every(x => Object.is(null, x));
-	 }
+		console.log(weaknesses)
+
+		var valueArr = weaknesses.map(function(item){ return item.message });
+		console.log(valueArr)
+
+		all = checkNull(valueArr)
+		function checkNull(weaknesses){
+			return weaknesses.every(x => Object.is(null, x));
+		}
+	 console.log(all)
 	if(all){
 		reasonsContainer.innerHTML = '';
 		reasonsContainer.style.display = 'none'
@@ -197,5 +233,8 @@ register.addEventListener("click", (e) => {
 		reasonsContainer.style.display = 'none';
 		})
 	}
+	confirmpassword.addEventListener('click', () => {
+		reasonsContainer.style.display = 'none'
 	})
-	
+
+	})
