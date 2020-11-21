@@ -256,7 +256,7 @@ cursor:pointer;
      display:none;
      position:absolute;
     right:-300%;
-     top:150%;
+     bottom:150%;
      width:18vw;
      /* height:10vh; */
      opacity:1 !important;
@@ -270,11 +270,11 @@ cursor:pointer;
  #infoText::after{
      content:"";
      position:absolute;
-     bottom:100%;
-     right:40px;
+     top:100%;
+     right:43px;
      border-width:6px;
      border-style:solid;
-     border-color: transparent transparent #9ac1f8 transparent;
+     border-color:  #9ac1f8 transparent transparent transparent;
  }
  #info:hover #infoText{
      display:block;
@@ -325,7 +325,7 @@ cursor: pointer;
 margin-top:1.5vh;
 color: #696F79;
 font-family:Inter;
-font-size:135%;
+font-size:105%;
 display:inline-block;
 }
 #loginLink{
