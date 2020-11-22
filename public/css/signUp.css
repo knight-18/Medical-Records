@@ -176,12 +176,13 @@ transition: 1s !important;
     height: 100vh;
 }
 #heading {
-    text-align: center;
+    /*text-align: center;*/
     font-family: Product Sans;
     font-weight: bold;
     font-size: 200%;
     letter-spacing: 0.03em;
     margin-bottom: 2vh;
+    margin-left: 11vw;
 }
 #signUpText {
     text-align: center;
@@ -327,6 +328,7 @@ color: #696F79;
 font-family:Inter;
 font-size:105%;
 display:inline-block;
+
 }
 #loginLink{
 text-decoration: none !important;
