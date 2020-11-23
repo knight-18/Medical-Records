@@ -764,6 +764,7 @@ background: rgba(244,0,255,0.65);
     font-size: 120px;
     color: #666666;
     position: absolute;
+    outline: none !important;
 }
 
 .arogya-news .owl-carousel .owl-nav .owl-prev {
