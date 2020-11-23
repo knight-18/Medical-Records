@@ -42,7 +42,7 @@ node_modules/
 jspm_packages/
 
 # Uploads directory for users
-uploads/
+/public/uploads/
 
 # TypeScript v1 declaration files
 typings/
@@ -107,3 +107,6 @@ dist
 .tern-port
 
 .uploads
+
+.ionide
+.vscode

@@ -43,6 +43,12 @@ const userSchema = mongoose.Schema(
             required: true,
             validate: [isMobilePhone, 'Phone Number is Invalid'],
         },
+        disease: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Disease',
+            },
+        ],
     },
     {
         timestamps: true,

@@ -7,16 +7,16 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
   <!--<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">-->
   <script src="https://use.fontawesome.com/67912d8e88.js"></script>
-  <link rel="stylesheet" href="../css/signUp.css" />
-  <link rel="stylesheet" href="../css/login.css" />
-  <link rel="stylesheet" href="../css/passwordstrength.css" />
+  <link rel="stylesheet" href="/css/signUp.css" />
+  <link rel="stylesheet" href="/css/login.css" />
+  <link rel="stylesheet" href="/css/passwordstrength.css" />
   <title>Aarogya</title>
 </head>
 
 <body>
   <div id="containers">
 	<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="Navbar" >
-		<a class="navbar-brand" href="/"><img src="../img/medical1.png" id="logo"></a>
+		<a class="navbar-brand" href="/"><img src="/img/medical1.png" id="logo"></a>
 	<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#collapsibleNavbar" id="button1"><span class="navbar-toggler-icon"></span></button>
 	<div class="collapse navbar-collapse" id="collapsibleNavbar">
 		<ul class=" nav navbar-nav mr-auto">
@@ -27,7 +27,7 @@
 		</ul>
 		<form class="form-inline">
 		<input type="text" id="inputNav" placeholder="Search...">
-		<a href="#"><img src="../img/search.png" id="search"></a>
+		<a href="#"><img src="/img/search.png" id="search"></a>
 		</form>
 	</div>
 	</nav>
@@ -46,7 +46,7 @@
     	<!-- <p id="signUpText">Sign up with your social media account or email address</p> -->
 	    
     	<div id="details">
-        <form action="/signup" method="POST" name="signUpform">
+        <form action="/user/signup" method="POST" name="signUpform">
           <label class="label1">Name*</label><br>
           <input type="text" placeholder="Write your name" class="inputDetails" required="required" name="name" id="name"><br>
           <label class="label1">Email address*</label><br>
@@ -84,7 +84,7 @@
         <h2 id="heading1">Login Now</h2>
         <!-- <p id="logInText">Login with your social media account or email address</p> -->
         <div id="details1">
-          <form action="/login" method="POST">
+          <form action="/user/login" method="POST">
             <label class="label2">Your email*</label>
             <input type="email" placeholder="Write your email" class="inputDetails" required id="email" name="email"/>
             <label class="label2">Password*</label>
@@ -102,8 +102,8 @@
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  <script src="../js/passwordstrength.js"></script>
-  <script src="../js/signUp.js"></script>
+  <script src="/js/passwordstrength.js"></script>
+  <script src="/js/signUp.js"></script>
 </body>
 
 </html>

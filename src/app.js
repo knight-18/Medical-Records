@@ -58,29 +58,26 @@ app.use((req, res, next) => {
     next()
 })
 
-// app.use(express.static(__dirname + '/public'));
-// console.log(__dirname+'/public');
-
 //Setup for rendering static pages
 
 
 //Routes
 const indexRoutes = require('./routes/index')
-const routes = require('./routes/user')
+const userRoutes = require('./routes/user')
 
-app.use(indexRoutes)
-app.use(routes)
+app.use('/',indexRoutes)
+app.use('/user',userRoutes)
 
 //Start the server
 app.listen(PORT, () => {
     console.log('Server listening on port', PORT)
 })
 
-// const User= require('./models/User')
+// const Disease= require('./models/Disease')
 // const databasedlt= async()=>{
-//    const user = await User.find()
+//    const user = await Disease.find()
 //    user.forEach(async(data)=>{
-//         await User.findByIdAndDelete(data._id)
+//         await Disease.findByIdAndDelete(data._id)
 //    })
 //    console.log("deleted")
 // }

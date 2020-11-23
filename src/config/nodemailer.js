@@ -16,7 +16,7 @@ const signupMail = (data, host, protocol) => {
     //console.log(TOKEN)
     //console.log(data)
     const PORT = process.env.PORT || 3000
-    const link = `${protocol}://${host}:${PORT}/verify/${data._id}?tkn=${TOKEN}`
+    const link = `${protocol}://${host}:${PORT}/user/verify/${data._id}?tkn=${TOKEN}`
 
     var transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
