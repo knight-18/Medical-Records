@@ -90,6 +90,7 @@
         </div>
     </div>-->
     </nav>
+    <div><%- include('partials/message'); %></div>
     <div class="container-fluid arogya-banner-area">
         <div class="container">
             <div class="row">
@@ -764,27 +765,27 @@
 
                 <div class="col-lg-6 mt-5 mt-lg-0" data-aos="fade-left" data-aos-delay="100">
 
-                    <form action="contact.php" method="post" role="form" class="arogya-email-form">
+                    <form action="/contact" method="post" role="form" class="arogya-email-form">
                         <div class="form-row">
                             <div class="col-md-6 form-group">
                                 <input type="text" name="name" class="form-control" id="name" placeholder="Your Name"
-                                    data-rule="minlen:4" data-msg="Please enter at least 4 characters" />
+                                    data-rule="minlen:1" data-msg="Please enter at least 1 character" required />
                                 <div class="validate"></div>
                             </div>
                             <div class="col-md-6 form-group">
                                 <input type="email" class="form-control" name="email" id="email"
-                                    placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
+                                    placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" required />
                                 <div class="validate"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject"
-                                data-rule="minlen:4" data-msg="Please enter at least 8 characters of subject" />
+                                data-rule="minlen:2" data-msg="Please enter at least 5 characters of subject" required />
                             <div class="validate"></div>
                         </div>
                         <div class="form-group">
                             <textarea class="form-control" name="message" rows="5" data-rule="required"
-                                data-msg="Please write something for us" placeholder="Message"></textarea>
+                                data-msg="Please write something for us" placeholder="Message" required></textarea>
                             <div class="validate"></div>
                         </div>
                         <div class="mb-3">
