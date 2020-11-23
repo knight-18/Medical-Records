@@ -1,10 +1,37 @@
-const strengthMeter = document.getElementById('strength-meter');
-const passwordInput = document.getElementById('password-input');
-const reasonsContainer = document.getElementById('reasons');
+const getElement = (value) => {
+	return document.getElementById(value);
+}
+
+const strengthMeter = getElement('strength-meter');
+const passwordInput = getElement('password-input');
+const reasonsContainer = getElement('reasons');
 const reasons = document.getElementsByClassName('reasons');
 const passwordRate = document.getElementsByClassName('password-rate')
-const terms = document.getElementById("terms")
-const confirmpassword = document.getElementById('confirmPwd');
+const terms = getElement("terms")
+const confirmpassword = getElement('confirmPwd');
+const SignupName = getElement("SignupName");
+const SignupEmail = getElement("SignupEmail");
+const SignupPhone = getElement("SignupPhone");
+const SignupButton = getElement("submitbtn");
+
+// SignupName.addEventListener('keyup',()=>{
+// 	if(SignupName.value.trim().length == 0)
+// 		SignupButton.disabled = true;
+// 	else
+// 		SignupButton.disabled = false;
+// })
+// SignupEmail.addEventListener('keyup',()=>{
+// 	if(SignupEmail.value.trim().length == 0)
+// 		SignupButton.disabled = true;
+// 	else
+// 		SignupButton.disabled = false;
+// })
+// SignupPhone.addEventListener('keyup',()=>{
+// 	if(SignupPhone.value.trim().length == 0)
+// 		SignupButton.disabled = true;
+// 	else
+// 		SignupButton.disabled = false;
+// })
 
 passwordInput.addEventListener('input',updateStrengthMeter);
 
@@ -48,30 +75,32 @@ function showreasonconfirmclick(){
 
 confirmpassword.addEventListener('click', showreasonconfirmclick)
 function backgroundSetter(strength){
-	let regex = /(?=.\d)(?=.[a-z])(?=.[A-Z])(?=.\W)/g
-	// 	// let regex = /^(?=.[a-z])(?=.[A-Z])(?=.[0-9])(?=.[^0-9a-zA-Z\s]).+$/
-	//console.log(regex.test(passwordInput.value));
+	let regex = /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?.+\-^#&])[A-Za-z\d@$!%*?.+\-^#&]{8,}/
 	let  passwordValue = passwordInput.value;
     if(strength < 33){
 		document.body.style.setProperty('--newBackground', 'red');
 		passwordRate[0].style.display = 'block'
         passwordRate[0].innerHTML = 'Your Password is too weak!'
-    }
-    else if(strength >= 33 && strength < 69 ){
+	}
+	else if(strength > 50 && passwordValue.length >= 8 && passwordValue.match(regex)){
+		document.body.style.setProperty('--newBackground', 'green');
+		passwordRate[0].style.display = 'block'
+       	passwordRate[0].innerHTML = 'Good to go!'
+	}
+    else if(strength < 69 ){
 		document.body.style.setProperty('--newBackground', '#FFC107');
 		passwordRate[0].style.display = 'block'
 		passwordRate[0].innerHTML = 'Not bad, but you know you can do better!'
-
 	}
 	else if(strength > 69 && !passwordValue.match(regex)){
 		document.body.style.setProperty('--newBackground', '#FFC107');
 		passwordRate[0].style.display = 'block'
-		passwordRate[0].innerHTML = 'Not bad, but you know you can do better!'
+		passwordRate[0].innerHTML = 'A strong password is recommended for security!'
 	}
     else{
 		document.body.style.setProperty('--newBackground', 'green');
 		passwordRate[0].style.display = 'block'
-       	 passwordRate[0].innerHTML = 'Good to go!'
+       	passwordRate[0].innerHTML = 'Good to go!'
     }
 }
 function calculateStrength(password){
@@ -105,6 +134,12 @@ function lengthWeaknesses(password){
 		return {
 			message:'Your password is too short',
 			deduction:40
+		}
+	}
+	else if(length < 8){
+		return {
+			message : 'Short Password!',
+			deduction : 35
 		}
 	}
 	else if(length < 10){
@@ -194,8 +229,20 @@ function checkTerms(value){
 		}
 	}
 } 
-const register = document.getElementsByClassName("register")[0]
-register.addEventListener("click", (e) => {
+SignupButton.addEventListener("click", (e) => {
+	e.preventDefault();
+	if(SignupName.value.trim().length == 0)
+			SignupName.classList.add('error');
+		else
+			SignupName.classList.remove('error');
+		if(SignupEmail.value.trim().length == 0)
+			SignupEmail.classList.add('error');
+		else
+			SignupEmail.classList.remove('error');
+		if(SignupPhone.value.trim().length == 0)
+			SignupPhone.classList.add('error');
+		else
+			SignupPhone.classList.remove('error');
 	reasonsContainer.innerHTML = '';
 	weaknesses = []
 	weaknesses = calculateStrength(passwordInput.value)
@@ -211,20 +258,20 @@ register.addEventListener("click", (e) => {
                 }
             }
 		})
-		console.log(weaknesses)
 
 		var valueArr = weaknesses.map(function(item){ return item.message });
-		console.log(valueArr)
 
 		all = checkNull(valueArr)
 		function checkNull(weaknesses){
 			return weaknesses.every(x => Object.is(null, x));
 		}
-	 console.log(all)
+		console.log(all);
 	if(all){
 		reasonsContainer.innerHTML = '';
-		reasonsContainer.style.display = 'none'
-		document.forms["signUpform"].submit()
+		reasonsContainer.style.display = 'none';
+		console.log(all);
+		if(SignupName.value.trim().length != 0 && SignupEmail.value.trim().length != 0 && SignupPhone.value.trim().length != 0)
+			document.forms["signUpform"].submit()
 	}
 	else{
 		e.preventDefault();

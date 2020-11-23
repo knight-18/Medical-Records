@@ -26,11 +26,15 @@ const handleErrors = (err) => {
 
 // controller actions
 module.exports.signup_get = (req, res) => {
-    res.render('signup')
+    res.render('signup',{
+        type: 'signup'
+    })
 }
 
 module.exports.login_get = (req, res) => {
-    res.render('login')
+    res.render('signup',{
+        type: 'login'
+    })
 }
 
 module.exports.signup_post = async (req, res) => {
