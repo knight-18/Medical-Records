@@ -4,6 +4,7 @@ const User = require('../models/User')
 require('dotenv').config()
 
 const requireAuth = (req, res, next) => {
+    try{
     const token = req.cookies.jwt
     //console.log(token);
     // check json web token exists & is verified
@@ -12,7 +13,7 @@ const requireAuth = (req, res, next) => {
             if (err) {
                 console.log(err.message)
 
-                res.redirect('/login')
+                res.redirect('/user/login')
             } else {
                 let user = await User.findById(decodedToken.id)
 
@@ -23,8 +24,12 @@ const requireAuth = (req, res, next) => {
             }
         })
     } else {
-        res.redirect('/login')
+        res.redirect('/user/login')
     }
+}
+catch(error){
+    res.redirect("/user/login");
+}
 }
 
 
@@ -33,7 +38,7 @@ const redirectIfLoggedIn = (req, res, next) => {
     if (token)
     {
         req.flash("error_msg", "You are already logged in.")
-        res.redirect("/profile")
+        res.redirect("/user/profile")
     }
     else
     {

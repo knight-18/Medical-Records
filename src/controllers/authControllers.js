@@ -2,6 +2,7 @@ const User = require('../models/User')
 const jwt = require('jsonwebtoken')
 const { signupMail } = require('../config/nodemailer')
 const path = require('path')
+const Disease = require('../models/Disease')
 
 require('dotenv').config()
 
@@ -16,7 +17,7 @@ const handleErrors = (err) => {
         Object.values(err.errors).forEach(({ properties }) => {
             // console.log(val);
             // console.log(properties);
-            errors[properties.path] = properties.message
+            errors[properties.path] = properties.message.concat('. '); 
         })
     }
 
@@ -25,43 +26,44 @@ const handleErrors = (err) => {
 
 // controller actions
 module.exports.signup_get = (req, res) => {
-    res.render('signup')
+    res.render('signup',{
+        type: 'signup'
+    })
 }
 
 module.exports.login_get = (req, res) => {
-    res.render('login')
+    res.render('signup',{
+        type: 'login'
+    })
 }
 
 module.exports.signup_post = async (req, res) => {
     const { name, email, password, confirmPwd, phoneNumber } = req.body
-    console.log("in sign up route",req.body);
-    if (password != confirmPwd)
-    {
-        req.flash("error_msg", "Passwords do not match. Try again"); 
-        res.status(400).redirect("/login")
-        return; 
+    //console.log("in sign up route",req.body);
+    if (password != confirmPwd) {
+        req.flash('error_msg', 'Passwords do not match. Try again')
+        res.status(400).redirect('/user/login')
+        return
     }
 
-    try
-    {
+    try {
         const userExists = await User.findOne({ email })
-    console.log('userexists', userExists)
-    /*if(userExists && userExists.active== false)
+        //console.log('userexists', userExists)
+        /*if(userExists && userExists.active== false)
     {
       req.flash("success_msg",`${userExists.name}, we have sent you a link to verify your account kindly check your mail`)
 
       signupMail(userExists,req.hostname,req.protocol)
       return res.redirect("/signup")
     }*/
-    if (userExists) {
-        req.flash(
-            'success_msg',
-            'This email is already registered. Try logging in'
-        )
-        return res.redirect('/login')
-    }
+        if (userExists) {
+            req.flash(
+                'success_msg',
+                'This email is already registered. Try logging in'
+            )
+            return res.redirect('/user/login')
+        }
 
-    
         const user = new User({ email, name, password, phoneNumber })
         let saveUser = await user.save()
         //console.log(saveUser);
@@ -71,20 +73,19 @@ module.exports.signup_post = async (req, res) => {
         )
         signupMail(saveUser, req.hostname, req.protocol)
         //res.send(saveUser)
-        res.redirect('/login')
-    
-    }
-    catch (err)
-    {
+        res.redirect('/user/login')
+    } catch (err) {
         const errors = handleErrors(err)
         console.log(errors)
-        //res.json(errors);
-        req.flash('error_msg', 'Could not signup')
-        res.status(400).redirect('/signup') 
-         
-    }
 
-    
+        var message = 'Could not signup. '.concat(errors['email'], errors['password'], errors['phoneNumber'])
+        //res.json(errors);
+        req.flash(
+            'error_msg',
+            message
+        )
+        res.status(400).redirect('/user/signup')
+    }
 }
 module.exports.emailVerify_get = async (req, res) => {
     try {
@@ -99,32 +100,35 @@ module.exports.emailVerify_get = async (req, res) => {
                     ' Your verify link had expired. We have sent you another verification link'
                 )
                 signupMail(expiredTokenUser, req.hostname, req.protocol)
-                return res.redirect('/login')
+                return res.redirect('/user/login')
             }
             const user = await User.findOne({ _id: decoded.id })
             if (!user) {
-                console.log('user not found')
+                //console.log('user not found')
                 res.redirect('/')
             } else {
                 const activeUser = await User.findByIdAndUpdate(user._id, {
                     active: true,
                 })
                 if (!activeUser) {
-                    console.log('Error occured while verifying')
+                    // console.log('Error occured while verifying')
                     req.flash('error_msg', 'Error occured while verifying')
                     res.redirect('/')
                 } else {
-                    req.flash('success_msg', 'User has been verified and can login now')
-                    console.log('The user has been verified.')
-                    console.log('active', activeUser)
-                    res.redirect('/login')
+                    req.flash(
+                        'success_msg',
+                        'User has been verified and can login now'
+                    )
+                    //console.log('The user has been verified.')
+                    //console.log('active', activeUser)
+                    res.redirect('/user/login')
                 }
             }
         })
     } catch (e) {
         console.log(e)
         //signupMail(user,req.hostname,req.protocol)
-        res.redirect('/login')
+        res.redirect('/user/login')
     }
 }
 
@@ -149,7 +153,7 @@ module.exports.login_post = async (req, res) => {
                 req.flash(
                     'error_msg',
                     `${userExists.name}, we have already sent you a verify link please check your email`)
-                res.redirect('/login')
+                res.redirect('/user/login')
                 return
             }
             req.flash(
@@ -159,7 +163,7 @@ module.exports.login_post = async (req, res) => {
             signupMail(userExists, req.hostname, req.protocol)
             await User.findByIdAndUpdate(userExists._id, { updatedAt: new Date() });
             //console.log('userExists',userExists)
-            res.redirect('/login')
+            res.redirect('/user/login')
             return
         }
        
@@ -169,16 +173,44 @@ module.exports.login_post = async (req, res) => {
         //console.log(user);
         //signupMail(saveUser)
         req.flash('success_msg', 'Successfully logged in')
-        res.status(200).redirect('/profile')
+        res.status(200).redirect('/user/profile')
     } catch (err) {
         req.flash('error_msg', 'Invalid Credentials')
         //console.log(err)
-        res.redirect('/login')
+        res.redirect('/user/login')
     }
 }
 
 module.exports.upload_post = async (req, res) => {
-    res.status(200).send('successful')
+    try {
+        let { name, duration, refDoctor, hospitalName, description } = req.body
+        const files = req.files
+        let images = files.map((file) => {
+            return `/uploads/${req.user.email}/${file.filename}`
+        })
+        let newDisease = await new Disease({
+            name,
+            images,
+            duration,
+            refDoctor,
+            hospitalName,
+            description,
+        }).save()
+        if (!newDisease) {
+            req.flash('error_msg', 'Unable to save the disease details')
+            return res.redirect('/user/profile')
+        }
+        req.user.disease.push(newDisease)
+        await req.user.save()
+
+        console.log(newDisease)
+        req.flash('success_msg', 'Sucessfully uploaded disease details.')
+        return res.redirect('/user/profile')
+    } catch (err) {
+        console.error(err)
+        req.flash('error_msg', 'Something went wrong')
+        return res.redirect('/user/profile')
+    }
 }
 
 module.exports.profile_get = async (req, res) => {
@@ -191,7 +223,7 @@ module.exports.logout_get = async (req, res) => {
     // const cookie = req.cookies.jwt
     res.clearCookie('jwt')
     req.flash('success_msg', 'Successfully logged out')
-    res.redirect('/login')
+    res.redirect('/user/login')
 }
 
 // module.exports.upload_get =async (req, res) => {

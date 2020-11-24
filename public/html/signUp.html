@@ -55,7 +55,8 @@
 
     		<!-- <input type="password" placeholder="Password" class="inputDetails" required="required" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"> -->
         <input type="password" placeholder="Password" class="inputDetails password-input" id="password-input" required="required" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
-        <i class="fa fa-eye" aria-hidden="true" id="eyeIcon"></i><br>
+        <i class="fa fa-eye" aria-hidden="true" id="eyeIcon"></i><i id="info" class="fa fa-info-circle" aria-hidden="true"><span id="infoText">Your password must contain 5 letters,1 uppercase characters, 1 number, 1 special character.</span></i>
+        <br>
         <div id="reasons" class="reasons"></div>
 
         <div class="strength-meter" id="strength-meter"></div>
@@ -103,7 +104,6 @@
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <script src="../js/passwordstrength.js"></script>
-  <script src="../js/signup.js"></script>
+  <script src="../js/signUp.js"></script>
 </body>
-
 </html>

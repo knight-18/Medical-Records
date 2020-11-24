@@ -75,8 +75,6 @@ body {
     padding: 20px 0;
 }
 
-
-
 /*font-size: 36px;
   font-family: "Lato-Black";
   text-transform: uppercase;
@@ -94,8 +92,6 @@ background: rgba(244,0,255,0.65);
   -ms-text-fill-color: transparent;
   -o-text-fill-color: transparent;
 }*/
-
-
 
 #arogya-main-nav .bar1,
 #arogya-main-nav .bar2,
@@ -680,8 +676,6 @@ background: rgba(244,0,255,0.65);
     }
 }
 
-
-
 .arogya-features-list {
     margin-top: 100px;
 }
@@ -764,6 +758,7 @@ background: rgba(244,0,255,0.65);
     font-size: 120px;
     color: #666666;
     position: absolute;
+    outline: none !important;
 }
 
 .arogya-news .owl-carousel .owl-nav .owl-prev {
@@ -1520,16 +1515,16 @@ a:link {
     margin-top: 40px;
 }
 
-.contact .arogya-email-form {
+.contact .needs-validation {
     width: 100%;
     background: transparent;
 }
 
-.contact .arogya-email-form .form-group {
+.contact .needs-validation .form-group {
     padding-bottom: 8px;
 }
 
-.contact .arogya-email-form .validate {
+.contact .needs-validation .validate {
     display: none;
     color: red;
     margin: 0 0 15px 0;
@@ -1537,7 +1532,7 @@ a:link {
     font-size: 13px;
 }
 
-.contact .arogya-email-form .error-message {
+.contact .needs-validation .error-message {
     display: none;
     color: #fff;
     background: #ed3c0d;
@@ -1547,11 +1542,11 @@ a:link {
     font-size: 30px;
 }
 
-.contact .arogya-email-form .error-message br + br {
+.contact .needs-validation .error-message br + br {
     margin-top: 25px;
 }
 
-.contact .arogya-email-form .sent-message {
+.contact .needs-validation .sent-message {
     display: none;
     color: #fff;
     background: #4186c7;
@@ -1560,14 +1555,14 @@ a:link {
     font-weight: 600;
 }
 
-.contact .arogya-email-form .loading {
+.contact .needs-validation .loading {
     display: none;
     background: rgb(240, 240, 240);
     text-align: center;
     padding: 15px;
 }
 
-.contact .arogya-email-form .loading:before {
+.contact .needs-validation .loading:before {
     content: '';
     display: inline-block;
     border-radius: 50%;
@@ -1580,68 +1575,68 @@ a:link {
     animation: animate-loading 1s linear infinite;
 }
 
-.contact .arogya-email-form input,
-.contact .arogya-email-form textarea {
+.contact .needs-validation input,
+.contact .needs-validation textarea {
     border-radius: 4px;
     box-shadow: none;
     font-size: 14px;
     background: rgb(170, 235, 255);
 }
 
-.contact .arogya-email-form textarea::placeholder,
-.contact .arogya-email-form input::placeholder {
+.contact .needs-validation textarea::placeholder,
+.contact .needs-validation input::placeholder {
     color: black;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
-.contact .arogya-email-form input:focus::-webkit-input-placeholder {
+.contact .needs-validation input:focus::-webkit-input-placeholder {
     color: transparent;
 }
 
-.contact .arogya-email-form input:focus:-moz-placeholder {
+.contact .needs-validation input:focus:-moz-placeholder {
     color: transparent;
 }
 
-.contact .arogya-email-form input:focus::-moz-placeholder {
+.contact .needs-validation input:focus::-moz-placeholder {
     color: transparent;
 }
 
-.contact .arogya-email-form input:focus:-ms-input-placeholder {
+.contact .needs-validation input:focus:-ms-input-placeholder {
     color: transparent;
 }
 
-.contact .arogya-email-form textarea:focus::-webkit-input-placeholder {
+.contact .needs-validation textarea:focus::-webkit-input-placeholder {
     color: transparent;
 }
 
-.contact .arogya-email-form textarea:focus:-moz-placeholder {
+.contact .needs-validation textarea:focus:-moz-placeholder {
     color: transparent;
 }
 
-.contact .arogya-email-form textarea:focus::-moz-placeholder {
+.contact .needs-validation textarea:focus::-moz-placeholder {
     color: transparent;
 }
 
-.contact .arogya-email-form textarea:focus:-ms-input-placeholder {
+.contact .needs-validation textarea:focus:-ms-input-placeholder {
     color: transparent;
 }
 
-.contact .arogya-email-form input {
+.contact .needs-validation input {
     height: 44px;
     border-radius: 20px;
 }
 
-.contact .arogya-email-form textarea {
+.contact .needs-validation textarea {
     padding: 10px 12px;
     border-radius: 20px;
 }
 
-.contact .arogya-email-form input:hover,
-.contact .arogya-email-form textarea:hover {
+.contact .needs-validation input:hover,
+.contact .needs-validation textarea:hover {
     background: rgb(130, 168, 238);
 }
 
-.contact .arogya-email-form button[type='submit'] {
+.contact .needs-validation button[type='submit'] {
     border: 0;
     padding: 10px 32px;
     color: #0880e8;
@@ -1651,7 +1646,7 @@ a:link {
     background: #fff;
 }
 
-.contact .arogya-email-form button[type='submit']:hover {
+.contact .needs-validation button[type='submit']:hover {
     background: #0f0e7e;
     color: #fff;
 }
@@ -1894,8 +1889,6 @@ a {
     line-height: 1.1;
 }
 
-
-
 @media (max-width: 1024px) {
     .bg-image {
         background-attachment: scroll;
@@ -2032,21 +2025,20 @@ a {
 /*  Scroll to top button  */
 
 #myBtn {
-    display: none; 
-    position: fixed; 
-    bottom: 20px; 
-    right: 30px; 
-    z-index: 99; 
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 99;
     border: none;
-    outline: none; 
+    outline: none;
     background-color: rgb(33, 46, 221); /* Set a background color */
-    color: white; 
-    cursor: pointer; 
-    padding: 17px; 
+    color: white;
+    cursor: pointer;
+    padding: 17px;
     border-radius: 50px;
-     
-  }
-  
-  #myBtn:hover {
+}
+
+#myBtn:hover {
     background-color: rgb(17, 17, 17); /* Add a dark-grey background on hover */
-  }
+}

@@ -11,14 +11,12 @@ const userSchema = mongoose.Schema(
         name: {
             type: String,
             trim: true,
-            required: false,
         },
         email: {
             type: String,
             trim: true,
-            required: true,
             unique: true,
-            validate: [isEmail, 'Email is Invalid'],
+            validate: [isEmail, 'Email is invalid'],
         },
         active: {
             type: Boolean,
@@ -27,7 +25,6 @@ const userSchema = mongoose.Schema(
         password: {
             type: String,
             trim: true,
-            required: true,
             minlength: 8,
             validate: [
                 (val) => {
@@ -40,9 +37,14 @@ const userSchema = mongoose.Schema(
         phoneNumber: {
             type: String,
             trim: true,
-            required: false,
-            validate: [isMobilePhone, 'Phone Number is Invalid'],
+            validate: [utilities.phoneValidator, 'Phone number is invalid'],
         },
+        disease: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Disease',
+            },
+        ],
     },
     {
         timestamps: true,

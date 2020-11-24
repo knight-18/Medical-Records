@@ -7,16 +7,16 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
   <!--<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">-->
   <script src="https://use.fontawesome.com/67912d8e88.js"></script>
-  <link rel="stylesheet" href="../css/signUp.css" />
-  <link rel="stylesheet" href="../css/login.css" />
-  <link rel="stylesheet" href="../css/passwordstrength.css" />
+  <link rel="stylesheet" href="/css/signUp.css" />
+  <link rel="stylesheet" href="/css/login.css" />
+  <link rel="stylesheet" href="/css/passwordstrength.css" />
   <title>Aarogya</title>
 </head>
 
 <body>
   <div id="containers">
 	<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="Navbar" >
-		<a class="navbar-brand" href="/"><img src="../img/medical1.png" id="logo"></a>
+		<a class="navbar-brand" href="/"><img src="/img/medical1.png" id="logo"></a>
 	<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#collapsibleNavbar" id="button1"><span class="navbar-toggler-icon"></span></button>
 	<div class="collapse navbar-collapse" id="collapsibleNavbar">
 		<ul class=" nav navbar-nav mr-auto">
@@ -27,7 +27,7 @@
 		</ul>
 		<form class="form-inline">
 		<input type="text" id="inputNav" placeholder="Search...">
-		<a href="#"><img src="../img/search.png" id="search"></a>
+		<a href="#"><img src="/img/search.png" id="search"></a>
 		</form>
 	</div>
 	</nav>
@@ -36,38 +36,41 @@
 <div id="signUp"><!--started details-->
 	<div id="signupLeftImage">
 		<!--<image src="medicalImage/plate.png" id="plate">-->
-			<img src="..\img/signup-Logo.png" id="design">
+			<img src="/img/signup-Logo.png" id="design">
     </div>
     
     <div id="Form">
-      
+      <div><%- include('partials/message'); %></div>
+      <% if(type === 'signup') { %>
         <div id="signUpform" class="fadeIn">
+      <% } else { %>
+        <div id="signUpform" class="fadeOut">
+      <% } %>
     	<h2 id="heading">Register Your Account!</h2>
     	<!-- <p id="signUpText">Sign up with your social media account or email address</p> -->
 	    
     	<div id="details">
-        <div><%- include('partials/message'); %></div>
-        <form action="/signup" method="POST" name="signUpform">
+       
+        <form action="/user/signup" method="POST" name="signUpform">
           <label class="label1">Name*</label><br>
-          <input type="text" placeholder="Write your name" class="inputDetails" required="required" name="name" id="name"><br>
+          <input type="text" placeholder="Write your name" class="inputDetails" name="name" id="SignupName" required /><br>
           <label class="label1">Email address*</label><br>
-        <input type="email" placeholder="Write your email" class="inputDetails" required="required" name="email" id="email"><br>
+        <input type="email" placeholder="Write your email" class="inputDetails" name="email" id="SignupEmail" required /><br>
 
         <label class="label1">Phone Number*</label><br>
-        <input type="tel" placeholder="Write your phone number" class="inputDetails" required="required" id="name" name="phoneNumber"><br>
+        <input type="tel" placeholder="Write your phone number" class="inputDetails" id="SignupPhone" name="phoneNumber" required /><br>
         
         <label class="label1">Create password*</label><br>
 
-    		<!-- <input type="password" placeholder="Password" class="inputDetails" required="required" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"> -->
-        <input type="password" placeholder="Password" class="inputDetails password-input" id="password-input" required="required" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" name="password">
-        <i class="fa fa-eye" aria-hidden="true" id="eyeIcon"></i><br>
+        <input type="password" placeholder="Password" class="inputDetails password-input" id="password-input" required pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?.+\-^#&])[A-Za-z\d@$!%*?.+\-^#&]{8,}" name="password">
+        <i class="fa fa-eye" aria-hidden="true" id="eyeIcon"></i><i id="info" class="fa fa-info-circle" aria-hidden="true"><span id="infoText">Your password must contain 8 letters,1 uppercase characters, 1 number, 1 special character.</span></i><br>
         <div id="reasons" class="reasons"></div>
 
         <div class="strength-meter" id="strength-meter"></div>
         <p class="password-rate"></p>
         <label class='label1'>Confirm password*</label><br>
           <div>
-            <input type="password" placeholder="Confirm password" class="inputDetails" id="confirmPwd" required="required" name="confirmPwd">
+            <input type="password" placeholder="Confirm password" class="inputDetails" id="confirmPwd" required name="confirmPwd">
             <i class="fa fa-eye" aria-hidden="true" id="eyeIcon"></i><br>
           </div>
         
@@ -77,37 +80,38 @@
       </div>
       <div class="loginlink-section">
         <p id="login">Already have an account?</p>
-    	  <a href="#" id="loginLink">Login</a>
+    	  <a href="#" id="loginLink" style="text-decoration:none !important">Login</a>
       </div>
     	
     </div>
-        <div id="logInform" class="fadeOut">
+    <% if(type === 'login') { %>
+      <div id="logInform" class="fadeIn">
+    <% } else { %>
+      <div id="logInform" class="fadeOut">
+    <% } %>
         <h2 id="heading1">Login Now</h2>
         <!-- <p id="logInText">Login with your social media account or email address</p> -->
         <div id="details1">
-          <div><%- include('partials/message'); %></div>
-          <form action="/login" method="POST">
+          <form action="/user/login" method="POST">
             <label class="label2">Your email*</label>
-            <input type="email" placeholder="Write your email" class="inputDetails" required id="email" name="email"/>
+            <input type="email" placeholder="Write your email" class="inputDetails" required id="LoginEmail" name="email"/>
             <label class="label2">Password*</label>
-            <input type="password" placeholder="Password" class="inputDetails" required="required" id="password" name="password"
-              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-              title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" />
+            <input type="password" placeholder="Password" class="inputDetails" required id="password" name="password"/>
             <i class="fa fa-eye" aria-hidden="true" id="eyeIcon"></i>
             <button type="submit" id="submitbtn1" >Login</button>
           </form>
         </div>
         <div class="signuplink-section">
           <p id="signUpopt">Don't have an account?</p>
-        <a href="#" id="signUpLink">Create account</a>
+        <a href="#" id="signUpLink" style="text-decoration:none !important">Create account</a>
         </div>  
     </div>
   </div>
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  <script src="../js/passwordstrength.js"></script>
-  <script src="../js/signup.js"></script>
+  <script src="/js/passwordstrength.js"></script>
+  <script src="/js/signUp.js"></script>
 </body>
 
 </html>

@@ -10,14 +10,15 @@
     <!-- ====================================owl carousel css========================================================-->
     <!-- <link rel="stylesheet" href="owl-carousel/assets/owl.carousel.min.css" type="text/css">-->
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
 
     <!--=================================== Bootstrap CSS ==============================================================-->
     <!--================================================================================================================-->
 
     <!-- <link rel="stylesheet" href="css/bootstrap.min.css">-->
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
 
     <!--==================================== Font awesome CSS =============================================================-->
     <!--===================================================================================================================-->
@@ -44,7 +45,7 @@
 <body data-spy="scroll" data-offset="80">
     <div id="containers" data-target="#Navbar">
         <nav class="navbar smart-scroll navbar-expand-lg navbar-light fixed-top" id="Navbar">
-            <a class="navbar-brand" href="#"><img id="logo" src="../img/medical1.png"></a>
+            <a class="navbar-brand" href="#"><img id="logo" src="/img/medical1.png"></a>
 
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#collapsibleNavbar"
                 id="button1"><span class="navbar-toggler-icon"></span></button>
@@ -90,6 +91,7 @@
         </div>
     </div>-->
     </nav>
+    <div><%- include('partials/message'); %></div>
     <div class="container-fluid arogya-banner-area">
         <div class="container">
             <div class="row">
@@ -97,10 +99,10 @@
                     <h1> Virtual <span>Healthcare</span> for
                         you . </h1>
                     <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. In rhoncus turpis nisl. </p>
-                    <a href="#">Get Started <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                    <a href="/user/login">Get Started <i class="fa fa-angle-right" aria-hidden="true"></i></a>
                 </div>
                 <div class="col-md-6">
-                    <div class="card"><img class="card-img-top img-fluid" src="../img/aboutus-logo-1 (1).png" alt="">
+                    <div class="card"><img class="card-img-top img-fluid" src="/img/aboutus-logo-1 (1).png" alt="">
                     </div>
                 </div>
             </div>
@@ -118,8 +120,8 @@
                         <div class="card">
                             <svg id="bg-services" width="100%" viewBox="0 0 1000 800">
                                 <defs>
-                                    <image id="clip-path" xlink:href="../img/aboutus-logo-2.png" width="100%"
-                                        height="70%" class="svg__image"></image>
+                                    <image id="clip-path" xlink:href="/img/aboutus-logo-2.png" width="100%" height="70%"
+                                        class="svg__image"></image>
                                     <lineargradient id="PSgrad_02" x1="64.279%" x2="0%" y1="76.604%" y2="0%">
                                         <stop offset="10%" stop-color="rgb(1,230,248)" stop-opacity="1" />
                                         <stop offset="10%" stop-color="rgb(30,62,222)" stop-opacity="1" />
@@ -396,8 +398,8 @@
             transform: translateY(-50%);" class="line-mf3"></div>
 
                     <div class="d-flex justify-content-center px-5">
-                        <div class="faqsearch"> <input type="text" class="faqsearch-input" placeholder="Search..."
-                                name=""> <a href=" " class="faqsearch-icon"><img src="/img/search.png" width=60%></a> </div>
+                        <!-- <div class="faqsearch"> <input type="text" class="faqsearch-input" placeholder="Search..."
+                                name=""> <a href=" " class="faqsearch-icon"><img src="/img/search.png" width=60%></a> </div> -->
                     </div>
                     <div class="medss">
                         <div class="faqplacards">
@@ -446,7 +448,7 @@
         <div class="container">
             <div class="row">
                 <div class="media col-md-6 col-lg-4">
-                    <div class="oval mr-4"><img class="align-self-start" src="../img/24-hours.png" alt=""></div>
+                    <div class="oval mr-4"><img class="align-self-start" src="/img/24-hours.png" alt=""></div>
                     <div class="media-body">
                         <h5 class="mb-0"> Quick Service </h5>
                         Aliquam a nisl pulvinar, hendrerit arcu sed, dapibus velit. Duis ac quam id sapien vestibulum
@@ -455,7 +457,7 @@
                 </div>
 
                 <div class="media col-md-6 col-lg-4">
-                    <div class="oval mr-4"><img class="align-self-start" src="../img/money (2).png" alt="">
+                    <div class="oval mr-4"><img class="align-self-start" src="/img/money (2).png" alt="">
                     </div>
                     <div class="media-body">
                         <h5 class="mb-0">Affordable Pricing</h5>
@@ -465,7 +467,7 @@
                 </div>
 
                 <div class="media col-md-6 col-lg-4">
-                    <div class="oval mr-4"><img class="align-self-start" src="../img/stethoscope.png" alt=""></div>
+                    <div class="oval mr-4"><img class="align-self-start" src="/img/stethoscope.png" alt=""></div>
                     <div class="media-body">
                         <h5 class="mb-0">Top Doctors</h5>
                         Aliquam a nisl pulvinar, hendrerit arcu sed, dapibus velit. Duis ac quam id sapien vestibulum
@@ -473,7 +475,7 @@
                     </div>
                 </div>
                 <div class="media col-md-6 col-lg-4">
-                    <div class="oval mr-4"><img class="align-self-start" src="../img/hospital.png" alt="">
+                    <div class="oval mr-4"><img class="align-self-start" src="/img/hospital.png" alt="">
                     </div>
                     <div class="media-body">
                         <h5 class="mb-0">Hospitals nearby</h5>
@@ -510,7 +512,7 @@
 
             <div class="owl-carousel owl-carousel2 owl-theme">
                 <div>
-                    <div class="card text-center"><img class="card-img-top" src="../img/aboutus.png" alt="">
+                    <div class="card text-center"><img class="card-img-top" src="/img/aboutus.png" alt="">
                         <div class="card-body text-left pr-0 pl-0">
                             <h5>Article 1</h5>
                             <p class="card-text">Donec non sem mi. In hac habitasse platea dictumst. Nullam a feugiat
@@ -522,7 +524,7 @@
                     </div>
                 </div>
                 <div>
-                    <div class="card text-center"><img class="card-img-top" src="../img/aboutus.png" alt="">
+                    <div class="card text-center"><img class="card-img-top" src="/img/aboutus.png" alt="">
                         <div class="card-body text-left pr-0 pl-0">
                             <h5>Article 2</h5>
                             <p class="card-text">Donec non sem mi. In hac habitasse platea dictumst. Nullam a feugiat
@@ -534,7 +536,7 @@
                     </div>
                 </div>
                 <div>
-                    <div class="card text-center"><img class="card-img-top" src="../img/aboutus.png" alt="">
+                    <div class="card text-center"><img class="card-img-top" src="/img/aboutus.png" alt="">
                         <div class="card-body text-left pr-0 pl-0">
                             <h5>Article 3 </h5>
                             <p class="card-text">Donec non sem mi. In hac habitasse platea dictumst. Nullam a feugiat
@@ -546,7 +548,7 @@
                     </div>
                 </div>
                 <div>
-                    <div class="card text-center"><img class="card-img-top" src="../img/aboutus-logo-2.png" alt="">
+                    <div class="card text-center"><img class="card-img-top" src="/img/aboutus-logo-2.png" alt="">
                         <div class="card-body text-left pr-0 pl-0">
                             <h5>Article 5
                             </h5>
@@ -559,7 +561,7 @@
                     </div>
                 </div>
                 <div>
-                    <div class="card text-center"><img class="card-img-top" src="../img/aboutus.png" alt="">
+                    <div class="card text-center"><img class="card-img-top" src="/img/aboutus.png" alt="">
                         <div class="card-body text-left pr-0 pl-0">
                             <h5>Article 6 </h5>
                             <p class="card-text">Donec non sem mi. In hac habitasse platea dictumst. Nullam a feugiat
@@ -570,7 +572,7 @@
                     </div>
                 </div>
                 <div>
-                    <div class="card text-center"><img class="card-img-top" src="../img/aboutus.png" alt="">
+                    <div class="card text-center"><img class="card-img-top" src="/img/aboutus.png" alt="">
                         <div class="card-body text-left pr-0 pl-0">
                             <h5>Article 7</h5>
                             <p class="card-text">Donec non sem mi. In hac habitasse platea dictumst. Nullam a feugiat
@@ -763,37 +765,50 @@
                 </div>
 
                 <div class="col-lg-6 mt-5 mt-lg-0" data-aos="fade-left" data-aos-delay="100">
-
-                    <form action="contact.php" method="post" role="form" class="arogya-email-form">
+                    <form action="/contact" class="needs-validation" method="POST" novalidate>
                         <div class="form-row">
                             <div class="col-md-6 form-group">
                                 <input type="text" name="name" class="form-control" id="name" placeholder="Your Name"
-                                    data-rule="minlen:4" data-msg="Please enter at least 4 characters" />
-                                <div class="validate"></div>
+                                    minlength="2" aria-hidden="true" required />
+                                <div class="invalid-feedback">
+                                    Please choose a name !!
+                                </div>
                             </div>
                             <div class="col-md-6 form-group">
                                 <input type="email" class="form-control" name="email" id="email"
-                                    placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
-                                <div class="validate"></div>
+                                    placeholder="Your Email" required />
+                                <div class="valid-feedback">
+                                    Looks good !!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please provide a valid email !!
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject"
-                                data-rule="minlen:4" data-msg="Please enter at least 8 characters of subject" />
-                            <div class="validate"></div>
+                                minlength="4" required />
+                            <div class="valid-feedback">
+                                Good to go !!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please provide a subject of minimum length 4!!
+                            </div>
                         </div>
                         <div class="form-group">
-                            <textarea class="form-control" name="message" rows="5" data-rule="required"
-                                data-msg="Please write something for us" placeholder="Message"></textarea>
-                            <div class="validate"></div>
+                            <textarea class="form-control" name="message" rows="5" placeholder="Message" minlength="1"
+                                required></textarea>
+                            <div class="valid-feedback">
+                                Let's Go !!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please write something !!
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <div class="loading">Loading</div>
-                            <div class="error-message"></div>
-                            <div class="sent-message">Your message has been sent. Thank you!</div>
-                        </div>
-                        <div class="text-center"> <button type="submit"><i class="fa fa-paper-plane-o m-r-6"
-                                    aria-hidden="true"></i> Send Message</button></div>
+
+                        <div class="text-center"><button type="submit" style="outline: none;"><i
+                                    class="fa fa-paper-plane-o m-r-6" aria-hidden="true"></i> Send
+                                Message</button></div>
                     </form>
 
                 </div>
@@ -841,7 +856,7 @@
             </div>
         </div>
         <div class="footer-right col-md-4 col-sm-6">
-            <h2>Arogya<span> <img width="20%" height="20%" src="../img/medical1.png" alt=""></span></h2>
+            <h2>Arogya<span> <img width="20%" height="20%" src="/img/medical1.png" alt=""></span></h2>
             <p class="menu">
                 <a href="#"> Home</a> |
                 <a href="#services"> About</a> |
@@ -852,8 +867,8 @@
         </div>
 
     </footer>
-   
-   
+
+
 
     <!--================================================================-->
     <!-- Footer -->
@@ -867,7 +882,7 @@
 
 
     </footer>
-    
+
 
 
 
