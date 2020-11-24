@@ -91,7 +91,7 @@ module.exports.emailVerify_get = async (req, res) => {
         const userID = req.params.id
         const expiredTokenUser = await User.findOne({ _id: userID })
         const token = req.query.tkn
-        console.log(token)
+        //console.log(token)
         jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
             if (err) {
                 req.flash(
@@ -133,16 +133,36 @@ module.exports.login_post = async (req, res) => {
     console.log('in Login route')
     console.log('req.body',req.body)
     try {
+
         const user = await User.login(email, password)
-        if (!user.active) {
+
+        const userExists = await User.findOne({ email })
+        
+
+        if (!userExists.active) {
+            const currDate = new Date();
+            const initialUpdatedAt = userExists.updatedAt;
+            const timeDiff = Math.abs(currDate.getTime() - initialUpdatedAt.getTime());
+            if(timeDiff<=10800000)
+            {
+                console.log("Email already sent check it")
+                req.flash(
+                    'error_msg',
+                    `${userExists.name}, we have already sent you a verify link please check your email`)
+                res.redirect('/login')
+                return
+            }
             req.flash(
-                'error_msg',
-                `${user.name}, You have not verified your account please check your mail to get the verify link`
+                'success_msg',
+                `${userExists.name}, your verify link has expired we have sent you another email please check you mailbox`
             )
-            signupMail(user, req.hostname, req.protocol)
+            signupMail(userExists, req.hostname, req.protocol)
+            await User.findByIdAndUpdate(userExists._id, { updatedAt: new Date() });
+            //console.log('userExists',userExists)
             res.redirect('/login')
             return
         }
+       
         const token = user.generateAuthToken(maxAge)
 
         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
