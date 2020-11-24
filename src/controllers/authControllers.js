@@ -100,7 +100,7 @@ module.exports.emailVerify_get = async (req, res) => {
                     ' Your verify link had expired. We have sent you another verification link'
                 )
                 signupMail(expiredTokenUser, req.hostname, req.protocol)
-                return res.redirect('/login')
+                return res.redirect('/user/login')
             }
             const user = await User.findOne({ _id: decoded.id })
             if (!user) {
@@ -134,17 +134,39 @@ module.exports.emailVerify_get = async (req, res) => {
 
 module.exports.login_post = async (req, res) => {
     const { email, password } = req.body
+    console.log('in Login route')
+    console.log('req.body',req.body)
     try {
+
         const user = await User.login(email, password)
-        if (!user.active) {
+
+        const userExists = await User.findOne({ email })
+        
+
+        if (!userExists.active) {
+            const currDate = new Date();
+            const initialUpdatedAt = userExists.updatedAt;
+            const timeDiff = Math.abs(currDate.getTime() - initialUpdatedAt.getTime());
+            if(timeDiff<=10800000)
+            {
+                console.log("Email already sent check it")
+                req.flash(
+                    'error_msg',
+                    `${userExists.name}, we have already sent you a verify link please check your email`)
+                res.redirect('/user/login')
+                return
+            }
             req.flash(
-                'error_msg',
-                `${user.name}, You have not verified your account please check your mail to get the verify link`
+                'success_msg',
+                `${userExists.name}, your verify link has expired we have sent you another email please check you mailbox`
             )
-            signupMail(user, req.hostname, req.protocol)
-            res.redirect('/login')
+            signupMail(userExists, req.hostname, req.protocol)
+            await User.findByIdAndUpdate(userExists._id, { updatedAt: new Date() });
+            //console.log('userExists',userExists)
+            res.redirect('/user/login')
             return
         }
+       
         const token = user.generateAuthToken(maxAge)
 
         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })

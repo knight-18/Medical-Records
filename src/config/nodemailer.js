@@ -16,9 +16,9 @@ const signupMail = (data, host, protocol) => {
         port: 465,
         secure: true,
         auth: {
-            user: process.env.NODEMAILER_EMAIL, //email id
+            user: NODEMAILER_EMAIL, //email id
 
-            pass: process.env.NODEMAILER_PASSWORD, // gmail password
+            pass: NODEMAILER_PASSWORD, // gmail password
         },
     })
     var mailOptions = {
