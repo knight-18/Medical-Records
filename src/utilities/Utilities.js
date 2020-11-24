@@ -17,6 +17,15 @@ const passwordStrength = (value) => {
     return strength
 }
 
+
+
+const phoneValidator = (value) => 
+{
+    var regx = /^[6-9]\d{9}$/; 
+    return regx.test(value)
+    
+}
 module.exports = {
     checkPasswordStrength: passwordStrength,
+    phoneValidator : phoneValidator, 
 }

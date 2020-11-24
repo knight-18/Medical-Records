@@ -17,7 +17,7 @@ const handleErrors = (err) => {
         Object.values(err.errors).forEach(({ properties }) => {
             // console.log(val);
             // console.log(properties);
-            errors[properties.path] = properties.message
+            errors[properties.path] = properties.message.concat('. '); 
         })
     }
 
@@ -77,16 +77,12 @@ module.exports.signup_post = async (req, res) => {
     } catch (err) {
         const errors = handleErrors(err)
         console.log(errors)
+
+        var message = 'Could not signup. '.concat(errors['email'], errors['password'], errors['phoneNumber'])
         //res.json(errors);
         req.flash(
             'error_msg',
-            'Could not signup.' +
-                ' ' +
-                errors['email'] +
-                ' ' +
-                errors['password'] +
-                ' ' +
-                errors['phoneNumber']
+            message
         )
         res.status(400).redirect('/user/signup')
     }
