@@ -40,57 +40,16 @@
 
 <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fa fa-arrow-up"></i></button>
 
-<!--================================ Navbar ==================================================================-->
 
 <body data-spy="scroll" data-offset="80">
-    <div id="containers" data-target="#Navbar">
-        <nav class="navbar smart-scroll navbar-expand-lg navbar-light fixed-top" id="Navbar">
-            <a class="navbar-brand" href="#"><img id="logo" src="/img/medical1.png"></a>
+    
+    <!--================================ Navbar ==================================================================--> 
 
-            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#collapsibleNavbar"
-                id="button1"><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="collapsibleNavbar">
-                <ul class=" nav navbar-nav mr-auto">
-                    <li class="nav-item"><a class="nav-link" href="#" id="homeOpt">HOME<span
-                                class="sr-only">(current)</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="#services">ABOUT US</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#service">SERVICES</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">CONTACT US</a></li>
-                </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <!--<input class="form-control mr-sm-2"  type="text" id="inputNav"><img src="medicalImage/search.png">-->
-                    <input type="text" id="inputNav" placeholder="Search..."
-                        class="mobile-preview shadow floating-animate">
-                    <a href="#"><img src="/img/search.png" id="search"></a>
-                </form>
-            </div>
-        </nav>
-    </div>
+    <%- include('partials/navbar'); %>
 
     <!--============================intropage starts==============================================-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light bg-transparent" id="arogya-main-nav"></nav>
 
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light bg-transparent" id="arogya-main-nav">
-
-        <!--<div class="container"><a class="navbar-brand">Arogya</a>
-        <button class="navbar-toggler" data-target="#my-nav" onclick="myFunction(this)" data-toggle="collapse"><span
-                class="bar1"></span> <span class="bar2"></span> <span class="bar3"></span></button>
-        <div id="my-nav" class="collapse navbar-collapse">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-                <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="#news">News</a></li>
-                <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <a href="#" class="btn btn-outline-dark my-2 my-sm-0 mr-3 text-uppercase">login</a> <a href="#"
-                                                                                                       class="btn btn-info my-2 my-sm-0 text-uppercase">sign
-                up</a>
-            </form>
-        </div>
-    </div>-->
-    </nav>
     <div><%- include('partials/message'); %></div>
     <div class="container-fluid arogya-banner-area">
         <div class="container">
@@ -823,78 +782,9 @@
     <!--=======================================================================================================-->
 
 
-
-    <footer class="footer">
-        <div class="footer-left col-md-4 col-sm-6">
-            <p class="about">
-                <span>
-                    <h2> About Arogya</h2>
-                </span> Ut congue augue non tellus bibendum, in varius tellus condimentum. In
-                scelerisque nibh tortor, sed rhoncus odio condimentum in. Sed sed est ut sapien ultrices eleifend.
-                nibh mollis, tristique ante sed, viverra massa.
-            </p>
-            <div class="icons">
-                <a href="#"><i class="fa fa-facebook"></i></a>
-                <a href="#"><i class="fa fa-twitter"></i></a>
-                <a href="#"><i class="fa fa-linkedin"></i></a>
-                <a href="#"><i class="fa fa-google-plus"></i></a>
-                <a href="#"><i class="fa fa-instagram"></i></a>
-            </div>
-        </div>
-        <div class="footer-center col-md-4 col-sm-6">
-            <div>
-                <i class="fa fa-map-marker"></i>
-                <p><span> Silchar</span> Assam,India</p>
-            </div>
-            <div>
-                <i class="fa fa-phone"></i>
-                <p> (+91) 0000 000 000</p>
-            </div>
-            <div>
-                <i class="fa fa-envelope"></i>
-                <p><a href="#"> dsc@nits.ac.in</a></p>
-            </div>
-        </div>
-        <div class="footer-right col-md-4 col-sm-6">
-            <h2>Arogya<span> <img width="20%" height="20%" src="/img/medical1.png" alt=""></span></h2>
-            <p class="menu">
-                <a href="#"> Home</a> |
-                <a href="#services"> About</a> |
-                <a href="#about"> Services</a> |
-                <a href="#"> Members</a> |
-                <a href="#contact"> Contact</a>
-            </p>
-        </div>
-
-    </footer>
-
-
-
-    <!--================================================================-->
     <!-- Footer -->
-    <footer class="page-footer font-small unique-color-dark">
-        <!-- Footer Links -->
+    <%- include('partials/footer'); %>
 
-        <!-- Copyright -->
-        <div class="footer-copyright text-center py-3 bg-dark" style="color: white;">© 2020 Copyright:
-            <a style="color: white;">DSC NIT,Silchar</a>
-        </div>
-
-
-    </footer>
-
-
-
-
-
-    <!-- Footer -->
-
-
-    <!--footer starts from here-->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <!-- <script src="js/jquery-3.3.1.slim.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>-->
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js">
     </script>
