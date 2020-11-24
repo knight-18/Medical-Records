@@ -16,7 +16,7 @@ const userSchema = mongoose.Schema(
             type: String,
             trim: true,
             unique: true,
-            validate: [isEmail, 'Email is Invalid'],
+            validate: [isEmail, 'Email is invalid'],
         },
         active: {
             type: Boolean,
@@ -37,7 +37,7 @@ const userSchema = mongoose.Schema(
         phoneNumber: {
             type: String,
             trim: true,
-            validate: [isMobilePhone, 'Phone Number is Invalid'],
+            validate: [utilities.phoneValidator, 'Phone number is invalid'],
         },
         disease: [
             {
