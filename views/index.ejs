@@ -40,57 +40,16 @@
 
 <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fa fa-arrow-up"></i></button>
 
-<!--================================ Navbar ==================================================================-->
 
 <body data-spy="scroll" data-offset="80">
-    <div id="containers" data-target="#Navbar">
-        <nav class="navbar smart-scroll navbar-expand-lg navbar-light fixed-top" id="Navbar">
-            <a class="navbar-brand" href="#"><img id="logo" src="/img/medical1.png"></a>
+    
+    <!--================================ Navbar ==================================================================--> 
 
-            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#collapsibleNavbar"
-                id="button1"><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="collapsibleNavbar">
-                <ul class=" nav navbar-nav mr-auto">
-                    <li class="nav-item"><a class="nav-link" href="#" id="homeOpt">HOME<span
-                                class="sr-only">(current)</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="#services">ABOUT US</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#service">SERVICES</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">CONTACT US</a></li>
-                </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <!--<input class="form-control mr-sm-2"  type="text" id="inputNav"><img src="medicalImage/search.png">-->
-                    <input type="text" id="inputNav" placeholder="Search..."
-                        class="mobile-preview shadow floating-animate">
-                    <a href="#"><img src="/img/search.png" id="search"></a>
-                </form>
-            </div>
-        </nav>
-    </div>
+    <%- include('partials/navbar'); %>
 
     <!--============================intropage starts==============================================-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light bg-transparent" id="arogya-main-nav"></nav>
 
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light bg-transparent" id="arogya-main-nav">
-
-        <!--<div class="container"><a class="navbar-brand">Arogya</a>
-        <button class="navbar-toggler" data-target="#my-nav" onclick="myFunction(this)" data-toggle="collapse"><span
-                class="bar1"></span> <span class="bar2"></span> <span class="bar3"></span></button>
-        <div id="my-nav" class="collapse navbar-collapse">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-                <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="#news">News</a></li>
-                <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <a href="#" class="btn btn-outline-dark my-2 my-sm-0 mr-3 text-uppercase">login</a> <a href="#"
-                                                                                                       class="btn btn-info my-2 my-sm-0 text-uppercase">sign
-                up</a>
-            </form>
-        </div>
-    </div>-->
-    </nav>
     <div><%- include('partials/message'); %></div>
     <div class="container-fluid arogya-banner-area">
         <div class="container">
