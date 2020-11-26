@@ -43,7 +43,7 @@
     src: url(../fonts/OpenSans-Semibold.ttf);
 }
 
-html {
+/* html {
     scroll-behavior: smooth;
 }
 
@@ -57,477 +57,118 @@ body {
     overflow-x: hidden;
     font-family: 'OpenSans-Regular';
     box-sizing: border-box;
-}
-
-@media (min-width: 1200px) {
-    .container {
-        max-width: 1240px;
-        justify-content: center;
-    }
-
-    #arogya-footer {
-        padding-top: 50px;
-    }
-}
-
-
-#logo{
-	width:45%;
-	height:45%;
-	margin-left:10px;
-}
-#containers{
-	height:9vh;
-	box-shadow: -3px -16px 44px 10px rgba(18, 118, 210, 0.44);
-}
-
-#arogya-main-nav {
-    padding: 20px 0;
-}
-
-#arogya-main-nav .bar1,
-#arogya-main-nav .bar2,
-#arogya-main-nav .bar3 {
-    width: 25px;
-    height: 2px;
-    background-color: rgb(0, 0, 0);
-    margin: 5px 0;
-    transition: 0.4s;
-    display: block;
-    position: relative;
-}
-
-#arogya-main-nav .change .bar1 {
-    -webkit-transform: rotate(-42deg) translate(-2px, 6px);
-    transform: rotate(-42deg) translate(-2px, 6px);
-}
-
-#arogya-main-nav .change .bar2 {
-    opacity: 0;
-}
-
-#arogya-main-nav .change .bar3 {
-    -webkit-transform: rotate(46deg) translate(-4px, -8px);
-    transform: rotate(46deg) translate(-4px, -8px);
-}
-
-#arogya-main-nav .navbar-nav li a {
-    font-family: 'OpenSans-Regular';
-    font-size: 18px;
-    color: #666666;
-    padding: 5px 15px !important;
-    text-transform: uppercase;
-}
-
-#arogya-main-nav form a {
-    font-family: 'OpenSans-Semibold';
-    font-size: 18px;
-    color: #fff;
-    padding: 5px 25px;
-    border-radius: 20px;
-    border-width: 2px;
-}
-
-#arogya-main-nav form a.btn-info {
-    background: #01e6f8;
-    border-color: #01e6f8;
-}
-
-#arogya-main-nav form a.btn-outline-dark {
-    border-color: #fff;
-    background-color: white;
-}
-
-@media (max-width: 991px) {
-    #arogya-main-nav form a.btn-outline-dark {
-        border-color: #27ccd8;
-        color: #1d3ede;
-    }
-}
-
-#arogya-main-nav::after {
-    position: absolute;
-    content: '';
-    height: 600px;
-    width: 900px;
-    background-image: -webkit-linear-gradient(-220deg, #e8eefc, #e6fafe);
-    background-image: -moz-linear-gradient(-220deg, #e8eefc, #e6fafe);
-    background-image: -ms-linear-gradient(-220deg, #e8eefc, #e6fafe);
-    background-image: -o-linear-gradient(-220deg, #e8eefc, #e6fafe);
-    background-image: linear-gradient(-220deg, #e8eefc, #e6fafe);
-    left: 49.5%;
-    top: -50px;
-    z-index: -1;
-    border-radius: 50% 0 50% 50%;
-}
-
-@media (max-width: 1400px) {
-    #arogya-main-nav::after {
-        height: 550px;
-        width: 800px;
-    }
-
-    #arogya-footer {
-        padding-top: 50px;
-    }
-}
-
-@media (max-width: 1199px) {
-    #arogya-main-nav::after {
-        width: 670px;
-    }
-
-    #arogya-footer {
-        padding-top: 50px;
-    }
-}
-
-@media (max-width: 991px) {
-    #arogya-main-nav::after {
-        width: 55%;
-        height: 0.5vp;
-        left: auto;
-        right: 0;
-    }
-}
-
-@media (max-width: 600px) {
-    #arogya-main-nav::after {
-        width: 99%;
-        height: 1vp;
-    }
-}
-
-#arogya-main-nav::before {
-    position: absolute;
-    content: '';
-    height: 590px;
-    width: 930px;
-    background-image: -webkit-linear-gradient(to right, #d691e4, #5edbd5);
-    background-image: -moz-linear-gradient(to right, #d691e4, #5edbd5);
-    background-image: -ms-linear-gradient(to right, #d691e4, #5edbd5);
-    background-image: -o-linear-gradient(to right, #d691e4, #5edbd5);
-    background-image: linear-gradient(to right, #d691e4, #5edbd5);
-    left: 47.5%;
-    top: -25px;
-    z-index: -1;
-    border-radius: 50% 0 50% 50%;
-}
-
-@media (max-width: 1400px) {
-    #arogya-main-nav::before {
-        height: 540px;
-        width: 810px;
-    }
-}
-
-@media (max-width: 1199px) {
-    #arogya-main-nav::before {
-        width: 710px;
-    }
-}
-
-@media (max-width: 991px) {
-    #arogya-main-nav::before {
-        width: 55%;
-        left: auto;
-        right: 0;
-    }
-}
-
-@media (max-width: 600px) {
-    #arogya-main-nav::before {
-        width: 100%;
-        height: 390px;
-    }
-}
-
-#Navbar {
-    background-color: #ffffff;
-}
-
-#button1 {
-    border-color: blue;
-}
-
-ul {
-    margin-left: 6vw;
-}
-
-ul li {
-    color: black;
-    font-family: Product Sans;
-    font-weight: bolder;
-    font-size: 18px;
-    line-height: 24px;
-    text-align: center;
-    letter-spacing: 0.1em;
-    margin-left: 3vw;
-    opacity: 1;
-}
-
-#inputNav {
-    width: 20vw;
-    padding: 3%;
-    position: relative;
-    right: 5vw;
-    border-radius: 42px;
-    background: #f0f0f0;
-    outline: 0;
-    border: none;
-    float: left;
-    padding-left: 30px;
-    padding-right: 50px;
-}
-
-#search {
-    width: 70%;
-    height: 70%;
-    float: left;
-    position: relative;
-    right: 8vw;
-}
-
-@media (max-width: 500px) {
-    #inputNav {
-        margin: 0 auto;
-        width: 70%;
-        position: relative;
-        left: 5vw;
-        padding: 10px;
-        padding-left: 20px;
-        padding-right: 40px;
-    }
-
-    #search {
-        position: relative;
-        right: 14vw;
-    }
-}
-
-@media (max-width: 991px) {
-    #inputNav {
-        margin: 0 auto;
-        width: 70%;
-        position: relative;
-        left: 5vw;
-        padding: 10px;
-        padding-left: 20px;
-        padding-right: 40px;
-    }
-
-    #search {
-        position: relative;
-        right: 14vw;
-    }
-}
-
-@media (max-width: 1096px) and (min-width: 992px) {
-    #containers {
-        box-shadow: -3px -16px 48px 17px rgba(18, 118, 210, 0.44);
-    }
-
-    #inputNav {
-        padding: 10px;
-        padding-left: 20px;
-        padding-right: 45px;
-    }
-
-    #search {
-        position: relative;
-        left: 11.5vw;
-        margin-top: -30px;
-    }
-}
-
-@media (min-width: 1096px) and (max-width: 1224px) {
-    #inputNav {
-        position: relative;
-        left: 5px;
-        padding-left: 17px;
-    }
-
-    #search {
-        position: relative;
-        right: 3.5vw;
-    }
-}
+} */
 
 /* ..................... */
-.arogya-news .owl-carousel .card a,
-#arogya-footer .submit-button {
-    background-color: rgb(80, 191, 211);
-    font-size: 15px;
-    font-family: 'OpenSans-Semibold';
-    color: rgb(255, 255, 255);
-    border-radius: 50px;
-    padding: 5px 15px;
-    display: inline-block;
-    text-transform: uppercase;
-    padding-right: 5px;
-    text-decoration: none !important;
-    padding-bottom: 7px;
-    justify-content: center;
-    margin-bottom: 20px;
+
+#logo{
+    width:45%;
+    height:45%;
+    margin-left:10px;
 }
-
-.arogya-news .owl-carousel .card a {
-    margin-left: 20%;
-    justify-content: center;
+#containers{
+height:9vh;
+box-shadow: -3px -16px 44px 10px rgba(18, 118, 210, 0.44);
 }
-
-#arogya-footer .submit-button {
-    margin-left: 25%;
+#Navbar{
+background-color: #ffffff;
 }
-
-.arogya-banner-area a .fa,
-.arogya-feature a .fa,
-.arogya-features a .fa,
-.arogya-news .owl-carousel .card a .fa,
-#arogya-footer .submit-button .fa {
-    background: rgb(255, 255, 255);
-    border-radius: 50%;
-    height: 30px;
-    width: 32px;
-    color: #000000;
-    font-size: 22px;
-    text-align: center;
-    padding-top: 5px;
-    margin-left: 15px;
+#button1{
+border-color:rgb(255, 255, 255);
 }
-
-.arogya-feature h2,
-.arogya-features h2 {
-    font-family: 'Lato-Regular';
-    color: #000000;
-    font-size: 31px;
-    margin-bottom: 30px;
+ul{
+margin-left:6vw;
 }
-
-.card {
-    border: none;
-    background: transparent;
-    margin-right: 1em;
+ul li{
+color: black;
+font-family: Product Sans;
+font-weight: bolder;
+font-size: 18px;
+line-height: 24px;
+text-align: center;
+letter-spacing: 0.10em;
+margin-left:3vw;
+/* opacity:; */
 }
-
-.arogya-banner-area {
-    margin-top: 20px;
-    min-height: 500px;
+#inputNav{
+width:20vw;
+padding:3%;
+position:relative;
+right:5vw;
+border-radius:42px;
+background: #F0F0F0;
+outline:0;
+border:none;
+float:left;
+padding-left:30px;
+padding-right: 50px;
+color: brown;
 }
-
-.arogya-banner-area h1 {
-    font-family: 'Lato-Light';
-    font-size: 48px;
-    color: #000000;
-    max-width: 500px;
-    margin-top: 70px;
+#search{
+width:70%;
+height:70%;
+float:left;
+position:relative;
+right:8vw;
 }
-
-.arogya-banner-area h1 span {
-    font-family: 'Lato-Medium';
+/*#homeOpt{
+color:#1975C9 !important;
+text-decoration:underline;
+}*/
+@media(max-width:500px){
+#inputNav{
+margin:0 auto;
+width:70%;
+position:relative;
+left:5vw;
+padding:10px;
+padding-left: 20px;
+padding-right: 40px;
 }
-
-@media (max-width: 1199px) {
-    .arogya-banner-area h1 {
-        margin-top: 30px;
-    }
+#search{
+position:relative;
+right:14vw;
 }
-
-.arogya-banner-area p {
-    max-width: 450px;
-    margin: 20px 0;
-    margin-bottom: 40px;
 }
-
-.arogya-banner-area a {
-    display: inline;
-    padding: 10px 30px;
-    padding-right: 5px;
+@media(max-width:991px){
+#inputNav{
+margin:0 auto;
+width:70%;
+position:relative;
+left:5vw;
+padding:10px;
+padding-left: 20px;
+padding-right: 40px;
 }
-
-.arogya-banner-area .col-md-6 .card .card-img-top {
-    max-width: 430px;
-    margin: 0 auto;
-    margin-top: 30px;
-    margin-right: 0;
+#search{
+position:relative;
+right:14vw;
 }
-
-@media (max-width: 1400px) {
-    .arogya-banner-area .col-md-6 .card .card-img-top {
-        max-width: 400px;
-        margin-top: 20px;
-        margin-right: auto;
-    }
 }
-
-@media (max-width: 1199px) {
-    .arogya-banner-area .col-md-6 .card .card-img-top {
-        max-width: 350px;
-    }
+@media(max-width:1096px) and (min-width:992px){
+#containers{
+box-shadow: -3px -16px 48px 17px rgba(18, 118, 210, 0.44);
 }
-
-@media (max-width: 767px) {
-    .arogya-banner-area .col-md-6 .card .card-img-top {
-        margin-top: 100px;
-    }
-
-    .arogya-banner-area .col-md-6 .card .card-img-top {
-        display: none;
-    }
-
-    div.arogya-banner-area {
-        margin-bottom: 0px;
-    }
-
-    div.arogya-feature {
-        margin-top: 0px;
-    }
-
-    div.arogya-features-list {
-        margin-top: 0px;
-    }
-
-    div.arogya-features #about {
-        margin-bottom: 0px;
-    }
-
-    div.arogya-news #news {
-        margin-bottom: 0px;
-        padding-bottom: 0px;
-    }
-
-    .arogya-features .col-lg-4 .col-lg-8 {
-        padding-top: 0px;
-        margin-top: 0px;
-        background-color: rgb(204, 196, 196);
-    }
+#inputNav{
+padding:10px;
+padding-left: 20px;
+padding-right: 45px;
 }
-
-.arogya-feature {
-    margin-top: 100px;
+#search{
+position:relative;
+left:11.5vw;
+margin-top:-30px;
 }
-
-.arogya-feature .card .back-bg {
-    margin-left: -30px !important;
-    margin-top: -20px;
 }
-
-.arogya-feature .card svg {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+@media(min-width:1096px) and (max-width:1224px)
+{
+#inputNav{
+position:relative;
+left:5px;
+padding-left: 17px;
 }
-
-.arogya-feature .card svg.defs {
-    position: absolute;
-    width: 0;
-    height: 0;
+#search{
+position:relative;
+right:3.5vw;
 }
-
-.arogya-feature .card .squircle {
-    width: 100%;
-    height: 456px;
-    background: url(../img/aboutus.png) center/cover, #aaa;
-    clip-path: url(#clip-path);
-    background-position-x: -50px;
 }

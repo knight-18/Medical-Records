@@ -30,6 +30,10 @@
     font-weight: normal;
     margin: 0;
 }
+.footer .about p{
+    color: #808080
+
+}
 
 .footer .about span {
     display: block;
@@ -111,7 +115,7 @@
     color: #ffffff;
     font-size: 36px;
     font-weight: normal;
-    margin: 0;
+    margin-bottom: 2vh;
 }
 
 .footer h2 span {
@@ -141,6 +145,18 @@
     font-weight: normal;
     margin: 0;
 }
+@media (min-width: 1200px) {
+    #arogya-footer {
+        padding-top: 50px;
+    }
+}
+@media (max-width: 1400px) {
+    
+    #arogya-footer {
+        padding-top: 50px;
+    }
+}
+
 
 @media (max-width: 767px) {
     .footer {
@@ -160,10 +176,6 @@
         margin-left: 0;
     }
 }
-.arogya-banner-area a .fa,
-.arogya-feature a .fa,
-.arogya-features a .fa,
-.arogya-news .owl-carousel .card a .fa,
 #arogya-footer .submit-button .fa {
     background: rgb(255, 255, 255);
     border-radius: 50%;
@@ -176,6 +188,27 @@
     margin-left: 15px;
 }
 
+#arogya-footer{
+    background-color: rgb(80, 191, 211);
+    font-size: 15px;
+    font-family: 'OpenSans-Semibold';
+    color: rgb(255, 255, 255);
+    border-radius: 50px;
+    padding: 8px 15px;
+    /* display: inline-block; */
+    text-transform: uppercase;
+    padding-right: 5px;
+    text-decoration: none !important;
+    /* padding-bottom: 7px; */
+    vertical-align: middle;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+
+
+
+/* 
 .arogya-feature h2,
 .arogya-features h2 {
     font-family: 'Lato-Regular';
@@ -310,4 +343,4 @@
     background: url(../img/aboutus.png) center/cover, #aaa;
     clip-path: url(#clip-path);
     background-position-x: -50px;
-}
+} */
