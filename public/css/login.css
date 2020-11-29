@@ -63,15 +63,15 @@
  	font-family:Inter;
  	font-size:1.2em;
  }
- @media screen and (max-width: 1367px){
+ /* @media screen and (max-width: 1367px){
 	 #heading1{
 		 text-align: center;
 	 }
 	 
- }
+ } */
  @media screen and (max-width: 1250px){
 	 #heading1{
-		margin-left: 30vw;
+		margin-left: 15w;
 	 }
 	 
  }
@@ -90,6 +90,8 @@
 	}
 	#heading1{
 		margin-left: inherit;
+		text-align: center;
+		margin-left: 0;
 	}
 }
 @media screen and (max-width: 750px){
