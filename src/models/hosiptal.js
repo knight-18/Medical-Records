@@ -46,3 +46,30 @@ const hospitalSchema = mongoose.Schema(
         timestamps : true
     }
 )
+
+// Creating token for hospital
+hospitalSchema.methods.generateAuthToken = function generateAuthToken(maxAge){
+    let id = this._id
+    return jwt.sign({ id }, process.env.JWT_SECRET, {
+        expiresIn: maxAge,
+    })
+}
+
+//deleting the passsword before sending
+hospitalSchema.methods.toJSON = function () {
+    const user = this
+    const userObject = user.toObject()
+
+    delete userObject.password
+    return userObject
+}
+
+//To hash the password
+hospitalSchema.pre('save', async function (next) {
+    const salt = await bcrypt.genSalt()
+    this.password = await bcrypt.hash(this.password, salt)
+    next()
+})
+
+const Hospital = monogose.model('Hospital', hospitalSchema)
+module.exports = Hospital
