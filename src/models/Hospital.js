@@ -8,7 +8,7 @@ require('dotenv').config()
 
 const hospitalSchema = mongoose.Schema(
     {
-        liscenceNumber:{
+        licenseNumber:{
             type: String,
             trim: true,
         },
@@ -26,7 +26,7 @@ const hospitalSchema = mongoose.Schema(
             unique: true,
             validate: [isEmail,'Email is invalid']
         },
-        phoneNmber: {
+        phoneNumber: {
             type: String,
             trim: true,
             validate: [utilities.phoneValidator, 'Phone Number is invalid']
@@ -72,4 +72,4 @@ hospitalSchema.pre('save', async function (next) {
 })
 
 const Hospital = monogose.model('Hospital', hospitalSchema)
-module.exports = Hospital
+module.exports = Hospital; 
