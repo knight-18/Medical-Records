@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <title>Aarogya</title>
+</head>
+<body>
+    <%- include('../partials/navbar'); %>
+    <%- include('../partials/message'); %>
+    <div class="container-fluid mt-3"></div>
+    <form action="/user/profile/upload" enctype="multipart/form-data" method="POST">
+    <input type="text" name="name" placeholder="Name" />
+    <input type="text" name="duration" placeholder="duration" />
+    <input type="text" name="description" placeholder="description" />
+    <input type="text" name="hospitalName" placeholder="hospitalName" />
+    <input type="text" name="refDoctor" placeholder="Doctor Name" />
+    <input type="file" multiple name="images" />
+    <button type="submit" value="Submit">Submit</button>
+    </form>
+
+    <br>
+    <a href="/user/logout"><h1>Logout</h1></a> 
+
+    <%- include('../partials/footer'); %>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
