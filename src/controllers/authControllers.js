@@ -3,36 +3,21 @@ const jwt = require('jsonwebtoken')
 const { signupMail } = require('../config/nodemailer')
 const path = require('path')
 const Disease = require('../models/Disease')
-
+const { handleErrors } = require('../utilities/Utilities'); 
 require('dotenv').config()
 
 const maxAge = 30 * 24 * 60 * 60
 
-const handleErrors = (err) => {
-    let errors = { email: '', password: '' }
-
-    // validation errors
-    if (err.message.includes('validation failed')) {
-        // console.log(err);
-        Object.values(err.errors).forEach(({ properties }) => {
-            // console.log(val);
-            // console.log(properties);
-            errors[properties.path] = properties.message.concat('. '); 
-        })
-    }
-
-    return errors
-}
 
 // controller actions
 module.exports.signup_get = (req, res) => {
-    res.render('signup',{
+    res.render('./userViews/signup',{
         type: 'signup'
     })
 }
 
 module.exports.login_get = (req, res) => {
-    res.render('signup',{
+    res.render('./userViews/signup',{
         type: 'login'
     })
 }
@@ -78,7 +63,7 @@ module.exports.signup_post = async (req, res) => {
         const errors = handleErrors(err)
         console.log(errors)
 
-        var message = 'Could not signup. '.concat(errors['email'], errors['password'], errors['phoneNumber'])
+        var message = 'Could not signup. '.concat((errors['email'] || ""), (errors['password'] || ""), (errors['phoneNumber'] || ""),(errors['name'] || "")  )
         //res.json(errors);
         req.flash(
             'error_msg',
@@ -135,7 +120,7 @@ module.exports.emailVerify_get = async (req, res) => {
 module.exports.login_post = async (req, res) => {
     const { email, password } = req.body
     console.log('in Login route')
-    console.log('req.body',req.body)
+    // console.log('req.body',req.body)
     try {
 
         const user = await User.login(email, password)
@@ -215,7 +200,7 @@ module.exports.upload_post = async (req, res) => {
 
 module.exports.profile_get = async (req, res) => {
     res.locals.user = req.user
-    res.render('profile')
+    res.render('./userViews/profile')
 }
 
 module.exports.logout_get = async (req, res) => {
