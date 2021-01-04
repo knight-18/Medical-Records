@@ -11,28 +11,37 @@ const hospitalSchema = mongoose.Schema(
         licenseNumber:{
             type: String,
             trim: true,
+            required: [true, 'License number field cannot be empty'] 
         },
         hospitalName: {
             type: String,
-            trim: true
+            trim: true, 
+            required:[true, 'Hospital name field cannot be empty'], 
         },
         adminName: {
             type: String,
             trim: true
         },
+        active: {
+            type: Boolean,
+            default: false,
+        },
         email: {
             type: String,
             trim: true,
             unique: true,
+            required: [true, 'Email field cannot be empty'], 
             validate: [isEmail,'Email is invalid']
         },
         phoneNumber: {
             type: String,
             trim: true,
+            required:[true, 'Phone number field cannot be empty'], 
             validate: [utilities.phoneValidator, 'Phone Number is invalid']
         },
         password: {
             type: String,
+            required:[true, 'Password field cannot be empty'],
             trim: true,
             validate: [
                 ( pass ) => {
@@ -64,6 +73,19 @@ hospitalSchema.methods.toJSON = function () {
     return userObject
 }
 
+hospitalSchema.statics.login = async function (email, password) {
+    const hospital = await this.findOne({ email })
+    if (hospital) {
+        const auth = await bcrypt.compare(password, hospital.password)
+        if (auth) {
+            return hospital
+        }
+        throw Error('Invalid Credentials')
+    }
+    throw Error('Invalid Credentials')
+}
+
+
 //To hash the password
 hospitalSchema.pre('save', async function (next) {
     const salt = await bcrypt.genSalt()
@@ -71,5 +93,8 @@ hospitalSchema.pre('save', async function (next) {
     next()
 })
 
-const Hospital = monogose.model('Hospital', hospitalSchema)
+
+
+
+const Hospital = mongoose.model('Hospital', hospitalSchema)
 module.exports = Hospital; 
