@@ -11,11 +11,13 @@ const userSchema = mongoose.Schema(
         name: {
             type: String,
             trim: true,
+            required: [true, 'Name field cannot be empty']
         },
         email: {
             type: String,
             trim: true,
             unique: true,
+            required: [true, 'Email field cannot be empty'],
             validate: [isEmail, 'Email is invalid'],
         },
         active: {
@@ -26,6 +28,7 @@ const userSchema = mongoose.Schema(
             type: String,
             trim: true,
             minlength: 8,
+            required: [true, 'Password field cannot be empty'],
             validate: [
                 (val) => {
                     var strength = utilities.checkPasswordStrength(val)
@@ -35,6 +38,7 @@ const userSchema = mongoose.Schema(
             ],
         },
         phoneNumber: {
+            required: [true, 'Phone number field cannot be empty'],
             type: String,
             trim: true,
             validate: [utilities.phoneValidator, 'Phone number is invalid'],
