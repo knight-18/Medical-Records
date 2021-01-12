@@ -7,8 +7,8 @@
     <title>Aarogya</title>
 </head>
 <body>
-    <%- include('partials/navbar'); %>
-    <%- include('partials/message'); %>
+    <%- include('../partials/navbar'); %>
+    <%- include('../partials/message'); %>
     <div class="container-fluid mt-3"></div>
     <form action="/user/profile/upload" enctype="multipart/form-data" method="POST">
     <input type="text" name="name" placeholder="Name" />
@@ -23,7 +23,7 @@
     <br>
     <a href="/user/logout"><h1>Logout</h1></a> 
 
-    <%- include('partials/footer'); %>
+    <%- include('../partials/footer'); %>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>

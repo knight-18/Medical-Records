@@ -48,7 +48,7 @@ function checkFileType(file, cb) {
 
 //uploading finishes
 const authController = require('../controllers/authControllers')
-const { requireAuth, redirectIfLoggedIn } = require('../middleware/auth')
+const { requireAuth, redirectIfLoggedIn } = require('../middleware/userAuth')
 router.get('/verify/:id', authController.emailVerify_get)
 router.get('/signup',redirectIfLoggedIn, authController.signup_get)
 router.post('/signup', authController.signup_post)

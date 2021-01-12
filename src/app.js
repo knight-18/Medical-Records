@@ -64,20 +64,23 @@ app.use((req, res, next) => {
 //Routes
 const indexRoutes = require('./routes/index')
 const userRoutes = require('./routes/user')
+const hospitalRoutes = require('./routes/hospital')
 
 app.use('/',indexRoutes)
 app.use('/user',userRoutes)
+app.use('/hospital', hospitalRoutes)
 
 //Start the server
 app.listen(PORT, () => {
     console.log('Server listening on port', PORT)
 })
 
-// const Disease= require('./models/Disease')
+
+// const Hospital = require('./models/Hospital')
 // const databasedlt= async()=>{
-//    const user = await Disease.find()
+//    const user = await Hospital.find({email:"gauravgluon20@gmail.com"})
 //    user.forEach(async(data)=>{
-//         await Disease.findByIdAndDelete(data._id)
+//         await Hospital.findByIdAndDelete(data._id)
 //    })
 //    console.log("deleted")
 // }
