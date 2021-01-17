@@ -41,6 +41,9 @@ build/Release
 node_modules/
 jspm_packages/
 
+# Uploads directory for users
+/public/uploads/
+
 # TypeScript v1 declaration files
 typings/
 
@@ -102,3 +105,8 @@ dist
 
 # TernJS port file
 .tern-port
+
+.uploads
+
+.ionide
+.vscode
