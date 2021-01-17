@@ -22,7 +22,7 @@ const userSchema = mongoose.Schema(
         },
         active: {
             type: Boolean,
-            default: false,
+            default:false,//to be changed to false after testing
         },
         password: {
             type: String,
@@ -58,6 +58,7 @@ const userSchema = mongoose.Schema(
 // static method to login user
 userSchema.statics.login = async function (email, password) {
     const user = await this.findOne({ email })
+    //console.log('log',user)
     if (user) {
         const auth = await bcrypt.compare(password, user.password)
         if (auth) {
