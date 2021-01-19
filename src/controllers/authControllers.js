@@ -24,7 +24,7 @@ module.exports.login_get = (req, res) => {
 
 module.exports.signup_post = async (req, res) => {
     const { name, email, password, confirmPwd, phoneNumber } = req.body
-    //console.log("in sign up route",req.body);
+    console.log("in sign up route",req.body);
     if (password != confirmPwd) {
         req.flash('error_msg', 'Passwords do not match. Try again')
         res.status(400).redirect('/user/login')
@@ -124,9 +124,11 @@ module.exports.login_post = async (req, res) => {
     try {
 
         const user = await User.login(email, password)
+        //console.log("user",user)
 
         const userExists = await User.findOne({ email })
-        
+       // console.log("userexsits",userExists)
+       
 
         if (!userExists.active) {
             const currDate = new Date();
@@ -157,6 +159,7 @@ module.exports.login_post = async (req, res) => {
         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
         //console.log(user);
         //signupMail(saveUser)
+        console.log("logged in")
         req.flash('success_msg', 'Successfully logged in')
         res.status(200).redirect('/user/profile')
     } catch (err) {
@@ -167,9 +170,14 @@ module.exports.login_post = async (req, res) => {
 }
 
 module.exports.upload_post = async (req, res) => {
+
+    //console.log("in uploads",req.body)
     try {
+        
         let { name, duration, refDoctor, hospitalName, description } = req.body
+       
         const files = req.files
+        console.log("files",files)
         let images = files.map((file) => {
             return `/uploads/${req.user.email}/${file.filename}`
         })
@@ -192,22 +200,27 @@ module.exports.upload_post = async (req, res) => {
         req.flash('success_msg', 'Sucessfully uploaded disease details.')
         return res.redirect('/user/profile')
     } catch (err) {
+        console.log("error")
         console.error(err)
         req.flash('error_msg', 'Something went wrong')
         return res.redirect('/user/profile')
     }
 }
 
-module.exports.profile_get = async (req, res) => {
-   
-            res.locals.user = await req.user.populate("disease").execPopulate(); 
-            console.log(res.locals.user)
-            res.render('./userViews/profile'); 
-        
 
-       
-
+module.exports.disease_get=async(req,res)=>{
     
+    //console.log('user',req.user)
+    const Userdiseases= await req.user.populate('disease').execPopulate()
+    console.log('diseases',Userdiseases)
+    return res.redirect('/user/profile')
+}
+
+module.exports.profile_get = async (req, res) => {
+    //res.locals.user = req.user
+    res.locals.user = await req.user.populate('disease').execPopulate()
+    console.log("locals",res.locals.user)
+    res.render('./userViews/profile')
 }
 
 module.exports.logout_get = async (req, res) => {
