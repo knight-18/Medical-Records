@@ -199,8 +199,15 @@ module.exports.upload_post = async (req, res) => {
 }
 
 module.exports.profile_get = async (req, res) => {
-    res.locals.user = req.user
-    res.render('./userViews/profile')
+   
+            res.locals.user = await req.user.populate("disease").execPopulate(); 
+            console.log(res.locals.user)
+            res.render('./userViews/profile'); 
+        
+
+       
+
+    
 }
 
 module.exports.logout_get = async (req, res) => {
