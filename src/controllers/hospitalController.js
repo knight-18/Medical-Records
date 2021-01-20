@@ -19,7 +19,12 @@ module.exports.signup_get = (req, res) => {
 }
 
 module.exports.profile_get = async (req, res) => {
-    res.render("./hospitalViews/profile")
+    res.locals.hospital = req.hospital
+    // console.log("hospital", res.locals.hospital)
+    const patients = await Relations.find({'isPermitted': true, 'hospitalId': req.hospital.id}, "userId").populate('userId', 'name'); 
+    
+    console.log(patients)
+    res.render("./hospitalViews/profile", { patients })
 }
 
 
@@ -187,6 +192,8 @@ module.exports.relation_post=async (req,res)=>{
     if(!user)
     {
         console.log('user not found')
+        req.flash("error_msg", "User not found")
+        res.redirect("/hospital/profile")
         return
     }
     //console.log('user',user)
@@ -197,14 +204,16 @@ module.exports.relation_post=async (req,res)=>{
     console.log('existRelation',existRelation)
     if(existRelation) 
     {
+
         console.log('relation already exists')
         if(existRelation.isPermitted)
         {
-            console.log('show your documents',existRelation)
+            console.log('show your documents',existRelation) //NEED TO IMPLEMENT SEARCH 
             res.redirect('/hospital/profile')
         }
         else{
             console.log('the user has not given access')
+            req.flash("error_msg", "The user is yet to respond to your request for access")
             res.redirect('/hospital/profile')
             //relationMail(existRelation,user,req.hostname,req.protocol)
         }
@@ -218,11 +227,12 @@ module.exports.relation_post=async (req,res)=>{
     if(!relation)
     {
         console.log('unable to create link')
-        return res.redirect('hospital/profile')
+        req.flash("error_msg", "There was an error in creating request link")
+        return res.redirect('/hospital/profile')
     }
     relationMail(relation,user,req.hostname,req.protocol)
-    req.flash('succes_msg','Wait till the user gives access to view their document. A mail has been sent to them')
-    return res.redirect('hospital/profile')
+    req.flash('success_msg','The user has been notified of your request for access. Awaiting user response')
+    return res.redirect('/hospital/profile')
     //console.log('relation',relation)
 
     }
@@ -265,11 +275,11 @@ module.exports.relationVerify_get = async (req, res) => {
                 } else {
                     req.flash(
                         'success_msg',
-                        'User has given you the permission to view their doccuments'
+                        'Access rights granted'   
                     )
                     //console.log('The user has been verified.')
                     //console.log('active', activeUser)
-                    res.redirect('/hospital/profile')
+                    res.redirect('/user/profile')
                 }
             }
         })
