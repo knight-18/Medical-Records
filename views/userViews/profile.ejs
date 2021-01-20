@@ -16,16 +16,15 @@
 	<!--Profile Part-->
 <div class="container-fluid" >	
 	<div class="row">
+    <div class="col-sm-12"><%- include('../partials/message'); %></div>
 		<div class="col-lg-2 col-sm-4 col-12 order-3 order-sm-1" id="pSec1">
 			<div id="leftPanel">
 				<div class="lists">
 					<a href="#">Profile</a>
 					<img src="../img/profile.png" class="Icons profile-icon">
 				</div>
-				<div class="lists">
-					<a href="#">Disease</a>
-					<img src="../img/disease.png" class="Icons">
-				</div>
+				
+       
 				<div class="lists">
 					<a href="#">Appointments</a>
 					<img src="../img/appointment.png" class="Icons">
@@ -49,7 +48,19 @@
 				<div class="lists">
 					<a href="#">Settings</a>
 					<img src="../img/Settings.png" class="Icons">
-				</div>
+        </div>
+        
+        <div class="lists dropdown show">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" id ="dropdownMenuLink" >Disease</a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+             <% for(var d of user.disease) { %>
+               <a class="dropdown-item"><span class="dropAnchor"><%= d.name %></span>
+				   </a>
+             <% } %>
+          </div>
+          <img src="../img/disease.png" class="Icons">
+          
+        </div>
 			</div>
 		</div>
 		<div class="col-lg-8 col-sm-8 col-12 order-1 order-sm-2" id="pSec2">
@@ -57,7 +68,7 @@
 			<img src="../img/CoverPhoto.png" id="coverImg">
 			<a href="#"><img src="../img/ProfilePic.png" id="profileImg"></a>
 			<a href="#"><img src="../img/camera.png" id="Camera"></a>
-			<h5 id="name">Kristin</h5>
+			<h5 id="name"><%= user.name %></h5>
 			<h4 id="heading1">Patient Id-<span id="patientId"></span></h4>
 			<div id="patientDetails">
 				<h3 id="heading2">Patient Details</h3>
@@ -85,8 +96,9 @@
 	</div>
 </div>
 
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-	<script src="../js/sideNav.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="../js/sideNav.js"></script>
 </body>
 </html>
