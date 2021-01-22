@@ -1,6 +1,11 @@
-<% if (success_msg.length > 0) { %>
-<div class="alert alert-success"><%= success_msg %></div>
-<% } else if (error_msg.length > 0) { %>
+<link rel="stylesheet" href="/css/flash-message.css">
+<div id="flash-message">
+    <% if (success_msg.length > 0) { %>
+    <div class="alert alert-success alignment"><%= success_msg %><span class="close">&times;</span></div>
+    <% } else if (error_msg.length > 0) { %>
+    
+    <div class="alert alert-danger alignment"><%= error_msg %><span class="close">&times;</span></div>
+    <% } else { %> <% } %>
+</div>
 
-<div class="alert alert-danger"><%= error_msg %></div>
-<% } else { %> <% } %>
+<script src="/js/flash-message.js"></script>

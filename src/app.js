@@ -2,7 +2,6 @@ const express = require('express')
 const path = require('path')
 
 const mongoose = require('mongoose')
-const routes = require('./routes/user')
 const connect_flash = require('connect-flash')
 const session = require('express-session')
 const cookieParser = require('cookie-parser')
@@ -10,10 +9,10 @@ const expressLayouts = require('express-ejs-layouts')
 //Configuring App
 const app = express()
 app.use(express.json())
-app.use(express.static('public'))
+// app.use(express.static('public'))
 app.use(cookieParser())
 // using dotenv module for environment
-require('dotenv').config({ path: 'env' })
+require('dotenv').config()
 
 //Configuring Port
 const PORT = process.env.PORT || 3000
@@ -29,7 +28,13 @@ mongoose
     .then(() => console.log('Connected to mongo server'))
     .catch((err) => console.error(err))
 
+const publicDirectory = path.join(__dirname, '../public')
+    // console.log(publicDirectory);
+app.use(express.static(publicDirectory))
+
 //Setting EJS view engine
+app.set('views', path.join(__dirname, '../views'));
+
 app.set('view engine', 'ejs')
 
 //app.use(expressLayouts);
@@ -53,31 +58,41 @@ app.use((req, res, next) => {
     next()
 })
 
-app.use(express.static(__dirname + '/public'));
+//Setup for rendering static pages
+
 
 //Routes
 const indexRoutes = require('./routes/index')
+const userRoutes = require('./routes/user')
+const hospitalRoutes = require('./routes/hospital')
 
-app.use(indexRoutes);
+app.use('/',indexRoutes)
+app.use('/user',userRoutes)
+app.use('/hospital', hospitalRoutes)
 
-//Setup for rendering static pages
-const publicDirectory = path.join(__dirname, '../public')
-app.use(express.static(publicDirectory))
-
-//Routes
-app.use(routes)
 //Start the server
 app.listen(PORT, () => {
     console.log('Server listening on port', PORT)
 })
 
-/*const User= require('./models/User')
-const databasedlt= async()=>{
-   const user = await User.find()
-   user.forEach(async(data)=>{
-        await User.findByIdAndDelete(data._id)
-   })
-   console.log("deleted")
-}
-databasedlt()*/
 
+ /*Hospital = require('./models/Hospital')
+ const databasedlt= async()=>{
+    const user = await Hospital.find({email:"gauravgluon20@gmail.com"})
+    user.forEach(async(data)=>{
+         await Hospital.findByIdAndDelete(data._id)
+    })
+    console.log("deleted")
+ }
+ databasedlt()*/
+
+
+//  const User= require('./models/User')
+// const databasedlt= async()=>{
+//    const user = await User.find({email:"debojyoti76@gmail.com"})
+//    user.forEach(async(data)=>{
+//         await User.findByIdAndDelete(data._id)
+//    })
+//    console.log("deleted")
+// }
+// databasedlt()
