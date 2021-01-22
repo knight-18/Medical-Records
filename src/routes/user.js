@@ -68,4 +68,8 @@ router.post(
 
 router.get('/profile/disease',requireAuth,authController.disease_get)
 
-module.exports = router
+router.get('/forgotPassword', redirectIfLoggedIn,authController.getForgotPasswordForm)
+router.post('/forgotPassword', redirectIfLoggedIn,authController.forgotPassword)
+router.get('/resetPassword/:id/:token',authController.getPasswordResetForm)
+router.post('/resetPassword/:id/:token',authController.resetPassword)
+module.exports = router 
