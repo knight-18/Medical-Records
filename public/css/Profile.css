@@ -4,7 +4,7 @@ html {
     scroll-behavior: smooth;
 }
 body {
-    overflow: hidden;
+   
     overflow-y: auto;
     font-family: 'OpenSans-Regular';
     box-sizing: border-box;
@@ -495,12 +495,68 @@ text-decoration:none;
 		margin-bottom: 6%;
 	}
 }
+.dropbtn {
+  border: none;
+  cursor: pointer;
+}
+
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  backdrop-filter: blur(4px);
+  background-color:rgba(7, 98, 172, 0.5);
+  min-width: 155px;
+  min-height:20px;
+  color:black;
+  border-radius:8px;
+  border-top: 0px;
+  transform: translateY(20%);
+  z-index: 1;
+  text-shadow: none;
+  transition: all 1250ms ;
+}
+.dropdown-content a {
+	filter: blur(0px);
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  cursor: pointer;
+  
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+	filter: brightness(2000%);
+	border: 0px solid;
+	box-shadow: inset 0 0 20px rgba(109, 131, 255, 0.5), 0 0 20px rgba(5, 110, 136, 0.2);
+	outline-color: rgba(255, 255, 255, 0);
+	outline-offset: 15px;
+	text-shadow: 1px 1px 2px #1c323b; 
+	border-radius: 8px;
+	color: black;
+}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}
 
 
 
+  
+  
 
-
-
-
-
-
+  
+  

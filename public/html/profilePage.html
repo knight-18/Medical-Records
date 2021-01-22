@@ -7,6 +7,8 @@
     <script src="https://use.fontawesome.com/67912d8e88.js"></script>
     <link rel="stylesheet" href="../css/NavBar.css">
     <link rel="stylesheet" href="../css/Profile.css">
+  
+    <link rel="stylesheet" href="../css/modal.css">
 	<title>Profile Page</title>
 </head>
 <body>
@@ -27,7 +29,14 @@
 		</form>
 	</div>
 	</nav>
-	</div>
+    </div>
+    <div id="myModal" class="modal">
+
+        <div class="modal-content">
+          <span class="close">&times;</span>
+        </div>
+      
+      </div>
 	<!--Profile Part-->
 <div class="container-fluid" >	
 	<div class="row">
@@ -38,9 +47,14 @@
 					<img src="../img/profile.png" class="Icons profile-icon">
 				</div>
 				<div class="lists">
-					<a href="#">Disease</a>
+					<a href="#" onclick="myFunction()" class="dropbtn">Disease</a>
 					<img src="../img/disease.png" class="Icons">
-				</div>
+						<div id="myDropdown" class="dropdown-content">
+                            <a id="myBtn">Add New</a>
+                        </div>
+                      
+                </div>
+                
 				<div class="lists">
 					<a href="#">Appointments</a>
 					<img src="../img/appointment.png" class="Icons">
@@ -102,6 +116,52 @@
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-	<script src="../js/sideNav.js"></script>
+    <script src="../js/sideNav.js"></script>
+    <script>
+        function myFunction() {
+          document.getElementById("myDropdown").classList.toggle("show");
+        }
+        
+        // Close the dropdown menu if the user clicks outside of it
+        window.onclick = function(event) {
+          if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+              var openDropdown = dropdowns[i];
+              if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+              }
+            }
+          }
+        } 
+        
+        </script>
+        <script>
+            var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+} 
+        </script>
 </body>
 </html>
