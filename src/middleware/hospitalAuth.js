@@ -16,9 +16,9 @@ const requireAuth = (req, res, next) => {
 
                 res.redirect('/hospital/login')
             } else {
-                let user = await Hospital.findById(decodedToken.id)
+                let hospital = await Hospital.findById(decodedToken.id)
 
-                req.user = user
+                req.hospital = hospital
                 //console.log("current user", req.user)
 
                 next()

@@ -1,9 +1,10 @@
 const User = require('../models/User')
 const jwt = require('jsonwebtoken')
-const { signupMail } = require('../config/nodemailer')
+const { signupMail,passwordMail } = require('../config/nodemailer')
 const path = require('path')
 const Disease = require('../models/Disease')
 const { handleErrors } = require('../utilities/Utilities'); 
+const crypto = require('crypto')
 require('dotenv').config()
 
 const maxAge = 30 * 24 * 60 * 60
@@ -24,7 +25,7 @@ module.exports.login_get = (req, res) => {
 
 module.exports.signup_post = async (req, res) => {
     const { name, email, password, confirmPwd, phoneNumber } = req.body
-    //console.log("in sign up route",req.body);
+    console.log("in sign up route",req.body);
     if (password != confirmPwd) {
         req.flash('error_msg', 'Passwords do not match. Try again')
         res.status(400).redirect('/user/login')
@@ -124,9 +125,11 @@ module.exports.login_post = async (req, res) => {
     try {
 
         const user = await User.login(email, password)
+        //console.log("user",user)
 
         const userExists = await User.findOne({ email })
-        
+       // console.log("userexsits",userExists)
+       
 
         if (!userExists.active) {
             const currDate = new Date();
@@ -157,6 +160,7 @@ module.exports.login_post = async (req, res) => {
         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
         //console.log(user);
         //signupMail(saveUser)
+        console.log("logged in")
         req.flash('success_msg', 'Successfully logged in')
         res.status(200).redirect('/user/profile')
     } catch (err) {
@@ -167,9 +171,14 @@ module.exports.login_post = async (req, res) => {
 }
 
 module.exports.upload_post = async (req, res) => {
+
+    //console.log("in uploads",req.body)
     try {
+        
         let { name, duration, refDoctor, hospitalName, description } = req.body
+       
         const files = req.files
+        console.log("files",files)
         let images = files.map((file) => {
             return `/uploads/${req.user.email}/${file.filename}`
         })
@@ -192,14 +201,26 @@ module.exports.upload_post = async (req, res) => {
         req.flash('success_msg', 'Sucessfully uploaded disease details.')
         return res.redirect('/user/profile')
     } catch (err) {
+        console.log("error")
         console.error(err)
         req.flash('error_msg', 'Something went wrong')
         return res.redirect('/user/profile')
     }
 }
 
+
+module.exports.disease_get=async(req,res)=>{
+    
+    //console.log('user',req.user)
+    const Userdiseases= await req.user.populate('disease').execPopulate()
+    console.log('diseases',Userdiseases)
+    return res.redirect('/user/profile')
+}
+
 module.exports.profile_get = async (req, res) => {
-    res.locals.user = req.user
+    //res.locals.user = req.user
+    res.locals.user = await req.user.populate('disease').execPopulate()
+    console.log("locals",res.locals.user)
     res.render('./userViews/profile')
 }
 
@@ -209,8 +230,90 @@ module.exports.logout_get = async (req, res) => {
     res.clearCookie('jwt')
     req.flash('success_msg', 'Successfully logged out')
     res.redirect('/user/login')
-}
+} 
 
 // module.exports.upload_get =async (req, res) => {
 //   res.render("multer")
 // }
+
+module.exports.getForgotPasswordForm = async (req, res) => {
+    res.render('./userViews/forgotPassword')
+}
+
+module.exports.getPasswordResetForm = async (req, res) => {
+    const userID=req.params.id;
+    const user = await User.findOne({ _id: userID })
+    const resetToken = req.params.token
+    res.render('./userViews/resetPassword', {
+        userID,
+        resetToken,
+    })
+}
+
+module.exports.forgotPassword = async (req, res) => {
+    const email=req.body.email
+    const user = await User.findOne({ email })
+    if (!user) {
+        req.flash('error_msg', 'No user found')
+        return res.redirect('/user/login')
+    }
+    console.log(user)
+    const userID = user._id
+    
+    const dt = new Date(user.passwordResetExpires).getTime()
+    if (
+        (user.passwordResetToken && dt > Date.now()) ||
+        !user.passwordResetToken
+    ) {
+        const resetToken = user.createPasswordResetToken()
+        // console.log(user.passwordResetExpires)
+        // console.log(user.passwordResetToken)
+        await user.save({ validateBeforeSave: false })
+        try {
+            passwordMail(user,resetToken,req.hostname, req.protocol)
+            req.flash('success_msg', 'Email sent,please check email')
+            res.redirect('/user/forgotPassword')
+        } catch (err) {
+            user.passwordResetToken = undefined
+            user.passwordResetExpires = undefined
+            await user.save({ validateBeforeSave: false })
+            req.flash('error_msg', 'Unable to send mail')
+            res.redirect('/user/forgotPassword')
+        }
+    } else {
+        req.flash('error_msg', 'Mail already send,please wait for sometime to send again')
+        res.redirect('/user/forgotPassword')
+    }
+}
+
+module.exports.resetPassword = async (req, res) => {
+    try {
+        const hashedToken = crypto
+            .createHash('sha256')
+            .update(req.params.token)
+            .digest('hex')
+        const user = await User.findOne({
+            _id: req.params.id,
+            passwordResetToken: hashedToken,
+            passwordResetExpires: { $gt: Date.now() },
+        })
+        if (!user) {
+            req.flash('error_msg', 'No user found')
+            return res.redirect('/user/login')
+        }
+
+        user.password = req.body.password
+        user.passwordResetToken = undefined
+        user.passwordResetExpires = undefined
+        await user.save()
+        const JWTtoken = await user.generateAuthToken(maxAge)
+        // user = user.toJSON()
+        res.cookie('jwt', JWTtoken, {
+            maxAge: 24 * 60 * 60 * 1000,
+            httpOnly: false,
+        })
+        res.redirect('/user/profile')
+    } catch (err) {
+        res.send(err)
+    }
+}

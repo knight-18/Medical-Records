@@ -8,5 +8,11 @@
 <body>
     <%- include('../partials/message'); %></div>
     <h1>HOSPITAL PROFILE</h1>
+    <h2>Patients</h2>
+    <ul>
+        <% for(var d of patients) { %>
+            <li><%= d.userId.name %></li>
+        <% } %>
+    </ul>
 </body>
 </html>

@@ -1,8 +1,10 @@
 const Hospital = require('../models/Hospital'); 
+const User=require('../models/User')
+const Relations=require('../models/Relations')
 
 
 const jwt = require('jsonwebtoken')
-const { hospitalSignupMail } = require('../config/nodemailer')
+const { hospitalSignupMail,relationMail } = require('../config/nodemailer')
 const path = require('path')
 
 const { handleErrors } = require('../utilities/Utilities'); 
@@ -17,7 +19,12 @@ module.exports.signup_get = (req, res) => {
 }
 
 module.exports.profile_get = async (req, res) => {
-    res.render("./hospitalViews/profile")
+    res.locals.hospital = req.hospital
+    // console.log("hospital", res.locals.hospital)
+    const patients = await Relations.find({'isPermitted': true, 'hospitalId': req.hospital.id}, "userId").populate('userId', 'name'); 
+    
+    console.log(patients)
+    res.render("./hospitalViews/profile", { patients })
 }
 
 
@@ -175,4 +182,110 @@ module.exports.logout_get = async (req, res) => {
     res.clearCookie('hospital')
     req.flash('success_msg', 'Successfully logged out')
     res.redirect('/hospital/login')
+}
+
+module.exports.relation_post=async (req,res)=>{
+    
+    try{
+    const{email}=req.body
+    const user=await User.findOne({email})
+    if(!user)
+    {
+        console.log('user not found')
+        req.flash("error_msg", "User not found")
+        res.redirect("/hospital/profile")
+        return
+    }
+    //console.log('user',user)
+    const hospitalId=req.hospital._id
+    const userId=user._id
+
+    const existRelation=await Relations.findOne({userId,hospitalId})
+    console.log('existRelation',existRelation)
+    if(existRelation) 
+    {
+
+        console.log('relation already exists')
+        if(existRelation.isPermitted)
+        {
+            console.log('show your documents',existRelation) //NEED TO IMPLEMENT SEARCH 
+            res.redirect('/hospital/profile')
+        }
+        else{
+            console.log('the user has not given access')
+            req.flash("error_msg", "The user is yet to respond to your request for access")
+            res.redirect('/hospital/profile')
+            //relationMail(existRelation,user,req.hostname,req.protocol)
+        }
+    }
+    else{
+    //console.log('hospital',hospital)
+    let relation = await new Relations({
+        hospitalId,
+        userId
+    }).save()
+    if(!relation)
+    {
+        console.log('unable to create link')
+        req.flash("error_msg", "There was an error in creating request link")
+        return res.redirect('/hospital/profile')
+    }
+    relationMail(relation,user,req.hostname,req.protocol)
+    req.flash('success_msg','The user has been notified of your request for access. Awaiting user response')
+    return res.redirect('/hospital/profile')
+    //console.log('relation',relation)
+
+    }
+    }
+    catch(e)
+    {
+        console.log(e)
+    }
+
+}
+
+module.exports.relationVerify_get = async (req, res) => {
+    try {
+        const relationID = req.params.id
+        console.log('relation',relationID)
+        const expiredTokenUser = await Relations.findOne({ _id: relationID })
+        const token = req.query.tkn
+        //console.log(token)
+        jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
+            if (err) {
+                req.flash(
+                    'error_msg',
+                    ' Your verify link had expired. We have sent you another verification link'
+                )
+                relationMail(expiredTokenUser, req.hostname, req.protocol)
+                return res.redirect('/user/profile')
+            }
+            const relation = await Relations.findOne({ _id: decoded.id })
+            if (!relation) {
+                //console.log('user not found')
+                res.redirect('/user/profile')
+            } else {
+                const activeRelation = await Relations.findByIdAndUpdate(relation._id, {
+                    isPermitted: true,
+                })
+                if (!activeRelation) {
+                    // console.log('Error occured while verifying')
+                    req.flash('error_msg', 'Error occured while verifying')
+                    res.redirect('/user/profile')
+                } else {
+                    req.flash(
+                        'success_msg',
+                        'Access rights granted'   
+                    )
+                    //console.log('The user has been verified.')
+                    //console.log('active', activeUser)
+                    res.redirect('/user/profile')
+                }
+            }
+        })
+    } catch (e) {
+        console.log(e)
+        //signupMail(user,req.hostname,req.protocol)
+        res.redirect('/hospital/profile')
+    }
 }

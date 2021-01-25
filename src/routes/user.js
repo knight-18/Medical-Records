@@ -10,9 +10,12 @@ const { v4 } = require('uuid');
 const multer = require('multer')
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
+        //console.log("in multer")
         const userEmail = req.user.email
         const dir = `./public/uploads/${userEmail}`
+        //console.log("dir",dir)
         if (!fs.existsSync(dir)) {
+           // console.log("making files")
             fs.mkdirSync(dir, { recursive: true }, (err) => {
                 if (err) console.error('New Directory Creation Error');
             })
@@ -59,8 +62,14 @@ router.get('/profile', requireAuth, authController.profile_get)
 router.post(
     '/profile/upload',
     requireAuth,
-    upload.array('images'),
+    upload.array('upload'),
     authController.upload_post
 )
 
-module.exports = router
+router.get('/profile/disease',requireAuth,authController.disease_get)
+
+router.get('/forgotPassword', redirectIfLoggedIn,authController.getForgotPasswordForm)
+router.post('/forgotPassword', redirectIfLoggedIn,authController.forgotPassword)
+router.get('/resetPassword/:id/:token',authController.getPasswordResetForm)
+router.post('/resetPassword/:id/:token',authController.resetPassword)
+module.exports = router 
