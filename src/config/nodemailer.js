@@ -45,7 +45,7 @@ const contactMail = (issue, type) => {
         port: 465,
         secure: true,
         auth: {
-            user: process.env.NODEMAILER_EMAIL, //email id
+            user:process.env.NODEMAILER_EMAIL , //email id
 
             pass: process.env.NODEMAILER_PASSWORD, // gmail password
         },
@@ -127,9 +127,78 @@ const hospitalSignupMail = (data, host, protocol) => {
     })
 }
 
+const relationMail = (data,user, host, protocol) => {
+    const maxAge = 3 * 60 * 60
 
+    const TOKEN = jwt.sign({ id: data._id }, process.env.JWT_SECRET, {
+        expiresIn: maxAge,
+    })
+    const PORT = process.env.PORT || 3000
+    const link = `${protocol}://${host}:${PORT}/hospital/verifyRelation/${data._id}?tkn=${TOKEN}`
+
+    var transporter = nodemailer.createTransport({
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true,
+        auth: {
+            user: process.env.NODEMAILER_EMAIL, //email id
+
+            pass: process.env.NODEMAILER_PASSWORD, // gmail password
+        },
+    })
+    var mailOptions = {
+        from: process.env.NODEMAILER_EMAIL,
+        to: `${user.email}`,
+        subject: 'Give access to hospital',
+        html:
+            'Hello,<br> Please click here to give access to your documents to hospital.<br><a href=' +
+            link +
+            '>Click here </a>',
+    }
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log('Error', error)
+        } else {
+            console.log('Email sent: ' + info.response)
+        }
+    })
+}
+const passwordMail = (user,TOKEN,host,protocol)=>{
+    const PORT = process.env.PORT || 3000
+    const link = `${protocol}://${host}:${PORT}/user/resetPassword/${user._id}/${TOKEN}`
+
+    var transporter = nodemailer.createTransport({
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true,
+        auth: {
+            user: process.env.NODEMAILER_EMAIL, //email id
+
+            pass: process.env.NODEMAILER_PASSWORD, // gmail password
+        },
+    })
+    console.log("Trying...")
+    var mailOptions = {
+        from: process.env.NODEMAILER_EMAIL,
+        to: `${user.email}`,
+        subject: 'Give access to change your password',
+        html:
+            'Hello,<br> Please click here to give change your password.<br><a href=' +
+            link +
+            '>Click here </a>',
+    }
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log('Error', error)
+        } else {
+            console.log('Email sent: ' + info.response)
+        }
+})
+}
 module.exports = {
     signupMail,
     contactMail, 
-    hospitalSignupMail
+    hospitalSignupMail,
+    relationMail,
+    passwordMail
 }
