@@ -66,7 +66,7 @@ router.post(
     authController.upload_post
 )
 
-router.get('/profile/disease',requireAuth,authController.disease_get)
+router.get('/disease',requireAuth,authController.disease_get)
 
 router.get('/forgotPassword', redirectIfLoggedIn,authController.getForgotPasswordForm)
 router.post('/forgotPassword', redirectIfLoggedIn,authController.forgotPassword)
