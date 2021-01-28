@@ -598,8 +598,28 @@ text-decoration:none;
 	font-size:23px;
 }
 
-  
+.lists a:not([href]):not([tabindex]) {
+    color: #9593A0 !important;
+}
+.lists a:not([href]):not([tabindex]):hover{
+	color:white !important;
+}
 
+.desktop-view{
+	display: block ;
+}
+.mobile-view{
+display: none ;
+}
+
+@media (max-width: 576px) {
+.mobile-view{
+	display: block ;
+}
+.desktop-view{
+	display: none ;
+}
+}
   
   
 

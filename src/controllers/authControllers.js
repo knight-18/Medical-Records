@@ -211,18 +211,23 @@ module.exports.upload_post = async (req, res) => {
 
 module.exports.disease_get=async(req,res)=>{
     
-    //console.log('user',req.user)
+    console.log('user',req.user)
     const Userdiseases= await req.user.populate('disease').execPopulate()
     console.log('diseases',Userdiseases)
-    return res.redirect('/user/profile')
-}
+    res.render('./userViews/profile', {
+        path: '/user/disease',
+      })
+      console.log("in disease page")
+    }
 
 module.exports.profile_get = async (req, res) => {
     //res.locals.user = req.user
     res.locals.user = await req.user.populate('disease').execPopulate()
     console.log("locals",res.locals.user)
-    res.render('./userViews/profile')
-}
+    res.render('./userViews/profile', {
+        path: '/user/profile',
+      })
+      console.log("in profile page")}
 
 module.exports.logout_get = async (req, res) => {
     // res.cookie('jwt', '', { maxAge: 1 });
