@@ -1,4 +1,5 @@
 const User = require('../models/User')
+const Hospital = require('../models/Hospital')
 const jwt = require('jsonwebtoken')
 const { signupMail,passwordMail } = require('../config/nodemailer')
 const path = require('path')
@@ -299,6 +300,8 @@ module.exports.forgotPassword = async (req, res) => {
 
 module.exports.resetPassword = async (req, res) => {
     try {
+        const token=req.params.token
+        const id=req.params.id
         const hashedToken = crypto
             .createHash('sha256')
             .update(req.params.token)
@@ -312,7 +315,11 @@ module.exports.resetPassword = async (req, res) => {
             req.flash('error_msg', 'No user found')
             return res.redirect('/user/login')
         }
-
+        if(req.body.password!==req.body.cpassword){
+          req.flash('error_msg','Passwords dont match') 
+          return res.redirect(`resetPassword/${id}/${token}`)
+        }else{
+            
         user.password = req.body.password
         user.passwordResetToken = undefined
         user.passwordResetExpires = undefined
@@ -324,7 +331,15 @@ module.exports.resetPassword = async (req, res) => {
             httpOnly: false,
         })
         res.redirect('/user/profile')
-    } catch (err) {
+ 
+        }
+   } catch (err) {
         res.send(err)
     }
+}
+module.exports.profile_post=async(req,res)=>{
+    const name=req.body.name;
+    // console.log(name);
+    const hospital = await Hospital.findOne({ hospitalName: name })
+    res.send(hospital);
 }
