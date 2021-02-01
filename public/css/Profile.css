@@ -520,13 +520,15 @@ text-decoration:none;
   display: none;
   position: absolute;
   backdrop-filter: blur(4px);
-  background-color:rgba(7, 98, 172, 0.5);
+  background-color:white;
   min-width: 155px;
   min-height:20px;
+  max-height: 150px;
+  overflow-y: scroll;
   color:black;
   border-radius:8px;
   border-top: 0px;
-  transform: translateY(20%);
+  transform: translateY(2%);
   z-index: 1;
   text-shadow: none;
   transition: all 1250ms ;
@@ -547,14 +549,16 @@ text-decoration:none;
 
 /* Change color of dropdown links on hover */
 .dropdown-content a:hover {
-	filter: brightness(2000%);
+	/*filter: brightness(2000%);
 	border: 0px solid;
 	box-shadow: inset 0 0 20px rgba(109, 131, 255, 0.5), 0 0 20px rgba(5, 110, 136, 0.2);
 	outline-color: rgba(255, 255, 255, 0);
 	outline-offset: 15px;
 	text-shadow: 1px 1px 2px #1c323b; 
 	border-radius: 8px;
-	color: black;
+	color: black;*/
+	color:black;
+	background-color: blue;
 }
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */

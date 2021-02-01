@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken')
 const { signupMail,passwordMail } = require('../config/nodemailer')
 const path = require('path')
 const Disease = require('../models/Disease')
+const Relations=require('../models/Relations')
 const { handleErrors } = require('../utilities/Utilities'); 
 const crypto = require('crypto')
 require('dotenv').config()
@@ -224,9 +225,14 @@ module.exports.disease_get=async(req,res)=>{
 module.exports.profile_get = async (req, res) => {
     //res.locals.user = req.user
     res.locals.user = await req.user.populate('disease').execPopulate()
-    console.log("locals",res.locals.user)
+    console.log('user',req.user)
+    //console.log("locals",res.locals.user)
+    //console.log('id',req.user._id)
+    const hospitals = await Relations.find({'userId':req.user._id}).populate('hospitalId','hospitalName')
+    console.log('hospitals',hospitals)
     res.render('./userViews/profile', {
         path: '/user/profile',
+        hospitals:hospitals
       })
       console.log("in profile page")}
 

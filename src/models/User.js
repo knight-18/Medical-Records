@@ -23,7 +23,7 @@ const userSchema = mongoose.Schema(
         },
         active: {
             type: Boolean,
-            default:true,//to be changed to false after testing
+            default:false,//to be changed to false after testing
         },
         password: {
             type: String,
