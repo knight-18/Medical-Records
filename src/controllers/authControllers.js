@@ -175,15 +175,19 @@ module.exports.login_post = async (req, res) => {
 module.exports.upload_post = async (req, res) => {
 
     //console.log("in uploads",req.body)
+    
     try {
         
         let { name, duration, refDoctor, hospitalName, description } = req.body
        
         const files = req.files
-        console.log("files",files)
+        //console.log("files",files)
+        if(files)
+        {
         let images = files.map((file) => {
             return `/uploads/${req.user.email}/${file.filename}`
         })
+        }
         let newDisease = await new Disease({
             name,
             images,

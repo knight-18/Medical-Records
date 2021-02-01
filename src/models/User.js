@@ -23,7 +23,7 @@ const userSchema = mongoose.Schema(
         },
         active: {
             type: Boolean,
-            default:false,//to be changed to false after testing
+            default:true,//to be changed to false after testing
         },
         password: {
             type: String,
@@ -78,6 +78,7 @@ userSchema.statics.login = async function (email, password) {
     //console.log('log',user)
     if (user) {
         const auth = await bcrypt.compare(password, user.password)
+        //found bug have to fix the login 
         if (auth) {
             return user
         }

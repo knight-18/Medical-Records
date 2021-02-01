@@ -10,10 +10,10 @@ const { v4 } = require('uuid');
 const multer = require('multer')
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        //console.log("in multer")
+        console.log("in multer")
         const userEmail = req.user.email
         const dir = `./public/uploads/${userEmail}`
-        //console.log("dir",dir)
+        console.log("dir",dir)
         if (!fs.existsSync(dir)) {
            // console.log("making files")
             fs.mkdirSync(dir, { recursive: true }, (err) => {
