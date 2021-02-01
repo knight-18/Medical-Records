@@ -61,19 +61,19 @@
 		<div class="row">
 			<div class="col-sm-12"><%- include('../partials/message'); %></div>
 			<div class="col-lg-2 col-sm-4 col-12 order-3 order-sm-1" id="pSec1">
-				<div id="leftPanel">
+				<div id="leftPanel"> 
 					<div class="lists">
-						<a href="/user/profile">Profile</a>
+						<a href="/user/profile">Profile</a> 
 						<img src="../img/profile.png" class="Icons profile-icon">
 					</div>
 					<div class="lists">
 						<a onclick="myFunction()" class="dropbtn">Disease</a>
 						<img src="../img/disease.png" class="Icons">
 							<div id="myDropdown" class="dropdown-content">
-								<a href="/user/disease">CORONA</a>
+						
 								<% for(var d of user.disease) { %>
 									<a class="dropdown-item"><span class="dropAnchor"><%= d.name %></span></a>
-								<% } %>
+								<% } %>>
 								<a id="myBtn">Add New</a>
 							</div>
 					</div>
@@ -92,6 +92,16 @@
 					<div class=" Doctor-list">
 						<div id="mySidenavTab" class="sidenav">
 							<div id="Dr"><p class="sidenavHeader">Doctors<a href="javascript:void(0)" class="closebtn" onclick="closeNavtab()"><i class="fa fa-angle-left sideNav " aria-hidden="true"></i></a></p></div>
+							<div>
+								<input type="text" placeholder="Search..."
+									class="mobile-preview shadow floating-animate">
+								<button>click</button>
+							</div>
+							<ul>
+								<% for(var d of hospitals) { %>
+									<li><%= d.hospitalId.hospitalName %></li>
+								<% } %>
+							</ul>	
 						</div>
 						<!-- <div id="Drs"><button class=" sideNavButton" onclick=openNavtab() type="button ">Doctors<i class="fa fa-angle-right sideNav" aria-hidden="true" onclick=openNav()></i></button></div>				 -->
 						<div id="Drs"><button class=" sideNavButton lists" onclick=openNavtab() type="button "><a>Doctors</a><img src="../img/doctor-icon.png" class="Icons doctor-icon"  onclick=openNavtab()></button></div>				
@@ -109,10 +119,17 @@
 				<%- include('../partials/diseaseContent'); %>
 			<% } %>
 			<div class="col-lg-2 col-sm-0 col-12 order-2 order-sm-3" id="pSec3">
-			
-					
-
-				<div id="Dr"><a>Doctors</a><img src="../img/doctor-icon.png" class="Icons doctor-icon" ></div>				
+				<div id="Dr"><a>Doctors</a><img src="../img/doctor-icon.png" class="Icons doctor-icon" ></div>
+				<div>
+					<input type="text" placeholder="Search..."
+						class="mobile-preview shadow floating-animate">
+					<button>click</button>
+				</div>
+				<ul>
+					<% for(var d of hospitals) { %>
+						<li><%= d.hospitalId.hospitalName %></li>
+					<% } %>
+				</ul>				
 			</div>
 		</div>
 	</div>
@@ -127,7 +144,6 @@
 							<a onclick=myFunctionMobile() class="dropbtn">Disease</a>
 							<img src="../img/disease.png" class="Icons">
 								<div id="myDropdownMobile" class="dropdown-content">
-									<a href="/user/disease">CORONA</a>
 									<% for(var d of user.disease) { %>
 										<a class="dropdown-item"><span class="dropAnchor"><%= d.name %></span></a>
 									<% } %>
@@ -148,10 +164,13 @@
 						</div>
 						<div class=" Doctor-list">
 							<div id="mySidenavTab" class="sidenav">
-								<div id="Dr"><p class="sidenavHeader">Doctors<a href="javascript:void(0)" class="closebtn" onclick="closeNavtab()"><i class="fa fa-angle-left sideNav " aria-hidden="true"></i></a></p></div>
+								<div id="Dr"><p class="sidenavHeader">Hospitals<a href="javascript:void(0)" class="closebtn" onclick="closeNavtab()"><i class="fa fa-angle-left sideNav " aria-hidden="true"></i></a></p></div>
+								
 							</div>
 							<!-- <div id="Drs"><button class=" sideNavButton" onclick=openNavtab() type="button ">Doctors<i class="fa fa-angle-right sideNav" aria-hidden="true" onclick=openNav()></i></button></div>				 -->
-							<div id="Drs"><button class=" sideNavButton lists" onclick=openNavtab() type="button "><a>Doctors</a><img src="../img/doctor-icon.png" class="Icons doctor-icon"  onclick=openNav()></button></div>				
+							<div id="Drs">
+								<button class=" sideNavButton lists" onclick=openNavtab() type="button "><a>Doctors</a><img src="../img/doctor-icon.png" class="Icons doctor-icon"  onclick=openNav()></button>
+							</div>				
 						</div>
 		
 						<div class="lists">
@@ -165,7 +184,17 @@
 		
 				<div class="col-lg-2 col-sm-0 col-12 order-2 order-sm-3" id="pSec3">
 					<div id="mySidenav" class="sidenav">
-						<div id="Dr"><p class="sidenavHeader">Doctors<a href="javascript:void(0)" class="closebtn" onclick=closeNav() ><i class="fa fa-angle-left sideNav " aria-hidden="true"></i></a></p></div>
+						<div id="Dr"><p class="sidenavHeader">Hospitals<a href="javascript:void(0)" class="closebtn" onclick=closeNav() ><i class="fa fa-angle-left sideNav " aria-hidden="true"></i></a></p></div>
+					    <div>
+							<input type="text" placeholder="Search..."
+								class="mobile-preview shadow floating-animate">
+							<button>click</button>
+						</div>
+						<ul>
+							<% for(var d of hospitals) { %>
+								<li><%= d.hospitalId.hospitalName %></li>
+							<% } %>
+						</ul>	
 					</div>
 					<div id="Dr"><a>Doctors</a><img src="../img/doctor-icon.png" class="Icons doctor-icon" onclick=openNav()  ></div>				
 				</div>

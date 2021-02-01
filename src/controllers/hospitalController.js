@@ -23,7 +23,7 @@ module.exports.profile_get = async (req, res) => {
     // console.log("hospital", res.locals.hospital)
     const patients = await Relations.find({'isPermitted': true, 'hospitalId': req.hospital.id}, "userId").populate('userId', 'name'); 
     
-    console.log(patients)
+    console.log("patientssssss",patients)
     res.render("./hospitalViews/profile", { patients })
 }
 
@@ -189,6 +189,7 @@ module.exports.relation_post=async (req,res)=>{
     try{
     const{email}=req.body
     const user=await User.findOne({email})
+    //console.log('userRels',user)
     if(!user)
     {
         console.log('user not found')
@@ -199,8 +200,11 @@ module.exports.relation_post=async (req,res)=>{
     //console.log('user',user)
     const hospitalId=req.hospital._id
     const userId=user._id
+    console.log('hospital current',req.hospital)
 
-    const existRelation=await Relations.findOne({userId,hospitalId})
+    const existRelation=await Relations.findOne({'userId':userId,'hospitalId':hospitalId})
+    //const userRel= await Relations.findOne(userId)
+    //console.log('userRel',userId)
     console.log('existRelation',existRelation)
     if(existRelation) 
     {

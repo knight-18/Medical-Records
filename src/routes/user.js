@@ -62,7 +62,7 @@ router.get('/profile', requireAuth, authController.profile_get)
 router.post(
     '/profile/upload',
     requireAuth,
-    upload.array('upload'),
+    upload.array('upload'),  
     authController.upload_post
 )
 
