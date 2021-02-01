@@ -13,29 +13,28 @@
 <body>
 	<%- include('../partials/navbar'); %>
 
-    <div id="myModal" class="modal">
+    <div id="myModal" class="modal" >
 
         <div class="modal-content">
+		
 			<div class="row">
 	           <div class="content-top ">
 				<a href="#" class="img-rounded"><img src="../img/ProfilePic.png" id="profileImg1"></a>
 				<h4>NEW DISEASE</h4>
 				  <span><button class="close">CANCEL</button></span>
-				  <span><button class="save1">SAVE</button></span>
 		        </div>
 			</div>
-			<form class="form-modal">
+			<form class="form-modal" method="POST" enctype="multipart/form-data" ><!--Dont remove the enctype-->
 				<div class="group1">
-				  <input type="text"><span class="highlight1"></span><span class="bar1"></span>
+				  <input type="text" name="name"><span class="highlight1"></span><span class="bar1"></span>
 				  <label class="label-form">Disease Name</label>
+				  <span><button class="save1" formaction="profile/upload" value="upload">SAVE</button></span><!-- Dont remove the name and value attribute-->
 				</div>
 				<div class="group2">
 					<input type="text"><span class="highlight1"></span><span class="bar1"></span>
 					<label class="label-form">Medicine</label>
 				  </div>
 				
-				 
-			</form>
 			<span class="UD">Upload Documents</span>
 			<div class="zone">
 				
@@ -45,12 +44,13 @@
 				  <span>OR</span>
 				  <div class="selectFile">       
 					<label for="file">Select file</label>                   
-					<input type="file" name="files[]" id="file">
+					<input type="file" name="upload" id="file"><!--          Dont remove the name attribute -->
 				  </div>
 				  <p>File size limit : 10 MB</p>
 				</div>
 			  
 			  </div>
+			  </form>
 			</div>
 	</div>
 
