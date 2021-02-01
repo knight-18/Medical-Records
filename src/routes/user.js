@@ -59,6 +59,7 @@ router.get('/login', redirectIfLoggedIn, authController.login_get)
 router.post('/login', authController.login_post)
 router.get('/logout', requireAuth, authController.logout_get)
 router.get('/profile', requireAuth, authController.profile_get)
+router.post('/profile', requireAuth, authController.profile_post)
 router.post(
     '/profile/upload',
     requireAuth,

@@ -109,10 +109,12 @@
 				<%- include('../partials/diseaseContent'); %>
 			<% } %>
 			<div class="col-lg-2 col-sm-0 col-12 order-2 order-sm-3" id="pSec3">
-			
-					
-
-				<div id="Dr"><a>Doctors</a><img src="../img/doctor-icon.png" class="Icons doctor-icon" ></div>				
+				<div id="Dr"><a>Hospitals</a><img src="../img/doctor-icon.png" class="Icons doctor-icon" ></div>
+				<form action="/user/profile" method="POST">
+					<label class="label1">Hospital's name to search*</label><br>
+					<input type="text" placeholder="eg:SMCH" name="name" required /><br>
+					<button type="submit" >Click Here</button>
+				</form>				
 			</div>
 		</div>
 	</div>
