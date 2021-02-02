@@ -10,10 +10,11 @@ const hospitalController = require('../controllers/hospitalController')
 
 router.get('/signup',redirectIfLoggedIn, hospitalController.signup_get)
 router.post('/signup', hospitalController.signup_post)
-router.post('/relation',requireAuth,hospitalController.relation_post)
+router.get('/relation/:shortId',requireAuth,hospitalController.relation_post)
 router.get('/login', redirectIfLoggedIn, hospitalController.login_get)
 router.get('/verify/:id', hospitalController.emailVerify_get)
 router.get('/logout', requireAuth, hospitalController.logout_get)
+router.post('/search', requireAuth, hospitalController.patient_search)
 router.post('/login', hospitalController.login_post)
 router.get('/verifyRelation/:id',hospitalController.relationVerify_get)
 

@@ -8,6 +8,7 @@ const Relations=require('../models/Relations')
 const { handleErrors } = require('../utilities/Utilities'); 
 const crypto = require('crypto')
 require('dotenv').config()
+const { nanoId } = require("nanoid")
 
 const maxAge = 30 * 24 * 60 * 60
 
@@ -51,8 +52,9 @@ module.exports.signup_post = async (req, res) => {
             )
             return res.redirect('/user/login')
         }
-
-        const user = new User({ email, name, password, phoneNumber })
+        const short_id = require("nanoid").nanoid(8);
+        console.log("Short ID generated is: ", short_id)
+        const user = new User({ email, name, password, phoneNumber, short_id })
         let saveUser = await user.save()
         //console.log(saveUser);
         req.flash(
