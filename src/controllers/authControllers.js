@@ -13,6 +13,33 @@ const { nanoId } = require("nanoid")
 const maxAge = 30 * 24 * 60 * 60
 
 
+module.exports.userHospital_get= async (req,res)=>{
+    const hsopitalId=req.query
+    const params=new URLSearchParams(hsopitalId)
+    const newId=params.get('id')
+    //console.log(newId);
+    res.locals.user = await req.user.populate('disease').execPopulate()
+    //const newId=JSON.parse(userId,true)
+    const hospital=await Hospital.findOne({'_id':newId});
+   // console.log('user details',userHospital)
+    
+     //console.log("hospital", user)
+    const hospitals = await Relations.find({'userId':req.user._id,'isPermitted':true},"hospitalId").populate('hospitalId','hospitalName')
+    //console.log('relation',hospitals)
+    if(!hospital)
+    {
+        req.flash('error_msg','user not found')
+        res.redirect('/user/profile')
+    }
+    res.render("./userViews/profile",{
+        path:'/user/userHospital',
+        hospitals,
+        hospital
+    })
+}
+
+
+
 // controller actions
 module.exports.signup_get = (req, res) => {
     res.render('./userViews/signup',{
@@ -184,12 +211,10 @@ module.exports.upload_post = async (req, res) => {
        
         const files = req.files
         //console.log("files",files)
-        if(files)
-        {
         let images = files.map((file) => {
             return `/uploads/${req.user.email}/${file.filename}`
         })
-        }
+        
         let newDisease = await new Disease({
             name,
             images,
@@ -231,11 +256,11 @@ module.exports.disease_get=async(req,res)=>{
 module.exports.profile_get = async (req, res) => {
     //res.locals.user = req.user
     res.locals.user = await req.user.populate('disease').execPopulate()
-    console.log('user',req.user)
+    //console.log('user id',req.user)
     //console.log("locals",res.locals.user)
     //console.log('id',req.user._id)
-    const hospitals = await Relations.find({'userId':req.user._id}).populate('hospitalId','hospitalName')
-    console.log('hospitals',hospitals)
+    const hospitals = await Relations.find({'userId':req.user._id,'isPermitted':true}).populate('hospitalId','hospitalName')
+    //console.log('hospitals',hospitals)
     res.render('./userViews/profile', {
         path: '/user/profile',
         hospitals:hospitals

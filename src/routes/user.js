@@ -66,6 +66,7 @@ router.post(
     upload.array('upload'),  
     authController.upload_post
 )
+router.get('/userHospital',requireAuth,authController.userHospital_get)
 
 router.get('/disease',requireAuth,authController.disease_get)
 

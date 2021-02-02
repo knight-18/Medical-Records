@@ -20,4 +20,6 @@ router.get('/verifyRelation/:id',hospitalController.relationVerify_get)
 
 router.get('/profile', requireAuth, hospitalController.profile_get)
 
+router.get('/patient',requireAuth,hospitalController.patient_get)
+
 module.exports = router

@@ -73,7 +73,7 @@
 						
 								<% for(var d of user.disease) { %>
 									<a class="dropdown-item"><span class="dropAnchor"><%= d.name %></span></a>
-								<% } %>>
+								<% } %>
 								<a id="myBtn">Add New</a>
 							</div>
 					</div>
@@ -99,7 +99,7 @@
 							</div>
 							<ul>
 								<% for(var d of hospitals) { %>
-									<li><%= d.hospitalId.hospitalName %></li>
+									<a href="/user/userHospital?id=<%=d.hospitalId._id%>"><li><%= d.hospitalId.hospitalName %></li></a>
 								<% } %>
 							</ul>	
 						</div>
@@ -118,6 +118,9 @@
 			<%if (path === '/user/disease') { %>
 				<%- include('../partials/diseaseContent'); %>
 			<% } %>
+			<%if (path === '/user/userHospital') { %>
+				<%- include('../partials/HospitalProfileContent'); %>
+			<% } %>
 			<div class="col-lg-2 col-sm-0 col-12 order-2 order-sm-3" id="pSec3">
 				<div id="Dr"><a>Doctors</a><img src="../img/doctor-icon.png" class="Icons doctor-icon" ></div>
 				<div>
@@ -127,7 +130,7 @@
 				</div>
 				<ul>
 					<% for(var d of hospitals) { %>
-						<li><%= d.hospitalId.hospitalName %></li>
+						<a href="/user/userHospital?id=<%=d.hospitalId._id%>"><li><%= d.hospitalId.hospitalName %></li></a>
 					<% } %>
 				</ul>				
 
@@ -136,7 +139,7 @@
 	</div>
 </div>
 <div class="mobile-view">
-	<%if (path === '/user/profile') { %>
+	<%if (path === '/user/profile'||path==='/user/userHospital') { %>
 		<div class="container-fluid" >	
 			<div class="row">
 				<div class="col-lg-2 col-sm-4 col-12 order-3 order-sm-1" id="pSec1">
@@ -181,7 +184,12 @@
 					</div>
 				</div>
 		
-				<%- include('../partials/profileContent'); %>
+				<%if (path === '/user/profile') { %>
+					<%- include('../partials/profileContent'); %>
+				<% } %>
+				<%if (path === '/user/userHospital') { %>
+					<%- include('../partials/HospitalProfileContent'); %>
+				<% } %>
 		
 				<div class="col-lg-2 col-sm-0 col-12 order-2 order-sm-3" id="pSec3">
 					<div id="mySidenav" class="sidenav">
@@ -193,7 +201,7 @@
 						</div>
 						<ul>
 							<% for(var d of hospitals) { %>
-								<li><%= d.hospitalId.hospitalName %></li>
+								<a href="/user/userHospital?id=<%=d.hospitalId._id%>"><li><%= d.hospitalId.hospitalName %></li></a>
 							<% } %>
 						</ul>	
 					</div>
@@ -206,6 +214,7 @@
 	<%if (path === '/user/disease') { %>
 		<%- include('../partials/diseaseContent'); %>
 	<% } %>
+	
 </div>
 
 <%- include('../partials/footer'); %>
