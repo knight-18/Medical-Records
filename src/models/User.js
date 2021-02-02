@@ -9,6 +9,12 @@ require('dotenv').config()
 
 const userSchema = mongoose.Schema(
     {
+        short_id: 
+        {
+            type: String, 
+            trim:true, 
+            required: [true, 'Short ID cannot be absent']
+        },
         name: {
             type: String,
             trim: true,
