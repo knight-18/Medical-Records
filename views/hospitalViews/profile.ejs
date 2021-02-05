@@ -14,7 +14,18 @@
 	<%- include('../partials/navbar'); %>
 
    
+	<% if (custom_flash) { %>
+		<link rel="stylesheet" href="/css/flash-message.css">
+<div id="flash-message">
+    <% if (custom_flash.length > 0) { %>
+    <div class="alert alert-success alignment"><%= custom_flash %><span class="close">&times;</span></div>
+    
+	<% } else { %>
+		 <% } %>
+</div>
 
+<script src="/js/flash-message.js"></script>
+	<% } %>
 	<!--Profile Part-->
 
 <div class="desktop-view">
@@ -79,7 +90,7 @@
 			<% } %>
 			
 			<div class="col-lg-2 col-sm-0 col-12 order-2 order-sm-3" id="pSec3">
-				<div id="Dr"><a>Paitients</a><img src="../img/doctor-icon.png" class="Icons doctor-icon" ></div>
+				<div id="Dr"><a>Patients</a><img src="../img/doctor-icon.png" class="Icons doctor-icon" ></div>
 				<div>
 					<form method="POST" action="/hospital/search">
 						<input type="text" placeholder="Enter patient unique ID to search" name="short_id"
@@ -91,7 +102,13 @@
 				<% if (foundUser) { %>
 					<div>
 						<p><%= foundUser.name %></p>
-						<a class="btn btn-primary" href="/hospital/relation/<%= foundUser.short_id %>"" role="button">Request Access</a>	
+						<% if (access.length > 0) { %>
+							<a class="btn btn-primary" href="/hospital/patient?id=<%=foundUser._id%>" role="button">View Details</a>	
+						<% } else { %>
+							<a class="btn btn-danger" href="/hospital/relation/<%= foundUser.short_id %>" role="button">Request Access</a>	
+						<% } %>
+
+						
 					</div>
 				<% } %>
 

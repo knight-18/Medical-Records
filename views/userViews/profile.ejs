@@ -21,23 +21,34 @@
 	           <div class="content-top ">
 				<a href="#" class="img-rounded"><img src="../img/ProfilePic.png" id="profileImg1"></a>
 				<h4>NEW DISEASE</h4>
-				  <span><button class="close">CANCEL</button></span>
+				 
 		        </div>
 			</div>
 			<form class="form-modal" method="POST" enctype="multipart/form-data" ><!--Dont remove the enctype-->
-				<div class="group1">
+				<!--<div class="group1">
 				  <input type="text" name="name"><span class="highlight1"></span><span class="bar1"></span>
 				  <label class="label-form">Disease Name</label>
-				  <span><button class="save1" formaction="profile/upload" value="upload">SAVE</button></span><!-- Dont remove the name and value attribute-->
-				</div>
-				<div class="group2">
-					<input type="text"><span class="highlight1"></span><span class="bar1"></span>
-					<label class="label-form">Medicine</label>
+				  <span><button class="save1" formaction="profile/upload" value="upload">SAVE</button></span><!-- Dont remove the name and value attribute--
+				</div>-->
+				<div class="group1">
+					<label for="name" style="margin-left: 8px; margin-top: -20px; padding-bottom: 200px;">Disease Name</label>
+					<input type="text" name="name" class="form-control" id="name" aria-describedby="nameHelp" style="margin-left: -35px;">
+					<span><button class="save1" formaction="profile/upload" value="upload">SAVE</button></span>
+					<span><button class="close1">CANCEL</button></span>
 				  </div>
+				<div class="group2" style=" margin-bottom: -51px; margin-top: 18px;">
+					<!--<input type="text"><span class="highlight1"></span><span class="bar1"></span>-->
+					<p style="margin-top: -9px; font-size:18px; font-weight: normal; margin-left: 5px;	color:#a5a5a5;">Medicine</p>
+					<div class="custom-file" style="border-radius: 4rem">
+						<input type="file" class="custom-file-input" id="customFile">
+						<label class="custom-file-label" for="customFile">Choose file</label>
+					  </div>
+				</div>
+
 				
-			<span class="UD">Upload Documents</span>
+		
 			<div class="zone">
-				
+				<span class="UD" style="z-index: 1000; overflow: hidden; display: flex; text-align: start; margin-left: 25px;">Upload Documents</span>
 				<div id="dropZ">
 				  <i class="fa fa-cloud-upload"></i>
 				  <div>Drag and drop your file here</div>                    
@@ -291,7 +302,7 @@
 // Get the button that opens the modal
 var btn = document.getElementById("myBtn");
 // Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+var span = document.getElementsByClassName("close1")[0];
 // When the user clicks on the button, open the modal
 btn.onclick = function() {
   modal.style.display = "block";

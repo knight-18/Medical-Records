@@ -32,7 +32,9 @@ module.exports.patient_get= async (req,res)=>{
     res.render("./hospitalViews/profile",{
         path:'/hospital/patient',
         user:user,
-        patients, foundUser:null,access:null
+        patients, foundUser:null,access:null, 
+        custom_flash:null, 
+        
     })
 }
 
@@ -51,7 +53,10 @@ module.exports.profile_get = async (req, res) => {
     res.render("./hospitalViews/profile",
     {path:'/hospital/profile',
     patients:patients, 
-    foundUser:null })
+    foundUser:null,
+    access:null, 
+    custom_flash:null, 
+      })
 }
 
 
@@ -292,22 +297,23 @@ module.exports.patient_search = async (req, res) =>
     {
         const result = await User.findOne({short_id})
         //console.log('resukts',result)
-        if (result == null)
+        if (result === null)
         {
-            req.flash("error_msg", "No such user exists")
+            req.flash('error_msg', 'No such user exists'); 
             res.redirect("/hospital/profile")
             return 
 
         }  
         else
         {
-            req.flash("success_msg", "User found")
+            
             res.locals.hospital = req.hospital;
            
-            const patients = await Relations.find({'isPermitted': true, 'hospitalId': req.hospital.id}, "userId").populate('userId', 'name'); 
-            const access= await Relations.find({'userId':result._id}).populate('userId','isPermitted'); 
-           console.log('searched patient',access)
-            res.render("./hospitalViews/profile", {path:'/hospital/search', patients:patients,access:access, foundUser:result })
+            const patients = await Relations.find({'isPermitted': true, 'hospitalId': req.hospital._id}, "userId").populate('userId', 'name'); 
+            const access= await Relations.find({'userId':result._id, 'hospitalId':req.hospital._id, 'isPermitted':true }).populate('userId','isPermitted'); 
+           console.log('searched patient',access);
+           const custom_flash = "User found"; 
+            res.render("./hospitalViews/profile", {path:'/hospital/search', patients:patients,access:access, foundUser:result, custom_flash:custom_flash });
             return 
 
         }
@@ -316,7 +322,7 @@ module.exports.patient_search = async (req, res) =>
     catch
     {
      console.log("Internal error while searching for patient"); 
-     req.flash("error_msg", "Could not execute search operation")
+     req.flash('error_msg', 'Could not execute search operation')
      res.redirect("/hospital/profile"); 
     }
 }
