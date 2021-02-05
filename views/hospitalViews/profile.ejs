@@ -90,7 +90,7 @@
 			<% } %>
 			
 			<div class="col-lg-2 col-sm-0 col-12 order-2 order-sm-3" id="pSec3">
-				<div id="Dr"><a>Paitients</a><img src="../img/doctor-icon.png" class="Icons doctor-icon" ></div>
+				<div id="Dr"><a>Patients</a><img src="../img/doctor-icon.png" class="Icons doctor-icon" ></div>
 				<div>
 					<form method="POST" action="/hospital/search">
 						<input type="text" placeholder="Enter patient unique ID to search" name="short_id"
@@ -103,7 +103,7 @@
 					<div>
 						<p><%= foundUser.name %></p>
 						<% if (access.length > 0) { %>
-							<a class="btn btn-primary" href="/hospital/patient?id=<%=d.userId._id%>" role="button">View Details</a>	
+							<a class="btn btn-primary" href="/hospital/patient?id=<%=foundUser._id%>" role="button">View Details</a>	
 						<% } else { %>
 							<a class="btn btn-danger" href="/hospital/relation/<%= foundUser.short_id %>" role="button">Request Access</a>	
 						<% } %>

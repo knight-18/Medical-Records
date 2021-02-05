@@ -54,6 +54,7 @@ module.exports.profile_get = async (req, res) => {
     {path:'/hospital/profile',
     patients:patients, 
     foundUser:null,
+    access:null, 
     custom_flash:null, 
       })
 }
@@ -308,8 +309,8 @@ module.exports.patient_search = async (req, res) =>
             
             res.locals.hospital = req.hospital;
            
-            const patients = await Relations.find({'isPermitted': true, 'hospitalId': req.hospital.id}, "userId").populate('userId', 'name'); 
-            const access= await Relations.find({'userId':result._id}).populate('userId','isPermitted'); 
+            const patients = await Relations.find({'isPermitted': true, 'hospitalId': req.hospital._id}, "userId").populate('userId', 'name'); 
+            const access= await Relations.find({'userId':result._id, 'hospitalId':req.hospital._id, 'isPermitted':true }).populate('userId','isPermitted'); 
            console.log('searched patient',access);
            const custom_flash = "User found"; 
             res.render("./hospitalViews/profile", {path:'/hospital/search', patients:patients,access:access, foundUser:result, custom_flash:custom_flash });
