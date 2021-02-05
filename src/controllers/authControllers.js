@@ -368,9 +368,60 @@ module.exports.resetPassword = async (req, res) => {
         res.send(err)
     }
 }
-module.exports.profile_post=async(req,res)=>{
-    const name=req.body.name;
-    // console.log(name);
-    const hospital = await Hospital.findOne({ hospitalName: name })
-    res.send(hospital);
+module.exports.hospitalSearch_get=async(req,res)=>{
+    const userId=req.query
+    const params=new URLSearchParams(userId)
+    const id=params.get('id')
+    const hospitals=await Hospital.find({ _id:id})
+    console.log(hospitals)
+    // res.send(hospital)
+    res.locals.user=req.user
+    res.render("./userViews/Profile",{
+        hospitals,
+        path:'/user/userHospitalD'
+    })
+}
+module.exports.hospitalSearch_post=async(req,res)=>{
+    const hospitalName = req.body.hname
+    console.log(hospitalName) 
+
+    if (!hospitalName)
+    {
+        req.flash("error_msg", "Enter a value")
+        res.redirect("/user/profile")
+        return 
+    }
+    try
+    {
+        const hospital = await Hospital.find({hospitalName:hospitalName})
+ //       console.log('resukts',hospital)
+        if (hospital.length === 0)
+        {
+            req.flash("error_msg", "No such hospital exists")
+            res.redirect("/user/profile")
+            return 
+
+        }  
+        else
+        {
+            req.flash("success_msg", "Hospital found")
+            res.locals.user = await req.user.populate('disease').execPopulate()
+            const hospitals = await Relations.find({'userId':req.user._id,'isPermitted':true}).populate('hospitalId','hospitalName')
+            console.log(hospitals)
+            res.render("./userViews/profile", {
+            path:'/user/hospitalSearch', 
+            hospitals, 
+            hospital })
+            return 
+
+        }
+
+    }
+    catch
+    {
+     console.log("Internal error while searching for hospital"); 
+     req.flash("error_msg", "error while searching for hospital")
+     res.redirect("/user/profile"); 
+    }
+    
 }
