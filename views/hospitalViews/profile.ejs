@@ -69,7 +69,7 @@
 							<% } %>
 							<ul>
 								<% for(var d of patients) { %>
-									<a  href="/hospital/patient/<%=d.userId %>"><li><%= d.userId.name %></li></a>
+									<a  href="/hospital/patient?id=<%=d.userId._id %>"><li><%= d.userId.name %></li></a>
 								<% } %>
 							</ul>	
 						</div>

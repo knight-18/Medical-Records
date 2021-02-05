@@ -369,7 +369,9 @@ module.exports.resetPassword = async (req, res) => {
     }
 }
 module.exports.hospitalSearch_get=async(req,res)=>{
-    const id=req.params.id
+    const userId=req.query
+    const params=new URLSearchParams(userId)
+    const id=params.get('id')
     const hospitals=await Hospital.find({ _id:id})
     console.log(hospitals)
     // res.send(hospital)

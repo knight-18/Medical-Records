@@ -69,7 +69,7 @@ router.post(
 router.get('/userHospital',requireAuth,authController.userHospital_get)
 
 router.get('/disease',requireAuth,authController.disease_get)
-router.get('/hospitalSearch/:id',requireAuth,authController.hospitalSearch_get)
+router.get('/hospitalSearch',requireAuth,authController.hospitalSearch_get)
 router.post('/hospitalSearch',requireAuth,authController.hospitalSearch_post)
 router.get('/forgotPassword', redirectIfLoggedIn,authController.getForgotPasswordForm)
 router.post('/forgotPassword', redirectIfLoggedIn,authController.forgotPassword)

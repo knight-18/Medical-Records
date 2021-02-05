@@ -1,6 +1,6 @@
 
 <div>
    <% for(var a of hospital){ %>
-      <a  href="/user/hospitalSearch/<%=a._id%>"><%= a.hospitalName %></a>
+      <a  href="/user/hospitalSearch?id=<%=a._id%>"><%= a.hospitalName %></a>
    <% } %>
 </div>
