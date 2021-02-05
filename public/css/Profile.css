@@ -564,11 +564,11 @@ text-decoration:none;
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {display:block;}
 
-.content-top {
+/*.content-top {
 	background-color: rgb(247, 247, 247) !important;
-	height:6rem;
-	width:110%;
-	top:-4rem;
+	height:5rem;
+	width:100%;
+	top:-5rem;
 	margin-top: -10px;
 	display: inline-flex;
 	border-radius: 1rem 1rem 0rem 0rem;
@@ -582,7 +582,7 @@ text-decoration:none;
   background-image: -o-linear-gradient(left, #3e7ac8 0%, #4E90A4 100%), -o-linear-gradient(left, #69a2e2 0%, #4E90A4 100%);
   background-image: linear-gradient(to right, #347ab3 0%, #4E90A4 100%), linear-gradient(to right, #6da2ce 0%, #4E90A4 100%);
 }
-
+*/
 #profileImg1 {
   border-radius: 4rem;
   max-height: 4rem;
@@ -624,7 +624,6 @@ display: none ;
 	display: none ;
 }
 }
-  
   
 
 
