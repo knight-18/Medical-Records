@@ -21,34 +21,23 @@
 	           <div class="content-top ">
 				<a href="#" class="img-rounded"><img src="../img/ProfilePic.png" id="profileImg1"></a>
 				<h4>NEW DISEASE</h4>
-				 
+				  <span><button class="close">CANCEL</button></span>
 		        </div>
 			</div>
 			<form class="form-modal" method="POST" enctype="multipart/form-data" ><!--Dont remove the enctype-->
-				<!--<div class="group1">
+				<div class="group1">
 				  <input type="text" name="name"><span class="highlight1"></span><span class="bar1"></span>
 				  <label class="label-form">Disease Name</label>
-				  <span><button class="save1" formaction="profile/upload" value="upload">SAVE</button></span><!-- Dont remove the name and value attribute--
-				</div>-->
-				<div class="group1">
-					<label for="name" style="margin-left: 8px; margin-top: -20px; padding-bottom: 200px;">Disease Name</label>
-					<input type="text" name="name" class="form-control" id="name" aria-describedby="nameHelp" style="margin-left: -35px;">
-					<span><button class="save1" formaction="profile/upload" value="upload">SAVE</button></span>
-					<span><button class="close1">CANCEL</button></span>
-				  </div>
-				<div class="group2" style=" margin-bottom: -51px; margin-top: 18px;">
-					<!--<input type="text"><span class="highlight1"></span><span class="bar1"></span>-->
-					<p style="margin-top: -9px; font-size:18px; font-weight: normal; margin-left: 5px;	color:#a5a5a5;">Medicine</p>
-					<div class="custom-file" style="border-radius: 4rem">
-						<input type="file" class="custom-file-input" id="customFile">
-						<label class="custom-file-label" for="customFile">Choose file</label>
-					  </div>
+				  <span><button class="save1" formaction="profile/upload" value="upload">SAVE</button></span><!-- Dont remove the name and value attribute-->
 				</div>
-
+				<div class="group2">
+					<input type="text"><span class="highlight1"></span><span class="bar1"></span>
+					<label class="label-form">Medicine</label>
+				  </div>
 				
-		
+			<span class="UD">Upload Documents</span>
 			<div class="zone">
-				<span class="UD" style="z-index: 1000; overflow: hidden; display: flex; text-align: start; margin-left: 25px;">Upload Documents</span>
+				
 				<div id="dropZ">
 				  <i class="fa fa-cloud-upload"></i>
 				  <div>Drag and drop your file here</div>                    
@@ -73,17 +62,18 @@
 			<div class="col-sm-12"><%- include('../partials/message'); %></div>
 			<div class="col-lg-2 col-sm-4 col-12 order-3 order-sm-1" id="pSec1">
 				<div id="leftPanel"> 
-					<div class="lists">
+					<div class = "<%= path === '/user/profile' ? 'lists active-list' : 'lists' %>">
 						<a href="/user/profile">Profile</a> 
 						<img src="../img/profile.png" class="Icons profile-icon">
 					</div>
-					<div class="lists">
+					<div class = "<%= path === '/user/disease' ? 'lists active-list' : 'lists' %>">
 						<a onclick="myFunction()" class="dropbtn">Disease</a>
 						<img src="../img/disease.png" class="Icons">
 							<div id="myDropdown" class="dropdown-content">
-						
+								<a href="/user/disease" class="dropdown-item"><span class="dropAnchor">Disease page</span></a>
+
 								<% for(var d of user.disease) { %>
-									<a class="dropdown-item"><span class="dropAnchor"><%= d.name %></span></a>
+									<a href="#" class="dropdown-item"><span class="dropAnchor"><%= d.name %></span></a>
 								<% } %>
 								<a id="myBtn">Add New</a>
 							</div>
@@ -102,23 +92,17 @@
 					</div>
 					<div class=" Doctor-list">
 						<div id="mySidenavTab" class="sidenav">
-							<div id="Dr"><p class="sidenavHeader">Hospitals<a href="javascript:void(0)" class="closebtn" onclick="closeNavtab()"><i class="fa fa-angle-left sideNav " aria-hidden="true"></i></a></p></div>
-							<form method="POST" action="/user/hospitalSearch">
+							<div id="Dr"><p class="sidenavHeader">Doctors<a href="javascript:void(0)" class="closebtn" onclick="closeNavtab()"><i class="fa fa-angle-left sideNav " aria-hidden="true"></i></a></p></div>
+							<div>
 								<input type="text" placeholder="Search..."
-									class="mobile-preview shadow floating-animate" name="hname">
+									class="mobile-preview shadow floating-animate">
 								<button>click</button>
-							</form>
-							<%if (path === '/user/hospitalSearch') { %>
-					
-								<%- include('../partials/hospitalSearch'); %>
-							<% } %>
-							<% if(path!=='/user/userHospitalD') { %>
+							</div>
 							<ul>
 								<% for(var d of hospitals) { %>
 									<a href="/user/userHospital?id=<%=d.hospitalId._id%>"><li><%= d.hospitalId.hospitalName %></li></a>
 								<% } %>
-							</ul>
-							<% } %>	
+							</ul>	
 						</div>
 						<!-- <div id="Drs"><button class=" sideNavButton" onclick=openNavtab() type="button ">Doctors<i class="fa fa-angle-right sideNav" aria-hidden="true" onclick=openNav()></i></button></div>				 -->
 						<div id="Drs"><button class=" sideNavButton lists" onclick=openNavtab() type="button "><a>Doctors</a><img src="../img/doctor-icon.png" class="Icons doctor-icon"  onclick=openNavtab()></button></div>				
@@ -129,7 +113,7 @@
 					</div>
 				</div>
 			</div>
-			<%if (path === '/user/profile'||path==='/user/hospitalSearch') { %>
+			<%if (path === '/user/profile') { %>
 				<%- include('../partials/profileContent'); %>
 			<% } %>
 			<%if (path === '/user/disease') { %>
@@ -138,33 +122,25 @@
 			<%if (path === '/user/userHospital') { %>
 				<%- include('../partials/HospitalProfileContent'); %>
 			<% } %>
-			<%if (path === '/user/userHospitalD') { %>
-				<%- include('../partials/HospitalProfileContentD'); %>
-			<% } %>
 			<div class="col-lg-2 col-sm-0 col-12 order-2 order-sm-3" id="pSec3">
 				<div id="Dr"><a>Doctors</a><img src="../img/doctor-icon.png" class="Icons doctor-icon" ></div>
-				<form method="POST" action="/user/hospitalSearch">
+				<div>
 					<input type="text" placeholder="Search..."
-						class="mobile-preview shadow floating-animate" name="hname">
+						class="mobile-preview shadow floating-animate">
 					<button>click</button>
-				</form>
-				<%if (path === '/user/hospitalSearch') { %>
-					
-					<%- include('../partials/hospitalSearch'); %>
-				<% } %>
-				<%if(path!=='/user/userHospitalD') { %>
-					<ul>
-						<% for(var d of hospitals) { %>
-							<a href="/user/userHospital?id=<%=d.hospitalId._id%>"><li><%= d.hospitalId.hospitalName %></li></a>
-						<% } %>
-					</ul>
+				</div>
+				<ul>
+					<% for(var d of hospitals) { %>
+						<a href="/user/userHospital?id=<%=d.hospitalId._id%>"><li><%= d.hospitalId.hospitalName %></li></a>
 					<% } %>
+				</ul>				
+
 			</div>
 		</div>
 	</div>
 </div>
 <div class="mobile-view">
-	<%if (path === '/user/profile'||path==='/user/userHospital'||path==='/user/hospitalSearch'||path==='/user/userHospitalD') { %>
+	<%if (path === '/user/profile'||path==='/user/userHospital') { %>
 		<div class="container-fluid" >	
 			<div class="row">
 				<div class="col-lg-2 col-sm-4 col-12 order-3 order-sm-1" id="pSec1">
@@ -209,36 +185,26 @@
 					</div>
 				</div>
 		
-				<%if (path === '/user/profile'||path==='/user/hospitalSearch') { %>
+				<%if (path === '/user/profile') { %>
 					<%- include('../partials/profileContent'); %>
 				<% } %>
 				<%if (path === '/user/userHospital') { %>
 					<%- include('../partials/HospitalProfileContent'); %>
 				<% } %>
-				<%if (path === '/user/userHospitalD') { %>
-					<%- include('../partials/HospitalProfileContentD'); %>
-				<% } %>
-				
 		
 				<div class="col-lg-2 col-sm-0 col-12 order-2 order-sm-3" id="pSec3">
 					<div id="mySidenav" class="sidenav">
 						<div id="Dr"><p class="sidenavHeader">Hospitals<a href="javascript:void(0)" class="closebtn" onclick=closeNav() ><i class="fa fa-angle-left sideNav " aria-hidden="true"></i></a></p></div>
-					    <form method="POST" action="/user/hospitalSearch">
+					    <div>
 							<input type="text" placeholder="Search..."
-								class="mobile-preview shadow floating-animate" name="hname">
+								class="mobile-preview shadow floating-animate">
 							<button>click</button>
-						</form>
-						<%if (path === '/user/hospitalSearch') { %>
-				
-							<%- include('../partials/hospitalSearch'); %>
-						<% } %>
-						<%if(path!=='/user/userHospitalD') { %>
-							<ul>
-								<% for(var d of hospitals) { %>
-									<a href="/user/userHospital?id=<%=d.hospitalId._id%>"><li><%= d.hospitalId.hospitalName %></li></a>
-								<% } %>
-							</ul>
-							<% } %>	
+						</div>
+						<ul>
+							<% for(var d of hospitals) { %>
+								<a href="/user/userHospital?id=<%=d.hospitalId._id%>"><li><%= d.hospitalId.hospitalName %></li></a>
+							<% } %>
+						</ul>	
 					</div>
 					<div id="Dr"><a>Doctors</a><img src="../img/doctor-icon.png" class="Icons doctor-icon" onclick=openNav()  ></div>				
 				</div>
@@ -256,17 +222,19 @@
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="../js/sideNav.js"></script>
+	<script src="../js/sideNav.js"></script>
+	<script src="../js/profilePage.js"></script>
+
     <script>
         function myFunction() {
           document.getElementById("myDropdown").classList.toggle("show");
         }
         
         // Close the dropdown menu if the user clicks outside of it
-        window.onclick = function(event) {
+        document.body.onclick = function(event) {
           if (!event.target.matches('.dropbtn')) {
             var dropdowns = document.getElementsByClassName("dropdown-content");
-            var i;
+			var i;
             for (i = 0; i < dropdowns.length; i++) {
               var openDropdown = dropdowns[i];
               if (openDropdown.classList.contains('show')) {
@@ -277,32 +245,12 @@
         } 
         
 		</script>
-		<script>
-			function myFunctionMobile() {
-			  document.getElementById("myDropdownMobile").classList.toggle("show");
-			}
-			
-			// Close the dropdown menu if the user clicks outside of it
-			window.onclick = function(event) {
-			  if (!event.target.matches('.dropbtn')) {
-				var dropdowns = document.getElementsByClassName("dropdown-content");
-				var i;
-				for (i = 0; i < dropdowns.length; i++) {
-				  var openDropdown = dropdowns[i];
-				  if (openDropdown.classList.contains('show')) {
-					openDropdown.classList.remove('show');
-				  }
-				}
-			  }
-			} 
-			
-			</script>
         <script>
             var modal = document.getElementById("myModal");
 // Get the button that opens the modal
 var btn = document.getElementById("myBtn");
 // Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close1")[0];
+var span = document.getElementsByClassName("close")[0];
 // When the user clicks on the button, open the modal
 btn.onclick = function() {
   modal.style.display = "block";
