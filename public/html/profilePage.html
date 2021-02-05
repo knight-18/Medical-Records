@@ -7,6 +7,8 @@
     <script src="https://use.fontawesome.com/67912d8e88.js"></script>
     <link rel="stylesheet" href="../css/NavBar.css">
     <link rel="stylesheet" href="../css/Profile.css">
+    
+    <link rel="stylesheet" href="../css/modal.css">
 	<title>Profile Page</title>
 </head>
 <body>
@@ -27,7 +29,48 @@
 		</form>
 	</div>
 	</nav>
+    </div>
+    <div id="myModal" class="modal">
+
+        <div class="modal-content">
+			<div class="row">
+	           <div class="content-top ">
+				<a href="#" class="img-rounded"><img src="../img/ProfilePic.png" id="profileImg1"></a>
+				<h4>NEW DISEASE</h4>
+				  <span><button class="close">CANCEL</button></span>
+				  <span><button class="save1">SAVE</button></span>
+		        </div>
+			</div>
+			<form class="form-modal">
+				<div class="group1">
+				  <input type="text"><span class="highlight1"></span><span class="bar1"></span>
+				  <label class="label-form">Disease Name</label>
+				</div>
+				<div class="group2">
+					<input type="text"><span class="highlight1"></span><span class="bar1"></span>
+					<label class="label-form">Medicine</label>
+				  </div>
+				
+				 
+			</form>
+			<span class="UD">Upload Documents</span>
+			<div class="zone">
+				
+				<div id="dropZ">
+				  <i class="fa fa-cloud-upload"></i>
+				  <div>Drag and drop your file here</div>                    
+				  <span>OR</span>
+				  <div class="selectFile">       
+					<label for="file">Select file</label>                   
+					<input type="file" name="files[]" id="file">
+				  </div>
+				  <p>File size limit : 10 MB</p>
+				</div>
+			  
+			  </div>
+			</div>
 	</div>
+
 	<!--Profile Part-->
 <div class="container-fluid" >	
 	<div class="row">
@@ -37,21 +80,16 @@
 					<a href="#">Profile</a>
 					<img src="../img/profile.png" class="Icons profile-icon">
 				</div>
-				<div class="lis">
-					<!--<a href="#">Disease</a>
-					<img src="../img/disease.png" class="Icons">-->
-					<div class="dropdown">
-						<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						  Disease
-					     <img src="../img/disease.png" class="Icons">
-						</button>
-						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						  <a class="dropdown-item" href="#">Action</a>
-						  <a class="dropdown-item" href="#">Another action</a>
-						  <a class="dropdown-item" href="#">Something else here</a>
-						</div>
-					  </div>
-				</div>
+
+				<div class="lists">
+					<a href="#" onclick="myFunction()" class="dropbtn">Disease</a>
+					<img src="../img/disease.png" class="Icons">
+						<div id="myDropdown" class="dropdown-content">
+                            <a id="myBtn">Add New</a>
+                        </div>
+                      
+                </div>
+                
 				<div class="lists">
 					<a href="#">Appointments</a>
 					<img src="../img/appointment.png" class="Icons">
@@ -113,6 +151,140 @@
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-	<script src="../js/sideNav.js"></script>
+    <script src="../js/sideNav.js"></script>
+    <script>
+        function myFunction() {
+          document.getElementById("myDropdown").classList.toggle("show");
+        }
+        
+        // Close the dropdown menu if the user clicks outside of it
+        document.body.onclick = function(event) {
+          if (!event.target.matches('.dropbtn')) {
+			var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+			  var openDropdown = dropdowns[i];
+			  console.log(openDropdown.classList.contains('show'))
+
+              if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+              }
+            }
+          }
+        } 
+        
+        </script>
+        <script>
+            var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+} 
+
+var span = document.getElementsByClassName("save1")[0];
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+} 
+
+		</script>
+		<script>
+
+$(window, document, undefined).ready(function() {
+
+$('input').blur(function() {
+  var $this = $(this);
+  if ($this.val())
+	$this.addClass('used');
+  else
+	$this.removeClass('used');
+});
+
+var $ripples = $('.ripples');
+
+$ripples.on('click.Ripples', function(e) {
+
+  var $this = $(this);
+  var $offset = $this.parent().offset();
+  var $circle = $this.find('.ripplesCircle');
+
+  var x = e.pageX - $offset.left;
+  var y = e.pageY - $offset.top;
+
+  $circle.css({
+	top: y + 'px',
+	left: x + 'px'
+  });
+
+  $this.addClass('is-active');
+
+});
+
+$ripples.on('animationend webkitAnimationEnd mozAnimationEnd oanimationend MSAnimationEnd', function(e) {
+	$(this).removeClass('is-active');
+});
+
+});
+		</script>
+		<script> 
+		$(document).bind('dragover', function (e) {
+    var dropZone = $('.zone'),
+        timeout = window.dropZoneTimeout;
+    if (!timeout) {
+        dropZone.addClass('in');
+    } else {
+        clearTimeout(timeout);
+    }
+    var found = false,
+        node = e.target;
+    do {
+        if (node === dropZone[0]) {
+            found = true;
+            break;
+        }
+        node = node.parentNode;
+    } while (node != null);
+    if (found) {
+        dropZone.addClass('hover');
+    } else {
+        dropZone.removeClass('hover');
+    }
+    window.dropZoneTimeout = setTimeout(function () {
+        window.dropZoneTimeout = null;
+        dropZone.removeClass('in hover');
+    }, 100);
+});
+		</script>
 </body>
 </html>

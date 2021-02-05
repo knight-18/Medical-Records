@@ -9,6 +9,12 @@ require('dotenv').config()
 
 const userSchema = mongoose.Schema(
     {
+        short_id: 
+        {
+            type: String, 
+            trim:true, 
+            required: [true, 'Short ID cannot be absent']
+        },
         name: {
             type: String,
             trim: true,
@@ -78,6 +84,7 @@ userSchema.statics.login = async function (email, password) {
     //console.log('log',user)
     if (user) {
         const auth = await bcrypt.compare(password, user.password)
+        //found bug have to fix the login 
         if (auth) {
             return user
         }

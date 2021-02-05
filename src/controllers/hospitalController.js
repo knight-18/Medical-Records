@@ -13,18 +13,50 @@ require('dotenv').config()
 const maxAge = 30 * 24 * 60 * 60
 
 
+module.exports.patient_get= async (req,res)=>{
+    const userId=req.query
+    const params=new URLSearchParams(userId)
+    const newId=params.get('id')
+    //const newId=JSON.parse(userId,true)
+    const user=await User.findOne({'_id':newId});
+    console.log('user details',)
+    res.locals.hospital = req.hospital
+    // console.log("hospital", res.locals.hospital)
+    const patients = await Relations.find({ 'hospitalId': req.hospital._id}, "userId").populate('userId','name'); 
+    console.log('relation',patients)
+    if(!user)
+    {
+        req.flash('error_msg','user not found')
+        res.redirect('/hospital/profile')
+    }
+    res.render("./hospitalViews/profile",{
+        path:'/hospital/patient',
+        user:user,
+        patients, foundUser:null,access:null, 
+        custom_flash:null, 
+        
+    })
+}
+
+
 module.exports.signup_get = (req, res) => {
-    res.render("./hospitalViews/signup")
+    res.render("./hospitalViews/signup", { type:"signup" }); 
 
 }
 
 module.exports.profile_get = async (req, res) => {
     res.locals.hospital = req.hospital
-    // console.log("hospital", res.locals.hospital)
-    const patients = await Relations.find({'isPermitted': true, 'hospitalId': req.hospital.id}, "userId").populate('userId', 'name'); 
+     //console.log("hospital", req.hospital)
+    const patients = await Relations.find({'isPermitted': true, 'hospitalId': req.hospital._id},"userId").populate('userId','name'); 
     
-    console.log(patients)
-    res.render("./hospitalViews/profile", { patients })
+    console.log("patientssssss",patients)
+    res.render("./hospitalViews/profile",
+    {path:'/hospital/profile',
+    patients:patients, 
+    foundUser:null,
+    access:null, 
+    custom_flash:null, 
+      })
 }
 
 
@@ -124,7 +156,7 @@ module.exports.signup_post = async (req, res) => {
     }
 }
 module.exports.login_get = (req, res) => {
-    res.render("./hospitalViews/login")
+    res.render("./hospitalViews/signup", { type:"login" }); 
 }
 
 module.exports.login_post = async (req, res) => {
@@ -187,8 +219,9 @@ module.exports.logout_get = async (req, res) => {
 module.exports.relation_post=async (req,res)=>{
     
     try{
-    const{email}=req.body
-    const user=await User.findOne({email})
+    const{shortId}=req.params; 
+    const user=await User.findOne({short_id: shortId})
+    console.log('userRels',user)
     if(!user)
     {
         console.log('user not found')
@@ -199,8 +232,11 @@ module.exports.relation_post=async (req,res)=>{
     //console.log('user',user)
     const hospitalId=req.hospital._id
     const userId=user._id
+    console.log('hospital current',req.hospital)
 
-    const existRelation=await Relations.findOne({userId,hospitalId})
+    const existRelation=await Relations.findOne({'userId':userId,'hospitalId':hospitalId})
+    //const userRel= await Relations.findOne(userId)
+    //console.log('userRel',userId)
     console.log('existRelation',existRelation)
     if(existRelation) 
     {
@@ -208,7 +244,8 @@ module.exports.relation_post=async (req,res)=>{
         console.log('relation already exists')
         if(existRelation.isPermitted)
         {
-            console.log('show your documents',existRelation) //NEED TO IMPLEMENT SEARCH 
+            console.log('The user already exists',existRelation) //NEED TO IMPLEMENT SEARCH 
+            req.flash('eror_msg','The user is already registered in your hospital')
             res.redirect('/hospital/profile')
         }
         else{
@@ -243,6 +280,54 @@ module.exports.relation_post=async (req,res)=>{
     }
 
 }
+
+
+
+
+module.exports.patient_search = async (req, res) => 
+{
+    const {short_id} = req.body; 
+    if (!short_id || short_id.length < 8)
+    {
+        req.flash("error_msg", "Unique ID of user cannot be less than 8 characters")
+        res.redirect("/hospital/profile")
+        return 
+    }
+    try
+    {
+        const result = await User.findOne({short_id})
+        //console.log('resukts',result)
+        if (result === null)
+        {
+            req.flash('error_msg', 'No such user exists'); 
+            res.redirect("/hospital/profile")
+            return 
+
+        }  
+        else
+        {
+            
+            res.locals.hospital = req.hospital;
+           
+            const patients = await Relations.find({'isPermitted': true, 'hospitalId': req.hospital._id}, "userId").populate('userId', 'name'); 
+            const access= await Relations.find({'userId':result._id, 'hospitalId':req.hospital._id, 'isPermitted':true }).populate('userId','isPermitted'); 
+           console.log('searched patient',access);
+           const custom_flash = "User found"; 
+            res.render("./hospitalViews/profile", {path:'/hospital/search', patients:patients,access:access, foundUser:result, custom_flash:custom_flash });
+            return 
+
+        }
+
+    }
+    catch
+    {
+     console.log("Internal error while searching for patient"); 
+     req.flash('error_msg', 'Could not execute search operation')
+     res.redirect("/hospital/profile"); 
+    }
+}
+
+
 
 module.exports.relationVerify_get = async (req, res) => {
     try {
