@@ -1,12 +1,43 @@
 const User = require('../models/User')
+const Hospital = require('../models/Hospital')
 const jwt = require('jsonwebtoken')
-const { signupMail } = require('../config/nodemailer')
+const { signupMail,passwordMail } = require('../config/nodemailer')
 const path = require('path')
 const Disease = require('../models/Disease')
+const Relations=require('../models/Relations')
 const { handleErrors } = require('../utilities/Utilities'); 
+const crypto = require('crypto')
 require('dotenv').config()
+const { nanoId } = require("nanoid")
 
 const maxAge = 30 * 24 * 60 * 60
+
+
+module.exports.userHospital_get= async (req,res)=>{
+    const hsopitalId=req.query
+    const params=new URLSearchParams(hsopitalId)
+    const newId=params.get('id')
+    //console.log(newId);
+    res.locals.user = await req.user.populate('disease').execPopulate()
+    //const newId=JSON.parse(userId,true)
+    const hospital=await Hospital.findOne({'_id':newId});
+   // console.log('user details',userHospital)
+    
+     //console.log("hospital", user)
+    const hospitals = await Relations.find({'userId':req.user._id,'isPermitted':true},"hospitalId").populate('hospitalId','hospitalName')
+    //console.log('relation',hospitals)
+    if(!hospital)
+    {
+        req.flash('error_msg','user not found')
+        res.redirect('/user/profile')
+    }
+    res.render("./userViews/profile",{
+        path:'/user/userHospital',
+        hospitals,
+        hospital
+    })
+}
+
 
 
 // controller actions
@@ -24,7 +55,7 @@ module.exports.login_get = (req, res) => {
 
 module.exports.signup_post = async (req, res) => {
     const { name, email, password, confirmPwd, phoneNumber } = req.body
-    //console.log("in sign up route",req.body);
+    console.log("in sign up route",req.body);
     if (password != confirmPwd) {
         req.flash('error_msg', 'Passwords do not match. Try again')
         res.status(400).redirect('/user/login')
@@ -48,8 +79,9 @@ module.exports.signup_post = async (req, res) => {
             )
             return res.redirect('/user/login')
         }
-
-        const user = new User({ email, name, password, phoneNumber })
+        const short_id = require("nanoid").nanoid(8);
+        console.log("Short ID generated is: ", short_id)
+        const user = new User({ email, name, password, phoneNumber, short_id })
         let saveUser = await user.save()
         //console.log(saveUser);
         req.flash(
@@ -124,9 +156,11 @@ module.exports.login_post = async (req, res) => {
     try {
 
         const user = await User.login(email, password)
+        //console.log("user",user)
 
         const userExists = await User.findOne({ email })
-        
+       // console.log("userexsits",userExists)
+       
 
         if (!userExists.active) {
             const currDate = new Date();
@@ -157,6 +191,7 @@ module.exports.login_post = async (req, res) => {
         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
         //console.log(user);
         //signupMail(saveUser)
+        console.log("logged in")
         req.flash('success_msg', 'Successfully logged in')
         res.status(200).redirect('/user/profile')
     } catch (err) {
@@ -167,12 +202,19 @@ module.exports.login_post = async (req, res) => {
 }
 
 module.exports.upload_post = async (req, res) => {
+
+    //console.log("in uploads",req.body)
+    
     try {
+        
         let { name, duration, refDoctor, hospitalName, description } = req.body
+       
         const files = req.files
+        //console.log("files",files)
         let images = files.map((file) => {
             return `/uploads/${req.user.email}/${file.filename}`
         })
+        
         let newDisease = await new Disease({
             name,
             images,
@@ -192,16 +234,38 @@ module.exports.upload_post = async (req, res) => {
         req.flash('success_msg', 'Sucessfully uploaded disease details.')
         return res.redirect('/user/profile')
     } catch (err) {
+        console.log("error")
         console.error(err)
         req.flash('error_msg', 'Something went wrong')
         return res.redirect('/user/profile')
     }
 }
 
+
+module.exports.disease_get=async(req,res)=>{
+    
+    console.log('user',req.user)
+    const Userdiseases= await req.user.populate('disease').execPopulate()
+    console.log('diseases',Userdiseases)
+    res.render('./userViews/profile', {
+        path: '/user/disease',
+      })
+      console.log("in disease page")
+    }
+
 module.exports.profile_get = async (req, res) => {
-    res.locals.user = req.user
-    res.render('./userViews/profile')
-}
+    //res.locals.user = req.user
+    res.locals.user = await req.user.populate('disease').execPopulate()
+    //console.log('user id',req.user)
+    //console.log("locals",res.locals.user)
+    //console.log('id',req.user._id)
+    const hospitals = await Relations.find({'userId':req.user._id,'isPermitted':true}).populate('hospitalId','hospitalName')
+    //console.log('hospitals',hospitals)
+    res.render('./userViews/profile', {
+        path: '/user/profile',
+        hospitals:hospitals
+      })
+      console.log("in profile page")}
 
 module.exports.logout_get = async (req, res) => {
     // res.cookie('jwt', '', { maxAge: 1 });
@@ -209,8 +273,155 @@ module.exports.logout_get = async (req, res) => {
     res.clearCookie('jwt')
     req.flash('success_msg', 'Successfully logged out')
     res.redirect('/user/login')
-}
+} 
 
 // module.exports.upload_get =async (req, res) => {
 //   res.render("multer")
 // }
+
+module.exports.getForgotPasswordForm = async (req, res) => {
+    res.render('./userViews/forgotPassword')
+}
+
+module.exports.getPasswordResetForm = async (req, res) => {
+    const userID=req.params.id;
+    const user = await User.findOne({ _id: userID })
+    const resetToken = req.params.token
+    res.render('./userViews/resetPassword', {
+        userID,
+        resetToken,
+    })
+}
+
+module.exports.forgotPassword = async (req, res) => {
+    const email=req.body.email
+    const user = await User.findOne({ email })
+    if (!user) {
+        req.flash('error_msg', 'No user found')
+        return res.redirect('/user/login')
+    }
+    console.log(user)
+    const userID = user._id
+    
+    const dt = new Date(user.passwordResetExpires).getTime()
+    if (
+        (user.passwordResetToken && dt > Date.now()) ||
+        !user.passwordResetToken
+    ) {
+        const resetToken = user.createPasswordResetToken()
+        // console.log(user.passwordResetExpires)
+        // console.log(user.passwordResetToken)
+        await user.save({ validateBeforeSave: false })
+        try {
+            passwordMail(user,resetToken,req.hostname, req.protocol)
+            req.flash('success_msg', 'Email sent,please check email')
+            res.redirect('/user/forgotPassword')
+        } catch (err) {
+            user.passwordResetToken = undefined
+            user.passwordResetExpires = undefined
+            await user.save({ validateBeforeSave: false })
+            req.flash('error_msg', 'Unable to send mail')
+            res.redirect('/user/forgotPassword')
+        }
+    } else {
+        req.flash('error_msg', 'Mail already send,please wait for sometime to send again')
+        res.redirect('/user/forgotPassword')
+    }
+}
+
+module.exports.resetPassword = async (req, res) => {
+    try {
+        const token=req.params.token
+        const id=req.params.id
+        const hashedToken = crypto
+            .createHash('sha256')
+            .update(req.params.token)
+            .digest('hex')
+        const user = await User.findOne({
+            _id: req.params.id,
+            passwordResetToken: hashedToken,
+            passwordResetExpires: { $gt: Date.now() },
+        })
+        if (!user) {
+            req.flash('error_msg', 'No user found')
+            return res.redirect('/user/login')
+        }
+        if(req.body.password!==req.body.cpassword){
+          req.flash('error_msg','Passwords dont match') 
+          return res.redirect(`resetPassword/${id}/${token}`)
+        }else{
+            
+        user.password = req.body.password
+        user.passwordResetToken = undefined
+        user.passwordResetExpires = undefined
+        await user.save()
+        const JWTtoken = await user.generateAuthToken(maxAge)
+        // user = user.toJSON()
+        res.cookie('jwt', JWTtoken, {
+            maxAge: 24 * 60 * 60 * 1000,
+            httpOnly: false,
+        })
+        res.redirect('/user/profile')
+ 
+        }
+   } catch (err) {
+        res.send(err)
+    }
+}
+module.exports.hospitalSearch_get=async(req,res)=>{
+    const userId=req.query
+    const params=new URLSearchParams(userId)
+    const id=params.get('id')
+    const hospitals=await Hospital.find({ _id:id})
+    console.log(hospitals)
+    // res.send(hospital)
+    res.locals.user=req.user
+    res.render("./userViews/Profile",{
+        hospitals,
+        path:'/user/userHospitalD'
+    })
+}
+module.exports.hospitalSearch_post=async(req,res)=>{
+    const hospitalName = req.body.hname
+    console.log(hospitalName) 
+
+    if (!hospitalName)
+    {
+        req.flash("error_msg", "Enter a value")
+        res.redirect("/user/profile")
+        return 
+    }
+    try
+    {
+        const hospital = await Hospital.find({hospitalName:hospitalName})
+ //       console.log('resukts',hospital)
+        if (hospital.length === 0)
+        {
+            req.flash("error_msg", "No such hospital exists")
+            res.redirect("/user/profile")
+            return 
+
+        }  
+        else
+        {
+            req.flash("success_msg", "Hospital found")
+            res.locals.user = await req.user.populate('disease').execPopulate()
+            const hospitals = await Relations.find({'userId':req.user._id,'isPermitted':true}).populate('hospitalId','hospitalName')
+            console.log(hospitals)
+            res.render("./userViews/profile", {
+            path:'/user/hospitalSearch', 
+            hospitals, 
+            hospital })
+            return 
+
+        }
+
+    }
+    catch
+    {
+     console.log("Internal error while searching for hospital"); 
+     req.flash("error_msg", "error while searching for hospital")
+     res.redirect("/user/profile"); 
+    }
+    
+}

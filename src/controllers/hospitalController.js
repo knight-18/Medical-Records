@@ -1,8 +1,10 @@
 const Hospital = require('../models/Hospital'); 
+const User=require('../models/User')
+const Relations=require('../models/Relations')
 
 
 const jwt = require('jsonwebtoken')
-const { hospitalSignupMail } = require('../config/nodemailer')
+const { hospitalSignupMail,relationMail } = require('../config/nodemailer')
 const path = require('path')
 
 const { handleErrors } = require('../utilities/Utilities'); 
@@ -11,13 +13,50 @@ require('dotenv').config()
 const maxAge = 30 * 24 * 60 * 60
 
 
+module.exports.patient_get= async (req,res)=>{
+    const userId=req.query
+    const params=new URLSearchParams(userId)
+    const newId=params.get('id')
+    //const newId=JSON.parse(userId,true)
+    const user=await User.findOne({'_id':newId});
+    console.log('user details',)
+    res.locals.hospital = req.hospital
+    // console.log("hospital", res.locals.hospital)
+    const patients = await Relations.find({ 'hospitalId': req.hospital._id}, "userId").populate('userId','name'); 
+    console.log('relation',patients)
+    if(!user)
+    {
+        req.flash('error_msg','user not found')
+        res.redirect('/hospital/profile')
+    }
+    res.render("./hospitalViews/profile",{
+        path:'/hospital/patient',
+        user:user,
+        patients, foundUser:null,access:null, 
+        custom_flash:null, 
+        
+    })
+}
+
+
 module.exports.signup_get = (req, res) => {
-    res.render("./hospitalViews/signup")
+    res.render("./hospitalViews/signup", { type:"signup" }); 
 
 }
 
 module.exports.profile_get = async (req, res) => {
-    res.render("./hospitalViews/profile")
+    res.locals.hospital = req.hospital
+     //console.log("hospital", req.hospital)
+    const patients = await Relations.find({'isPermitted': true, 'hospitalId': req.hospital._id},"userId").populate('userId','name'); 
+    
+    console.log("patientssssss",patients)
+    res.render("./hospitalViews/profile",
+    {path:'/hospital/profile',
+    patients:patients, 
+    foundUser:null,
+    access:null, 
+    custom_flash:null, 
+      })
 }
 
 
@@ -117,7 +156,7 @@ module.exports.signup_post = async (req, res) => {
     }
 }
 module.exports.login_get = (req, res) => {
-    res.render("./hospitalViews/login")
+    res.render("./hospitalViews/signup", { type:"login" }); 
 }
 
 module.exports.login_post = async (req, res) => {
@@ -175,4 +214,163 @@ module.exports.logout_get = async (req, res) => {
     res.clearCookie('hospital')
     req.flash('success_msg', 'Successfully logged out')
     res.redirect('/hospital/login')
+}
+
+module.exports.relation_post=async (req,res)=>{
+    
+    try{
+    const{shortId}=req.params; 
+    const user=await User.findOne({short_id: shortId})
+    console.log('userRels',user)
+    if(!user)
+    {
+        console.log('user not found')
+        req.flash("error_msg", "User not found")
+        res.redirect("/hospital/profile")
+        return
+    }
+    //console.log('user',user)
+    const hospitalId=req.hospital._id
+    const userId=user._id
+    console.log('hospital current',req.hospital)
+
+    const existRelation=await Relations.findOne({'userId':userId,'hospitalId':hospitalId})
+    //const userRel= await Relations.findOne(userId)
+    //console.log('userRel',userId)
+    console.log('existRelation',existRelation)
+    if(existRelation) 
+    {
+
+        console.log('relation already exists')
+        if(existRelation.isPermitted)
+        {
+            console.log('The user already exists',existRelation) //NEED TO IMPLEMENT SEARCH 
+            req.flash('eror_msg','The user is already registered in your hospital')
+            res.redirect('/hospital/profile')
+        }
+        else{
+            console.log('the user has not given access')
+            req.flash("error_msg", "The user is yet to respond to your request for access")
+            res.redirect('/hospital/profile')
+            //relationMail(existRelation,user,req.hostname,req.protocol)
+        }
+    }
+    else{
+    //console.log('hospital',hospital)
+    let relation = await new Relations({
+        hospitalId,
+        userId
+    }).save()
+    if(!relation)
+    {
+        console.log('unable to create link')
+        req.flash("error_msg", "There was an error in creating request link")
+        return res.redirect('/hospital/profile')
+    }
+    relationMail(relation,user,req.hostname,req.protocol)
+    req.flash('success_msg','The user has been notified of your request for access. Awaiting user response')
+    return res.redirect('/hospital/profile')
+    //console.log('relation',relation)
+
+    }
+    }
+    catch(e)
+    {
+        console.log(e)
+    }
+
+}
+
+
+
+
+module.exports.patient_search = async (req, res) => 
+{
+    const {short_id} = req.body; 
+    if (!short_id || short_id.length < 8)
+    {
+        req.flash("error_msg", "Unique ID of user cannot be less than 8 characters")
+        res.redirect("/hospital/profile")
+        return 
+    }
+    try
+    {
+        const result = await User.findOne({short_id})
+        //console.log('resukts',result)
+        if (result === null)
+        {
+            req.flash('error_msg', 'No such user exists'); 
+            res.redirect("/hospital/profile")
+            return 
+
+        }  
+        else
+        {
+            
+            res.locals.hospital = req.hospital;
+           
+            const patients = await Relations.find({'isPermitted': true, 'hospitalId': req.hospital._id}, "userId").populate('userId', 'name'); 
+            const access= await Relations.find({'userId':result._id, 'hospitalId':req.hospital._id, 'isPermitted':true }).populate('userId','isPermitted'); 
+           console.log('searched patient',access);
+           const custom_flash = "User found"; 
+            res.render("./hospitalViews/profile", {path:'/hospital/search', patients:patients,access:access, foundUser:result, custom_flash:custom_flash });
+            return 
+
+        }
+
+    }
+    catch
+    {
+     console.log("Internal error while searching for patient"); 
+     req.flash('error_msg', 'Could not execute search operation')
+     res.redirect("/hospital/profile"); 
+    }
+}
+
+
+
+module.exports.relationVerify_get = async (req, res) => {
+    try {
+        const relationID = req.params.id
+        console.log('relation',relationID)
+        const expiredTokenUser = await Relations.findOne({ _id: relationID })
+        const token = req.query.tkn
+        //console.log(token)
+        jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
+            if (err) {
+                req.flash(
+                    'error_msg',
+                    ' Your verify link had expired. We have sent you another verification link'
+                )
+                relationMail(expiredTokenUser, req.hostname, req.protocol)
+                return res.redirect('/user/profile')
+            }
+            const relation = await Relations.findOne({ _id: decoded.id })
+            if (!relation) {
+                //console.log('user not found')
+                res.redirect('/user/profile')
+            } else {
+                const activeRelation = await Relations.findByIdAndUpdate(relation._id, {
+                    isPermitted: true,
+                })
+                if (!activeRelation) {
+                    // console.log('Error occured while verifying')
+                    req.flash('error_msg', 'Error occured while verifying')
+                    res.redirect('/user/profile')
+                } else {
+                    req.flash(
+                        'success_msg',
+                        'Access rights granted'   
+                    )
+                    //console.log('The user has been verified.')
+                    //console.log('active', activeUser)
+                    res.redirect('/user/profile')
+                }
+            }
+        })
+    } catch (e) {
+        console.log(e)
+        //signupMail(user,req.hostname,req.protocol)
+        res.redirect('/hospital/profile')
+    }
 }

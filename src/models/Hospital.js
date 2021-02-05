@@ -24,7 +24,7 @@ const hospitalSchema = mongoose.Schema(
         },
         active: {
             type: Boolean,
-            default: false,
+            default: true,// to be set to false after testing
         },
         email: {
             type: String,

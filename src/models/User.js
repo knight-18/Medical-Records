@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
 const jwt = require('jsonwebtoken')
+const crypto=require('crypto')
 const bcrypt = require('bcryptjs')
 const utilities = require('../utilities/Utilities')
 const { isEmail, isMobilePhone } = require('validator')
@@ -8,6 +9,12 @@ require('dotenv').config()
 
 const userSchema = mongoose.Schema(
     {
+        short_id: 
+        {
+            type: String, 
+            trim:true, 
+            required: [true, 'Short ID cannot be absent']
+        },
         name: {
             type: String,
             trim: true,
@@ -22,7 +29,7 @@ const userSchema = mongoose.Schema(
         },
         active: {
             type: Boolean,
-            default: false,
+            default:true,//to be changed to false after testing
         },
         password: {
             type: String,
@@ -49,17 +56,35 @@ const userSchema = mongoose.Schema(
                 ref: 'Disease',
             },
         ],
+        passwordResetToken: String,
+        passwordResetExpires: Date,
     },
+    
     {
         timestamps: true,
-    }
+    },
+
 )
+// generate passwordResetToken
+userSchema.methods.createPasswordResetToken = function () {
+    const resetToken = crypto.randomBytes(32).toString('hex')
+    this.passwordResetToken = crypto
+        .createHash('sha256')
+        .update(resetToken)
+        .digest('hex')
+
+    this.passwordResetExpires = Date.now() + 10 * 60 * 1000
+
+    return resetToken
+}
 
 // static method to login user
 userSchema.statics.login = async function (email, password) {
     const user = await this.findOne({ email })
+    //console.log('log',user)
     if (user) {
         const auth = await bcrypt.compare(password, user.password)
+        //found bug have to fix the login 
         if (auth) {
             return user
         }

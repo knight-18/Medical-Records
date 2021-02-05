@@ -76,12 +76,24 @@ app.listen(PORT, () => {
 })
 
 
-// const Hospital = require('./models/Hospital')
+ /*User = require('./models/User')
+ const databasedlt= async()=>{
+    const user = await User.find({email:"rishirajkalita13@gmail.com"})
+    user.forEach(async(data)=>{
+         await User.findByIdAndDelete(data._id)
+    })
+    console.log("deleted")
+ }
+ databasedlt()*/
+
+
+//  const User= require('./models/Hospital')
 // const databasedlt= async()=>{
-//    const user = await Hospital.find({email:"gauravgluon20@gmail.com"})
+//    const user = await User.find({email:"gauravbhattacharjee_ug@cse.nits.ac.in"})
 //    user.forEach(async(data)=>{
-//         await Hospital.findByIdAndDelete(data._id)
+//         await User.findByIdAndDelete(data._id)
 //    })
 //    console.log("deleted")
 // }
 // databasedlt()
+
