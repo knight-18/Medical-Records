@@ -62,17 +62,18 @@
 			<div class="col-sm-12"><%- include('../partials/message'); %></div>
 			<div class="col-lg-2 col-sm-4 col-12 order-3 order-sm-1" id="pSec1">
 				<div id="leftPanel"> 
-					<div class="lists">
+					<div class = "<%= path === '/user/profile' ? 'lists active-list' : 'lists' %>">
 						<a href="/user/profile">Profile</a> 
 						<img src="../img/profile.png" class="Icons profile-icon">
 					</div>
-					<div class="lists">
+					<div class = "<%= path === '/user/disease' ? 'lists active-list' : 'lists' %>">
 						<a onclick="myFunction()" class="dropbtn">Disease</a>
 						<img src="../img/disease.png" class="Icons">
 							<div id="myDropdown" class="dropdown-content">
-						
+								<a href="/user/disease" class="dropdown-item"><span class="dropAnchor">Disease page</span></a>
+
 								<% for(var d of user.disease) { %>
-									<a class="dropdown-item"><span class="dropAnchor"><%= d.name %></span></a>
+									<a href="#" class="dropdown-item"><span class="dropAnchor"><%= d.name %></span></a>
 								<% } %>
 								<a id="myBtn">Add New</a>
 							</div>
@@ -221,17 +222,19 @@
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="../js/sideNav.js"></script>
+	<script src="../js/sideNav.js"></script>
+	<script src="../js/profilePage.js"></script>
+
     <script>
         function myFunction() {
           document.getElementById("myDropdown").classList.toggle("show");
         }
         
         // Close the dropdown menu if the user clicks outside of it
-        window.onclick = function(event) {
+        document.body.onclick = function(event) {
           if (!event.target.matches('.dropbtn')) {
             var dropdowns = document.getElementsByClassName("dropdown-content");
-            var i;
+			var i;
             for (i = 0; i < dropdowns.length; i++) {
               var openDropdown = dropdowns[i];
               if (openDropdown.classList.contains('show')) {
@@ -242,26 +245,6 @@
         } 
         
 		</script>
-		<script>
-			function myFunctionMobile() {
-			  document.getElementById("myDropdownMobile").classList.toggle("show");
-			}
-			
-			// Close the dropdown menu if the user clicks outside of it
-			window.onclick = function(event) {
-			  if (!event.target.matches('.dropbtn')) {
-				var dropdowns = document.getElementsByClassName("dropdown-content");
-				var i;
-				for (i = 0; i < dropdowns.length; i++) {
-				  var openDropdown = dropdowns[i];
-				  if (openDropdown.classList.contains('show')) {
-					openDropdown.classList.remove('show');
-				  }
-				}
-			  }
-			} 
-			
-			</script>
         <script>
             var modal = document.getElementById("myModal");
 // Get the button that opens the modal
