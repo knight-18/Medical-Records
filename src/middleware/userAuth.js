@@ -16,7 +16,15 @@ const requireAuth = (req, res, next) => {
                 res.redirect('/user/login')
             } else {
                 let user = await User.findById(decodedToken.id)
-
+                // if null then redirect to signup
+                if (user == null)
+                {
+                    req.flash("error_msg", "You do not have an account yet, kindly sign up for one"); 
+                    res.clearCookie('jwt')
+                    res.redirect("/user/signup"); 
+                    return; 
+                }
+                //else to profile
                 req.user = user
                 //console.log("current user", req.user)
 

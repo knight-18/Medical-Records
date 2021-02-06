@@ -17,6 +17,14 @@ const requireAuth = (req, res, next) => {
                 res.redirect('/hospital/login')
             } else {
                 let hospital = await Hospital.findById(decodedToken.id)
+                
+                if (hospital == null)
+                {
+                    req.flash("error_msg", "You do not have an account yet, kindly sign up for one"); 
+                    res.clearCookie('hospital');
+                    res.redirect("/hospital/signup"); 
+                    return; 
+                }
 
                 req.hospital = hospital
                 //console.log("current user", req.user)
