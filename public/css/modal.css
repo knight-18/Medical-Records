@@ -13,7 +13,7 @@
   background-position: center;
   background-blend-mode: overlay !important;
   background-repeat: no-repeat, repeat;
-   transition: background-color .5s ease-in;
+   transition: background-color .1s ease-in;
   -webkit-transition: opacity 400ms ease-in;
   -moz-transition: opacity 400ms ease-in;
   transition: opacity 400ms ease-in;
@@ -77,21 +77,25 @@
 }
 
 /* The Close Button */
-.close1 {
+.close {
   position: absolute !important;
-  right: 5rem !important;
-  bottom:6rem;
+  right: 7rem !important;
+  bottom:-300rem !important;
   text-align:end;
-  color: rgb(227, 232, 235);
-  font-size: 18px;
+  color: rgb(227, 232, 235) !important;
+  font-size: 18px !important;
   background: none;
   border: none;
    padding: 0;
+   margin-top:-10.5rem;
+   font-weight: 10px;
+   text-decoration: none;
+   font-family: "Times New Roman", Times, serif;
 }
 .save1 {
+  font-family: "Times New Roman", Times, serif;
   position: absolute;
   right: 1rem;
-
   text-align:end;
   bottom:6rem;
   padding: 0;
@@ -100,6 +104,7 @@
   font-size: 18px;
   background: none;
   border: none;
+  font-weight: 20px;
 }
 
 
@@ -367,21 +372,22 @@ input:focus ~ .highlight1 {
   margin-top: 15px;
 }
 .zone .selectFile {
-  height: 10px;
+  height: 60px;
   margin: 0px auto;
   position: relative;
-  width: 150px;
+  width: 350px;
 }
 .zone label,
 .zone input {
   cursor: pointer;
   display: block;
-  height: 25px;
+  height: 40px;
   left: 0;
   position: absolute;
   top: 0;
   width: 80%;
   border-radius: 5px;
+  margin-left:5px;
 }
 .zone label {
   background: #fff;
@@ -396,9 +402,9 @@ input:focus ~ .highlight1 {
   font-weight: 400;
   box-shadow: 0 1px 1px gray;
   margin-left:7px ;
-}
+}*/
 .zone input[type=file] {
-  opacity: 0;
+  opacity: 1;
 }
 .zone.in {
   color: white;
@@ -476,4 +482,8 @@ input:focus ~ .highlight1 {
 .myBtn {
   background-color: transparent;
   cursor: pointer;
+}
+.selectFile input {
+  text: White;
+  z-index: 10000;
 }
