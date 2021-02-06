@@ -243,12 +243,14 @@ module.exports.upload_post = async (req, res) => {
 
 
 module.exports.disease_get=async(req,res)=>{
-    
-    console.log('user',req.user)
-    const Userdiseases= await req.user.populate('disease').execPopulate()
-    console.log('diseases',Userdiseases)
+    const hospitals = await Relations.find({'userId':req.user._id,'isPermitted':true}).populate('hospitalId','hospitalName')    
+    // console.log('user',req.user)
+    res.locals.user= await req.user.populate('disease').execPopulate()
+    // console.log('diseases',Userdiseases)
     res.render('./userViews/profile', {
         path: '/user/disease',
+        hospitals
+
       })
       console.log("in disease page")
     }
@@ -265,7 +267,8 @@ module.exports.profile_get = async (req, res) => {
         path: '/user/profile',
         hospitals:hospitals
       })
-      console.log("in profile page")}
+      console.log("in profile page")
+    }
 
 module.exports.logout_get = async (req, res) => {
     // res.cookie('jwt', '', { maxAge: 1 });
