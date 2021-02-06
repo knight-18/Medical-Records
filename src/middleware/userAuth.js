@@ -20,6 +20,7 @@ const requireAuth = (req, res, next) => {
                 if (user == null)
                 {
                     req.flash("error_msg", "You do not have an account yet, kindly sign up for one"); 
+                    res.clearCookie('jwt')
                     res.redirect("/user/signup"); 
                     return; 
                 }

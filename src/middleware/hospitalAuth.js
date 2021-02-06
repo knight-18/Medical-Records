@@ -21,6 +21,7 @@ const requireAuth = (req, res, next) => {
                 if (hospital == null)
                 {
                     req.flash("error_msg", "You do not have an account yet, kindly sign up for one"); 
+                    res.clearCookie('hospital');
                     res.redirect("/hospital/signup"); 
                     return; 
                 }
