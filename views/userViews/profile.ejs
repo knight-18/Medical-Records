@@ -25,14 +25,19 @@
 			<form class="form-modal" method="POST" enctype="multipart/form-data" ><!--Dont remove the enctype-->
 				<div class="group1">
 				  <input type="text" name="name"><span class="highlight1"></span><span class="bar1"></span>
-				  <label class="label-form">Disease Name</label>
+				  <label for="name" style="margin-left: 8px; margin-top: -20px; padding-bottom: 200px;">Disease Name</label>
 				  <span><button class="save1" formaction="profile/upload" value="upload">SAVE</button></span><!-- Dont remove the name and value attribute-->
-				</div>
-				<label class="label-form">Medicine</label>
-				<div class="group2">
-					<input type="text"><span class="highlight1"></span><span class="bar1"></span>
-					
 				  </div>
+				<div class="group2" style=" margin-bottom: -51px; margin-top: 15px;">
+					<!--<input type="text"><span class="highlight1"></span><span class="bar1"></span>-->
+					<p style="margin-top: -9px; font-size:18px; font-weight: normal; margin-left: 5px;	color:#a5a5a5;">Medicine</p>
+					<div class="custom-file" style="border-radius: 4rem; margin-top: -26px;">
+						<!--<input type="file" class="custom-file-input" id="customFile">
+						<label class="custom-file-label" for="customFile">Choose file</label>-->
+						<input id="input-b3" name="input-b3[]" type="file" class="file" multiple 
+						data-show-upload="false" data-show-caption="true" data-msg-placeholder="Select {files} for upload...">
+						</div>
+				</div>
 			<span class="UD">Upload Documents</span>
 			<div class="zone">
 				
@@ -337,3 +342,15 @@ $ripples.on('animationend webkitAnimationEnd mozAnimationEnd oanimationend MSAni
 		</script>
 </body>
 </html>
+
+
+
+<!----	</div>
+	<label class="label-form">Medicine</label>
+				<div class="group2">
+					<input type="text"><span class="highlight1"></span><span class="bar1"></span>
+				  </div>-->
+				  <!--<div class="group1">
+					<label for="name" style="margin-left: 8px; margin-top: -20px; padding-bottom: 200px;">Disease Name</label>
+					<input type="text" name="name" class="form-control" id="name" aria-describedby="nameHelp" style="margin-left: -35px;">
+					<span><button class="save1" formaction="profile/upload" value="upload">SAVE</button></span><!-- Dont remove the name and value attribute-->
