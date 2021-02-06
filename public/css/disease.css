@@ -1,11 +1,11 @@
 #profileBody{
 	margin-top:0;
 	display:flex;
-	/*flex-wrap:wrap;*/
+	/* flex-wrap:wrap; */
 	width:100vw;
 	height:100vh;
 }
-#pSec1{
+#pSec7{
 	/*position:relative;
 	top:15px;
 	/*width:18vw;
@@ -13,7 +13,7 @@
 	background:#FFFFFF;
 }
 
-#pSec3{
+#pSec8{
 	/*width:20vw;
 	height:90vh;*/
 	background-color: #FFFFFF;
@@ -26,21 +26,8 @@
 	right:5px;
 	padding:0
 }
-/*#profile{
-	width:85%;
-	height:7%;
-	background:#019DFA;
-	color:white;
-	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
-	border-radius: 16px;
-	position:relative;
-	top:30px;
-	left:7%;
-	padding:10px;
-	padding-left:20px;
-	margin-bottom:60px;
-}*/
-#leftPanel{
+
+#leftPanel1{
 	margin-top:40px;
 }
 /* #leftPanel button{
@@ -86,48 +73,13 @@ text-decoration:none;
 	width:100%;
 	height:40%;
 }
-/* #Dr{
-	width:100%;
-	height:10%;
-	text-align:center;
-	background: #019DFA;
-	color:white;
-	padding:5%;
-	padding-top:6%;
-	border-radius:5px 5px 0px 0px;
-	font-weight:bold;
-	font-size:140%;
-	font-family: Product Sans;
-} */
-/* #profileImg{
-	position:absolute;
-	top:25%;
-	left:4%;
-	border-radius:50%;
-	box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
-} */
-/* #Camera{
-	position:absolute;
-	top:36.5%;
-	left:14.5%;
-} */
 
-/* .bheart{
-	height: 10vh;
-	left:55%;
-	top:3%;
-}
-.edit{
-	left:55%;
-	top:3%;
-} */
 
 .dropdown:hover>.dropdown-menu {
   display: block;
 }
 
 .dropdown>.dropdown-toggle:active {
-  /*Without this, clicking will make it sticky*/
     pointer-events: none;
 }
 
@@ -171,29 +123,29 @@ padding: 0;
 #profileBody{
 	margin-top:0vh;
 	display:flex;
-	/*flex-wrap:wrap;*/
+	/* flex-wrap:wrap; */
 	width:100vw;
 	height:100vh;
 }
-#pSec1{
+#pSec7{
 	/*position:relative;
 	top:15px;
 	/*width:18vw;
 	height:90vh;*/
 	background:#FFFFFF;
 }
-#pSec2{
+#pSec9{
 	overflow-y:scroll ;
-	/*width:64vw;*/
+	/* width:64vw; */
 	height:100vh;
-	/*position:relative;*/
+	/* position:relative; */
 	top:15px;
 	left:0px;
 	/*left:1%;
 	margin-right: 20px;*/
 }
-#sub1{
-	/*width:30vw;*/
+#sub4{
+	/* width:30vw; */
 	
 	background:#FFFFFF;
 	box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.25);
@@ -205,26 +157,16 @@ padding: 0;
 	background:#fff;
     margin-bottom: 2vw;
 }
-#pSec3{
-	/*width:20vw;
-	height:90vh;*/
+#pSec8{
 	background-color: #FFFFFF;
-	/*position:relative;
-	top:15px;
-	right:1%;*/
 	box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.25);
 	border-radius: 5px;
 	top:15px;
-	/* right:5px; */
 	padding:0
 }
 
-#leftPanel{
-	margin-top:40px;
-}
 
-
-#Dr{
+#Dr420{
 	width:95%;
 	height:10%;
 	text-align:center;
@@ -303,18 +245,18 @@ padding: 0;
 }
 @media screen and (min-width: 0px) and (max-width: 767px) { 
 
-  #pSec2{
+  #pSec9{
 	overflow-y:scroll ;
-	/*width:64vw;*/
+	/* width:64vw; */
 	height:100vh;
-	/*position:relative;*/
+	/* position:relative; */
 	top:15vh;
 	left:0px;
 	/*left:1%;
 	margin-right: 20px;*/
 }
 
-	 #pSec3{
+	 #pSec8{
 			display: flex !important;
 			background-color: #FFFFFF;
 			box-shadow: none;
@@ -335,10 +277,10 @@ padding: 0;
 
 
 
-/*____________________________________ Tab view _____________________________________________*/
+/* /____________ Tab view _______________/ */
 @media(max-width:992px)
 {
-	 #pSec1{
+	 #pSec7{
 		display: none !important;
 		background-color: #FFFFFF;
 		box-shadow: none;
@@ -353,7 +295,7 @@ padding: 0;
         box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25); 
         /* border-radius: 5px;*/
 	 }
-	   #pSec3{
+	   #pSec8{
 		/* display: none !important; */
 		background-color: #FFFFFF;
 		box-shadow: none;
@@ -376,15 +318,9 @@ padding: 0;
 
 	
 
-
-
-
-
 @media (max-width: 576px) {
-	embed{
-		width: 100%;
-	}
-	 #pSec3{
+	
+	 #pSec8{
 			display: flex !important;
 			background-color: #FFFFFF;
 			box-shadow: none;
@@ -538,176 +474,31 @@ padding: 0;
 
 
 
-/* .download_button {
-  margin: 20px;
-  text-decoration: none;
-  display: block;
-  width: 320px;
-  height: 180px;
-  padding: 1px;
-  border: 1px solid #17aabd;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  border-radius: 10px;
-  color: #050505;
-  text-shadow: 0 0 15px #3ac2da;
-  font-size: 16px;
-}
+@media only screen and (device-width: 768px) 
+{
+	 #pSec7{
 
-.download_button .filename {
-  font-size: 32px;
-  margin: 10px 20px 0;
-}
-.download_button .filesize {
-  margin: 10px 20px 0;  
-}
-
-.download_button .downloads {
-  margin: 5px 20px 0;    
-}
-
-.download_button .downloadicon{
-  position: relative;
-  float: right;
-  margin: 10px;
-  width: 140px;
-  height: 90px;
-}
-
-@-webkit-keyframes movedown {
-  0% {
-    -webkit-transform: translateY(-1.5em);
-    opacity:0;
-  }
-  50% {
-    -webkit-transform: translateY(0);
-    opacity:1;
-  }
-  100% {
-    -webkit-transform: translateY(1.5em);
-    opacity:0;
-  }
-}
-@-moz-keyframes movedown {
-  0% {
-    transform: translateY(-1.5em);
-    opacity:0;
-  }
-  50% {
-    transform: translateY(0);
-    opacity:1;
-  }
-  100% {
-    transform: translateY(1.5em);
-    opacity:0;
-  }
-}
-@-o-keyframes movedown {
-  0% {
-    -o-transform: translateY(-1.5em);
-    opacity:0;
-  }
-  50% {
-    -o-transform: translateY(0);
-    opacity:1;
-  }
-  100% {
-    -o-transform: translateY(1.5em);
-    opacity:0;
-  }
-}
-@keyframes movedown {
-  0% {
-    transform: translateY(-1.5em);
-    opacity:0;
-  }
-  50% {
-    transform: translateY(0);
-    opacity:1;
-  }
-  100% {
-    transform: translateY(1.5em);
-    opacity:0;
-  }
-}
-
-.download_button .cloud{
-  width: 140px;
-  height: 50px;
-  background-color: #fff;   
-  border-radius: 30px;
-  position: absolute; 
-  top:60px;
-}
-.download_button .cloud:before{
-  content: "";
-  display: block;
-  width: 50px;
-  height: 50px;
-  top: -30px;
-  left: 70px;
-  background-color: #fff;   
-  border-radius: 50%;
-  position: absolute;
-  box-shadow: -40px 0 0 10px #fff;  
-}
-
-.download_button .cloud .arrowdown {
-  background: #823ddb;
-  position: absolute;
-  top: -10px;
-  left: 60px;    
-  width: 10px;
-  height: 40px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  
-  -webkit-animation: movedown 2s infinite linear;
-  -moz-animation: movedown 2s infinite linear;
-  -o-animation: movedown 2s infinite linear;
-  animation: movedown 2s infinite linear;
-}
-
-.download_button .cloud .arrowdown:before,
-.download_button .cloud .arrowdown:after {
-  top:14px;
-  content: "";
-  position: absolute;
-  background: #3dd6db;
-  position: absolute;
-  width: 10px;
-  height: 25px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-}
-.download_button .cloud .arrowdown:before {
-  -webkit-transform:rotate(45deg);
-  -webkit-transform-origin: 70% 90%;
-}
-.download_button .cloud .arrowdown:after {
-  -webkit-transform:rotate(-45deg);
-  -webkit-transform-origin: 30% 90%;
-}
-
-.download_button{
-
-  background: #3dcedb; /* Old browsers */
-/* background: -moz-linear-gradient(top,  #3dc3db 0%, #31accb 100%); 
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#3dc9db), color-stop(100%,#31b9cb)); 
-background: -webkit-linear-gradient(top,  #3ddbd3 0%,#31becb 100%); 
-background: -o-linear-gradient(top,  #3ddbd3 0%,#31cbbe 100%); 
-background: -ms-linear-gradient(top,  #3ddbdb 0%,#31cbbe 100%); 
-background: linear-gradient(to bottom,  #3ddbc1 0%,#31cbcb 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3dc9db', endColorstr='#3dc9db',GradientType=0 ); 
-
-  
-} */ 
+		background-color: #FFFFFF;
+		box-shadow: none;
+		margin-top: 50px;
+		position: absolute;
+        width: 700px;
+        height:17vw;
+        top:30px;
+        background: #019DFA;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25); 
+	 }
+	   #pSec8{
+		background-color: #FFFFFF;
+		box-shadow: none;
+		margin-top: 50px;
+        background: #019DFA;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25); 
+	 }
+	
 
 
-
-
+}
 
 
 
@@ -855,8 +646,170 @@ margin-left: 22vw;
 
 
 
-@media screen and (max-width: 400px){
+
+@media only screen and (device-width: 360px){
 	.media-body{
+		display: inline !important;
+align-self: center;
+padding-top: 3vh;
+margin-left: 14vw;
+height:12vh;
+
+}
+.pdf-img{
+		margin-right: 0.5vw !important;
+	}
+
+}
+
+@media only screen and (device-width: 320px){
+	.media-body{
+			display: inline !important;
+	align-self: center;
+	padding-top: 3vh;
+	margin-left: 1.5vw !important;
+
+	}
+	.pdf-img{
+		margin-right: 3vw !important;
+	}
+
+	
+}
+
+@media only screen and (device-width: 375px){
+	.media-body{
+		display: inline !important;
+align-self: center;
+padding-top: 3vh;
+margin-left: 17vw;
+height:12vh;
+
+}
+.pdf-img{
+		margin-right: 0.5vw !important;
+	}
+
+
+}
+
+@media only screen and (device-width: 411px){
+
+		.media-body{
+		display: inline !important;
+align-self: center;
+padding-top: 3vh;
+margin-left: 20vw;
+height:12vh;
+
+}
+.pdf-img{
+		margin-right: 0.5vw !important;
+	}
+
+
+}
+@media only screen and (device-width: 412px){
+
+	.media-body{
+		display: inline !important;
+align-self: center;
+padding-top: 3vh;
+margin-left: 20vw;
+height:12vh;
+
+}
+.pdf-img{
+		margin-right: 0.5vw !important;
+	}
+
+
+}
+
+
+@media only screen and (device-width: 540px){
+
+	.media-body{
+		display: inline !important;
+align-self: center;
+padding-top: 3vh;
+margin-left: 28vw;
+height:12vh;
+
+}
+.pdf-img{
+		margin-right: 0.5vw !important;
+	}
+
+
+}
+@media only screen and (device-width: 414px){
+
+	.media-body{
+		display: inline !important;
+align-self: center;
+padding-top: 3vh;
+margin-left: 20vw;
+height:12vh;
+
+}
+.pdf-img{
+		margin-right: 0.5vw !important;
+	}
+
+
+}
+
+@media only screen and (device-width: 360px){
+	
+	.media-body{
+		display: inline !important;
+align-self: center;
+padding-top: 3vh;
+margin-left: 14vw;
+height:13vh;
+
+}
+.pdf-img{
+		margin-right: 0.5vw !important;
+	}
+
+
+}
+@media only screen and (device-width: 384px){
+
+	.media-body{
+		display: inline !important;
+align-self: center;
+padding-top: 3vh;
+margin-left: 18vw;
+height:12vh;
+
+}
+.pdf-img{
+		margin-right: 0.5vw !important;
+	}
+
+
+}
+
+@media only screen and (device-width: 600px) {
+	  .media-body{
+		display: inline !important;
+align-self: center;
+padding-top: 3vh;
+margin-left: 31vw;
+height:10vh;
+
+}
+.pdf-img{
+		margin-right: 0.7vw !important;
+	}
+  /* For general iPad layouts */
+}
+@media only screen and (device-width: 768px) {
+  /* For general iPad layouts */
+  .media-body{
 		display: inline !important;
 align-self: center;
 padding-top: 3vh;
@@ -869,21 +822,3 @@ height:12vh;
 	}
 
 }
-
-@media screen and (max-width: 320px){
-	.media-body{
-			display: inline !important;
-	align-self: center;
-	padding-top: 3vh;
-	margin-left: 1vw !important;
-
-	}
-	.pdf-img{
-		margin-right: 3vw !important;
-	}
-
-	
-}
-
-
-
