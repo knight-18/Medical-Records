@@ -564,11 +564,11 @@ text-decoration:none;
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {display:block;}
 
-/*.content-top {
+.content-top {
 	background-color: rgb(247, 247, 247) !important;
-	height:5rem;
-	width:100%;
-	top:-5rem;
+	height:6rem;
+	width:110%;
+	top:-4rem;
 	margin-top: -10px;
 	display: inline-flex;
 	border-radius: 1rem 1rem 0rem 0rem;
@@ -582,7 +582,7 @@ text-decoration:none;
   background-image: -o-linear-gradient(left, #3e7ac8 0%, #4E90A4 100%), -o-linear-gradient(left, #69a2e2 0%, #4E90A4 100%);
   background-image: linear-gradient(to right, #347ab3 0%, #4E90A4 100%), linear-gradient(to right, #6da2ce 0%, #4E90A4 100%);
 }
-*/
+
 #profileImg1 {
   border-radius: 4rem;
   max-height: 4rem;
@@ -679,7 +679,7 @@ display: none ;
      /* display:flex;  */
  } 
  #patientImage1{
-	margin-right:4%;
+	margin-right:5%;
 	float:left;
 	width:50px;
 	height:50px;
@@ -705,7 +705,7 @@ display: none ;
 	background-image:url('../img/ProfilePic.png');
 	background-size:cover;
 } 
-/* #patientImage3{
+#patientImage3{
 	margin-right:30px;
 	float:left;
 	width:50px;
@@ -713,11 +713,10 @@ display: none ;
 	border-radius:50%;
 	background-image:url('../img/ProfilePic.png');
 	background-size:cover;
-}  */
+} 
 #patientName a{
 	position:relative;
-	top:6px; 
-	/* left:-10px;change */
+	top:6px;             /*change*/
 	font-size:90%;
 	display:block;
 	color:black;
@@ -725,22 +724,11 @@ display: none ;
 }
  #patientName1 a{
 	position:relative;
-	top:12px;
-	left:-20px;            
+	top:12px;             
 	font-size:90%;
 	display:block;
 	color:black;
 	text-decoration:none;
-} 
-#patientName2 a{
-	position:relative;
-	top:12px;
-	left:15px;             
-	font-size:90%;
-	display:block;
-	color:black;
-	text-decoration:none;
-	width:100%
 } 
 /* #patientName a:hover{
 	text-decoration:none;
@@ -775,16 +763,16 @@ display: none ;
 #patientList li{
     list-style-type: none;
     position:relative;
-    left:-40px;    
+    /* left:-40px;    change */
 	bottom:4px;
+	margin-left:30px;
     font-weight:normal;
     font-size:16px;
-	width: 100%;
 }
  #patientList1 li{
     list-style-type: none;
     position:relative;
-    right:18%; 
+    right:16%; 
 	width:100%;   
     font-weight:normal;
     font-size:16px;
@@ -809,18 +797,18 @@ display: none ;
 	margin:20px 20px 40px 30px;
      /* display:flex;  */
  } 
- /* #search_button2{
+ #search_button2{
 	 width:80%;
 	margin:0px 10%;
- } */
- /* #search_button1{
+ }
+ #search_button1{
 	 font-size:16px !important;
 	 width:200px;
-	 margin:0px 10px 10px 10px;
+	 /* margin:0px 10px 10px 10px; */
 	 margin-left:20px;
 	 padding:10px;
 	 color:white;
- } */
+ }
  @media only screen and (min-width:992px) and (max-width:1416px){
  #id_search1{
 	 width:90%;
@@ -834,15 +822,12 @@ display: none ;
 @media only screen and (min-width:1200px) and (max-width:1389px){
 	#patientName1 li{
 		position:relative;
-		left:-9%;
+		left:-7%;
 		width:100%;
 
 	}
 	#patientList1{
 		margin-left:-20%;
-	}
-	#patientId2{
-		margin-left:15px;
 	}
 	#patientImage1{
 		margin-right:2%;
@@ -856,15 +841,12 @@ display: none ;
 	#patientList1{
 		margin-left:-25%;
 	}
-	#patientId2{
-		margin-left:15px;
-	}
 	#patientImage1{
 		margin-right:.5%;
 	}
 	#patientName1 li{
 		position: relative;
-		left:-3%;
+		left:-4%;
 		width:100%;
 	}
 	#patientId1:hover{
@@ -876,10 +858,7 @@ display: none ;
 		right:10%;
 		width:100%;
 	}
-
 }
-   
-
 
 
 

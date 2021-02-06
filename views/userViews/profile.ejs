@@ -14,9 +14,7 @@
 	<%- include('../partials/navbar'); %>
 
     <div id="myModal" class="modal" >
-
         <div class="modal-content">
-		
 			<div class="row">
 	           <div class="content-top ">
 				<a href="#" class="img-rounded"><img src="../img/ProfilePic.png" id="profileImg1"></a>
@@ -27,39 +25,30 @@
 			<form class="form-modal" method="POST" enctype="multipart/form-data" ><!--Dont remove the enctype-->
 				<!--<div class="group1">
 				  <input type="text" name="name"><span class="highlight1"></span><span class="bar1"></span>
-				  <label class="label-form">Disease Name</label>
-				  <span><button class="save1" formaction="profile/upload" value="upload">SAVE</button></span><!-- Dont remove the name and value attribute--
-				</div>-->
-				<div class="group1">
-					<label for="name" style="margin-left: 8px; margin-top: -20px; padding-bottom: 200px;">Disease Name</label>
-					<input type="text" name="name" class="form-control" id="name" aria-describedby="nameHelp" style="margin-left: -35px;">
-					<span><button class="save1" formaction="profile/upload" value="upload">SAVE</button></span>
-					<span><button class="close1">CANCEL</button></span>
+				  <label for="name" style="margin-left: 8px; margin-top: -20px; padding-bottom: 200px;">Disease Name</label>
+				  <span><button class="save1" formaction="profile/upload" value="upload">SAVE</button></span><!-- Dont remove the name and value attribute-->
 				  </div>
-				<div class="group2" style=" margin-bottom: -51px; margin-top: 18px;">
+				<div class="group2" style=" margin-bottom: -51px; margin-top: 15px;">
 					<!--<input type="text"><span class="highlight1"></span><span class="bar1"></span>-->
 					<p style="margin-top: -9px; font-size:18px; font-weight: normal; margin-left: 5px;	color:#a5a5a5;">Medicine</p>
-					<div class="custom-file" style="border-radius: 4rem">
-						<input type="file" class="custom-file-input" id="customFile">
-						<label class="custom-file-label" for="customFile">Choose file</label>
-					  </div>
+					<div class="custom-file" style="border-radius: 4rem; margin-top: -26px;">
+						<!--<input type="file" class="custom-file-input" id="customFile">
+						<label class="custom-file-label" for="customFile">Choose file</label>-->
+						<input id="input-b3" name="input-b3[]" type="file" class="file" multiple 
+						data-show-upload="false" data-show-caption="true" data-msg-placeholder="Select {files} for upload...">
+						</div>
 				</div>
-
-				
-		
+			<span class="UD">Upload Documents</span>
 			<div class="zone">
 				<span class="UD" style="z-index: 1000; overflow: hidden; display: flex; text-align: start; margin-left: 25px;">Upload Documents</span>
 				<div id="dropZ">
 				  <i class="fa fa-cloud-upload"></i>
-				  <div>Drag and drop your file here</div>                    
-				  <span>OR</span>
-				  <div class="selectFile">       
-					<label for="file">Select file</label>                   
-					<input type="file" name="upload" id="file"><!--          Dont remove the name attribute -->
+				  <div>Select your file here</div>                   
+				  <div class="selectFile">                      
+					<input type="file" name="file" id="file" multiple><!--Dont remove the name attribute -->
 				  </div>
 				  <p>File size limit : 10 MB</p>
 				</div>
-			  
 			  </div>
 			  </form>
 			</div>
@@ -105,17 +94,22 @@
 							<div id="Dr"><p class="sidenavHeader">Hospitals<a href="javascript:void(0)" class="closebtn" onclick="closeNavtab()"><i class="fa fa-angle-left sideNav " aria-hidden="true"></i></a></p></div>
 							<form method="POST" action="/user/hospitalSearch">
 								<input type="text" placeholder="Search..."
-									class="mobile-preview shadow floating-animate" name="hname">
-								<button>click</button>
+									class="mobile-preview shadow floating-animate" name="hname" id="id_search">
+								<button id="id_search_button">click</button>
 							</form>
 							<%if (path === '/user/hospitalSearch') { %>
 					
 								<%- include('../partials/hospitalSearch'); %>
 							<% } %>
 							<% if(path!=='/user/userHospitalD') { %>
-							<ul>
+							<ul id="patientList">
 								<% for(var d of hospitals) { %>
+									<div id="patientId">
+										<div id="patientImage"></div>
+										<div id="patientName">
 									<a href="/user/userHospital?id=<%=d.hospitalId._id%>"><li><%= d.hospitalId.hospitalName %></li></a>
+									</div>
+									</div>
 								<% } %>
 							</ul>
 							<% } %>	
@@ -145,17 +139,22 @@
 				<div id="Dr"><a>Doctors</a><img src="../img/doctor-icon.png" class="Icons doctor-icon" ></div>
 				<form method="POST" action="/user/hospitalSearch">
 					<input type="text" placeholder="Search..."
-						class="mobile-preview shadow floating-animate" name="hname">
-					<button>click</button>
+						class="mobile-preview shadow floating-animate" name="hname" id="id_search1">
+					<button id="id_search_button1">click</button>
 				</form>
 				<%if (path === '/user/hospitalSearch') { %>
 					
 					<%- include('../partials/hospitalSearch'); %>
 				<% } %>
 				<%if(path!=='/user/userHospitalD') { %>
-					<ul>
+					<ul id="patientList1">
 						<% for(var d of hospitals) { %>
+							<div id="patientId1">
+								<div id="patientImage1"></div>
+								<div id="patientName1">
 							<a href="/user/userHospital?id=<%=d.hospitalId._id%>"><li><%= d.hospitalId.hospitalName %></li></a>
+						</div>
+					</div>
 						<% } %>
 					</ul>
 					<% } %>
@@ -256,7 +255,13 @@
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="../js/sideNav.js"></script>
+
+	<script src="../js/sideNav.js"></script>
+	<script src="../js/profilePage.js"></script>
+  <script src="../js/sideNav.js"></script>
+	<script>
+		var test = document.querySelector('input');
+	  </script>
     <script>
         function myFunction() {
           document.getElementById("myDropdown").classList.toggle("show");
@@ -391,3 +396,15 @@ $ripples.on('animationend webkitAnimationEnd mozAnimationEnd oanimationend MSAni
 		</script>
 </body>
 </html>
+
+
+
+<!----	</div>
+	<label class="label-form">Medicine</label>
+				<div class="group2">
+					<input type="text"><span class="highlight1"></span><span class="bar1"></span>
+				  </div>-->
+				  <!--<div class="group1">
+					<label for="name" style="margin-left: 8px; margin-top: -20px; padding-bottom: 200px;">Disease Name</label>
+					<input type="text" name="name" class="form-control" id="name" aria-describedby="nameHelp" style="margin-left: -35px;">
+					<span><button class="save1" formaction="profile/upload" value="upload">SAVE</button></span><!-- Dont remove the name and value attribute-->

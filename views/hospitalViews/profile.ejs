@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
     <script src="https://use.fontawesome.com/67912d8e88.js"></script>
     <link rel="stylesheet" href="../css/NavBar.css">
-    <link rel="stylesheet" href="../css/Profile.css">
+    <link rel="stylesheet" href="../css/hospitalProfile.css">
     <link rel="stylesheet" href="../css/modal.css">
 	<title>Profile Page</title>
 </head>
@@ -14,18 +14,7 @@
 	<%- include('../partials/navbar'); %>
 
    
-	<% if (custom_flash) { %>
-		<link rel="stylesheet" href="/css/flash-message.css">
-<div id="flash-message">
-    <% if (custom_flash.length > 0) { %>
-    <div class="alert alert-success alignment"><%= custom_flash %><span class="close">&times;</span></div>
-    
-	<% } else { %>
-		 <% } %>
-</div>
 
-<script src="/js/flash-message.js"></script>
-	<% } %>
 	<!--Profile Part-->
 
 <div class="desktop-view">
@@ -56,20 +45,31 @@
 							<div>
 								<form method="POST" action="/hospital/search">
 									<input type="text" placeholder="Enter patient unique ID to search" name="short_id"
-									class="mobile-preview shadow floating-animate">
-								<button>Search</button>
+									class="mobile-preview shadow floating-animate" id="id_search">
+								<button id="id_search_button">Search</button>
 								</form>
 							   
 							</div>
 							<% if (foundUser) { %>
 								<div>
+									<div id="patientId2">
+										<div id="patientImage3"></div>
+										<div id="patientName1">
 									<p><%= foundUser.name %></p>
-									<a class="btn btn-primary" href="/hospital/relation/<%= foundUser.short_id %>" role="button">Request Access</a>
+										</div>
+									</div>
+									<a class="btn btn-primary" href="/hospital/relation/<%= foundUser.short_id %>" role="button" id="search_button1">Request Access</a>
 								</div>
 							<% } %>
-							<ul>
+							<ul id="patientList">
 								<% for(var d of patients) { %>
-									<a  href="/hospital/patient?id=<%=d.userId._id %>"><li><%= d.userId.name %></li></a>
+									<div id="patientId">
+										<div id="patientImage"></div>
+										<div id="patientName">
+										<a  href="/hospital/patient?id=<%=d.userId._id%>"><li><%= d.userId.name %></li></a>
+										</div>
+									</div>
+									<!-- <a  href="/hospital/patient/<%=d.userId %>"><li><%= d.userId.name %></li></a> -->
 								<% } %>
 							</ul>	
 						</div>
@@ -94,28 +94,30 @@
 				<div>
 					<form method="POST" action="/hospital/search">
 						<input type="text" placeholder="Enter patient unique ID to search" name="short_id"
-						class="mobile-preview shadow floating-animate">
-					<button>Search</button>
+						class="mobile-preview shadow floating-animate" id="id_search1">
+					<button id="id_search_button1">Search</button>
 					</form>
 				   
 				</div>
 				<% if (foundUser) { %>
 					<div>
+						<div id="patientId2">
+						<div id="patientImage2"></div>
+						<div id="patientName1">
 						<p><%= foundUser.name %></p>
-						<% if (access.length > 0) { %>
-							<a class="btn btn-primary" href="/hospital/patient?id=<%=foundUser._id%>" role="button">View Details</a>	
-						<% } else { %>
-							<a class="btn btn-danger" href="/hospital/relation/<%= foundUser.short_id %>" role="button">Request Access</a>	
-						<% } %>
-
-						
+						</div>
+						</div>
+						<a class="btn btn-primary" href="/hospital/relation/<%= foundUser.short_id %>"" role="button" id="search_button2">Request Access</a>	
 					</div>
 				<% } %>
 
-				<ul>
+				<ul id="patientList1">
 					<% for(var d of patients) { %>
-						<div>
+						<div id="patientId1">
+							<div id="patientImage1"></div>
+							<div id="patientName1">
 							<a  href="/hospital/patient?id=<%=d.userId._id%>"><li><%= d.userId.name %></li></a>
+							</div>
 						</div>
 					<% } %>
 				</ul>	
@@ -145,12 +147,13 @@
 						</div>
 						<div class=" Doctor-list">
 							<div id="mySidenavTab" class="sidenav">
-								<div id="Dr"><p class="sidenavHeader">Paitients<a href="javascript:void(0)" class="closebtn" onclick="closeNavtab()"><i class="fa fa-angle-left sideNav " aria-hidden="true"></i></a></p></div>
+								<div id="Dr"><p class="sidenavHeader">Patients<a href="javascript:void(0)" class="closebtn" onclick="closeNavtab()"><i class="fa fa-angle-left sideNav " aria-hidden="true"></i></a></p></div>
+								
 								<% for(var d of patients) { %>
-									<div>
 										<a  href="/hospital/patient?id=<%=d.userId._id%>"><li><%= d.userId.name %></li></a>
-									</div>
+										
 								<% } %>
+							
 							</div>
 							<!-- <div id="Drs"><button class=" sideNavButton" onclick=openNavtab() type="button ">Doctors<i class="fa fa-angle-right sideNav" aria-hidden="true" onclick=openNav()></i></button></div>				 -->
 							<div id="Drs">
@@ -202,7 +205,7 @@
 							<div>
 								<p><%= foundUser.name %></p>
 								<a class="btn btn-primary" href="/hospital/relation/<%= foundUser.short_id %>"" role="button">Request Access</a>
-							</div>
+								</div>
 						<% } %>
 					</div>
 					<div id="Dr"><a>Patients</a><img src="../img/doctor-icon.png" class="Icons doctor-icon" onclick=openNav()  ></div>				
