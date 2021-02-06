@@ -18,12 +18,13 @@
 			<div class="row">
 	           <div class="content-top ">
 				<a href="#" class="img-rounded"><img src="../img/ProfilePic.png" id="profileImg1"></a>
+				<span><button class="close">CANCEL</button></span>
 				<h4>NEW DISEASE</h4>
 				 
 		        </div>
 			</div>
 			<form class="form-modal" method="POST" enctype="multipart/form-data" ><!--Dont remove the enctype-->
-				<!--<div class="group1">
+				<div class="group1">
 				  <input type="text" name="name"><span class="highlight1"></span><span class="bar1"></span>
 				  <label for="name" style="margin-left: 8px; margin-top: -20px; padding-bottom: 200px;">Disease Name</label>
 				  <span><button class="save1" formaction="profile/upload" value="upload">SAVE</button></span><!-- Dont remove the name and value attribute-->
@@ -307,7 +308,7 @@
 // Get the button that opens the modal
 var btn = document.getElementById("myBtn");
 // Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close1")[0];
+var span = document.getElementsByClassName("close")[0];
 // When the user clicks on the button, open the modal
 btn.onclick = function() {
   modal.style.display = "block";
