@@ -220,7 +220,7 @@ padding: 0;
 	top:10%;
 
 }
-#name{
+#name1{
 	position:relative;
 	top:10%;
 	left:5.5%;
@@ -794,6 +794,39 @@ height:12vh;
 }
 
 @media only screen and (device-width: 600px) {
+
+
+			.bk-btn {
+	z-index: 1000;
+	 height: 48px;
+	 width: 48px;
+	 background-color: rgb(36, 67, 206);
+	 border-radius: 50%;
+	 margin-bottom: -9.2vh;
+	 margin-top: 4vh;
+	 margin-left: 3vh;
+	 margin-right: 4vw;
+}
+ .bk-btn .bk-btn-triangle {
+	 padding:0px;
+	 position: relative;
+	 top: 13px;
+	 left: 10.4px;
+	 width: 0;
+	 height: 0;
+	 border-top: 13px solid transparent;
+	 border-bottom: 13px solid transparent;
+	 border-right: 13px solid white;
+}
+ .bk-btn .bk-btn-bar {
+	 position: relative;
+	 background-color: rgb(255, 255, 255);
+	 height: 7.8px;
+	 width: 13px;
+	 top: -3.64px;
+	 left: 22.88px;
+}
+
 	  .media-body{
 		display: inline !important;
 align-self: center;
@@ -808,6 +841,38 @@ height:10vh;
   /* For general iPad layouts */
 }
 @media only screen and (device-width: 768px) {
+
+
+			.bk-btn {
+	z-index: 1000;
+	 height: 48px;
+	 width: 48px;
+	 background-color: rgb(36, 67, 206);
+	 border-radius: 50%;
+	 margin-bottom: -9.2vh;
+	 margin-top: 4vh;
+	 margin-left: 3vh;
+	 margin-right: 4vw;
+}
+ .bk-btn .bk-btn-triangle {
+	 padding:0px;
+	 position: relative;
+	 top: 13px;
+	 left: 10.4px;
+	 width: 0;
+	 height: 0;
+	 border-top: 13px solid transparent;
+	 border-bottom: 13px solid transparent;
+	 border-right: 13px solid white;
+}
+ .bk-btn .bk-btn-bar {
+	 position: relative;
+	 background-color: white;
+	 height: 7.8px;
+	 width: 13px;
+	 top: -3.64px;
+	 left: 22.88px;
+}
   /* For general iPad layouts */
   .media-body{
 		display: inline !important;
