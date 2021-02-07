@@ -190,23 +190,35 @@
 						<div>
 							<form method="POST" action="/hospital/search">
 								<input type="text" placeholder="Enter patient unique ID to search" name="short_id"
-								class="mobile-preview shadow floating-animate">
-							<button>Search</button>
+								class="mobile-preview shadow floating-animate" id="id_search1">
+							<button id="id_search_button1">Search</button>
 							</form>
 						   
 						</div>
-						<% for(var d of patients) { %>
-							<div>
-								<a  href="/hospital/patient?id=<%=d.userId._id%>"><li><%= d.userId.name %></li></a>
-							
-							</div>
-						<% } %>
 						<% if (foundUser) { %>
 							<div>
+								<div id="patientId2">
+								<div id="patientImage2"></div>
+								<div id="patientName1">
 								<p><%= foundUser.name %></p>
-								<a class="btn btn-primary" href="/hospital/relation/<%= foundUser.short_id %>"" role="button">Request Access</a>
 								</div>
+								</div>
+								<a class="btn btn-primary" href="/hospital/relation/<%= foundUser.short_id %>"" role="button" id="search_button2">Request Access</a>	
+							</div>
 						<% } %>
+		
+						<ul id="patientList1">
+							<% for(var d of patients) { %>
+								<div id="patientId1">
+									<div id="patientImage1"></div>
+									<div id="patientName1">
+									<a  href="/hospital/patient?id=<%=d.userId._id%>"><li><%= d.userId.name %></li></a>
+									</div>
+								</div>
+							<% } %>
+						</ul>	
+
+						
 					</div>
 					<div id="Dr"><a>Patients</a><img src="../img/doctor-icon.png" class="Icons doctor-icon" onclick=openNav()  ></div>				
 				</div>
