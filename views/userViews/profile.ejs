@@ -5,13 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
     <script src="https://use.fontawesome.com/67912d8e88.js"></script>
-    <link rel="stylesheet" href="../css/NavBar.css">
-    <link rel="stylesheet" href="../css/Profile.css">
-    <link rel="stylesheet" href="../css/modal.css">
+    
+	<link rel="stylesheet" href="../css/NavBar.css">
+	<link rel="stylesheet" href="../css/modal.css">
+	<link rel="stylesheet" href="../css/Profile.css">
 	
 	<title>Profile Page</title>
 </head>
 <body>
+	
 	<%- include('../partials/navbar'); %>
 
     <div id="myModal" class="modal" >
@@ -64,11 +66,11 @@
 			<div class="col-sm-12"><%- include('../partials/message'); %></div>
 			<div class="col-lg-2 col-sm-4 col-12 order-3 order-sm-1" id="pSec1">
 				<div id="leftPanel"> 
-					<div class="lists">
+					<div class = "<%= path === '/user/profile' ? 'lists active-list' : 'lists' %>">
 						<a href="/user/profile">Profile</a> 
 						<img src="../img/profile.png" class="Icons profile-icon">
 					</div>
-					<div class="lists">
+					<div class = "<%= path === '/user/disease' ? 'lists active-list' : 'lists' %>">
 						<a onclick="myFunction()" class="dropbtn">Disease</a>
 						<img src="../img/disease.png" class="Icons">
 							<div id="myDropdown" class="dropdown-content">
@@ -279,7 +281,7 @@
         }
         
         // Close the dropdown menu if the user clicks outside of it
-        window.onclick = function(event) {
+        document.body.onclick = function(event) {
           if (!event.target.matches('.dropbtn')) {
             var dropdowns = document.getElementsByClassName("dropdown-content");
             var i;
@@ -299,7 +301,7 @@
 			}
 			
 			// Close the dropdown menu if the user clicks outside of it
-			window.onclick = function(event) {
+			document.body.onclick = function(event) {
 			  if (!event.target.matches('.dropbtn')) {
 				var dropdowns = document.getElementsByClassName("dropdown-content");
 				var i;
