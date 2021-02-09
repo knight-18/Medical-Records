@@ -7,25 +7,15 @@ const diseaseSchema = mongoose.Schema({
         type: String,
         trim: true,
     },
-    duration: {
-        type: String,
-        trim: true,
-    },
-    description: {
-        type: String,
-    },
-    hospitalName: {
-        type: String,
-    },
-    images:[{
+    medicine:[{
+        type: String
+    }],
+    document:[{
         type: String
     }],
     owner:{
         type: mongoose.Schema.Types.ObjectId ,
         ref:'User'
-    },
-    refDoctor: {
-        type: String,
     }
 })
 
