@@ -10,12 +10,16 @@ const { v4 } = require('uuid');
 const multer = require('multer')
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        console.log("in multer")
-        const userEmail = req.user.email
-        const dir = `./public/uploads/${userEmail}`
+        console.log("in multer",file)
+        const {name}=req.body 
+        //console.log('disease name',name)
+        console.log('field',file.fieldname)
+        const dname= name.toLowerCase()
+        const userEmail = req.user.email.toLowerCase()
+        const dir = `./public/uploads/${userEmail}/${dname}/${file.fieldname}`
         console.log("dir",dir)
         if (!fs.existsSync(dir)) {
-           // console.log("making files")
+            //console.log("making files")
             fs.mkdirSync(dir, { recursive: true }, (err) => {
                 if (err) console.error('New Directory Creation Error');
             })
@@ -35,7 +39,6 @@ const upload = multer({
         checkFileType(file, cb)
     },
 })
-
 function checkFileType(file, cb) {
     const filetypes = /jpeg|jpg|png|gif|pdf/
     const extname = filetypes.test(
@@ -63,9 +66,15 @@ router.get('/profile', requireAuth, authController.profile_get)
 router.post(
     '/profile/upload',
     requireAuth,
-    upload.array('upload'),  
+    upload.fields([{
+        name: 'medicine', maxCount: 3
+      }, {
+        name: 'document', maxCount: 3
+      }]),  
     authController.upload_post
 )
+
+
 router.get('/userHospital',requireAuth,authController.userHospital_get)
 
 router.get('/disease',requireAuth,authController.disease_get)
