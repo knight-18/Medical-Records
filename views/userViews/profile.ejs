@@ -36,7 +36,7 @@
 					<div class="custom-file" style="border-radius: 4rem; margin-top: -26px;">
 						<!--<input type="file" class="custom-file-input" id="customFile">
 						<label class="custom-file-label" for="customFile">Choose file</label>-->
-						<input id="input-b3" name="upload" type="file" class="file" multiple 
+						<input id="input-b3" name="medicine" type="file" class="file" multiple 
 						data-show-upload="false" data-show-caption="true" data-msg-placeholder="Select {files} for upload...">
 						</div>
 				</div>
@@ -47,7 +47,7 @@
 				  <i class="fa fa-cloud-upload"></i>
 				  <div>Select your file here</div>                   
 				  <div class="selectFile">                      
-					<input type="file" name="upload" id="file" multiple><!--Dont remove the name attribute -->
+					<input type="file" name="document" id="file" multiple><!--Dont remove the name attribute -->
 				  </div>
 				  <p>File size limit : 10 MB</p>
 				</div>
@@ -170,6 +170,10 @@
 			<div class="row">
 				<div class="col-lg-2 col-sm-4 col-12 order-3 order-sm-1" id="pSec1">
 					<div id="leftPanel">
+						<div class="lists">
+							<a href="/user/profile">Profile</a> 
+							<img src="../img/profile.png" class="Icons profile-icon">
+						</div>
 						<div class="lists">
 							<a onclick=myFunctionMobile() class="dropbtn">Disease</a>
 							<img src="../img/disease.png" class="Icons">

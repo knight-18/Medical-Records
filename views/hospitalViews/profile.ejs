@@ -24,7 +24,7 @@
 			<div class="col-lg-2 col-sm-4 col-12 order-3 order-sm-1" id="pSec1">
 				<div id="leftPanel"> 
 					<div class="lists">
-						<a href="/user/profile">Profile</a> 
+						<a href="/hospital/profile">Profile</a> 
 						<img src="../img/profile.png" class="Icons profile-icon">
 					</div>
 					<div class="lists">
@@ -128,11 +128,15 @@
 	</div>
 </div>
 <div class="mobile-view">
-	<%if (path === '/hospital/profile'||path==='/hospital/patient') { %>
+	<%if (path === '/hospital/profile'||path==='/hospital/patient'||path==='/hospital/search') { %>
 		<div class="container-fluid" >	
 			<div class="row">
 				<div class="col-lg-2 col-sm-4 col-12 order-3 order-sm-1" id="pSec1">
 					<div id="leftPanel">
+						<div class="lists">
+							<a href="/hospital/profile">Profile</a> 
+							<img src="../img/profile.png" class="Icons profile-icon">
+						</div>
 						<div class="lists">
 							<a href="#">Appointments</a>
 							<img src="../img/appointment.png" class="Icons">
