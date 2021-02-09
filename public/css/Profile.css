@@ -9,6 +9,19 @@ body {
     box-sizing: border-box;
 }
 
+/* prole page scrollbar */
+.profile-main::-webkit-scrollbar{
+	width:8px;
+}
+.profile-main::-webkit-scrollbar-track{
+    background-color: rgb(209, 202, 202);
+    border-radius:3px;
+}
+.profile-main::-webkit-scrollbar-thumb{
+    background-color:#9593A0;
+    border-radius:3px;
+}
+
 #profileBody {
     margin-top: 0;
     display: flex;
