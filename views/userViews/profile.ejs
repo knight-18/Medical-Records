@@ -74,7 +74,12 @@
 						<a onclick="myFunction()" class="dropbtn">Disease</a>
 						<img src="../img/disease.png" class="Icons">
 							<div id="myDropdown" class="dropdown-content">
-						
+								<a href="/user/disease" class="dropdown-item"><span class="dropAnchor">Corona</span></a>
+								<a href="/user/disease" class="dropdown-item"><span class="dropAnchor">Corona</span></a>
+								<a href="/user/disease" class="dropdown-item"><span class="dropAnchor">Corona</span></a>
+								<a href="/user/disease" class="dropdown-item"><span class="dropAnchor">Corona</span></a>
+								<a href="/user/disease" class="dropdown-item"><span class="dropAnchor">Corona</span></a>
+
 								<% for(var d of user.disease) { %>
 									<a class="dropdown-item"><span class="dropAnchor"><%= d.name %></span></a>
 								<% } %>
@@ -172,7 +177,7 @@
 			<div class="row">
 				<div class="col-lg-2 col-sm-4 col-12 order-3 order-sm-1" id="pSec1">
 					<div id="leftPanel">
-						<div class="lists">
+						<div class = "<%= path === '/user/disease' ? 'lists active-list' : 'lists' %>">
 							<a onclick=myFunctionMobile() class="dropbtn">Disease</a>
 							<img src="../img/disease.png" class="Icons">
 								<div id="myDropdownMobile" class="dropdown-content">
