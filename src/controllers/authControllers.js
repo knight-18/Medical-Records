@@ -203,25 +203,55 @@ module.exports.login_post = async (req, res) => {
 
 module.exports.upload_post = async (req, res) => {
 
-    //console.log("in uploads",req.body)
+    console.log("in uploads",req.body)
     
     try {
         
-        let { name, duration, refDoctor, hospitalName, description } = req.body
+        let { name } = req.body
        
         const files = req.files
-        //console.log("files",files)
-        let images = files.map((file) => {
-            return `/uploads/${req.user.email}/${file.filename}`
-        })
+        dname=name.toLowerCase()
+        const obj = JSON.parse(JSON.stringify(files))
+        console.log("files",Object.keys(obj).length)
+        //console.log(obj.document[0].filename)
+        if(Object.keys(obj).length===0)
+        {
+            req.flash('error_msg','Please select atleast one file to upload')
+            return res.redirect('/user/profile')
+        }
+        if(name==='')
+        {
+            req.flash('error_msg','Disease name cant be empty')
+            return res.redirect('/user/profile')
+        }
+        existDisease= await Disease.findOne({'name':dname})
+        if(existDisease)
+        {
+            req.flash('success_msg','Disease name already exists, file succesfully uploaded')
+            return res.redirect('/user/profile')
+        }
         
-        let newDisease = await new Disease({
+        /*let images = files.map((file) => {
+            return `/uploads/${req.user.email}/${file.filename}`
+        })*/
+        const document=[]
+        const medicine=[]
+
+            if(obj.medicine)
+            {
+                medicine.push(`/uploads/${req.user.email}/${dname}/${obj.medicine[0].filename}`)
+            }
+            if(obj.document)
+            {
+                document.push( `/uploads/${req.user.email}/${dname}/${obj.document[0].filename}`)
+            }
+
+            console.log('documents',document)
+            console.log('medicine',medicine)
+        let newDisease = await new Disease({ 
             name,
-            images,
-            duration,
-            refDoctor,
-            hospitalName,
-            description,
+            medicine,
+            document
         }).save()
         if (!newDisease) {
             req.flash('error_msg', 'Unable to save the disease details')
