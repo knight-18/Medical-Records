@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding: 0;
     background-color:#F1F1F1;
-    /* overflow-y: hidden; */
+    overflow-y: hidden;
     overflow-x: hidden;
 }
 #logo {
