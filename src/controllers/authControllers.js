@@ -228,6 +228,17 @@ module.exports.upload_post = async (req, res) => {
         if(existDisease)
         {
             req.flash('success_msg','Disease name already exists, file succesfully uploaded')
+            console.log('exist disease',existDisease)
+            if(obj.medicine)
+            {
+                existDisease.medicine.push(`/uploads/${req.user.email}/${dname}/${obj.medicine[0].filename}`)
+            }
+            if(obj.document)
+            {
+                existDisease.document.push( `/uploads/${req.user.email}/${dname}/${obj.document[0].filename}`)
+            }
+            await existDisease.save()
+           
             return res.redirect('/user/profile')
         }
         
@@ -273,14 +284,19 @@ module.exports.upload_post = async (req, res) => {
 
 
 module.exports.disease_get=async(req,res)=>{
+    const userId=req.query
+    const params=new URLSearchParams(userId)
+    const id=params.get('id')
+    const disease=await Disease.findOne({_id:id})
+    console.log("disease",disease)
     const hospitals = await Relations.find({'userId':req.user._id,'isPermitted':true}).populate('hospitalId','hospitalName')    
     // console.log('user',req.user)
     res.locals.user= await req.user.populate('disease').execPopulate()
     // console.log('diseases',Userdiseases)
     res.render('./userViews/profile', {
         path: '/user/disease',
-        hospitals
-
+        hospitals,
+        disease
       })
       console.log("in disease page")
     }

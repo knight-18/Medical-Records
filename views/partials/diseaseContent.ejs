@@ -24,19 +24,22 @@
     <div class="disease-back-link"><a href="/user/profile"><i class="fa fa-arrow-left" aria-hidden="true"></i>Disease</a></div>
     <div id="sub4">
         <div class="container">
-            <h4 id="name1">Corona</h5>
+            <h5 id="name1"><%=disease.name%></h5>
             <h5 id="name1">Uploaded Documents</h5>
 
             <div class="disease-flexbox">
+            <%for(var i of disease.document){%>
                 <div class="media" style="background: rgb(179, 232, 241)">
                     <img class="pdf-img align-self-center mr-3" src="../img/pdf-image.png" alt="Generic placeholder image" style="width: 80px" />
-                    <div style="display: inline-block" class="media-heading align-self-center">BloodReport.pdf</div>
+                    <div style="display: inline-block" class="media-heading align-self-center">Document</div>
                     <div class="media-body">
                         <p>
                             <a href="../pdf/sample.pdf" style="color: black"><i class="fa fa-download fa-3x" aria-hidden="true"></i></a>
                         </p>
                     </div>
                 </div>
+                <%}%>
+                <%for(var i of disease.medicine){%>
                 <div
                     class="media"
                     style="background: rgb(179, 232, 241)"
@@ -51,7 +54,7 @@
                         style="display: inline-block"
                         class="media-heading align-self-center"
                     >
-                        BloodReport.pdf
+                       Medicine
                     </div>
 
                     <div class="media-body">
@@ -67,6 +70,7 @@
                         </p>
                     </div>
                 </div>
+                <%}%>
             </div>
         </div>
     </div>

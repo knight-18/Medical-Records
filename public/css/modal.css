@@ -77,10 +77,10 @@
 }
 
 /* The Close Button */
-.close {
+.cancel {
   position: absolute !important;
   right: 7rem !important;
-  top:4.5rem !important;
+  top:3.8rem !important;
   text-align:end;
   color: rgb(227, 232, 235) !important;
   font-size: 18px !important;
@@ -107,10 +107,10 @@
 }
 
 
-.close1:hover,
-.close1:focus {
+.cancel:hover,
+.cancel:focus {
   color: black;
-  text-decoration: none;
+
   cursor: pointer;
 }
 .save1:hover,
@@ -119,13 +119,6 @@
   text-decoration: none;
   cursor: pointer;
 }
-
-
-
-
-
-
-
 
 
 .form-modal {
@@ -480,10 +473,10 @@ input:focus ~ .highlight1 {
     margin: auto;
     margin-top: 20rem;
   }
-  .close {
+  .cancel {
     position: absolute !important;
     right: 7rem !important;
-    top: 6.5rem !important;
+    top: 5.8rem !important;
     text-align:end;
     color: rgb(227, 232, 235) !important;
     font-size: 18px !important;
@@ -513,6 +506,6 @@ input:focus ~ .highlight1 {
   cursor: pointer;
 }
 .selectFile input {
-  text: White;
+ 
   z-index: 10000;
 }
