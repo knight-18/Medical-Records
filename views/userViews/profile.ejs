@@ -201,7 +201,7 @@
 							<img src="../img/disease.png" class="Icons">
 							<div id="myDropdownMobile" class="dropdown-content">
 								<% for(var d of user.disease) { %>
-								<a class="dropdown-item"><span class="dropAnchor"><%= d.name %></span></a>
+									<a class="dropdown-item" href="/user/disease?id=<%= d._id %>"><span class="dropAnchor"><%= d.name %></span></a>
 								<% } %>
 								<a id="myBtn" data-toggle="modal" data-target="#myModal">Add New</a>
 							</div>
