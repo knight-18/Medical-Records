@@ -38,8 +38,6 @@
                         </p>
                     </div>
                 </div>
-                <%}%>
-                <%for(var i of disease.medicine){%>
                 <div
                     class="media"
                     style="background: rgb(179, 232, 241)"
@@ -54,7 +52,7 @@
                         style="display: inline-block"
                         class="media-heading align-self-center"
                     >
-                       Medicine
+                       Document
                     </div>
 
                     <div class="media-body">
@@ -78,6 +76,7 @@
         <div class="container">
             <h5 id="name1">Medicine</h5>
             <div class="disease-flexbox">
+                <%for(var i of disease.medicine){%>
                 <div class="media" style="background: rgb(179, 232, 241)">
                     <img class="pdf-img align-self-center mr-3" src="../img/pdf-image.png" alt="Generic placeholder image" style="width: 80px" />
                     <div style="display: inline-block" class="media-heading align-self-center">BloodReport.pdf</div>
@@ -117,6 +116,7 @@
                         </p>
                     </div>
                 </div>
+                <%}%>
             </div>
         </div>
     </div>
