@@ -12,7 +12,7 @@
 	
 	<title>Profile Page</title>
 </head>
-<body class="profile-main">
+<body>
 	
 	<%- include('../partials/navbar'); %>
 
@@ -71,11 +71,12 @@
 						<img src="../img/profile.png" class="Icons profile-icon">
 					</div>
 					<div class = "<%= path === '/user/disease' ? 'lists active-list' : 'lists' %>">
-						<a onclick="myFunction()" class="dropbtn">Disease</a>
+						<a onclick="myFunction()" class="dropbtn">Diseases</a> 
 						<img src="../img/disease.png" class="Icons">
 							<div id="myDropdown" class="dropdown-content">
+						
 								<% for(var d of user.disease) { %>
-									<a class="dropdown-item"><span class="dropAnchor"><%= d.name %></span></a>
+									<a class="dropdown-item"><span class="dropAnchor"><%= d.name %></span></a> 
 								<% } %>
 								<a id="myBtn">Add New</a>
 							</div>
@@ -171,11 +172,11 @@
 			<div class="row">
 				<div class="col-lg-2 col-sm-4 col-12 order-3 order-sm-1" id="pSec1">
 					<div id="leftPanel">
-						<div class = "lists">
+						<div class="lists">
 							<a href="/user/profile">Profile</a> 
 							<img src="../img/profile.png" class="Icons profile-icon">
 						</div>
-						<div class = "<%= path === '/user/disease' ? 'lists active-list' : 'lists' %>">
+						<div class="lists">
 							<a onclick=myFunctionMobile() class="dropbtn">Disease</a>
 							<img src="../img/disease.png" class="Icons">
 								<div id="myDropdownMobile" class="dropdown-content">
