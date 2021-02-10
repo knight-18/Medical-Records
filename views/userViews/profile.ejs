@@ -69,21 +69,6 @@
 
 	<!--Profile Part-->
 
-<<<<<<< HEAD
-<div class="desktop-view">
-	<div class="container-fluid" >	
-		<div class="row">
-			<div class="col-sm-12"><%- include('../partials/message'); %></div>
-			<div class="col-lg-2 col-sm-4 col-12 order-3 order-sm-1" id="pSec1">
-				<div id="leftPanel"> 
-					<div class = "<%= path === '/user/profile' ? 'lists active-list' : 'lists' %>">
-						<a href="/user/profile">Profile</a> 
-						<img src="../img/profile.png" class="Icons profile-icon">
-					</div>
-					<div class = "<%= path === '/user/disease' ? 'lists active-list' : 'lists' %>">
-						<a onclick="myFunction()" class="dropbtn">Diseases</a> 
-						<img src="../img/disease.png" class="Icons">
-=======
 	<div class="desktop-view">
 		<div class="container-fluid">
 			<div class="row">
@@ -97,15 +82,10 @@
 						<div class="<%= path === '/user/disease' ? 'lists active-list' : 'lists' %>">
 							<a onclick="myFunction()" class="dropbtn">Disease</a>
 							<img src="../img/disease.png" class="Icons">
->>>>>>> b72a7c7121dd2061694faca1d5d7e6cf3725b996
 							<div id="myDropdown" class="dropdown-content">
 
 								<% for(var d of user.disease) { %>
-<<<<<<< HEAD
-									<a class="dropdown-item"><span class="dropAnchor"><%= d.name %></span></a> 
-=======
 								<a class="dropdown-item"><span class="dropAnchor"><%= d.name %></span></a>
->>>>>>> b72a7c7121dd2061694faca1d5d7e6cf3725b996
 								<% } %>
 								<a id="myBtn">Add New</a>
 							</div>
@@ -209,6 +189,7 @@
 		<%if (path === '/user/profile'||path==='/user/userHospital'||path==='/user/hospitalSearch'||path==='/user/userHospitalD') { %>
 		<div class="container-fluid">
 			<div class="row">
+				<div class="col-sm-12"><%- include('../partials/message'); %></div>
 				<div class="col-lg-2 col-sm-4 col-12 order-3 order-sm-1" id="pSec1">
 					<div id="leftPanel">
 						<div class="lists">
