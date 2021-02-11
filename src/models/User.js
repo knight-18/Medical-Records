@@ -56,6 +56,17 @@ const userSchema = mongoose.Schema(
                 ref: 'Disease',
             },
         ],
+        address:{
+            type:String
+        },
+        bloodGroup:{
+            type:String
+        },
+        nominee:{
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'Nominee'
+
+        },
         passwordResetToken: String,
         passwordResetExpires: Date,
     },
