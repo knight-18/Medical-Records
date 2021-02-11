@@ -9,6 +9,7 @@
 
 	<link rel="stylesheet" href="../css/NavBar.css">
 	<link rel="stylesheet" href="../css/modal.css">
+	<link rel="stylesheet" href="../css/edit-form.css">
 	<link rel="stylesheet" href="../css/Profile.css">
 
 	<title>Profile Page</title>
@@ -17,7 +18,7 @@
 <body>
 
 	<%- include('../partials/navbar'); %>
-
+	
 	<div id="myModal" class="modal fadeIn">
 		<div class="modal-content">
 			<div class="row">
@@ -348,90 +349,179 @@
 		}
 
 	</script>
-	<script>
-		var modal = document.getElementById("myModal");
-		var btn = document.getElementById("myBtn");
-		var span = document.getElementsByClassName("cancel")[0];
-		btn.onclick = function () {
-			modal.style.display = "block";
-		}
-		span.onclick = function () {
+	
+
+
+    <script>
+    var modal = document.getElementById("myModalEdit");
+    var btn = document.getElementById("myBtnEdit");
+    var span = document.getElementsByClassName("cancel-edit")[0];
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    var span = document.getElementsByClassName("save1-edit")[0];
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    } 
+</script>
+<script>
+    $(window, document, undefined).ready(function () {
+        $('input').blur(function () {
+            var $this = $(this);
+            if ($this.val())
+                $this.addClass('used');
+            else
+                $this.removeClass('used');
+        });
+        var $ripples = $('.ripples');
+        $ripples.on('click.Ripples', function (e) {
+            var $this = $(this);
+            var $offset = $this.parent().offset();
+            var $circle = $this.find('.ripplesCircle');
+            var x = e.pageX - $offset.left;
+            var y = e.pageY - $offset.top;
+            $circle.css({
+                top: y + 'px',
+                left: x + 'px'
+            });
+            $this.addClass('is-active');
+        });
+        $ripples.on('animationend webkitAnimationEnd mozAnimationEnd oanimationend MSAnimationEnd', function (e) {
+            $(this).removeClass('is-active');
+        });
+    });
+</script>
+<script>
+    $(document).bind('dragover', function (e) {
+        var dropZone = $('.zone'),
+            timeout = window.dropZoneTimeout;
+        if (!timeout) {
+            dropZone.addClass('in');
+        } else {
+            clearTimeout(timeout);
+        }
+        var found = false,
+            node = e.target;
+        do {
+            if (node === dropZone[0]) {
+                found = true;
+                break;
+            }
+            node = node.parentNode;
+        } while (node != null);
+        if (found) {
+            dropZone.addClass('hover');
+        } else {
+            dropZone.removeClass('hover');
+        }
+        window.dropZoneTimeout = setTimeout(function () {
+            window.dropZoneTimeout = null;
+            dropZone.removeClass('in hover');
+        }, 100);
+    });
+</script>
+
+<script>
+	var modal = document.getElementById("myModal");
+	var btn = document.getElementById("myBtn");
+	var span = document.getElementsByClassName("cancel")[0];
+	btn.onclick = function () {
+		modal.style.display = "block";
+	}
+	span.onclick = function () {
+		modal.style.display = "none";
+	}
+	window.onclick = function (event) {
+		if (event.target == modal) {
 			modal.style.display = "none";
 		}
-		window.onclick = function (event) {
-			if (event.target == modal) {
-				modal.style.display = "none";
-			}
-		}
-		var span = document.getElementsByClassName("save1")[0];
-		btn.onclick = function () {
-			modal.style.display = "block";
-		}
-		span.onclick = function () {
+	}
+	var span = document.getElementsByClassName("save1")[0];
+	btn.onclick = function () {
+		modal.style.display = "block";
+	}
+	span.onclick = function () {
+		modal.style.display = "none";
+	}
+	window.onclick = function (event) {
+		if (event.target == modal) {
 			modal.style.display = "none";
 		}
-		window.onclick = function (event) {
-			if (event.target == modal) {
-				modal.style.display = "none";
-			}
-		} 
-	</script>
-	<script>
-		$(window, document, undefined).ready(function () {
-			$('input').blur(function () {
-				var $this = $(this);
-				if ($this.val())
-					$this.addClass('used');
-				else
-					$this.removeClass('used');
-			});
-			var $ripples = $('.ripples');
-			$ripples.on('click.Ripples', function (e) {
-				var $this = $(this);
-				var $offset = $this.parent().offset();
-				var $circle = $this.find('.ripplesCircle');
-				var x = e.pageX - $offset.left;
-				var y = e.pageY - $offset.top;
-				$circle.css({
-					top: y + 'px',
-					left: x + 'px'
-				});
-				$this.addClass('is-active');
-			});
-			$ripples.on('animationend webkitAnimationEnd mozAnimationEnd oanimationend MSAnimationEnd', function (e) {
-				$(this).removeClass('is-active');
-			});
+	} 
+</script>
+<script>
+	$(window, document, undefined).ready(function () {
+		$('input').blur(function () {
+			var $this = $(this);
+			if ($this.val())
+				$this.addClass('used');
+			else
+				$this.removeClass('used');
 		});
-	</script>
-	<script>
-		$(document).bind('dragover', function (e) {
-			var dropZone = $('.zone'),
-				timeout = window.dropZoneTimeout;
-			if (!timeout) {
-				dropZone.addClass('in');
-			} else {
-				clearTimeout(timeout);
-			}
-			var found = false,
-				node = e.target;
-			do {
-				if (node === dropZone[0]) {
-					found = true;
-					break;
-				}
-				node = node.parentNode;
-			} while (node != null);
-			if (found) {
-				dropZone.addClass('hover');
-			} else {
-				dropZone.removeClass('hover');
-			}
-			window.dropZoneTimeout = setTimeout(function () {
-				window.dropZoneTimeout = null;
-				dropZone.removeClass('in hover');
-			}, 100);
+		var $ripples = $('.ripples');
+		$ripples.on('click.Ripples', function (e) {
+			var $this = $(this);
+			var $offset = $this.parent().offset();
+			var $circle = $this.find('.ripplesCircle');
+			var x = e.pageX - $offset.left;
+			var y = e.pageY - $offset.top;
+			$circle.css({
+				top: y + 'px',
+				left: x + 'px'
+			});
+			$this.addClass('is-active');
 		});
-	</script>
+		$ripples.on('animationend webkitAnimationEnd mozAnimationEnd oanimationend MSAnimationEnd', function (e) {
+			$(this).removeClass('is-active');
+		});
+	});
+</script>
+<script>
+	$(document).bind('dragover', function (e) {
+		var dropZone = $('.zone'),
+			timeout = window.dropZoneTimeout;
+		if (!timeout) {
+			dropZone.addClass('in');
+		} else {
+			clearTimeout(timeout);
+		}
+		var found = false,
+			node = e.target;
+		do {
+			if (node === dropZone[0]) {
+				found = true;
+				break;
+			}
+			node = node.parentNode;
+		} while (node != null);
+		if (found) {
+			dropZone.addClass('hover');
+		} else {
+			dropZone.removeClass('hover');
+		}
+		window.dropZoneTimeout = setTimeout(function () {
+			window.dropZoneTimeout = null;
+			dropZone.removeClass('in hover');
+		}, 100);
+	});
+</script>
+
 </body>
 
 </html>

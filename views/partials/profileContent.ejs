@@ -1,21 +1,91 @@
+<div id="myModalEdit" class="modal fadeIn">
+    <div class="modal-content-edit">
+        <div class="row">
+            <div class="content-top-edit ">
+                <a href="#" class="img-rounded"><img src="../img/ProfilePic.png" id="profileImg1"></a>
+                <span><button type="button" class="cancel-edit fadeOut" data-dismiss="modal">CANCEL</button></span>
+                <h4>Profile details</h4>
+            </div>
+        </div>
+        <form class="form-modal-edit" method="POST" >
+            <!--Dont remove the enctype-->
+            <div class="group1">
+                <input type="text" name="nomineeName" aria-required="true" required><span class="highlight1"></span><span
+                    class="bar1"></span>
+                <label for="name" style="margin-left: 8px; margin-top: -20px; padding-bottom: 200px;">Nominee
+                    Name</label>
+                <span><button class="save1-edit" formaction="profile/editDetails" >SAVE</button></span>
+                <!-- Dont remove the name and value attribute-->
+            </div>
+            <div class="group1-edit">
+                <input type="text" name="nomineeEmail" aria-required="true" required><span class="highlight1"></span><span
+                    class="bar1"></span>
+                <label for="name" style="margin-left: 8px; margin-top: -20px; padding-bottom: 200px;">Nominee
+                    Email</label>
+                
+                <!-- Dont remove the name and value attribute-->
+            </div>
+            <div class="group1">
+                <input type="text" name="nomineePhn" aria-required="true" required><span class="highlight1"></span><span
+                    class="bar1"></span>
+                <label for="name" style="margin-left: 8px; margin-top: -20px; padding-bottom: 200px;">Nominee
+                    Phone Number</label>
+               
+                <!-- Dont remove the name and value attribute-->
+            </div>
+            <div class="group1">
+                <input type="text" name="address" aria-required="true" required><span class="highlight1"></span><span
+                    class="bar1"></span>
+                <label for="name" style="margin-left: 8px; margin-top: -20px; padding-bottom: 200px;">User Address</label>
+               
+                <!-- Dont remove the name and value attribute-->
+            </div>
+            <div class="group1">
+                <input type="text" name="bloodGroup" aria-required="true" required><span class="highlight1"></span><span
+                    class="bar1"></span>
+                <label for="name" style="margin-left: 8px; margin-top: -20px; padding-bottom: 200px;">User Blood-Group</label>
+               
+                <!-- Dont remove the name and value attribute-->
+            </div>
+        </form>
+    </div>
+</div>
+
 <div class="col-lg-8 col-sm-8 col-12 order-1 order-sm-2" id="pSec2">
     <div id="sub1">
         <img src="../img/CoverPhoto.png" id="coverImg">
         <a href="#"><img src="../img/ProfilePic.png" id="profileImg"></a>
         <a href="#"><img src="../img/camera.png" id="Camera"></a>
-        <h5 id="name"><%= user.name %></h5>
-        <h4 id="heading1">Patient Id- <%= user.short_id %><span id="patientId"></span></h4>
+        <h5 id="name"><%if (user.name) { %>
+            <%=user.name %>
+            <% } %></h5>
+        <h4 id="heading1">Patient Id-:<%if (user.short_id) { %>
+            <%=user.short_id %>
+            <% } %><span id="patientId"></span></h4>
         <div id="patientDetails">
+            <button id="myBtnEdit" class="editBtn"  data-toggle="modal" data-target="#myModalEdit">edit</button>
             <h3 id="heading2">Patient Details</h3>
-            <label for="bloodGroup" class="detailLevels">Blood Group : </label>
-            
+            <label for="PhoneNo" class="detailLevels">Phone No. : <%if (user.phoneNumber) { %>
+				<%=user.phoneNumber %>
+				<% } %> </label>
             <br>
-            <label for="Address" class="detailLevels">Address : </label>
+            <label for="Email" class="detailLevels">Email :<%if (user.email) { %>
+				<%=user.email %>
+				<% } %></label>
             <br>
-            <label for="PhoneNo" class="detailLevels">Phone No. : <%=user.phoneNumber %> </label>
+            <label for="bloodGroup" class="detailLevels">Blood Group:<%if (user.bloodGroup) { %>
+				<%=user.bloodGroup %>
+				<% } %></label>
             <br>
-            <label for="Email" class="detailLevels">Email : <%=user.email %> </label>
+            <label for="bloodGroup" class="detailLevels">Nominee Name:<%if (nominee.nominee) { %>
+				<%=nominee.nominee.name %>
+				<% } %> </label>
+            <br>
+            <label for="bloodGroup" class="detailLevels">Nominee Email:<%if (nominee.nominee) { %>
+				<%=nominee.nominee.email %>
+				<% } %></label>
             <br>
         </div>
     </div>
 </div>
+
