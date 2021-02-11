@@ -245,7 +245,7 @@ module.exports.relation_post=async (req,res)=>{
         if(existRelation.isPermitted)
         {
             console.log('The user already exists',existRelation) //NEED TO IMPLEMENT SEARCH 
-            req.flash('eror_msg','The user is already registered in your hospital')
+            req.flash('error_msg','The user is already registered in your hospital')
             res.redirect('/hospital/profile')
         }
         else{
