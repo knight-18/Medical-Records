@@ -13,7 +13,15 @@
 <body>
 	<%- include('../partials/navbar'); %>
 
-   
+	<link rel="stylesheet" href="/css/flash-message.css">
+	<div id="flash-message">
+		<% if (custom_flash) { %>
+		<div class="alert alert-success alignment"><%= custom_flash %><span class="close">&times;</span></div>
+		
+		<% } else { %> <% } %>
+	</div>
+	
+	<script src="/js/flash-message.js"></script>
 
 	<!--Profile Part-->
 
@@ -112,7 +120,18 @@
 						<p><%= foundUser.name %></p>
 						</div>
 						</div>
-						<a class="btn btn-primary" href="/hospital/relation/<%= foundUser.short_id %>"" role="button" id="search_button2">Request Access</a>	
+						<% if (access.length == 0) { %>
+							<a class="btn btn-danger" href="/hospital/relation/<%= foundUser.short_id %>"" role="button" id="search_button2">Request Patient</a>	
+							<% if (foundUser.nominee) { %>
+								<br>
+								<br>
+								
+								<a class="btn btn-warning" href="/hospital/nominee/<%= foundUser.short_id %>"" role="button" id="search_button2">Request Nominee</a>
+							<% } %>
+					    <% } else { %>
+							<a class="btn btn-primary" href="/hospital/patient?id=<%= foundUser._id %>"" role="button" id="search_button2">View details</a>
+					    <% } %>
+						
 					</div>
 				<% } %>
 
