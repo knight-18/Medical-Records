@@ -478,6 +478,7 @@ module.exports.hospitalSearch_get=async(req,res)=>{
     console.log(hospitals)
     // res.send(hospital)
     const nominee= await req.user.populate('nominee').execPopulate()
+    console.log('nomineeeee',nominee)
     res.locals.user=req.user
     res.render("./userViews/Profile",{
         hospitals,
@@ -511,10 +512,12 @@ module.exports.hospitalSearch_post=async(req,res)=>{
             req.flash("success_msg", "Hospital found")
             res.locals.user = await req.user.populate('disease').execPopulate()
             const hospitals = await Relations.find({'userId':req.user._id,'isPermitted':true}).populate('hospitalId','hospitalName')
+            const nominee= await req.user.populate('nominee').execPopulate()
             console.log(hospitals)
             res.render("./userViews/profile", {
             path:'/user/hospitalSearch', 
             hospitals, 
+            nominee,
             hospital })
             return 
 
