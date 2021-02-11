@@ -3,25 +3,60 @@
 }
 
 #pSec9{
-	top: 15px;
+	top: 17px;
+	height: 91vh;
+	overflow-y: scroll !important;
+	padding-right: unset !important;
+	scroll-margin-right: 15px !important;
+}
+.disease-back-link{
+    width: 100%;
+    /* height: 8%; */
+    text-align: center;
+    background: #019dfa;
+    color: white;
+    padding: 3%;
+    /* padding-top: 6%; */
+    border-radius: 5px 5px 0px 0px;
+    font-weight: bold;
+    font-size: 140%;
+    font-family: Product Sans;
+	margin: 5px 0px 15px;
+	display: none;
+}
+.disease-back-link a{
+	text-decoration: none;
+	color: white;
+}
+.disease-back-link .fa-arrow-left{
+	margin-right: 15px;
 }
 #sub4{
 	height: 91vh;
-	overflow-y: scroll !important;
 	box-shadow: 3px 3px 15px rgb(0 0 0 / 25%);
     border-radius: 10px 10px 10px 10px;
-	margin-bottom: 15px;
+	margin-bottom: 10px;
 }
-#sub4::-webkit-scrollbar{
+
+#pSec9::-webkit-scrollbar{
 	width:8px;
+	scroll-padding-right: 15px;
+	scroll-margin-right: 15px;
 }
-#sub4::-webkit-scrollbar-track{
+#pSec9::-webkit-scrollbar-track{
     background-color: rgb(209, 202, 202);
     border-radius:3px;
+	scroll-padding-right: 15px;
+
 }
-#sub4::-webkit-scrollbar-thumb{
+#pSec9::-webkit-scrollbar-thumb{
     background-color:#9593A0;
     border-radius:3px;
+	scroll-padding-right: 15px;
+
+}
+#pSec3{
+	right: -10px !important;
 }
 #Dr{
 	height: auto !important;
@@ -52,6 +87,9 @@
 }
 @media (max-width: 576px) {
 	#sub4{
-		margin-bottom: 30px;
+		margin-bottom: 15px;
+	}
+	.disease-back-link{
+		display: block;
 	}
 }
