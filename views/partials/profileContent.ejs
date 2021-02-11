@@ -83,7 +83,7 @@
 				<%=nominee.nominee.name %>
 				<% } %> </label>
             <br>
-            <label for="bloodGroup" class="detailLevels">Nominee Email:<%if (nominee.nominee) { %>
+            <label for="bloodGroup" class="detailLevels">Nominee Email:<%if (nominee.nominee!==null) { %>
 				<%=nominee.nominee.email %>
 				<% } %></label>
             <br>

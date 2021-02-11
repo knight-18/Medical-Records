@@ -477,9 +477,11 @@ module.exports.hospitalSearch_get=async(req,res)=>{
     const hospitals=await Hospital.find({ _id:id})
     console.log(hospitals)
     // res.send(hospital)
+    const nominee= await req.user.populate('nominee').execPopulate()
     res.locals.user=req.user
     res.render("./userViews/Profile",{
         hospitals,
+        nominee,
         path:'/user/userHospitalD'
     })
 }
