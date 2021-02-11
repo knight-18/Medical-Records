@@ -63,7 +63,7 @@
             <%=user.short_id %>
             <% } %><span id="patientId"></span></h4>
         <div id="patientDetails">
-            <button id="myBtnEdit" class="editBtn"  data-toggle="modal" data-target="#myModalEdit">edit</button>
+            <button id="myBtnEdit" class="editBtn"  data-toggle="modal" data-target="#myModalEdit" onclick=modalEdit()>edit</button>
             <h3 id="heading2">Patient Details</h3>
             <label for="PhoneNo" class="detailLevels">Phone No. : <%if (user.phoneNumber) { %>
 				<%=user.phoneNumber %>

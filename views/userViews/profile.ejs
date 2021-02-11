@@ -353,6 +353,7 @@
 
 
     <script>
+		function modalEdit(){
     var modal = document.getElementById("myModalEdit");
     var btn = document.getElementById("myBtnEdit");
     var span = document.getElementsByClassName("cancel-edit")[0];
@@ -378,7 +379,8 @@
         if (event.target == modal) {
             modal.style.display = "none";
         }
-    } 
+    }
+} 
 </script>
 <script>
     $(window, document, undefined).ready(function () {
@@ -406,6 +408,7 @@
             $(this).removeClass('is-active');
         });
     });
+
 </script>
 <script>
     $(document).bind('dragover', function (e) {
