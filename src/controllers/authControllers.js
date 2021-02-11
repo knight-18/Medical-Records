@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken')
 const { signupMail,passwordMail } = require('../config/nodemailer')
 const path = require('path')
 const Disease = require('../models/Disease')
+const Nominee = require('../models/Nominee')
 const Relations=require('../models/Relations')
 const { handleErrors } = require('../utilities/Utilities'); 
 const crypto = require('crypto')
@@ -11,6 +12,45 @@ require('dotenv').config()
 const { nanoId } = require("nanoid")
 
 const maxAge = 30 * 24 * 60 * 60
+
+
+module.exports.editDetails_post=async(req,res)=>{
+    try{
+    console.log("details",req.body)
+    const name =req.body.nomineeName
+    const email=req.body.nomineeEmail
+    const phoneNumber=req.body.nomineePhn
+    
+    const address= req.body.address
+    const bloodGroup= req.body.bloodGroup
+    const user=req.user
+    user.address=address
+    user.bloodGroup=bloodGroup
+    //await user.save()
+    let nominee = await new Nominee({ 
+        name,
+        email,
+        phoneNumber
+    }).save()
+    if (!nominee) {
+        req.flash('error_msg', 'Unable to save the details')
+        return res.redirect('/user/profile')
+    }
+    console.log('nominee',nominee)
+    
+    req.user.nominee = nominee._id
+    await user.save()
+    console.log("user saved",user)
+    req.flash('success_msg','Details about the user has been saved')
+
+    res.redirect('/user/profile')
+    }
+    catch(e){
+        console.log("error",e)
+        req.flash('error_msg','error while editing profile details')
+        res.redirect('/user/profile')
+    }
+}
 
 
 module.exports.userHospital_get= async (req,res)=>{
@@ -55,6 +95,7 @@ module.exports.login_get = (req, res) => {
 
 module.exports.signup_post = async (req, res) => {
     const { name, email, password, confirmPwd, phoneNumber } = req.body
+    const nominee=null
     console.log("in sign up route",req.body);
     if (password != confirmPwd) {
         req.flash('error_msg', 'Passwords do not match. Try again')
@@ -81,7 +122,7 @@ module.exports.signup_post = async (req, res) => {
         }
         const short_id = require("nanoid").nanoid(8);
         console.log("Short ID generated is: ", short_id)
-        const user = new User({ email, name, password, phoneNumber, short_id })
+        const user = new User({ email, name, password, phoneNumber, short_id ,nominee})
         let saveUser = await user.save()
         //console.log(saveUser);
         req.flash(
@@ -308,10 +349,12 @@ module.exports.profile_get = async (req, res) => {
     //console.log("locals",res.locals.user)
     //console.log('id',req.user._id)
     const hospitals = await Relations.find({'userId':req.user._id,'isPermitted':true}).populate('hospitalId','hospitalName')
-    //console.log('hospitals',hospitals)
+    const nominee= await req.user.populate('nominee').execPopulate()// to be optimised by gaurav
+    console.log('hospitals',nominee)
     res.render('./userViews/profile', {
         path: '/user/profile',
-        hospitals:hospitals
+        hospitals:hospitals,
+        nominee
       })
       console.log("in profile page")
     }

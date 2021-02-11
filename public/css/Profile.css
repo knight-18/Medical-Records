@@ -22,6 +22,11 @@ body {
     border-radius:3px;
 }
 
+#profileEdit{
+    top:0;
+    right:0;
+}
+
 #profileBody {
     margin-top: 0;
     display: flex;
@@ -39,7 +44,7 @@ body {
     left: 0px;
 }
 #sub1 {
-    height: 85vh;
+    height: 96vh;
     background: #ffffff;
     box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.25);
     border-radius: 10px 10px 10px 10px;
@@ -149,7 +154,7 @@ body {
     top: 14%;
     left: 5.5%;
     width: 88%;
-    height: 30%;
+    height: fit-content;
     background-color: #f3f3f3;
     border-radius: 15px;
 }
