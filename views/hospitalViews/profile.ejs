@@ -116,7 +116,13 @@
 						</div>
 						</div>
 						<% if (access.length == 0) { %>
-							<a class="btn btn-danger" href="/hospital/relation/<%= foundUser.short_id %>"" role="button" id="search_button2">Request Access</a>	
+							<a class="btn btn-danger" href="/hospital/relation/<%= foundUser.short_id %>"" role="button" id="search_button2">Request Patient</a>	
+							<% if (foundUser.nominee) { %>
+								<br>
+								<br>
+								
+								<a class="btn btn-warning" href="/hospital/nominee/<%= foundUser.short_id %>"" role="button" id="search_button2">Request Nominee</a>
+							<% } %>
 					    <% } else { %>
 							<a class="btn btn-primary" href="/hospital/patient?id=<%= foundUser._id %>"" role="button" id="search_button2">View details</a>
 					    <% } %>
