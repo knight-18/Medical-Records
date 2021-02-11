@@ -1,4 +1,6 @@
-<div id="myModalEdit" class="modal fadeIn">
+<link rel="stylesheet" href="../css/edit-form.css">
+
+<div id="myModalEdit" class="modalEdit fadeIn">
     <div class="modal-content-edit">
         <div class="row">
             <div class="content-top-edit ">
@@ -63,7 +65,7 @@
             <%=user.short_id %>
             <% } %><span id="patientId"></span></h4>
         <div id="patientDetails">
-            <button id="myBtnEdit" class="editBtn"  data-toggle="modal" data-target="#myModalEdit" onclick=modalEdit()>edit</button>
+            <button id="myBtnEdit" class="editBtn"  data-toggle="modalEdit" data-target="#myModalEdit" onclick=modalEdit()>edit</button>
             <h3 id="heading2">Patient Details</h3>
             <label for="PhoneNo" class="detailLevels">Phone No. : <%if (user.phoneNumber) { %>
 				<%=user.phoneNumber %>

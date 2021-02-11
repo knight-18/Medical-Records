@@ -1,4 +1,4 @@
-.modal {
+.modalEdit {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -442,7 +442,7 @@
   }
   
   @media screen and (max-width:1300px) {
-  .modal {
+  .modalEdit {
     margin-bottom: 1rem;
   }
     .modal-content-edit {
@@ -458,7 +458,7 @@
       flex:none !important;
       height:8rem !important;
     }
-    .modal {
+    .modalEdit {
       width:100%;
     }
     #profileImg1 {

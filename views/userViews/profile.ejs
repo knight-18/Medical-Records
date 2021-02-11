@@ -9,7 +9,7 @@
 
 	<link rel="stylesheet" href="../css/NavBar.css">
 	<link rel="stylesheet" href="../css/modal.css">
-	<link rel="stylesheet" href="../css/edit-form.css">
+	
 	<link rel="stylesheet" href="../css/Profile.css">
 
 	<title>Profile Page</title>
@@ -88,7 +88,7 @@
 								<% for(var d of user.disease) { %>
 									<a class="dropdown-item" href="/user/disease?id=<%= d._id %>"><span class="dropAnchor"><%= d.name %></span></a>
 								<% } %>
-								<a id="myBtn">Add New</a>
+								<a id="myBtn" onclick=openModal()>Add New</a>
 							</div>
 						</div>
 						<div class="lists">
@@ -204,7 +204,7 @@
 								<% for(var d of user.disease) { %>
 									<a class="dropdown-item" href="/user/disease?id=<%= d._id %>"><span class="dropAnchor"><%= d.name %></span></a>
 								<% } %>
-								<a id="myBtn" data-toggle="modal" data-target="#myModal">Add New</a>
+								<a id="myBtn" data-toggle="modal" onclick=openModal() data-target="#myModal">Add New</a>
 							</div>
 						</div>
 						<div class="lists">
@@ -441,6 +441,7 @@
 </script>
 
 <script>
+	function openModal(){
 	var modal = document.getElementById("myModal");
 	var btn = document.getElementById("myBtn");
 	var span = document.getElementsByClassName("cancel")[0];
@@ -467,6 +468,7 @@
 			modal.style.display = "none";
 		}
 	} 
+}
 </script>
 <script>
 	$(window, document, undefined).ready(function () {

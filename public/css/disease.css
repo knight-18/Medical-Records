@@ -32,10 +32,20 @@
 	margin-right: 15px;
 }
 #sub4{
-	height: 91vh;
+	height: 100vh;
 	box-shadow: 3px 3px 15px rgb(0 0 0 / 25%);
     border-radius: 10px 10px 10px 10px;
 	margin-bottom: 10px;
+}
+#patientDiseases {
+    color: black;
+    font-family: Product Sans;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+    letter-spacing: 0.1em;
+    margin-left: 3vw;
 }
 
 #pSec9::-webkit-scrollbar{

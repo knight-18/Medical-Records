@@ -3,7 +3,7 @@
         <img src="../img/CoverPhoto.png" id="coverImg">
         <a href="#"><img src="../img/ProfilePic.png" id="profileImg"></a>
         <a href="#"><img src="../img/camera.png" id="Camera"></a>
-        <h5 id="name"><%= user.name %></h5>
+        <h5 id="name"><%= user.name %></h5><a href="/hospital/diseases?id=<%=user.short_id%>"><button id="id_search_disease"> Documents</button></a>
         <h4 id="heading1">Patient Id- <%= user.short_id %><span id="patientId"></span></h4>
         <div id="patientDetails">
             <h3 id="heading2">Patient Details</h3>

@@ -7,7 +7,9 @@ const { requireAuth, redirectIfLoggedIn } = require("../middleware/hospitalAuth"
 
 const hospitalController = require('../controllers/hospitalController')
 
+router.get('/document',requireAuth,hospitalController.document_get)
 
+router.get('/diseases',requireAuth,hospitalController.patientDiseases_get)
 router.get('/signup',redirectIfLoggedIn, hospitalController.signup_get)
 router.post('/signup', hospitalController.signup_post)
 router.get('/relation/:shortId',requireAuth,hospitalController.relation_post)

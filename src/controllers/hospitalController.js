@@ -1,5 +1,7 @@
 const Hospital = require('../models/Hospital'); 
 const User=require('../models/User')
+const Disease=require('../models/Disease')
+
 const Relations=require('../models/Relations')
 
 
@@ -11,6 +13,79 @@ const { handleErrors } = require('../utilities/Utilities');
 require('dotenv').config()
 
 const maxAge = 30 * 24 * 60 * 60
+module.exports.document_get=async(req,res)=>{
+    try{
+    const diseaseId=req.query
+    const params=new URLSearchParams(diseaseId)
+    const newid=params.get('id')
+    const userId=params.get('userId')
+    const user= await User.findOne({'_id':userId})
+    const disease= await Disease.findOne({'_id':newid})
+    res.locals.hospital = req.hospital
+    // console.log("hospital", res.locals.hospital)
+    const patients = await Relations.find({ 'hospitalId': req.hospital._id}, "userId").populate('userId','name'); 
+    //console.log('diseases of user',user)
+    console.log('dieasessssssssssssssss',disease)
+    if(!disease)
+    {
+        req.flash('error_msg','User not found')
+        res.redirect('/hospital/profile')
+    }
+    //const diseases=await Disease.populate().execPopulate()
+    console.log('dieases',disease)
+    res.render("./hospitalViews/profile",{
+        path:'/hospital/document',
+        disease,
+        user,
+        patients, foundUser:null,access:null, 
+        custom_flash:null, 
+        
+    })
+   }
+
+    
+    catch(e)
+    {
+        console.log(e)
+        res.redirect('/hospital/profile')
+    }
+}
+
+
+module.exports.patientDiseases_get=async(req,res)=>{
+    try{
+    const userId=req.query
+    const params=new URLSearchParams(userId)
+    const short_id=params.get('id')
+    const user= await User.findOne({'short_id':short_id})
+    res.locals.hospital = req.hospital
+    // console.log("hospital", res.locals.hospital)
+    const patients = await Relations.find({ 'hospitalId': req.hospital._id}, "userId").populate('userId','name'); 
+    //console.log('diseases of user',user)
+    if(!user)
+    {
+        req.flash('error_msg','User not found')
+        res.redirect('/hospital/profile')
+    }
+    const diseases=await user.populate('disease','name').execPopulate()
+    //console.log('dieases',diseases)
+    res.render("./hospitalViews/profile",{
+        path:'/hospital/diseases',
+        user:user,
+        diseases,
+        patients, foundUser:null,access:null, 
+        custom_flash:null, 
+        
+    })
+   }
+
+    
+    catch(e)
+    {
+        console.log(e)
+        res.redirect('/hospital/profile')
+    }
+}
 
 
 module.exports.patient_get= async (req,res)=>{

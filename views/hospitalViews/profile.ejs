@@ -88,7 +88,12 @@
 			<%if (path === '/hospital/patient') { %>
 				<%- include('../partials/HospitalProfilePatient'); %>
 			<% } %>
-			
+			<%if (path === '/hospital/diseases') { %>
+				<%- include('../partials/hospitalPatientDiseases'); %>
+			<% } %>
+			<%if (path === '/hospital/document') { %>
+				<%- include('../partials/diseaseContentHospital'); %>
+			<% } %>
 			<div class="col-lg-2 col-sm-0 col-12 order-2 order-sm-3" id="pSec3">
 				<div id="Dr"><a>Patients</a><img src="../img/doctor-icon.png" class="Icons doctor-icon" ></div>
 				<div>
@@ -230,6 +235,14 @@
 		</div>
 	</div>
 	<% } %>	
+
+	<%if (path === '/hospital/diseases') { %>
+		<%- include('../partials/hospitalPatientDiseases'); %>
+	<% } %>
+	<%if (path === '/hospital/document') { %>
+		<%- include('../partials/diseaseContentHospital'); %>
+	<% } %>
+
 </div>
 
 <%- include('../partials/footer'); %>
