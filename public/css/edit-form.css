@@ -1,4 +1,4 @@
-.modalEdit {
+.modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -27,7 +27,7 @@
   
   
   /* Modal Content/Box #0667B8;*/
-  .modal-content-edit {
+  .modal-content {
     color:#e9ebec;
     background-color: rgba(238, 246, 253, 1) !important;
     margin: 15% auto; /* 15% from the top and centered */
@@ -82,7 +82,7 @@
   }
   
   /* The Close Button */
-  .cancel-edit {
+  .cancel {
     position: absolute !important;
     right: 27rem !important;
     top:8.3rem !important;
@@ -442,10 +442,10 @@
   }
   
   @media screen and (max-width:1300px) {
-  .modalEdit {
+  .modal {
     margin-bottom: 1rem;
   }
-    .modal-content-edit {
+    .modal-content {
       width: 100% !important ; /* Could be more or less, depending on screen size */
      height: 80% !important;
      /*background-color: red!important;*/
@@ -458,7 +458,7 @@
       flex:none !important;
       height:8rem !important;
     }
-    .modalEdit {
+    .modal {
       width:100%;
     }
     #profileImg1 {
@@ -478,7 +478,7 @@
       margin: auto;
       margin-top: 20rem;
     }
-    .cancel-edit {
+    .cancel {
       position: absolute !important;
       right: 7rem !important;
       top: 8.2rem !important;
@@ -501,7 +501,7 @@
       height:100%;
   
     }
-   .modal-content-edit {
+   .modal-content {
      height:32% !important;
    }
     

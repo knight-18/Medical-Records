@@ -20,6 +20,17 @@ module.exports.editDetails_post=async(req,res)=>{
     const name =req.body.nomineeName
     const email=req.body.nomineeEmail
     const phoneNumber=req.body.nomineePhn
+    if(!name){
+        name=''
+    }
+    if(!phoneNumber)
+    {
+        phone=''
+    }
+    if(!email)
+    {
+        email=''
+    }
     
     const address= req.body.address
     const bloodGroup= req.body.bloodGroup
