@@ -563,3 +563,15 @@ module.exports.download=async(req,res)=>{
       })
 
 }
+module.exports.picupload_post=async(req,res)=>{
+    const user=req.user
+    const picPath=user.profilePic
+    User.findOneAndUpdate({_id: user.id}, {$set:{profilePic:picPath}}, {new: true}, (err, doc) => {
+        if (err) {
+            console.log("Something wrong when updating data!");
+        }
+        
+        console.log(doc);
+    });
+    res.redirect('/user/profile')
+}
