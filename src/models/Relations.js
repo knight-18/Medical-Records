@@ -11,7 +11,7 @@ const relationsSchema=mongoose.Schema({
     },
     isPermitted:{
         type:Boolean,
-        default:true
+        default:false
     }
 
 })

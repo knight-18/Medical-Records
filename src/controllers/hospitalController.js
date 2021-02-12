@@ -4,7 +4,7 @@ const Relations=require('../models/Relations')
 
 
 const jwt = require('jsonwebtoken')
-const { hospitalSignupMail,relationMail } = require('../config/nodemailer')
+const { hospitalSignupMail,relationMail, nomineeMail } = require('../config/nodemailer')
 const path = require('path')
 
 const { handleErrors } = require('../utilities/Utilities'); 
@@ -245,7 +245,7 @@ module.exports.relation_post=async (req,res)=>{
         if(existRelation.isPermitted)
         {
             console.log('The user already exists',existRelation) //NEED TO IMPLEMENT SEARCH 
-            req.flash('eror_msg','The user is already registered in your hospital')
+            req.flash('error_msg','The user is already registered in your hospital')
             res.redirect('/hospital/profile')
         }
         else{
@@ -295,7 +295,7 @@ module.exports.patient_search = async (req, res) =>
     }
     try
     {
-        const result = await User.findOne({short_id})
+        const result = await User.findOne({short_id}).populate("nominee")
         //console.log('resukts',result)
         if (result === null)
         {
@@ -312,6 +312,7 @@ module.exports.patient_search = async (req, res) =>
             const patients = await Relations.find({'isPermitted': true, 'hospitalId': req.hospital._id}, "userId").populate('userId', 'name'); 
             const access= await Relations.find({'userId':result._id, 'hospitalId':req.hospital._id, 'isPermitted':true }).populate('userId','isPermitted'); 
            console.log('searched patient',access);
+           console.log("Found patient that I am passing into the ejs file", result);
            const custom_flash = "User found"; 
             res.render("./hospitalViews/profile", {path:'/hospital/search', patients:patients,access:access, foundUser:result, custom_flash:custom_flash });
             return 
@@ -372,5 +373,129 @@ module.exports.relationVerify_get = async (req, res) => {
         console.log(e)
         //signupMail(user,req.hostname,req.protocol)
         res.redirect('/hospital/profile')
+    }
+}
+
+
+module.exports.mail_to_nominee =   async (req,res)=>{
+    
+    try{
+    const{shortId}=req.params; 
+    const user=await  User.findOne({short_id: shortId}).populate("nominee"); 
+    const nominee = user.nominee; 
+    console.log(nominee);
+    console.log('user I found',user)
+    if(!user)
+    {
+        console.log('user not found')
+        req.flash("error_msg", "User not found")
+        res.redirect("/hospital/profile")
+        return
+    }
+    if (!nominee)
+    {
+        console.log('User has no nominee')
+        req.flash("error_msg", "User has no nominee")
+        res.redirect("/hospital/profile")
+        return
+    }
+
+   
+    //console.log('user',user)
+    const hospitalId=req.hospital._id
+    const userId=user._id
+    console.log('hospital current',req.hospital)
+
+    const existRelation=await Relations.findOne({'userId':userId,'hospitalId':hospitalId})
+    //const userRel= await Relations.findOne(userId)
+    //console.log('userRel',userId)
+    console.log('existRelation',existRelation)
+    if(existRelation) 
+    {
+
+        console.log('relation already exists')
+        if(existRelation.isPermitted)
+        {
+            console.log('The user already exists',existRelation) //NEED TO IMPLEMENT SEARCH 
+            req.flash('error_msg','The user is already registered in your hospital')
+            res.redirect('/hospital/profile')
+        }
+        else{
+            console.log('the user has not given access')
+            req.flash("error_msg", "The user is yet to respond to your request for access")
+            res.redirect('/hospital/profile')
+            //relationMail(existRelation,user,req.hostname,req.protocol)
+        }
+    }
+    else{
+    //console.log('hospital',hospital)
+    let relation = await new Relations({
+        hospitalId,
+        userId
+    }).save()
+    if(!relation)
+    {
+        console.log('unable to create link')
+        req.flash("error_msg", "There was an error in creating request link")
+        return res.redirect('/hospital/profile')
+    }
+    nomineeMail(relation,nominee,user, req.hostname,req.protocol)
+    req.flash('success_msg','The nominee has been notified of your request for access. Awaiting user response')
+    return res.redirect('/hospital/profile')
+    //console.log('relation',relation)
+
+    }
+    }
+    catch(e)
+    {
+        console.log(e)
+    }
+
+}
+
+module.exports.nomineeVerify_get = async (req, res) => {
+    try {
+        const relationID = req.params.id
+        console.log('relation',relationID)
+        const expiredTokenUser = await Relations.findOne({ _id: relationID })
+        const token = req.query.tkn
+        //console.log(token)
+        jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
+            if (err) {
+                req.flash(
+                    'error_msg',
+                    ' Your verify link had expired. We have sent you another verification link'
+                )
+                console.log("Not able to send mail to nominee again"); 
+                // relationMail(expiredTokenUser, req.hostname, req.protocol)
+                return res.redirect('/')
+            }
+            const relation = await Relations.findOne({ _id: decoded.id })
+            if (!relation) {
+                //console.log('user not found')
+                res.redirect('/')
+            } else {
+                const activeRelation = await Relations.findByIdAndUpdate(relation._id, {
+                    isPermitted: true,
+                })
+                if (!activeRelation) {
+                    // console.log('Error occured while verifying')
+                    req.flash('error_msg', 'Error occured while verifying')
+                    res.redirect('/')
+                } else {
+                    req.flash(
+                        'success_msg',
+                        'Access rights of your kin granted'   
+                    )
+                    //console.log('The user has been verified.')
+                    //console.log('active', activeUser)
+                    res.redirect('/')
+                }
+            }
+        })
+    } catch (e) {
+        console.log(e)
+        //signupMail(user,req.hostname,req.protocol)
+        res.redirect('/')
     }
 }

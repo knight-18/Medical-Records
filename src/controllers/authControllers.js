@@ -253,7 +253,7 @@ module.exports.upload_post = async (req, res) => {
         const files = req.files
         dname=name.toLowerCase()
         const obj = JSON.parse(JSON.stringify(files))
-        console.log("files",Object.keys(obj).length)
+        console.log("files",obj)
         //console.log(obj.document[0].filename)
         if(Object.keys(obj).length===0)
         {
@@ -265,10 +265,20 @@ module.exports.upload_post = async (req, res) => {
             req.flash('error_msg','Disease name cant be empty')
             return res.redirect('/user/profile')
         }
-        existDisease= await Disease.findOne({'name':dname})
-        if(existDisease)
+        const userDisease= await req.user.populate('disease','name').execPopulate()
+        console.log('disease',userDisease)
+        const existName=userDisease.disease.find(data=>
+            data.name===dname
+        )
+        console.log('disease',existName)
+
+        
+
+
+        if(existName)
         {
             req.flash('success_msg','Disease name already exists, file succesfully uploaded')
+            const existDisease= await Disease.findById({'_id':existName._id})
             console.log('exist disease',existDisease)
             if(obj.medicine)
             {

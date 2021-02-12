@@ -97,3 +97,17 @@ app.listen(PORT, () => {
 // }
 // databasedlt()
 
+
+
+//  const Relations= require('./models/Relations')
+// const databasedlt= async()=>{
+//    const user = await Relations.find({_id: "60259290d60e72021ba9ed4a"})
+//    user.forEach(async(data)=>{
+//         await Relations.findByIdAndDelete(data._id)
+//    })
+//    console.log("deleted")
+// }
+// databasedlt()
+
+
+
