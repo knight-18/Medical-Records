@@ -13,11 +13,11 @@ const storage = multer.diskStorage({
         console.log("in multer",file)
         const {name}=req.body 
         //console.log('disease name',name)
-        console.log('field',file.fieldname)
+        //console.log('field',file.fieldname)
         const dname= name.toLowerCase()
         const userEmail = req.user.email.toLowerCase()
         const dir = `./public/uploads/${userEmail}/${dname}/${file.fieldname}`
-        console.log("dir",dir)
+        //console.log("dir",dir)
         if (!fs.existsSync(dir)) {
             //console.log("making files")
             fs.mkdirSync(dir, { recursive: true }, (err) => {
@@ -87,4 +87,5 @@ router.get('/forgotPassword', redirectIfLoggedIn,authController.getForgotPasswor
 router.post('/forgotPassword', redirectIfLoggedIn,authController.forgotPassword)
 router.get('/resetPassword/:id/:token',authController.getPasswordResetForm)
 router.post('/resetPassword/:id/:token',authController.resetPassword)
+router.get('/download/:type/pdf',requireAuth,authController.download)
 module.exports = router
