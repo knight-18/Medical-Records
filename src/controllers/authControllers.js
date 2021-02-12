@@ -534,15 +534,21 @@ module.exports.download=async(req,res)=>{
     var parts = pathp.split("/");
     var result = parts[parts.length - 1]
     const type=req.params.type
-    let reqPath = path.join(__dirname, '../../')
-    let file =reqPath+'public'+pathp
-    let rpath=path.join(file,'../')
+    let reqPath = path.join(__dirname, `../../public/${pathp}`)
+    // let file =reqPath+'public'+pathp
+    let rpath=path.join(reqPath,'../')
     rpath=path.join(rpath+type+'/'+result)
     console.log(rpath)
+    res.download
     res.download(rpath, (error)=>{
-        req.flash("error_msg", "error while downloading")
-        console.log("Error : ", error) 
-        res.redirect('/user/profile')
+        if(error){
+            req.flash("error_msg", "error while downloading")
+            console.trace(error)
+            return res.redirect('/user/profile')
+        }
+
+        res.end()
+        
       })
 
 }
