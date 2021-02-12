@@ -645,6 +645,20 @@ display: none ;
     text-align:center;
     border:none;
 }
+#id_search_disease{
+   display:block;
+   margin-right:5%;
+   margin-left: 75%;
+  
+    width:100px;
+    height:40px;
+    border-radius:5px;
+    background-color:#019DFA;
+    color:white;
+    outline:none;
+    text-align:center;
+    border:none;
+}
 #id_search1{
     width:80%;
     margin:20px 30px 10px 30px;

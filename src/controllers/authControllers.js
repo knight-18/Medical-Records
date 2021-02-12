@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken')
 const { signupMail,passwordMail } = require('../config/nodemailer')
 const path = require('path')
 const Disease = require('../models/Disease')
+const Nominee = require('../models/Nominee')
 const Relations=require('../models/Relations')
 const { handleErrors } = require('../utilities/Utilities'); 
 const crypto = require('crypto')
@@ -11,6 +12,56 @@ require('dotenv').config()
 const { nanoId } = require("nanoid")
 
 const maxAge = 30 * 24 * 60 * 60
+
+
+module.exports.editDetails_post=async(req,res)=>{
+    try{
+   // console.log("details",req.body)
+    const name =req.body.nomineeName
+    const email=req.body.nomineeEmail
+    const phoneNumber=req.body.nomineePhn
+    if(!name){
+        name=''
+    }
+    if(!phoneNumber)
+    {
+        phone=''
+    }
+    if(!email)
+    {
+        email=''
+    }
+    
+    const address= req.body.address
+    const bloodGroup= req.body.bloodGroup
+    const user=req.user
+    user.address=address
+    user.bloodGroup=bloodGroup
+    //await user.save()
+    let nominee = await new Nominee({ 
+        name,
+        email,
+        phoneNumber
+    }).save()
+    if (!nominee) {
+        req.flash('error_msg', 'Unable to save the details')
+        return res.redirect('/user/profile')
+    }
+    console.log('nominee',nominee)
+    
+    req.user.nominee = nominee._id
+    await user.save()
+    console.log("user saved",user)
+    req.flash('success_msg','Details about the user has been saved')
+
+    res.redirect('/user/profile')
+    }
+    catch(e){
+        console.log("error",e)
+        req.flash('error_msg','error while editing profile details')
+        res.redirect('/user/profile')
+    }
+}
 
 
 module.exports.userHospital_get= async (req,res)=>{
@@ -55,6 +106,7 @@ module.exports.login_get = (req, res) => {
 
 module.exports.signup_post = async (req, res) => {
     const { name, email, password, confirmPwd, phoneNumber } = req.body
+    const nominee=null
     console.log("in sign up route",req.body);
     if (password != confirmPwd) {
         req.flash('error_msg', 'Passwords do not match. Try again')
@@ -81,7 +133,7 @@ module.exports.signup_post = async (req, res) => {
         }
         const short_id = require("nanoid").nanoid(8);
         console.log("Short ID generated is: ", short_id)
-        const user = new User({ email, name, password, phoneNumber, short_id })
+        const user = new User({ email, name, password, phoneNumber, short_id ,nominee})
         let saveUser = await user.save()
         //console.log(saveUser);
         req.flash(
@@ -191,7 +243,7 @@ module.exports.login_post = async (req, res) => {
         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
         //console.log(user);
         //signupMail(saveUser)
-        console.log("logged in")
+       // console.log("logged in")
         req.flash('success_msg', 'Successfully logged in')
         res.status(200).redirect('/user/profile')
     } catch (err) {
@@ -203,7 +255,7 @@ module.exports.login_post = async (req, res) => {
 
 module.exports.upload_post = async (req, res) => {
 
-    console.log("in uploads",req.body)
+    //console.log("in uploads",req.body)
     
     try {
         
@@ -212,7 +264,7 @@ module.exports.upload_post = async (req, res) => {
         const files = req.files
         dname=name.toLowerCase()
         const obj = JSON.parse(JSON.stringify(files))
-        console.log("files",Object.keys(obj).length)
+        console.log("files",obj)
         //console.log(obj.document[0].filename)
         if(Object.keys(obj).length===0)
         {
@@ -224,10 +276,31 @@ module.exports.upload_post = async (req, res) => {
             req.flash('error_msg','Disease name cant be empty')
             return res.redirect('/user/profile')
         }
-        existDisease= await Disease.findOne({'name':dname})
-        if(existDisease)
+        const userDisease= await req.user.populate('disease','name').execPopulate()
+        //console.log('disease',userDisease)
+        const existName=userDisease.disease.find(data=>
+            data.name===dname
+        )
+      //  console.log('disease',existName)
+
+        
+
+
+        if(existName)
         {
             req.flash('success_msg','Disease name already exists, file succesfully uploaded')
+            const existDisease= await Disease.findById({'_id':existName._id})
+           // console.log('exist disease',existDisease)
+            if(obj.medicine)
+            {
+                existDisease.medicine.push(`/uploads/${req.user.email}/${dname}/${obj.medicine[0].filename}`)
+            }
+            if(obj.document)
+            {
+                existDisease.document.push( `/uploads/${req.user.email}/${dname}/${obj.document[0].filename}`)
+            }
+            await existDisease.save()
+           
             return res.redirect('/user/profile')
         }
         
@@ -246,8 +319,8 @@ module.exports.upload_post = async (req, res) => {
                 document.push( `/uploads/${req.user.email}/${dname}/${obj.document[0].filename}`)
             }
 
-            console.log('documents',document)
-            console.log('medicine',medicine)
+           // console.log('documents',document)
+           // console.log('medicine',medicine)
         let newDisease = await new Disease({ 
             name,
             medicine,
@@ -273,14 +346,19 @@ module.exports.upload_post = async (req, res) => {
 
 
 module.exports.disease_get=async(req,res)=>{
+    const userId=req.query
+    const params=new URLSearchParams(userId)
+    const id=params.get('id')
+    const disease=await Disease.findOne({_id:id})
+    //console.log("disease",disease)
     const hospitals = await Relations.find({'userId':req.user._id,'isPermitted':true}).populate('hospitalId','hospitalName')    
     // console.log('user',req.user)
     res.locals.user= await req.user.populate('disease').execPopulate()
     // console.log('diseases',Userdiseases)
     res.render('./userViews/profile', {
         path: '/user/disease',
-        hospitals
-
+        hospitals,
+        disease
       })
       console.log("in disease page")
     }
@@ -292,10 +370,12 @@ module.exports.profile_get = async (req, res) => {
     //console.log("locals",res.locals.user)
     //console.log('id',req.user._id)
     const hospitals = await Relations.find({'userId':req.user._id,'isPermitted':true}).populate('hospitalId','hospitalName')
-    //console.log('hospitals',hospitals)
+    const nominee= await req.user.populate('nominee').execPopulate()// to be optimised by gaurav
+    //console.log('hospitals',nominee)
     res.render('./userViews/profile', {
         path: '/user/profile',
-        hospitals:hospitals
+        hospitals:hospitals,
+        nominee
       })
       console.log("in profile page")
     }
@@ -333,7 +413,7 @@ module.exports.forgotPassword = async (req, res) => {
         req.flash('error_msg', 'No user found')
         return res.redirect('/user/login')
     }
-    console.log(user)
+    //console.log(user)
     const userID = user._id
     
     const dt = new Date(user.passwordResetExpires).getTime()
@@ -406,17 +486,20 @@ module.exports.hospitalSearch_get=async(req,res)=>{
     const params=new URLSearchParams(userId)
     const id=params.get('id')
     const hospitals=await Hospital.find({ _id:id})
-    console.log(hospitals)
+    //console.log(hospitals)
     // res.send(hospital)
+    const nominee= await req.user.populate('nominee').execPopulate()
+    console.log('nomineeeee',nominee)
     res.locals.user=req.user
     res.render("./userViews/Profile",{
         hospitals,
+        nominee,
         path:'/user/userHospitalD'
     })
 }
 module.exports.hospitalSearch_post=async(req,res)=>{
     const hospitalName = req.body.hname
-    console.log(hospitalName) 
+    //console.log(hospitalName) 
 
     if (!hospitalName)
     {
@@ -440,10 +523,13 @@ module.exports.hospitalSearch_post=async(req,res)=>{
             req.flash("success_msg", "Hospital found")
             res.locals.user = await req.user.populate('disease').execPopulate()
             const hospitals = await Relations.find({'userId':req.user._id,'isPermitted':true}).populate('hospitalId','hospitalName')
+            const nominee= await req.user.populate('nominee').execPopulate()
             console.log(hospitals)
+            //console.log(hospitals)
             res.render("./userViews/profile", {
             path:'/user/hospitalSearch', 
             hospitals, 
+            nominee,
             hospital })
             return 
 
@@ -457,4 +543,23 @@ module.exports.hospitalSearch_post=async(req,res)=>{
      res.redirect("/user/profile"); 
     }
     
+}
+module.exports.download=async(req,res)=>{
+    const downloadpdf=req.query
+    const params=new URLSearchParams(downloadpdf)
+    const pathp=params.get('pdfdownload')
+    var parts = pathp.split("/");
+    var result = parts[parts.length - 1]//to get the file name
+    const type=req.params.type//to get the type wheather 'medical/documnet'
+    let reqPath = path.join(__dirname, `../../public/${pathp}/../${type}/${result}`)
+    //console.log(reqPath) 
+    res.download(reqPath, (error)=>{
+        if(error){
+            req.flash("error_msg", "error while downloading")
+            console.trace(error)
+            return res.redirect('/user/profile')
+        }
+        res.end()
+      })
+
 }

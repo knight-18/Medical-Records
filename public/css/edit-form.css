@@ -27,7 +27,7 @@
 
 
 /* Modal Content/Box #0667B8;*/
-.modal-content {
+.modal-content-edit {
   color:#e9ebec;
   background-color: rgba(238, 246, 253, 1) !important;
   margin: 15% auto; /* 15% from the top and centered */
@@ -42,14 +42,14 @@
   -moz-transition: opacity 400ms ease-in;
   transition: opacity 400ms ease-in;
 }
-.content-top {
-	background-color: rgb(247, 247, 247) !important;
-	height:6rem;
-	width:100%;
-	top:-5rem;
-	margin-top: -15px;
-	display: inline-flex;
-	border-radius: 1rem 1rem 0rem 0rem;
+.content-top-edit {
+    background-color: rgb(247, 247, 247) !important;
+    height:6rem;
+    width:100%;
+    top:-5rem;
+    margin-top: -15px;
+    display: inline-flex;
+    border-radius: 1rem 1rem 0rem 0rem;
   border-radius: 8px;
   background-image: -webkit-linear-gradient(left,#0667B8 0%, #4E90A4 100%), -webkit-linear-gradient(left, #3e57c8 0%, #0667B8 100%);
   background-image: -moz-linear-gradient(left, #0667B8 0%, #4E90A4 100%), -moz-linear-gradient(left, #6db4e4 0%,#0667B8 100%);
@@ -67,20 +67,25 @@
  margin-left: 30px;
 
 }
+.editBtn{
+    right:0 !important;
+    
+   
+}
 
-.content-top h4 {
-	display: flex;
-	vertical-align: middle;
-	margin-top: 22px;
-	margin-left:20px;
-	font-size:23px;
+.content-top-edit h4 {
+    display: flex;
+    vertical-align: middle;
+    margin-top: 38px;
+    margin-left:20px;
+    font-size:23px;
 }
 
 /* The Close Button */
-.cancel {
+.cancel-edit {
   position: absolute !important;
-  right: 7rem !important;
-  top:3.8rem !important;
+  right: 27rem !important;
+  top:8.3rem !important;
   text-align:end;
   color: rgb(227, 232, 235) !important;
   font-size: 18px !important;
@@ -91,12 +96,12 @@
    text-decoration: none;
    font-family: "Times New Roman", Times, serif;
 }
-.save1 {
+.save1-edit {
   font-family: "Times New Roman", Times, serif;
   position: absolute;
   right: 1rem;
   text-align:end;
-  bottom:6rem;
+  bottom:8rem;
   padding: 0;
   border: none;
   color: rgb(227, 232, 235) !important;
@@ -121,85 +126,85 @@
 }
 
 
-.form-modal {
-	
-	border-radius: 1rem 1rem 0rem 0rem;
+.form-modal-edit {
+    
+    border-radius: 1rem 1rem 0rem 0rem;
   padding-top:1rem;
   width:100%;
-	/*background:  rgb(35, 94, 172,0.8) ;*/
+    /*background:  rgb(35, 94, 172,0.8) ;*/
   /*box-shadow: rgba(0,0,0,0.14902) 0px 1px 1px 0px,rgba(0,0,0,0.09804) 0px 1px 2px 0px;*/
   margin-top:5px;
   max-height:100%;
   display:flex-wrap;
 }
 
-.group1 { 
+.group1-edit { 
   margin-top:12px !important;
   margin-left: -5px;
-	position: relative; 
+    position: relative; 
   margin-bottom: 15px; 
   
 }
 
 
-.form-modal input {
-  margin-top:1rem;
-	font-size: 18px;
-	padding: 8px 8px 8px 5px;
+.form-modal-edit input {
+  margin-top:2.5rem;
+    font-size: 18px;
+    padding: 8px 8px 8px 5px;
   -webkit-appearance: none;
   border-radius:10px;
-	display: block;
-	background: rgb(35, 94, 172,0.2);
-	color: #7a7a7a !important;
-	width: 100%;
-	border: none;
-	border-bottom: 1px solid  #cecbcb;
+    display: block;
+    background: rgb(35, 94, 172,0.2);
+    color: #7a7a7a !important;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid  #cecbcb;
 }
 
-.form-modal input:focus { outline: none; }
+.form-modal-edit input:focus { outline: none; }
 
 
 /* Label */
 
-.form-modal label {
-	color: #a5a5a5; 
-	font-size: 18px;
-	font-weight: normal;
-	position: absolute;
-	pointer-events: none;
-	left: 5px;
-	top: -12px;
-	transition: all 0.2s ease;
+.form-modal-edit label {
+    color: #a5a5a5; 
+    font-size: 18px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 5px;
+    top: -12px;
+    transition: all 0.2s ease;
 }
 
 
 /* active */
 
-.form-modal input:focus ~ label, input.used ~ label {
-	/*top: -20px;
+.form-modal-edit input:focus ~ label, input.used ~ label {
+    /*top: -20px;
   /*transform: scale(.75); left: -2px;
-	/* font-size: 14px; */
-	color: #3cd2ff !important;
+    /* font-size: 14px; */
+    color: #3cd2ff !important;
 }
 
 
 /* Underline */
 
 .bar1 {
-	position: relative;
-	display: block;
+    position: relative;
+    display: block;
   width: 100%;
   margin-left:7px;
   border-bottom-left-radius:18px;
 }
 
 /*.bar1:before, .bar1:after {
-	content: '';
-	height: 2px; 
-	width: 0;
-	bottom: 1px; 
-	position: absolute;
-	background: #0667B8; 
+    content: '';
+    height: 2px; 
+    width: 0;
+    bottom: 1px; 
+    position: absolute;
+    background: #0667B8; 
   transition: all 0.2s ease;
   border-radius:18px !important;
 }
@@ -217,37 +222,37 @@ input:focus ~ .bar1:before, input:focus ~ .bar1:after { width: 100%; }
 /* Highlight */
 
 .highlight {
-	position: absolute;
-	height: 60%; 
-	width: 100px; 
-	top: 25%; 
-	left: 0;
-	pointer-events: none;
-	opacity: 0.5;
+    position: absolute;
+    height: 60%; 
+    width: 100px; 
+    top: 25%; 
+    left: 0;
+    pointer-events: none;
+    opacity: 0.5;
 }
 .highlight1 {
-	position: absolute;
-	height: 60%; 
-	width: 50%; 
-	top: 25%; 
-	left: 0;
-	pointer-events: none;
-	opacity: 0.5;
+    position: absolute;
+    height: 60%; 
+    width: 50%; 
+    top: 25%; 
+    left: 0;
+    pointer-events: none;
+    opacity: 0.5;
 }
 
 
 /* active */
 
 input:focus ~ .highlight1 {
-	animation: inputHighlighter 0.3s ease;
+    animation: inputHighlighter 0.3s ease;
 }
 
 
 /* Animations */
 
 @keyframes inputHighlighter {
-	from { background: #4a89dc; }
-	to 	{ width: 0; background: transparent; }
+    from { background: #4a89dc; }
+    to 	{ width: 0; background: transparent; }
 }
 
 
@@ -437,10 +442,10 @@ input:focus ~ .highlight1 {
 }
 
 @media screen and (max-width:1300px) {
-.modal {
+.modalEdit {
   margin-bottom: 1rem;
 }
-  .modal-content {
+  .modal-content-edit {
     width: 100% !important ; /* Could be more or less, depending on screen size */
    height: 80% !important;
    /*background-color: red!important;*/
@@ -453,7 +458,7 @@ input:focus ~ .highlight1 {
     flex:none !important;
     height:8rem !important;
   }
-  .modal {
+  .modalEdit {
     width:100%;
   }
   #profileImg1 {
@@ -466,17 +471,17 @@ input:focus ~ .highlight1 {
    margin-left: 15px;
   
   }
-  .group1 input {
+  .group1-edit input {
     margin-left:4px !important;
   }
   .zone {
     margin: auto;
     margin-top: 20rem;
   }
-  .cancel {
+  .cancel-edit {
     position: absolute !important;
     right: 7rem !important;
-    top: 5.8rem !important;
+    top: 8.2rem !important;
     text-align:end;
     color: rgb(227, 232, 235) !important;
     font-size: 18px !important;
@@ -496,16 +501,25 @@ input:focus ~ .highlight1 {
     height:100%;
 
   }
- .modal-content {
+ .modal-content-edit {
    height:32% !important;
  }
   
 }
-.myBtn {
+.myBtnEdit {
   background-color: transparent;
   cursor: pointer;
 }
 .selectFile input {
  
   z-index: 10000;
+}
+@media screen and (max-width:400px){
+  .content-top-edit h4 {
+     
+      margin-top: 10px;
+      margin-left:10px;
+      font-size:20px;
+  }
+
 }

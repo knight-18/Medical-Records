@@ -7,6 +7,7 @@
     font-size: 16px;
     padding: 50px;
     margin-top: 5px;
+    
 }
 
 .footer .footer-left,
@@ -206,6 +207,12 @@
 }
 
 
+@media (max-width: 576px) {
+    .footer {
+        margin-top: 20px;
+    }
+
+}
 
 
 /* 
