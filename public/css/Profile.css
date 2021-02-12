@@ -1,3 +1,4 @@
+/*_________________________________________________Profile page default_____________________________________________*/
 
 html {
     scroll-behavior: smooth;
@@ -21,6 +22,11 @@ body {
     border-radius:3px;
 }
 
+#profileEdit{
+    top:0;
+    right:0;
+}
+
 #profileBody {
     margin-top: 0;
     display: flex;
@@ -32,13 +38,13 @@ body {
     background: #ffffff;
 }
 #pSec2 {
-    /width:64vw;/
+    /*width:64vw;*/
     height: 100vh;
     top: 15px;
     left: 0px;
 }
 #sub1 {
-    height: 85vh;
+    height: 96vh;
     background: #ffffff;
     box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.25);
     border-radius: 10px 10px 10px 10px;
@@ -148,7 +154,7 @@ body {
     top: 14%;
     left: 5.5%;
     width: 88%;
-    height: 30%;
+    height: fit-content;
     background-color: #f3f3f3;
     border-radius: 15px;
 }
@@ -189,7 +195,7 @@ body {
     font-weight: bold;
 }
 
-/_________sideNav styles _______/
+/*________________________sideNav styles ________________*/
 
 .sidenav {
     height: 100%;
@@ -251,7 +257,7 @@ body {
     font-weight: 700;
 }
 
-/_________ button sidenav_________/
+/*__________________________ button sidenav____________________________*/
 .sideNav {
     display: none;
 }
@@ -262,7 +268,7 @@ body {
     outline: none;
 }
 
-/____________ Tab view _______________/
+/*____________________________________ Tab view _____________________________________________*/
 @media (max-width: 992px) {
     #sub1 {
         height: 90vh;
@@ -340,7 +346,7 @@ body {
     }
 }
 
-/___________Mobile View_______________/
+/*______________________________Mobile View______________________________________________*/
 
 @media (max-width: 576px) {
     body {
@@ -700,7 +706,7 @@ body {
     /* display:flex; */
 }
 #patientList {
-    margin-left:-28px;
+    margin-left: 12px;
 }
 #patientId1 {
     /* width:90%; */
@@ -726,7 +732,7 @@ body {
     background-size: cover;
 }
 #patientImage {
-    margin-right: 10px;
+    margin-right: 15px;
     float: left;
     width: 50px;
     height: 50px;
@@ -799,12 +805,12 @@ body {
     color: white;
 }
 #patientList1 {
-    margin-left:-2vw;
+    margin-left: 2vw;
 }
 #patientList li {
     list-style-type: none;
     position: relative;
-    right:40px;
+    left: -25px;
     bottom: 4px;
     font-weight: normal;
     font-size: 16px;
@@ -813,23 +819,22 @@ body {
 #patientList1 li {
     list-style-type: none;
     position: relative;
-    right: 18%;
+    right: 5%;
     width: 100%;
     font-weight: normal;
     font-size: 16px;
 }
 #patientId:hover #patientName li {
     color: white;
-    position:relative;
-    left:-30px;
+    position: relative;
+    /* changbottom:4px;e */
+    margin-left: 30px;
 }
-#patientId:hover #patientImage {
-        margin-right:30px;
-}
+
 #patientId1:hover #patientName1 li {
     color: white;
     position: relative;
-    right:16%;
+    right: -5%;
     width: 100%;
 }
 #patientName1 p {
@@ -862,35 +867,18 @@ body {
     }
 }
 @media only screen and (min-width: 1389px) and (max-width: 1416px) {
-   #patientName1 li {
-        position: relative;
-        right: 12%;
-        width: 100%;
-    }
     #patientList1 {
-        margin-left:-12%;
+        margin-left: 5%;
     }
-    #patientImage1 {
-        margin-right: 2%;
-    }
-    #patientId1:hover #patientName1 li {
-        position: relative;
-        right: 12%;
-    }
-    #patientId1:hover #patientImage1{
-        margin-right: 15%;
-    }
-      
-
 }
 @media only screen and (min-width: 1200px) and (max-width: 1389px) {
     #patientName1 li {
         position: relative;
-        right: 12%;
+        left: 6%;
         width: 100%;
     }
     #patientList1 {
-        margin-left:-18%;
+        margin-left: 5%;
     }
     #patientId2 {
         margin-left: 15px;
@@ -900,38 +888,31 @@ body {
     }
     #patientId1:hover #patientName1 li {
         position: relative;
-        right: 12%;
-    }
-    #patientId1:hover #patientImage1{
-        margin-right: 15%;
+        right: 10%;
     }
 }
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
     #patientList1 {
-        margin-left:-24%;
+        margin-left: -4%;
     }
     #patientId2 {
         margin-left: 15px;
     }
     #patientImage1 {
-        margin-right: 8%;
+        margin-right: 0.5%;
     }
     #patientName1 li {
         position: relative;
-        right:6%;
+        left: 5%;
         width: 100%;
     }
     #patientId1:hover {
         margin-left: 7%;
         width: 90%;
     }
-    
     #patientId1:hover #patientName1 li {
         position: relative;
         right: 10%;
         width: 100%;
-    }
-    #patientId1:hover #patientImage1{
-        margin-right: 15%;
     }
 }
