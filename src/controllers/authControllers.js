@@ -475,7 +475,7 @@ module.exports.hospitalSearch_get=async(req,res)=>{
 }
 module.exports.hospitalSearch_post=async(req,res)=>{
     const hospitalName = req.body.hname
-    console.log(hospitalName) 
+    //console.log(hospitalName) 
 
     if (!hospitalName)
     {
@@ -499,7 +499,7 @@ module.exports.hospitalSearch_post=async(req,res)=>{
             req.flash("success_msg", "Hospital found")
             res.locals.user = await req.user.populate('disease').execPopulate()
             const hospitals = await Relations.find({'userId':req.user._id,'isPermitted':true}).populate('hospitalId','hospitalName')
-            console.log(hospitals)
+            //console.log(hospitals)
             res.render("./userViews/profile", {
             path:'/user/hospitalSearch', 
             hospitals, 
@@ -516,4 +516,23 @@ module.exports.hospitalSearch_post=async(req,res)=>{
      res.redirect("/user/profile"); 
     }
     
+}
+module.exports.download=async(req,res)=>{
+    const downloadpdf=req.query
+    const params=new URLSearchParams(downloadpdf)
+    const pathp=params.get('pdfdownload')
+    var parts = pathp.split("/");
+    var result = parts[parts.length - 1]
+    const type=req.params.type
+    let reqPath = path.join(__dirname, '../../')
+    let file =reqPath+'public'+pathp
+    let rpath=path.join(file,'../')
+    rpath=path.join(rpath+type+'/'+result)
+    console.log(rpath)
+    res.download(rpath, (error)=>{
+        req.flash("error_msg", "error while downloading")
+        console.log("Error : ", error) 
+        res.redirect('/user/profile')
+      })
+
 }
