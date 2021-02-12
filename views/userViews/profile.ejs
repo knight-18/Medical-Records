@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="../css/NavBar.css">
 	<link rel="stylesheet" href="../css/modal.css">
 	<link rel="stylesheet" href="../css/edit-form.css">
+	
 	<link rel="stylesheet" href="../css/Profile.css">
 
 	<title>Profile Page</title>
@@ -18,6 +19,60 @@
 <body>
 
 	<%- include('../partials/navbar'); %>
+
+
+	<div id="myModalEdit" class="modal fadeIn">
+		<div class="modal-content-edit">
+			<div class="row">
+				<div class="content-top-edit ">
+					<a href="#" class="img-rounded"><img src="../img/ProfilePic.png" id="profileImg1"></a>
+					<span><button type="button" class="cancel-edit fadeOut" data-dismiss="modal">CANCEL</button></span>
+					<h4>Profile details</h4>
+				</div>
+			</div>
+			<form class="form-modal-edit" method="POST" >
+				<!--Dont remove the enctype-->
+				<div class="group1">
+					<input type="text" name="nomineeName" aria-required="true" required><span class="highlight1"></span><span
+						class="bar1"></span>
+					<label for="name" style="margin-left: 8px; margin-top: -20px; padding-bottom: 200px;">Nominee
+						Name</label>
+					<span><button class="save1-edit" formaction="profile/editDetails" >SAVE</button></span>
+					<!-- Dont remove the name and value attribute-->
+				</div>
+				<div class="group1-edit">
+					<input type="text" name="nomineeEmail" aria-required="true" required><span class="highlight1"></span><span
+						class="bar1"></span>
+					<label for="name" style="margin-left: 8px; margin-top: -20px; padding-bottom: 200px;">Nominee
+						Email</label>
+					
+					<!-- Dont remove the name and value attribute-->
+				</div>
+				<div class="group1">
+					<input type="text" name="nomineePhn" aria-required="true" required><span class="highlight1"></span><span
+						class="bar1"></span>
+					<label for="name" style="margin-left: 8px; margin-top: -20px; padding-bottom: 200px;">Nominee
+						Phone Number</label>
+				   
+					<!-- Dont remove the name and value attribute-->
+				</div>
+				<div class="group1">
+					<input type="text" name="address" aria-required="true" required><span class="highlight1"></span><span
+						class="bar1"></span>
+					<label for="name" style="margin-left: 8px; margin-top: -20px; padding-bottom: 200px;">User Address</label>
+				   
+					<!-- Dont remove the name and value attribute-->
+				</div>
+				<div class="group1">
+					<input type="text" name="bloodGroup" aria-required="true" required><span class="highlight1"></span><span
+						class="bar1"></span>
+					<label for="name" style="margin-left: 8px; margin-top: -20px; padding-bottom: 200px;">User Blood-Group</label>
+				   
+					<!-- Dont remove the name and value attribute-->
+				</div>
+			</form>
+		</div>
+	</div>
 	
 	<div id="myModal" class="modal fadeIn">
 		<div class="modal-content">
@@ -88,7 +143,7 @@
 								<% for(var d of user.disease) { %>
 									<a class="dropdown-item" href="/user/disease?id=<%= d._id %>"><span class="dropAnchor"><%= d.name %></span></a>
 								<% } %>
-								<a id="myBtn">Add New</a>
+								<a id="myBtn" onclick=openModal()>Add New</a>
 							</div>
 						</div>
 						<div class="lists">
@@ -204,7 +259,7 @@
 								<% for(var d of user.disease) { %>
 									<a class="dropdown-item" href="/user/disease?id=<%= d._id %>"><span class="dropAnchor"><%= d.name %></span></a>
 								<% } %>
-								<a id="myBtn" data-toggle="modal" data-target="#myModal">Add New</a>
+								<a id="myBtn" data-toggle="modal" onclick=openModal() data-target="#myModal">Add New</a>
 							</div>
 						</div>
 						<div class="lists">
@@ -353,6 +408,7 @@
 
 
     <script>
+		function modalEdit(){
     var modal = document.getElementById("myModalEdit");
     var btn = document.getElementById("myBtnEdit");
     var span = document.getElementsByClassName("cancel-edit")[0];
@@ -378,7 +434,8 @@
         if (event.target == modal) {
             modal.style.display = "none";
         }
-    } 
+    }
+} 
 </script>
 <script>
     $(window, document, undefined).ready(function () {
@@ -406,6 +463,7 @@
             $(this).removeClass('is-active');
         });
     });
+
 </script>
 <script>
     $(document).bind('dragover', function (e) {
@@ -438,6 +496,7 @@
 </script>
 
 <script>
+	function openModal(){
 	var modal = document.getElementById("myModal");
 	var btn = document.getElementById("myBtn");
 	var span = document.getElementsByClassName("cancel")[0];
@@ -464,6 +523,7 @@
 			modal.style.display = "none";
 		}
 	} 
+}
 </script>
 <script>
 	$(window, document, undefined).ready(function () {

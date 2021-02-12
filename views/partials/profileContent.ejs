@@ -1,55 +1,7 @@
-<div id="myModalEdit" class="modal fadeIn">
-    <div class="modal-content-edit">
-        <div class="row">
-            <div class="content-top-edit ">
-                <a href="#" class="img-rounded"><img src="../img/ProfilePic.png" id="profileImg1"></a>
-                <span><button type="button" class="cancel-edit fadeOut" data-dismiss="modal">CANCEL</button></span>
-                <h4>Profile details</h4>
-            </div>
-        </div>
-        <form class="form-modal-edit" method="POST" >
-            <!--Dont remove the enctype-->
-            <div class="group1">
-                <input type="text" name="nomineeName" aria-required="true" required><span class="highlight1"></span><span
-                    class="bar1"></span>
-                <label for="name" style="margin-left: 8px; margin-top: -20px; padding-bottom: 200px;">Nominee
-                    Name</label>
-                <span><button class="save1-edit" formaction="profile/editDetails" >SAVE</button></span>
-                <!-- Dont remove the name and value attribute-->
-            </div>
-            <div class="group1-edit">
-                <input type="text" name="nomineeEmail" aria-required="true" required><span class="highlight1"></span><span
-                    class="bar1"></span>
-                <label for="name" style="margin-left: 8px; margin-top: -20px; padding-bottom: 200px;">Nominee
-                    Email</label>
-                
-                <!-- Dont remove the name and value attribute-->
-            </div>
-            <div class="group1">
-                <input type="text" name="nomineePhn" aria-required="true" required><span class="highlight1"></span><span
-                    class="bar1"></span>
-                <label for="name" style="margin-left: 8px; margin-top: -20px; padding-bottom: 200px;">Nominee
-                    Phone Number</label>
-               
-                <!-- Dont remove the name and value attribute-->
-            </div>
-            <div class="group1">
-                <input type="text" name="address" aria-required="true" required><span class="highlight1"></span><span
-                    class="bar1"></span>
-                <label for="name" style="margin-left: 8px; margin-top: -20px; padding-bottom: 200px;">User Address</label>
-               
-                <!-- Dont remove the name and value attribute-->
-            </div>
-            <div class="group1">
-                <input type="text" name="bloodGroup" aria-required="true" required><span class="highlight1"></span><span
-                    class="bar1"></span>
-                <label for="name" style="margin-left: 8px; margin-top: -20px; padding-bottom: 200px;">User Blood-Group</label>
-               
-                <!-- Dont remove the name and value attribute-->
-            </div>
-        </form>
-    </div>
-</div>
+<link rel="stylesheet" href="../css/edit-form.css">
+
+
+
 
 <div class="col-lg-8 col-sm-8 col-12 order-1 order-sm-2" id="pSec2">
     <div id="sub1">
@@ -63,7 +15,7 @@
             <%=user.short_id %>
             <% } %><span id="patientId"></span></h4>
         <div id="patientDetails">
-            <button id="myBtnEdit" class="editBtn"  data-toggle="modal" data-target="#myModalEdit">edit</button>
+            <button id="myBtnEdit"  data-toggle="modal" data-target="#myModalEdit" onclick=modalEdit()>edit</button>
             <h3 id="heading2">Patient Details</h3>
             <label for="PhoneNo" class="detailLevels">Phone No. : <%if (user.phoneNumber) { %>
 				<%=user.phoneNumber %>
@@ -81,7 +33,7 @@
 				<%=nominee.nominee.name %>
 				<% } %> </label>
             <br>
-            <label for="bloodGroup" class="detailLevels">Nominee Email:<%if (nominee.nominee) { %>
+            <label for="bloodGroup" class="detailLevels">Nominee Email:<%if (nominee.nominee!==null) { %>
 				<%=nominee.nominee.email %>
 				<% } %></label>
             <br>

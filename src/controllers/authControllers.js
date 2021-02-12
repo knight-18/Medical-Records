@@ -20,6 +20,17 @@ module.exports.editDetails_post=async(req,res)=>{
     const name =req.body.nomineeName
     const email=req.body.nomineeEmail
     const phoneNumber=req.body.nomineePhn
+    if(!name){
+        name=''
+    }
+    if(!phoneNumber)
+    {
+        phone=''
+    }
+    if(!email)
+    {
+        email=''
+    }
     
     const address= req.body.address
     const bloodGroup= req.body.bloodGroup
@@ -477,9 +488,12 @@ module.exports.hospitalSearch_get=async(req,res)=>{
     const hospitals=await Hospital.find({ _id:id})
     //console.log(hospitals)
     // res.send(hospital)
+    const nominee= await req.user.populate('nominee').execPopulate()
+    console.log('nomineeeee',nominee)
     res.locals.user=req.user
     res.render("./userViews/Profile",{
         hospitals,
+        nominee,
         path:'/user/userHospitalD'
     })
 }
@@ -509,10 +523,13 @@ module.exports.hospitalSearch_post=async(req,res)=>{
             req.flash("success_msg", "Hospital found")
             res.locals.user = await req.user.populate('disease').execPopulate()
             const hospitals = await Relations.find({'userId':req.user._id,'isPermitted':true}).populate('hospitalId','hospitalName')
+            const nominee= await req.user.populate('nominee').execPopulate()
+            console.log(hospitals)
             //console.log(hospitals)
             res.render("./userViews/profile", {
             path:'/user/hospitalSearch', 
             hospitals, 
+            nominee,
             hospital })
             return 
 
