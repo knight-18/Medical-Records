@@ -457,7 +457,8 @@ module.exports.nomineeVerify_get = async (req, res) => {
     try {
         const relationID = req.params.id
         console.log('relation',relationID)
-        const expiredTokenUser = await Relations.findOne({ _id: relationID })
+        const expiredTokenUser = await Relations.findOne({ _id: relationID }).populate('userId'); 
+        
         const token = req.query.tkn
         //console.log(token)
         jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
@@ -466,8 +467,13 @@ module.exports.nomineeVerify_get = async (req, res) => {
                     'error_msg',
                     ' Your verify link had expired. We have sent you another verification link'
                 )
+                
+                const user = expiredTokenUser.userId;
+                const userDetails = await user.populate('nominee').execPopulate(); 
+                const nominee = userDetails.nominee; 
+                console.log("nominee email fail ", nominee)
                 console.log("Not able to send mail to nominee again"); 
-                // relationMail(expiredTokenUser, req.hostname, req.protocol)
+                relationMail(expiredTokenUser, nominee, req.hostname, req.protocol)
                 return res.redirect('/')
             }
             const relation = await Relations.findOne({ _id: decoded.id })
