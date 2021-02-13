@@ -26,14 +26,14 @@
     <div class="disease-back-link"><a href="/hospital/patient?id=<%=user._id%>"><i class="fa fa-arrow-left" aria-hidden="true"></i>Disease</a></div>
     <div id="sub4">
         <div class="container">
-            <h5 id="name1"><%=disease.name%></h5>
+            <h5 id="name1">Disease Name-: <%=disease.name%></h5>
             <h5 id="name1">Uploaded Documents</h5>
 
             <div class="disease-flexbox">
             <%for(var i of disease.document){%>
                 <div class="media" style="background: rgb(179, 232, 241)">
                     <img class="pdf-img align-self-center mr-3" src="../img/pdf-image.png" alt="Generic placeholder image" style="width: 80px" />
-                    <div style="display: inline-block" class="media-heading align-self-center">Document</div>
+                    <div style="display: inline-block" class="media-heading align-self-center"><%=i.originalName%></div>
                     <div class="media-body">
                         <p>
                             <a href="../pdf/sample.pdf" style="color: black"><i class="fa fa-download fa-3x" aria-hidden="true"></i></a>
@@ -52,7 +52,7 @@
                 <%for(var i of disease.medicine){%>
                 <div class="media" style="background: rgb(179, 232, 241)">
                     <img class="pdf-img align-self-center mr-3" src="../img/pdf-image.png" alt="Generic placeholder image" style="width: 80px" />
-                    <div style="display: inline-block" class="media-heading align-self-center">Medicine Report</div>
+                    <div style="display: inline-block" class="media-heading align-self-center"><%=i.originalName%></div>
                     <div class="media-body">
                         <p>
                             <a href="../pdf/sample.pdf" style="color: black"><i class="fa fa-download fa-3x" aria-hidden="true"></i></a>
