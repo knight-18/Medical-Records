@@ -79,7 +79,7 @@ function checkFileType1(file, cb) {
         return cb(null, true)
     } else {
         cb(null,false)
-        // req.flash("error_msg", "Enter a valid picture of format jpeg jpg png")
+        // req.flash("error_msg", "Enter a valid picture of format jpeg jpg png") 
     }
 }
 
