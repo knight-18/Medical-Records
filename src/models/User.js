@@ -67,6 +67,10 @@ const userSchema = mongoose.Schema(
             ref:'Nominee'
 
         },
+        profilePic: {
+            type: String,
+            trim: true,
+        },
         passwordResetToken: String,
         passwordResetExpires: Date,
     },
