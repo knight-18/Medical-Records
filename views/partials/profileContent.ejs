@@ -6,12 +6,12 @@
     <div class="modal-content-dp-edit">
       <span class="close-dp-edit">&times;</span>
       <div class="col-md-6">
-        <form class="form-group" type="profilePic">
+        <form class="form-group"  method="POST" action="/user/profile/picupload" enctype="multipart/form-data">
             <label>Upload Image</label>
             <div class="input-group">
                 <span class="input-group-btn">
                     <span class="btn btn-default btn-file">
-                        Browse… <input type="file" id="imgInp">
+                        Browse… <input type="file" id="profilePic"name="profilePic">
                     </span>
                 </span>
                 <input type="text" class="form-control" readonly>
