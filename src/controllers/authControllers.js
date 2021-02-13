@@ -369,13 +369,17 @@ module.exports.profile_get = async (req, res) => {
     //console.log('user id',req.user)
     //console.log("locals",res.locals.user)
     //console.log('id',req.user._id)
+    // const user=req.user
     const hospitals = await Relations.find({'userId':req.user._id,'isPermitted':true}).populate('hospitalId','hospitalName')
     const nominee= await req.user.populate('nominee').execPopulate()// to be optimised by gaurav
     //console.log('hospitals',nominee)
+    // const profilePath=path.join(__dirname,`../../public/uploads/${user.email}/${user.profilePic}`)
+    // console.log(profilePath)
     res.render('./userViews/profile', {
         path: '/user/profile',
         hospitals:hospitals,
-        nominee
+        nominee,
+        // profilePath
       })
       console.log("in profile page")
     }

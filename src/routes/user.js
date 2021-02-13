@@ -21,7 +21,7 @@ const storage = multer.diskStorage({
         }else{
             const userEmail = req.user.email.toLowerCase()
             var dir = `./public/uploads/${userEmail}/${file.fieldname}`
-            console.log(dir)
+            console.log("dir:",dir)
         }
         if (!fs.existsSync(dir)) {
             //console.log("making files")
@@ -35,9 +35,13 @@ const storage = multer.diskStorage({
         // const userId = req.user._id
        // fileName= path.join(`${file.fieldname}`,`File-${v4()}-${file.originalname}-${path.extname(file.originalname)}`)
         //console.log(fileName)
+        if(file.fieldname==='profilePic'){
         const user=req.user
-        user.profilePic=`File-${v4()}-${file.originalname}`
+        user.profilePic=`ProfilePic_${file.originalname}`
+        cb(null,`ProfilePic_${file.originalname}` )
+        }else{
         cb(null,`File-${v4()}-${file.originalname}` )
+        }
     },
 })
 
