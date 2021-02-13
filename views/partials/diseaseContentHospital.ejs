@@ -30,7 +30,7 @@
             <h5 id="name1">Uploaded Documents</h5>
 
             <div class="disease-flexbox">
-                 <% if(disease.document.length!=0){%>
+                 <% if(disease.document.length!==0){%>
                  <%for(var i of disease.document){%>
                  <div class="media" style="background: rgb(179, 232, 241)">
                      <img class="pdf-img align-self-center mr-3" src="../img/pdf-image.png"
@@ -47,7 +47,6 @@
 
                  <%}%>
                   <%}else{%>
-                 <div>No uploaded documents</div>
                  <div id="name9">No documents uploaded</div>
                  <%}%>
          

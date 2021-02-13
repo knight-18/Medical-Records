@@ -5,11 +5,11 @@
 
 <div class="col-lg-8 col-sm-8 col-12 order-1 order-sm-2" id="pSec9">
     <div class="disease-back-link"><a href="/hospital/patient?id=<%=user._id%>"><i class="fa fa-arrow-left" aria-hidden="true"></i>Patient's Diseases</a></div>
-    <div id="sub4" style="height:fit-content !important;">
+    <div id="sub4" style="height:90vh !important;">
         <div class="container">
             <h5 id="name1">Patient's Diseases </h5>
             <div class="disease-flexbox">
-                  <% if(diseases.disease.length!=0){%>
+                  <% if(diseases.disease.length !== 0){%>
                   <%for(var i of diseases.disease){%>
                   <div class="media" id="pat-dis">
 
@@ -23,8 +23,8 @@
 
                   <%}%>
                   <%}else{%>
-                  <div>No diseases found</div>
-                  <divid="name9">Patient's Diseases </div>
+    
+                  <div id="name9">No diseases found</div>
                   <%}%>
                   
        
