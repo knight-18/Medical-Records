@@ -1209,7 +1209,7 @@ border: none;
     
     
     
-    .modal-dp-edit {
+.modal-dp-edit {
         display: none; /* Hidden by default */
         position: fixed; /* Stay in place */
         z-index: 1; /* Sit on top */
@@ -1220,39 +1220,45 @@ border: none;
         overflow: auto; /* Enable scroll if needed */
         background-color: rgb(0,0,0); /* Fallback color */
         background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-      }
+}
       
       /* Modal Content/Box */
-      .modal-content-dp-edit{
+.modal-content-dp-edit{
         background-color: #292727;
         color:white;
         margin: 15% auto; /* 15% from the top and centered */
         padding: 20px;
         border: 1px solid #888;
-        width: 80%; /* Could be more or less, depending on screen size */
-      }
+        width: 40%; /* Could be more or less, depending on screen size */
+        height:30%;
+}
       
       /* The Close Button */
-      .close-dp-edit {
+.close-dp-edit {
         color: rgb(236, 230, 230);
         float: right;
         font-size: 28px;
         font-weight: bold;
-      }
+}
       
-      .close-dp-edit,
-      .close-dp-edit:focus {
-        color: black;
+.close-dp-edit,
+.close-dp-edit:focus {
+        color: rgb(160, 158, 158);
         text-decoration: none;
         cursor: pointer;
-      }
-      .save-dp-edit {
+}
+.save-dp-edit {
+    position: fixed;
     background-color: #0380c9;
     color:white;
     float:right;
     border: none;
-      }
-    
+    margin: 5px;
+}
+.form-control {
+    background: #292727;
+    color:white;
+}
     @media only screen and (max-width:450px){
         #patientId:hover #patientImage{
             margin-right:30px;
