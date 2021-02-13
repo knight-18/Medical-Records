@@ -30,18 +30,26 @@
             <h5 id="name1">Uploaded Documents</h5>
 
             <div class="disease-flexbox">
-            <%for(var i of disease.document){%>
-                <div class="media" style="background: rgb(179, 232, 241)">
-                    <img class="pdf-img align-self-center mr-3" src="../img/pdf-image.png" alt="Generic placeholder image" style="width: 80px" />
-                    <div style="display: inline-block" class="media-heading align-self-center"><%=i.originalName%></div>
-                    <div class="media-body">
-                        <p>
-                            <a href="../pdf/sample.pdf" style="color: black"><i class="fa fa-download fa-3x" aria-hidden="true"></i></a>
-                        </p>
-                    </div>
-                </div>
-     
-                <%}%>
+                 <% if(disease.document.length!==0){%>
+                 <%for(var i of disease.document){%>
+                 <div class="media" style="background: rgb(179, 232, 241)">
+                     <img class="pdf-img align-self-center mr-3" src="../img/pdf-image.png"
+                         alt="Generic placeholder image" style="width: 80px" />
+                     <div style="display: inline-block" class="media-heading align-self-center"><%=i.originalName%>
+                     </div>
+                     <div class="media-body">
+                         <p>
+                             <a href="../pdf/sample.pdf" style="color: black"><i class="fa fa-download fa-3x"
+                                     aria-hidden="true"></i></a>
+                         </p>
+                     </div>
+                 </div>
+
+                 <%}%>
+                  <%}else{%>
+                 <div id="name9">No documents uploaded</div>
+                 <%}%>
+         
             </div>
         </div>
     </div>
