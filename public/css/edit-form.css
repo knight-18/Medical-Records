@@ -33,7 +33,7 @@
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
   width: 60% !important ; /* Could be more or less, depending on screen size */
-  height: 75% !important;
+  height: 83% !important;
   border-radius: 1rem;
   border-color: bisque;
   margin-top: 5rem;
@@ -441,13 +441,18 @@ input:focus ~ .highlight1 {
   font-size: 0.7rem;
 }
 
+
+
+
+
+
 @media screen and (max-width:1300px) {
 .modalEdit {
   margin-bottom: 1rem;
 }
   .modal-content-edit {
     width: 100% !important ; /* Could be more or less, depending on screen size */
-   height: 80% !important;
+   height: 83% !important;
    /*background-color: red!important;*/
    margin-top:15% auto !important;
    padding: 20px !important;
@@ -493,6 +498,24 @@ input:focus ~ .highlight1 {
      font-family: "Times New Roman", Times, serif;
   }
  
+}
+
+@media screen and (max-width:500px){
+  .content-top-edit h4 {
+    
+    margin-top: 20px;
+    margin-left: 16px;
+    font-size: 23px;
+}
+  
+}
+@media screen and (max-width:400px){
+  
+  .modal-content-edit {
+  width: 100% !important;
+  height: 100% !important;
+  
+}
 }
 @media only screen and (min-device-width: 481px) and (max-device-width:900px) and (orientation:portrait) {
   /* For portrait layouts only */

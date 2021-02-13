@@ -58,17 +58,37 @@
 								</form>
 							   
 							</div>
-							<% if (foundUser) { %>
-								<div>
-									<div id="patientId2">
-										<div id="patientImage3"></div>
+					
+		     
+								<% if (foundUser) { %>
+									<div>
+										<div id="patientId2">
+										<div id="patientImage2"></div>
 										<div id="patientName1">
-									<p><%= foundUser.name %></p>
+										<p><%= foundUser.name %></p>
 										</div>
+										</div>
+										<% if (access.length == 0) { %>
+											<a class="btn btn-danger" href="/hospital/relation/<%= foundUser.short_id %>"" role="button" id="search_button2">Request Patient</a>	
+											<% if (foundUser.nominee) { %>
+												<br>
+												<br>
+												
+												
+												<a class="btn btn-warning" href="/hospital/nominee/<%= foundUser.short_id %>"" role="button" id="search_button2">Request Nominee</a>
+									
+												<% } %>
+										<% } else { %>
+											<a class="btn btn-primary" href="/hospital/patient?id=<%= foundUser._id %>"" role="button" id="search_button2">View details</a>
+										    
+											<% } %>
+											<div id="separator"></div>
+										
 									</div>
-									<a class="btn btn-primary" href="/hospital/relation/<%= foundUser.short_id %>" role="button" id="search_button1">Request Access</a>
-								</div>
-							<% } %>
+								<% } %>
+								
+
+
 							<ul id="patientList">
 								<% for(var d of patients) { %>
 									<div id="patientId">
@@ -223,6 +243,7 @@
 							</form>
 						   
 						</div>
+						
 						<% if (foundUser) { %>
 							<div>
 								<div id="patientId2">
@@ -231,9 +252,26 @@
 								<p><%= foundUser.name %></p>
 								</div>
 								</div>
-								<a class="btn btn-primary" href="/hospital/relation/<%= foundUser.short_id %>"" role="button" id="search_button2">Request Access</a>	
+								<% if (access.length == 0) { %>
+									<a class="btn btn-danger" href="/hospital/relation/<%= foundUser.short_id %>"" role="button" id="search_button2">Request Patient</a>	
+									<% if (foundUser.nominee) { %>
+										<br>
+										<br>
+										
+										
+										<a class="btn btn-warning" href="/hospital/nominee/<%= foundUser.short_id %>"" role="button" id="search_button2">Request Nominee</a>
+										
+										<% } %>
+								<% } else { %>
+									<a class="btn btn-primary" href="/hospital/patient?id=<%= foundUser._id %>"" role="button" id="search_button2">View details</a>
+									
+									<% } %>
+									<div id="separator"></div>
+								
 							</div>
 						<% } %>
+						
+
 		
 						<ul id="patientList1">
 							<% for(var d of patients) { %>

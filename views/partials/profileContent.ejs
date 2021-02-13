@@ -9,7 +9,7 @@
         <% if (user.profilePic){%>
         <a href="#"><img src="../uploads/<%=user.email%>/profilePic/<%=user.profilePic%>"  id="profileImg"></a>
         <%}else{%>
-            <a href="#"><img src="../img/ProfilePic"  id="profileImg"></a>
+            <a href="#"><img src="../img/ProfilePic.png"  id="profileImg"></a>
             <%}%>
         <a href="#"><img src="../img/camera.png" id="Camera"></a>
         <h5 id="name"><%if (user.name) { %>
@@ -29,15 +29,7 @@
 				<%=user.email %>
 				<% } %></label>
             <br>
-            <label for="bloodGroup" class="detailLevels">Blood Group:<%if (user.bloodGroup) { %>
-				<%=user.bloodGroup %>
-				<% } %></label>
-            <br>
-            <label for="bloodGroup" class="detailLevels">Nominee Name:<%if (nominee.nominee) { %>
-				<%=nominee.nominee.name %>
-				<% } %> </label>
-            <br>
-            <label for="bloodGroup" class="detailLevels">Nominee Email:<%if (nominee.nominee!==null) { %>
+            <label for="bloodGroup" class="detailLevels">Nominee Email:<%if (nominee.nominee) { %>
 				<%=nominee.nominee.email %>
 				<% } %></label>
             <br>
