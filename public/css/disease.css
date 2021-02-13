@@ -79,6 +79,14 @@
 	padding: 2vh 0 1vh;
 	margin-bottom: 2vh;
 }
+#name9{
+	margin-top: 2vh;
+	text-align: center;
+	padding:10px;
+	font-weight: bold;
+	font-size: 1rem;
+	background-color:rgb(179, 232, 241);
+}
 .disease-flexbox{
 	display: flex;
 	flex-direction: column;

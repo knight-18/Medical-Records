@@ -8,10 +8,20 @@ const diseaseSchema = mongoose.Schema({
         trim: true,
     },
     medicine:[{
-        type: String
+        originalName:{
+            type:String
+        },
+        filename:{
+            type:String
+        }
     }],
     document:[{
-        type: String
+        originalName:{
+            type:String
+        },
+        filename:{
+            type:String
+        }
     }],
     owner:{
         type: mongoose.Schema.Types.ObjectId ,

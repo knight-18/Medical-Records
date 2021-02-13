@@ -9,15 +9,25 @@
         <div class="container">
             <h5 id="name1">Patient's Diseases </h5>
             <div class="disease-flexbox">
-            <%for(var i of diseases.disease){%>
-                <div class="media" id="pat-dis">
-                   
-                    <a href="/hospital/document?id=<%=i._id%>&userId=<%=user._id%>"><div style="display: inline-block" class="media-heading align-self-center" id="patientDiseases"><%=i.name%></div></a>
-            
-                    <i class="fa fa-medkit fa fa-2x" aria-hidden="true"></i>
-                </div>
-     
-                <%}%>
+                  <% if(diseases.disease.length!=0){%>
+                  <%for(var i of diseases.disease){%>
+                  <div class="media" id="pat-dis">
+
+                      <a href="/hospital/document?id=<%=i._id%>&userId=<%=user._id%>">
+                          <div style="display: inline-block" class="media-heading align-self-center"
+                              id="patientDiseases"><%=i.name%></div>
+                      </a>
+
+                      <i class="fa fa-medkit fa fa-2x" aria-hidden="true"></i>
+                  </div>
+
+                  <%}%>
+                  <%}else{%>
+                  <div>No diseases found</div>
+                  <divid="name9">Patient's Diseases </div>
+                  <%}%>
+                  
+       
             </div>
         </div>
     </div>

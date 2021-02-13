@@ -6,7 +6,11 @@
 <div class="col-lg-8 col-sm-8 col-12 order-1 order-sm-2" id="pSec2">
     <div id="sub1">
         <img src="../img/CoverPhoto.png" id="coverImg">
-        <a href="#"><img src="../img/ProfilePic.png" id="profileImg"></a>
+        <% if (user.profilePic){%>
+        <a href="#"><img src="../uploads/<%=user.email%>/profilePic/<%=user.profilePic%>"  id="profileImg"></a>
+        <%}else{%>
+            <a href="#"><img src="../img/ProfilePic.png"  id="profileImg"></a>
+            <%}%>
         <a href="#"><img src="../img/camera.png" id="Camera"></a>
         <h5 id="name"><%if (user.name) { %>
             <%=user.name %>
@@ -25,6 +29,7 @@
 				<%=user.email %>
 				<% } %></label>
             <br>
+<<<<<<< HEAD
             <label for="bloodGroup" class="detailLevels">Blood Group:<%if (user.bloodGroup) { %>
 				<%=user.bloodGroup %>
 				<% } %></label>
@@ -33,6 +38,8 @@
 				<%=nominee.nominee.name %>
 				<% } %> </label>
             <br>
+=======
+>>>>>>> 5997e98ff0b5ed0e11f0c3c0b38389cc5eef7625
             <label for="bloodGroup" class="detailLevels">Nominee Email:<%if (nominee.nominee) { %>
 				<%=nominee.nominee.email %>
 				<% } %></label>

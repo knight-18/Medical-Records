@@ -10,6 +10,7 @@ const { handleErrors } = require('../utilities/Utilities');
 const crypto = require('crypto')
 require('dotenv').config()
 const { nanoId } = require("nanoid")
+const mongoose=require('mongoose')
 
 const maxAge = 30 * 24 * 60 * 60
 
@@ -283,49 +284,71 @@ module.exports.upload_post = async (req, res) => {
         )
       //  console.log('disease',existName)
 
-        
+        const document={
+        originalName:'',
+        filename:''
+        }
+        const medicine={
+        originalName:'',
+        filename:''
+        }
 
 
         if(existName)
         {
-            req.flash('success_msg','Disease name already exists, file succesfully uploaded')
+            
             const existDisease= await Disease.findById({'_id':existName._id})
-           // console.log('exist disease',existDisease)
+            console.log('exist disease',existDisease)
+          
             if(obj.medicine)
             {
-                existDisease.medicine.push(`/uploads/${req.user.email}/${dname}/${obj.medicine[0].filename}`)
+                //medicine[0]._id= mongoose.Types.ObjectId()
+                medicine.originalName=obj.medicine[0].originalname
+                medicine.filename=`/uploads/${req.user.email}/${dname}/${obj.medicine[0].filename}`
+                existDisease.medicine.push(medicine)
             }
             if(obj.document)
             {
-                existDisease.document.push( `/uploads/${req.user.email}/${dname}/${obj.document[0].filename}`)
+                //document[0]._id=mongoose.Types.ObjectId()
+                document.originalName=obj.document[0].originalname
+                document.filename=`/uploads/${req.user.email}/${dname}/${obj.document[0].filename}`
+                existDisease.document.push(document)
             }
             await existDisease.save()
-           
+            req.flash('success_msg','Disease name already exists, file succesfully uploaded')
             return res.redirect('/user/profile')
         }
         
         /*let images = files.map((file) => {
             return `/uploads/${req.user.email}/${file.filename}`
         })*/
-        const document=[]
-        const medicine=[]
+       
 
-            if(obj.medicine)
-            {
-                medicine.push(`/uploads/${req.user.email}/${dname}/${obj.medicine[0].filename}`)
-            }
-            if(obj.document)
-            {
-                document.push( `/uploads/${req.user.email}/${dname}/${obj.document[0].filename}`)
-            }
-
-           // console.log('documents',document)
-           // console.log('medicine',medicine)
+           
         let newDisease = await new Disease({ 
-            name,
-            medicine,
-            document
+            name
         }).save()
+        if(obj.medicine)
+        {
+            medicine.originalName=obj.medicine[0].originalname
+            medicine.filename=`/uploads/${req.user.email}/${dname}/${obj.medicine[0].filename}`
+            newDisease.medicine.push(medicine)
+            
+           // medicine.push(`/uploads/${req.user.email}/${dname}/${obj.medicine[0].filename}`)
+        }
+        if(obj.document)
+        {
+            document.originalName=obj.document[0].originalname
+            document.filename=`/uploads/${req.user.email}/${dname}/${obj.document[0].filename}`
+            newDisease.document.push(document)
+            //await newDisease.save()
+            //document.push( `/uploads/${req.user.email}/${dname}/${obj.document[0].filename}`)
+        }
+        await newDisease.save()
+
+        console.log('documents',document)
+        console.log('medicine',medicine)
+        
         if (!newDisease) {
             req.flash('error_msg', 'Unable to save the disease details')
             return res.redirect('/user/profile')
@@ -369,13 +392,17 @@ module.exports.profile_get = async (req, res) => {
     //console.log('user id',req.user)
     //console.log("locals",res.locals.user)
     //console.log('id',req.user._id)
+    // const user=req.user
     const hospitals = await Relations.find({'userId':req.user._id,'isPermitted':true}).populate('hospitalId','hospitalName')
     const nominee= await req.user.populate('nominee').execPopulate()// to be optimised by gaurav
     //console.log('hospitals',nominee)
+    // const profilePath=path.join(__dirname,`../../public/uploads/${user.email}/${user.profilePic}`)
+    // console.log(profilePath)
     res.render('./userViews/profile', {
         path: '/user/profile',
         hospitals:hospitals,
-        nominee
+        nominee,
+        // profilePath
       })
       console.log("in profile page")
     }
@@ -562,4 +589,16 @@ module.exports.download=async(req,res)=>{
         res.end()
       })
 
+}
+module.exports.picupload_post=async(req,res)=>{
+    const user=req.user
+    const picPath=user.profilePic
+    User.findOneAndUpdate({_id: user.id}, {$set:{profilePic:picPath}}, {new: true}, (err, doc) => {
+        if (err) {
+            console.log("Something wrong when updating data!");
+        }
+        
+        console.log(doc);
+    });
+    res.redirect('/user/profile')
 }
