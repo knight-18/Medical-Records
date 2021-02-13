@@ -24,7 +24,11 @@
     <div class="disease-back-link"><a href="/user/profile"><i class="fa fa-arrow-left" aria-hidden="true"></i>Disease</a></div>
     <div id="sub4">
         <div class="container">
-            <h5 id="name1">Disease Name-: <%=disease.name%></h5>
+            <div class="add-documents">
+           
+            <h5 id="name1">Disease Name-: <%=disease.name%></h5> 
+            <button id="myBtn"  data-toggle="modal" data-target="#myModal" class="add-documents-button" onclick=oepnModal()>Add</button>
+            </div>
             <h5 id="name1">Uploaded Documents</h5>
 
             <div class="disease-flexbox">
