@@ -121,7 +121,6 @@ body {
 }
 #Dr {
     width: 100%;
-    /* height: 8%; */
     text-align: center;
     background: #019dfa;
     color: white;
@@ -418,7 +417,7 @@ body {
     }
     #Camera {
         top: 40.5%;
-        left: 22.5%;
+        left: 26.5%;
     }
     #name {
         top: 12%;
@@ -488,7 +487,7 @@ body {
 
     #Camera {
         top: 43.5%;
-        left: 30.5%;
+        left: 40.5%;
     }
 
     #name {
@@ -654,6 +653,7 @@ body {
         display: none;
     }
 }
+/*Right Panel*/
 #id_search {
     width: 200px;
     margin: 20px 20px 0px 20px;
@@ -936,3 +936,99 @@ body {
         margin-right: 15%;
     }
 }
+@media only screen and (max-width:450px){
+    #patientId:hover #patientImage{
+        margin-right:30px;
+    }
+    #patientList li{
+        /* position:relative;
+       right:10px; */
+       margin-left:15px;
+        width:100%;
+    }
+    #name{
+        margin-top:10px;
+    }
+    #patientDetails{
+        margin-top:20px;
+        padding-bottom:10px;
+    }
+    #pSec3{
+        margin-top:25%;
+    }
+    #pSec1{
+        margin-top:30%;
+    }
+}
+/*Mobile view responsiveness modified*/
+@media only screen and (min-width:451px) and (max-width:540px){
+    #name{
+        margin-top:10px;
+    }
+   #pSec3{
+       margin-top:15%;
+   }
+   #pSec1{
+    margin-top:20%;
+}
+    #patientDetails{
+        margin-top:10px;
+        padding-bottom:10px;
+    }
+    #Camera {
+        top: 44.5%;
+        left: 20%;
+    }
+}
+@media only screen and (min-width:319px) and (max-width:340px){
+    #name{
+        margin-top:20px;
+    }
+   #pSec3{
+       margin-top:80px;
+   }
+    #patientDetails{
+        margin-top:10px;
+        padding-bottom:10px;
+    }
+}
+@media only screen and (min-width:365px) and (max-width:380px){
+    #pSec3{
+        margin-top:15%;
+    }
+    #pSec1{
+        margin-top:30%;
+    }
+    #Camera {
+        top: 43.5%;
+        left: 34%;
+    }
+}
+@media (min-width:320px) and (max-width: 365px){
+#Camera {
+    top: 43.5%;
+    left: 34%;
+}
+#pSec3{
+    margin-top:25%;
+ }
+ #pSec1{
+     margin-top:40%;
+ }
+}
+@media (max-width: 320px){
+    #Camera {
+        top: 43.5%;
+        left: 40%;
+    }
+    #patientDetails{
+        margin-top:10px;
+        padding-bottom:10px;
+    }
+#pSec3{
+    margin-top:30%;
+ }
+ #pSec1{
+     margin-top:45%;
+ }
+    }
