@@ -6,7 +6,34 @@
 <div class="col-lg-8 col-sm-8 col-12 order-1 order-sm-2" id="pSec2">
     <div id="sub1">
         <img src="../img/CoverPhoto.png" id="coverImg">
-        <a href="#"><img src="../img/ProfilePic.png" id="profileImg"></a>
+        <div class="profile-photo-div" id="profile-photo-div">
+            <div class="profile-img-div" id="profile-img-div">
+                <div id="loader"></div>
+                <a href="#">
+        <a href="#"><!--<img src="../img/ProfilePic.png" id="profileImg"></a>-->
+    
+                    <img src="../img/ProfilePic.png"  id="profile-img" class=" img-fluid">
+                </a>
+                <input id="x-position" type="range" name="x-position" value="0" min="0" />
+                <input id="y-position" type="range" name="y-position" value="0" min="0" />
+              <!-- <a href="#"><img src="../img/camera.png" id="Camera"></a> -->
+            </div>
+            <div class="profile-buttons-div">
+                <div class="profile-img-input" id="profile-img-input">
+                    <label class="button" id="change-photo-label" for="change-photo">
+                        <a href="#">
+                        <img src="../img/camera.png" id="Camera">
+                        </a>
+                </label><input id="change-photo" name="change-photo" type="file" style="display: none" accept="image/*" />
+                </div>
+                <div class="profile-img-confirm" id="profile-img-confirm" style="display: none">
+                    <div class="button half green" id="save-img"><i class="fa fa-check" aria-hidden="true"></i></div>
+                    <div class="button half red" id="cancel-img"><i class="fa fa-remove" aria-hidden="true"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="error" id="error">min sizes 400*400px</div>
+        <canvas id="croppedPhoto" width="400" height="400"></canvas>
         <a href="#"><img src="../img/camera.png" id="Camera"></a>
         <h5 id="name"><%if (user.name) { %>
             <%=user.name %>
@@ -33,7 +60,7 @@
 				<%=nominee.nominee.name %>
 				<% } %> </label>
             <br>
-            <label for="bloodGroup" class="detailLevels">Nominee Email:<%if (nominee.nominee!==null) { %>
+            <label for="bloodGroup" class="detailLevels">Nominee Email:<%if (nominee.nominee) { %>
 				<%=nominee.nominee.email %>
 				<% } %></label>
             <br>
