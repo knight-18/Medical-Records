@@ -880,37 +880,6 @@ display: none ;
 		width:100%;
 	}
 }
-<<<<<<< HEAD
-@media only screen and (max-width: 600px) {
-   #search_button2{
-	 width:80%;
-	padding-left:10%;
-	padding-right:10%;
-	font-size: 1rem !important;
-	color:white !important;
-	background-color:rgb(190, 67, 67) !important;
-	border:none;
-	
- }
-}
-@media only screen 
-  and (min-device-width: 768px) 
-  and (max-device-width: 1024px) 
-  and (-webkit-min-device-pixel-ratio: 2){
-	   #search_button2{
-	 width:80%;
-	padding-left:10%;
-	padding-right:10%;
-	font-size: 1rem !important;
-	color:white !important;
-	background-color:rgb(190, 67, 67) !important;
-	border:none;
-	
- }
-
-}
-
-=======
 /*Mobile view*/
 @media only screen and (max-width:450px){
 	#name{
@@ -1003,6 +972,30 @@ display: none ;
      margin-top:45%;
  }
     }
->>>>>>> 5997e98ff0b5ed0e11f0c3c0b38389cc5eef7625
+
+	@media only screen and (max-width: 600px) {
+   #search_button2{
+	 width:80%;
+	padding-left:10%;
+	padding-right:10%;
+	font-size: 1rem !important;
+	border:none;
+
+ }
+}
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (-webkit-min-device-pixel-ratio: 2){
+	   #search_button2{
+	 width:80%;
+	padding-left:10%;
+	padding-right:10%;
+	font-size: 1rem !important;
+	border:none;
+
+ }
+
+}
 
 
