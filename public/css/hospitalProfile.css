@@ -188,7 +188,7 @@ text-decoration:none;
 	padding: 8px 8px 8px 32px;
 	text-decoration: none;
 	font-size: 25px;
-	color: black;
+	color: white;
 	display: block;
 	transition: 0.3s;
   }
@@ -680,6 +680,12 @@ display: none ;
     text-align:center;
     border:none;
 }
+#separator{
+	border-bottom:1px solid rgb(187, 186, 186);
+	width:90%;
+	margin-left:5%;
+	margin-top:10px;
+}
 #patientId{
 	margin:30px 20px 30px 20px;
 	/* display:flex; */
@@ -873,6 +879,97 @@ display: none ;
 		width:100%;
 	}
 }
-
+/*Mobile view*/
+@media only screen and (max-width:450px){
+	#name{
+        margin-top:10px;
+    }
+    #patientDetails{
+        margin-top:20px;
+        padding-bottom:10px;
+    }
+    #pSec3{
+        margin-top:25%;
+    }
+    #pSec1{
+        margin-top:30%;
+    }
+	#id_search_disease {
+		
+		margin-left: 70%;
+		
+	}
+}
+@media only screen and (min-width:451px) and (max-width:540px){
+    #name{
+        margin-top:10px;
+    }
+   #pSec3{
+       margin-top:15%;
+   }
+   #pSec1{
+    margin-top:20%;
+}
+    #patientDetails{
+        margin-top:10px;
+        padding-bottom:10px;
+    }
+    #Camera {
+        top: 44.5%;
+        left: 20%;
+    }
+}
+@media only screen and (min-width:319px) and (max-width:340px){
+    #name{
+        margin-top:20px;
+    }
+   #pSec3{
+       margin-top:80px;
+   }
+    #patientDetails{
+        margin-top:10px;
+        padding-bottom:10px;
+    }
+}
+@media only screen and (min-width:365px) and (max-width:380px){
+    #pSec3{
+        margin-top:20%;
+    }
+    #pSec1{
+        margin-top:35%;
+    }
+    #Camera {
+        top: 43.5%;
+        left: 34%;
+    }
+}
+@media (min-width:320px) and (max-width: 365px){
+#Camera {
+    top: 43.5%;
+    left: 34%;
+}
+#pSec3{
+    margin-top:25%;
+ }
+ #pSec1{
+     margin-top:40%;
+ }
+}
+@media (max-width: 320px){
+    #Camera {
+        top: 43.5%;
+        left: 40%;
+    }
+    #patientDetails{
+        margin-top:10px;
+        padding-bottom:10px;
+    }
+#pSec3{
+    margin-top:30%;
+ }
+ #pSec1{
+     margin-top:45%;
+ }
+    }
 
 
