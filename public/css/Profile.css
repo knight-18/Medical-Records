@@ -1039,3 +1039,310 @@ body {
      margin-top:45%;
  }
     }
+
+
+    #myBtnEdit {
+    background: black;
+    color:#f1f1f1;
+    border-radius:5px;
+   margin-left:90%;
+  position: relative;
+  top:15%;
+}
+
+
+
+.modal-dp-edit {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content-dp-edit{
+    background-color: #292727;
+    color:white;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+  }
+  
+  /* The Close Button */
+  .close-dp-edit {
+    color: rgb(236, 230, 230);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close-dp-edit,
+  .close-dp-edit:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .save-dp-edit {
+background-color: #0380c9;
+color:white;
+float:right;
+border: none;
+  }
+
+@media only screen and (max-width:450px){
+    #patientId:hover #patientImage{
+        margin-right:30px;
+    }
+    #patientList li{
+        /* position:relative;
+       right:10px; */
+       margin-left:15px;
+        width:100%;
+    }
+    #name{
+        margin-top:10px;
+    }
+    #patientDetails{
+        margin-top:20px;
+        padding-bottom:10px;
+    }
+    #pSec3{
+        margin-top:25%;
+    }
+    #pSec1{
+        margin-top:30%;
+    }
+}
+/*Mobile view responsiveness modified*/
+@media only screen and (min-width:451px) and (max-width:540px){
+    #name{
+        margin-top:10px;
+    }
+   #pSec3{
+       margin-top:15%;
+   }
+   #pSec1{
+    margin-top:20%;
+}
+    #patientDetails{
+        margin-top:10px;
+        padding-bottom:10px;
+    }
+    #Camera {
+        top: 44.5%;
+        left: 20%;
+    }
+}
+@media only screen and (min-width:319px) and (max-width:340px){
+    #name{
+        margin-top:20px;
+    }
+   #pSec3{
+       margin-top:80px;
+   }
+    #patientDetails{
+        margin-top:10px;
+        padding-bottom:10px;
+    }
+}
+@media only screen and (min-width:365px) and (max-width:380px){
+    #pSec3{
+        margin-top:15%;
+    }
+    #pSec1{
+        margin-top:30%;
+    }
+    #Camera {
+        top: 43.5%;
+        left: 34%;
+    }
+}
+@media (min-width:320px) and (max-width: 365px){
+#Camera {
+    top: 43.5%;
+    left: 34%;
+}
+#pSec3{
+    margin-top:25%;
+ }
+ #pSec1{
+     margin-top:40%;
+ }
+}
+@media (max-width: 320px){
+    #Camera {
+        top: 43.5%;
+        left: 40%;
+    }
+    #patientDetails{
+        margin-top:10px;
+        padding-bottom:10px;
+    }
+#pSec3{
+    margin-top:30%;
+ }
+ #pSec1{
+     margin-top:45%;
+ }
+    }
+
+    
+
+    #myBtnEdit {
+        background: black;
+        color:#f1f1f1;
+        border-radius:5px;
+       margin-left:90%;
+      position: relative;
+      top:15%;
+    }
+    
+    
+    
+    .modal-dp-edit {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+      }
+      
+      /* Modal Content/Box */
+      .modal-content-dp-edit{
+        background-color: #292727;
+        color:white;
+        margin: 15% auto; /* 15% from the top and centered */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%; /* Could be more or less, depending on screen size */
+      }
+      
+      /* The Close Button */
+      .close-dp-edit {
+        color: rgb(236, 230, 230);
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+      
+      .close-dp-edit,
+      .close-dp-edit:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      .save-dp-edit {
+    background-color: #0380c9;
+    color:white;
+    float:right;
+    border: none;
+      }
+    
+    @media only screen and (max-width:450px){
+        #patientId:hover #patientImage{
+            margin-right:30px;
+        }
+        #patientList li{
+            /* position:relative;
+           right:10px; */
+           margin-left:15px;
+            width:100%;
+        }
+        #name{
+            margin-top:10px;
+        }
+        #patientDetails{
+            margin-top:20px;
+            padding-bottom:10px;
+        }
+        #pSec3{
+            margin-top:25%;
+        }
+        #pSec1{
+            margin-top:30%;
+        }
+    }
+    /*Mobile view responsiveness modified*/
+    @media only screen and (min-width:451px) and (max-width:540px){
+        #name{
+            margin-top:10px;
+        }
+       #pSec3{
+           margin-top:15%;
+       }
+       #pSec1{
+        margin-top:20%;
+    }
+        #patientDetails{
+            margin-top:10px;
+            padding-bottom:10px;
+        }
+        #Camera {
+            top: 44.5%;
+            left: 20%;
+        }
+    }
+    @media only screen and (min-width:319px) and (max-width:340px){
+        #name{
+            margin-top:20px;
+        }
+       #pSec3{
+           margin-top:80px;
+       }
+        #patientDetails{
+            margin-top:10px;
+            padding-bottom:10px;
+        }
+    }
+    @media only screen and (min-width:365px) and (max-width:380px){
+        #pSec3{
+            margin-top:15%;
+        }
+        #pSec1{
+            margin-top:30%;
+        }
+        #Camera {
+            top: 43.5%;
+            left: 34%;
+        }
+    }
+    @media (min-width:320px) and (max-width: 365px){
+    #Camera {
+        top: 43.5%;
+        left: 34%;
+    }
+    #pSec3{
+        margin-top:25%;
+     }
+     #pSec1{
+         margin-top:40%;
+     }
+    }
+    @media (max-width: 320px){
+        #Camera {
+            top: 43.5%;
+            left: 40%;
+        }
+        #patientDetails{
+            margin-top:10px;
+            padding-bottom:10px;
+        }
+    #pSec3{
+        margin-top:30%;
+     }
+     #pSec1{
+         margin-top:45%;
+     }
+        }    
