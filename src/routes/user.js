@@ -33,6 +33,7 @@ const storage = multer.diskStorage({
     },
     filename: (req, file, cb) => {
         // const userId = req.user._id
+
        // fileName= path.join(`${file.fieldname}`,`File-${v4()}-${file.originalname}-${path.extname(file.originalname)}`)
         //console.log(fileName)
         if(file.fieldname==='profilePic'){
