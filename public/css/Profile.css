@@ -1047,8 +1047,10 @@ body {
     border-radius:5px;
    margin-left:90%;
   position: relative;
-  top:15%;
+  top:5%;
 }
+
+
 
 
 
@@ -1118,6 +1120,14 @@ border: none;
     }
     #pSec1{
         margin-top:30%;
+    }
+     #myBtnEdit {
+        background: black;
+        color:#f1f1f1;
+        border-radius:5px;
+       margin-left:80%;
+      position: relative;
+      top:15%;
     }
 }
 /*Mobile view responsiveness modified*/
@@ -1195,14 +1205,7 @@ border: none;
 
     
 
-    #myBtnEdit {
-        background: black;
-        color:#f1f1f1;
-        border-radius:5px;
-       margin-left:90%;
-      position: relative;
-      top:15%;
-    }
+  
     
     
     

@@ -37,15 +37,40 @@
     border-radius: 10px 10px 10px 10px;
 	margin-bottom: 10px;
 }
+
+.add-documents{
+	display:inline-flex;
+	width:100%
+}
+
+.add-documents-button{
+  
+   position: absolute;
+   top: 15px;
+   right: 3px;
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+	
+    background-color:black;
+    color: white;
+    outline: none;
+    text-align: center;
+    border: none;
+}
+
+
 #patientDiseases {
     color: black;
-    font-family: Product Sans;
-    font-weight: normal;
-    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 1.2rem;
     line-height: 24px;
     text-align: center;
     letter-spacing: 0.1em;
-    margin-left: 3vw;
+    margin-left: 2vw;
+	margin-bottom: 2vh;
+	 
 }
 
 #pSec9::-webkit-scrollbar{
@@ -77,15 +102,38 @@
 	padding: 2vh 0 1vh;
 	margin-bottom: 2vh;
 }
+#name9{
+	margin-top: 2vh;
+	text-align: center;
+	padding:10px;
+	font-weight: bold;
+	font-size: 1rem;
+	background-color:rgb(179, 232, 241);
+}
 .disease-flexbox{
 	display: flex;
 	flex-direction: column;
 }
+
 .media{
 	margin-bottom: 20px;
 	display: flex;
 	align-items: flex-end !important;
 	justify-content: space-between !important;
+}
+#pat-dis{
+	margin: 2vh;
+	display:flex;
+	align-items: flex-end !important;
+	justify-content: space-between !important;
+	background-color: rgb(101, 204, 223) !important;
+	border-radius:5px;
+	padding: 1vh;
+
+}
+#pat-dis i{
+	text-align: center;
+	padding-right: 1px;
 }
 .pdf-img{
 	margin-left: 5px;
