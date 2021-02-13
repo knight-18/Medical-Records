@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
 	<script src="https://use.fontawesome.com/67912d8e88.js"></script>
-
+    
 	<link rel="stylesheet" href="../css/NavBar.css">
 	<link rel="stylesheet" href="../css/modal.css">
 	<link rel="stylesheet" href="../css/edit-form.css">
@@ -14,6 +14,7 @@
 	<link rel="stylesheet" href="../css/Profile.css">
 
 	<title>Profile Page</title>
+	<link rel="shortcut icon" href="../img/medical1.png">
 </head>
 
 <body>
@@ -361,6 +362,7 @@
 	<script src="../js/sideNav.js"></script>
 	<script src="../js/profilePage.js"></script>
 	<script src="../js/sideNav.js"></script>
+	<script src="../js/modal.js"></script>
 	<script>
 		var test = document.querySelector('input');
 	</script>
@@ -595,36 +597,7 @@ window.onclick = function(event) {
   }
 } 
 </script>
-<script>
-	function openModal(){
-	var modal = document.getElementById("myModal");
-	var btn = document.getElementById("myBtn");
-	var span = document.getElementsByClassName("cancel")[0];
-	btn.onclick = function () {
-		modal.style.display = "block";
-	}
-	span.onclick = function () {
-		modal.style.display = "none";
-	}
-	window.onclick = function (event) {
-		if (event.target == modal) {
-			modal.style.display = "none";
-		}
-	}
-	var span = document.getElementsByClassName("save1")[0];
-	btn.onclick = function () {
-		modal.style.display = "block";
-	}
-	span.onclick = function () {
-		modal.style.display = "none";
-	}
-	window.onclick = function (event) {
-		if (event.target == modal) {
-			modal.style.display = "none";
-		}
-	} 
-}
-</script>
+
 <script>
 	$(window, document, undefined).ready(function () {
 		$('input').blur(function () {
