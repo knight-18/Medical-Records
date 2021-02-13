@@ -392,13 +392,17 @@ module.exports.profile_get = async (req, res) => {
     //console.log('user id',req.user)
     //console.log("locals",res.locals.user)
     //console.log('id',req.user._id)
+    // const user=req.user
     const hospitals = await Relations.find({'userId':req.user._id,'isPermitted':true}).populate('hospitalId','hospitalName')
     const nominee= await req.user.populate('nominee').execPopulate()// to be optimised by gaurav
     //console.log('hospitals',nominee)
+    // const profilePath=path.join(__dirname,`../../public/uploads/${user.email}/${user.profilePic}`)
+    // console.log(profilePath)
     res.render('./userViews/profile', {
         path: '/user/profile',
         hospitals:hospitals,
-        nominee
+        nominee,
+        // profilePath
       })
       console.log("in profile page")
     }
@@ -585,4 +589,16 @@ module.exports.download=async(req,res)=>{
         res.end()
       })
 
+}
+module.exports.picupload_post=async(req,res)=>{
+    const user=req.user
+    const picPath=user.profilePic
+    User.findOneAndUpdate({_id: user.id}, {$set:{profilePic:picPath}}, {new: true}, (err, doc) => {
+        if (err) {
+            console.log("Something wrong when updating data!");
+        }
+        
+        console.log(doc);
+    });
+    res.redirect('/user/profile')
 }
