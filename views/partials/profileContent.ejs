@@ -6,6 +6,7 @@
 <div class="col-lg-8 col-sm-8 col-12 order-1 order-sm-2" id="pSec2">
     <div id="sub1">
         <img src="../img/CoverPhoto.png" id="coverImg">
+<<<<<<< HEAD
         <div class="profile-photo-div" id="profile-photo-div">
             <div class="profile-img-div" id="profile-img-div">
                 <div id="loader"></div>
@@ -34,6 +35,13 @@
         </div>
         <div class="error" id="error">min sizes 400*400px</div>
         <canvas id="croppedPhoto" width="400" height="400"></canvas>
+=======
+        <% if (user.profilePic){%>
+        <a href="#"><img src="../uploads/<%=user.email%>/profilePic/<%=user.profilePic%>"  id="profileImg"></a>
+        <%}else{%>
+            <a href="#"><img src="../img/ProfilePic"  id="profileImg"></a>
+            <%}%>
+>>>>>>> 0319e76a56d60566cfb93cd2a272e1632d63dc2f
         <a href="#"><img src="../img/camera.png" id="Camera"></a>
         <h5 id="name"><%if (user.name) { %>
             <%=user.name %>

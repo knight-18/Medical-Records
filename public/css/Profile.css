@@ -10,21 +10,16 @@ body {
 }
 
 /* prole page scrollbar */
-.profile-main::-webkit-scrollbar{
-	width:8px;
+.profile-main::-webkit-scrollbar {
+    width: 8px;
 }
-.profile-main::-webkit-scrollbar-track{
+.profile-main::-webkit-scrollbar-track {
     background-color: rgb(209, 202, 202);
-    border-radius:3px;
+    border-radius: 3px;
 }
-.profile-main::-webkit-scrollbar-thumb{
-    background-color:#9593A0;
-    border-radius:3px;
-}
-
-#profileEdit{
-    top:0;
-    right:0;
+.profile-main::-webkit-scrollbar-thumb {
+    background-color: #9593a0;
+    border-radius: 3px;
 }
 
 #profileBody {
@@ -44,7 +39,7 @@ body {
     left: 0px;
 }
 #sub1 {
-    height: 96vh;
+    height: 85vh;
     background: #ffffff;
     box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.25);
     border-radius: 10px 10px 10px 10px;
@@ -95,20 +90,20 @@ body {
     filter: brightness(0) invert(1);
     margin-top: 1%;
 }
-.active-list{
-	width:85%;
-	height:100%;
-	background:#019DFA;
-	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
-	border-radius: 16px;
-	padding:5%;
+.active-list {
+    width: 85%;
+    height: 100%;
+    background: #019dfa;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 16px;
+    padding: 5%;
 }
-.active-list a{
-	color:white !important;
+.active-list a {
+    color: white !important;
 }
-.active-list .Icons{
-	filter:brightness(0) invert(1);
-	margin-top:1%;
+.active-list .Icons {
+    filter: brightness(0) invert(1);
+    margin-top: 1%;
 }
 .Icons {
     position: absolute;
@@ -141,9 +136,20 @@ body {
     position: absolute;
     top: 25%;
     left: 5%;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
 }
+/* #profileImgD {
+    position: absolute;
+    top: 25%;
+    width: 20%;
+    height: auto;
+    left: -2%;
+    border-radius: 50%;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+} */
 #Camera {
     position: absolute;
     top: 36.5%;
@@ -154,7 +160,7 @@ body {
     top: 14%;
     left: 5.5%;
     width: 88%;
-    height: fit-content;
+    height: 30%;
     background-color: #f3f3f3;
     border-radius: 15px;
 }
@@ -537,7 +543,7 @@ body {
 
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
-	display: none;
+    display: none;
     position: absolute;
     /* backdrop-filter: blur(4px); */
     /* background-color: white; */
@@ -552,24 +558,24 @@ body {
     z-index: 1;
     /* text-shadow: none; */
     /* transition: all 1250ms; */
-    background: #F3F3F3;
+    background: #f3f3f3;
     box-shadow: 4px 4px 10px rgb(0 0 0 / 25%);
     border-radius: 0px 0px 10px 10px;
 }
 
 /* Links inside the dropdown */
-.dropdown-content a{
-  color: #9593A0 !important;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  cursor: pointer;
-  /* filter: blur(0px); */
+.dropdown-content a {
+    color: #9593a0 !important;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+    /* filter: blur(0px); */
 }
 
 /* Change color of dropdown links on hover */
 .dropdown-content a:hover {
-	/*filter: brightness(2000%);
+    /*filter: brightness(2000%);
 	border: 0px solid;
 	box-shadow: inset 0 0 20px rgba(109, 131, 255, 0.5), 0 0 20px rgba(5, 110, 136, 0.2);
 	outline-color: rgba(255, 255, 255, 0);
@@ -577,11 +583,9 @@ body {
 	text-shadow: 1px 1px 2px #1c323b; 
 	border-radius: 8px;
 	color: black;*/
-	color:black !important;
-	background: #F3F3F3;
-
+    color: black !important;
+    background: #f3f3f3;
 }
-
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {
@@ -626,22 +630,22 @@ body {
 }
 
 .lists a:not([href]):not([tabindex]) {
-    color: #9593a0 ;
+    color: #9593a0;
 }
-.lists:hover a:not([href]):not([tabindex]), 
-.lists:active a:not([href]):not([tabindex]){
-	color:white ;
+.lists:hover a:not([href]):not([tabindex]),
+.lists:active a:not([href]):not([tabindex]) {
+    color: white;
 }
 
-.dropdown-content::-webkit-scrollbar{
-	width:5.5px;
+.dropdown-content::-webkit-scrollbar {
+    width: 5.5px;
 }
-.dropdown-content::-webkit-scrollbar-track{
+.dropdown-content::-webkit-scrollbar-track {
     background-color: rgb(209, 202, 202);
     /* border-radius:3px; */
 }
-.dropdown-content::-webkit-scrollbar-thumb{
-    background-color:#9593A0;
+.dropdown-content::-webkit-scrollbar-thumb {
+    background-color: #9593a0;
     /* border-radius:3px; */
 }
 
@@ -707,7 +711,7 @@ body {
     /* display:flex; */
 }
 #patientList {
-    margin-left: 12px;
+    margin-left: -28px;
 }
 #patientId1 {
     /* width:90%; */
@@ -733,7 +737,7 @@ body {
     background-size: cover;
 }
 #patientImage {
-    margin-right: 15px;
+    margin-right: 10px;
     float: left;
     width: 50px;
     height: 50px;
@@ -806,12 +810,12 @@ body {
     color: white;
 }
 #patientList1 {
-    margin-left: 2vw;
+    margin-left: -2vw;
 }
 #patientList li {
     list-style-type: none;
     position: relative;
-    left: -25px;
+    right: 40px;
     bottom: 4px;
     font-weight: normal;
     font-size: 16px;
@@ -820,7 +824,7 @@ body {
 #patientList1 li {
     list-style-type: none;
     position: relative;
-    right: 5%;
+    right: 18%;
     width: 100%;
     font-weight: normal;
     font-size: 16px;
@@ -828,14 +832,15 @@ body {
 #patientId:hover #patientName li {
     color: white;
     position: relative;
-    /* changbottom:4px;e */
-    margin-left: 30px;
+    left: -30px;
 }
-
+#patientId:hover #patientImage {
+    margin-right: 30px;
+}
 #patientId1:hover #patientName1 li {
     color: white;
     position: relative;
-    right: -5%;
+    right: 16%;
     width: 100%;
 }
 #patientName1 p {
@@ -868,18 +873,33 @@ body {
     }
 }
 @media only screen and (min-width: 1389px) and (max-width: 1416px) {
+    #patientName1 li {
+        position: relative;
+        right: 12%;
+        width: 100%;
+    }
     #patientList1 {
-        margin-left: 5%;
+        margin-left: -12%;
+    }
+    #patientImage1 {
+        margin-right: 2%;
+    }
+    #patientId1:hover #patientName1 li {
+        position: relative;
+        right: 12%;
+    }
+    #patientId1:hover #patientImage1 {
+        margin-right: 15%;
     }
 }
 @media only screen and (min-width: 1200px) and (max-width: 1389px) {
     #patientName1 li {
         position: relative;
-        left: 6%;
+        right: 12%;
         width: 100%;
     }
     #patientList1 {
-        margin-left: 5%;
+        margin-left: -18%;
     }
     #patientId2 {
         margin-left: 15px;
@@ -889,34 +909,42 @@ body {
     }
     #patientId1:hover #patientName1 li {
         position: relative;
-        right: 10%;
+        right: 12%;
+    }
+    #patientId1:hover #patientImage1 {
+        margin-right: 15%;
     }
 }
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
     #patientList1 {
-        margin-left: -4%;
+        margin-left: -24%;
     }
     #patientId2 {
         margin-left: 15px;
     }
     #patientImage1 {
-        margin-right: 0.5%;
+        margin-right: 8%;
     }
     #patientName1 li {
         position: relative;
-        left: 5%;
+        right: 6%;
         width: 100%;
     }
     #patientId1:hover {
         margin-left: 7%;
         width: 90%;
     }
+
     #patientId1:hover #patientName1 li {
         position: relative;
         right: 10%;
         width: 100%;
     }
+    #patientId1:hover #patientImage1 {
+        margin-right: 15%;
+    }
 }
+<<<<<<< HEAD
 #myBtnEdit {
     background: black;
     color:#f1f1f1;
@@ -1095,3 +1123,6 @@ body {
     text-align:center;
     display: none;
   }
+=======
+/* @media only screen and  */
+>>>>>>> 0319e76a56d60566cfb93cd2a272e1632d63dc2f
