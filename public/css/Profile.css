@@ -1235,7 +1235,7 @@ border: none;
       
       /* The Close Button */
 .close-dp-edit {
-        color: rgb(236, 230, 230);
+        color: rgb(236, 230, 230) !important;
         float: right;
         font-size: 28px;
         font-weight: bold;
@@ -1243,21 +1243,23 @@ border: none;
       
 .close-dp-edit,
 .close-dp-edit:focus {
-        color: rgb(160, 158, 158);
+        color: rgb(141, 56, 56);
         text-decoration: none;
         cursor: pointer;
 }
 .save-dp-edit {
-    position: fixed;
     background-color: #0380c9;
     color:white;
-    float:right;
+    float:left;
+    margin-right:-7rem;
     border: none;
-    margin: 5px;
+    margin-top: 10px;
+    border-bottom: 2px;
 }
 .form-control {
-    background: #292727;
-    color:white;
+    background: #292727 !important;
+    border:none !important;
+    color:white !important;
 }
     @media only screen and (max-width:450px){
         #patientId:hover #patientImage{
