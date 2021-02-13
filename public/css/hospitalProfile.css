@@ -820,11 +820,11 @@ display: none ;
  #search_button2{
 	 width:80%;
 	margin:0px 10%;
-	
  }
  #search_button1{
 	 font-size:16px !important;
 	 width:200px;
+	 /* margin:0px 10px 10px 10px; */
 	 margin-left:20px;
 	 padding:10px;
 	 color:white;
@@ -838,7 +838,6 @@ display: none ;
 	 margin-left:23%;
 	 
  }
-
  } 
 @media only screen and (min-width:1200px) and (max-width:1389px){
 	#patientName1 li{
@@ -972,30 +971,5 @@ display: none ;
      margin-top:45%;
  }
     }
-
-	@media only screen and (max-width: 600px) {
-   #search_button2{
-	 width:80%;
-	padding-left:10%;
-	padding-right:10%;
-	font-size: 1rem !important;
-	border:none;
-
- }
-}
-@media only screen 
-  and (min-device-width: 768px) 
-  and (max-device-width: 1024px) 
-  and (-webkit-min-device-pixel-ratio: 2){
-	   #search_button2{
-	 width:80%;
-	padding-left:10%;
-	padding-right:10%;
-	font-size: 1rem !important;
-	border:none;
-
- }
-
-}
 
 
