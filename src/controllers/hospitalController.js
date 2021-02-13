@@ -580,3 +580,17 @@ module.exports.nomineeVerify_get = async (req, res) => {
         res.redirect('/')
     }
 }
+module.exports.picupload_post=async(req,res)=>{
+    const hospital=req.hospital
+    const picPath=hospital.profilePic
+    Hospital.findOneAndUpdate({_id: hospital._id}, {$set:{profilePic:picPath}}, {new: true}, (err, doc) => {
+        if (err) {
+            console.log("Something wrong when updating data!");
+            req.flash("error_msg", "Something wrong when updating data!")
+            res.redirect('/hospital/profile')
+        }
+        
+        console.log(doc);
+    });
+    res.redirect('/hospital/profile')
+}

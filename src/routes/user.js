@@ -50,7 +50,11 @@ const upload = multer({
     storage: storage,
     limits: { fileSize: 6000000 },
     fileFilter: function (req, file, cb) {
+        if(file.fieldname==='profilePic'){
+        checkFileType1(file, cb)
+        }else{
         checkFileType(file, cb)
+        }
     },
 })
 function checkFileType(file, cb) {
@@ -63,6 +67,19 @@ function checkFileType(file, cb) {
         return cb(null, true)
     } else {
         cb(null,false)
+    }
+}
+function checkFileType1(file, cb) {
+    const filetypes = /jpeg|jpg|png/
+    const extname = filetypes.test(
+        path.extname(file.originalname).toLowerCase()
+    )
+    const mimetype = filetypes.test(file.mimetype)
+    if (mimetype && extname) {
+        return cb(null, true)
+    } else {
+        cb(null,false)
+        // req.flash("error_msg", "Enter a valid picture of format jpeg jpg png") 
     }
 }
 
