@@ -44,11 +44,11 @@ module.exports.editDetails_post = async (req, res) => {
             req.flash('error_msg', 'Unable to save the details')
             return res.redirect('/user/profile')
         }
-        console.log('nominee', nominee)
+        // console.log('nominee', nominee)
 
         req.user.nominee = nominee._id
         await user.save()
-        console.log('user saved', user)
+        // console.log('user saved', user)
         req.flash('success_msg', 'Details about the user has been saved')
 
         res.redirect('/user/profile')
@@ -102,7 +102,7 @@ module.exports.login_get = (req, res) => {
 module.exports.signup_post = async (req, res) => {
     const { name, email, password, confirmPwd, phoneNumber } = req.body
     const nominee = null
-    console.log('in sign up route', req.body)
+    // console.log('in sign up route', req.body)
     if (password != confirmPwd) {
         req.flash('error_msg', 'Passwords do not match. Try again')
         res.status(400).redirect('/user/login')
@@ -127,7 +127,7 @@ module.exports.signup_post = async (req, res) => {
             return res.redirect('/user/login')
         }
         const short_id = generateShortId(name,phoneNumber);
-        console.log('Short ID generated is: ', short_id)
+        // console.log('Short ID generated is: ', short_id)
         const user = new User({
             email,
             name,
@@ -207,7 +207,7 @@ module.exports.emailVerify_get = async (req, res) => {
 
 module.exports.login_post = async (req, res) => {
     const { email, password } = req.body
-    console.log('in Login route')
+    // console.log('in Login route')
     // console.log('req.body',req.body)
     try {
         const user = await User.login(email, password)
@@ -223,7 +223,7 @@ module.exports.login_post = async (req, res) => {
                 currDate.getTime() - initialUpdatedAt.getTime()
             )
             if (timeDiff <= 10800000) {
-                console.log('Email already sent check it')
+                // console.log('Email already sent check it')
                 req.flash(
                     'error_msg',
                     `${userExists.name}, we have already sent you a verify link please check your email`
@@ -268,7 +268,7 @@ module.exports.upload_post = async (req, res) => {
         const files = req.files
         dname = name.toLowerCase()
         const obj = JSON.parse(JSON.stringify(files))
-        console.log('files', obj)
+        // console.log('files', obj)
         //console.log(obj.document[0].filename)
         if (Object.keys(obj).length === 0) {
             req.flash('error_msg', 'Please select atleast one file to upload')
@@ -298,7 +298,7 @@ module.exports.upload_post = async (req, res) => {
 
         if (existName) {
             const existDisease = await Disease.findById({ _id: existName._id })
-            console.log('exist disease', existDisease)
+            // console.log('exist disease', existDisease)
 
             if (obj.medicine) {
                 //medicine[0]._id= mongoose.Types.ObjectId()
@@ -343,8 +343,8 @@ module.exports.upload_post = async (req, res) => {
         }
         await newDisease.save()
 
-        console.log('documents', document)
-        console.log('medicine', medicine)
+        // console.log('documents', document)
+        // console.log('medicine', medicine)
 
         if (!newDisease) {
             req.flash('error_msg', 'Unable to save the disease details')
@@ -353,7 +353,7 @@ module.exports.upload_post = async (req, res) => {
         req.user.disease.push(newDisease)
         await req.user.save()
 
-        console.log(newDisease)
+        // console.log(newDisease)
         req.flash('success_msg', 'Sucessfully uploaded disease details.')
         return res.redirect('/user/profile')
     } catch (err) {
@@ -382,7 +382,7 @@ module.exports.disease_get = async (req, res) => {
         hospitals,
         disease,
     })
-    console.log('in disease page')
+    // console.log('in disease page')
 }
 
 module.exports.profile_get = async (req, res) => {
@@ -406,7 +406,7 @@ module.exports.profile_get = async (req, res) => {
         nominee,
         // profilePath
     })
-    console.log('in profile page')
+    // console.log('in profile page')
 }
 
 module.exports.logout_get = async (req, res) => {
@@ -551,7 +551,7 @@ module.exports.hospitalSearch_post = async (req, res) => {
                 isPermitted: true,
             }).populate('hospitalId', 'hospitalName')
             const nominee = await req.user.populate('nominee').execPopulate()
-            console.log(hospitals)
+            // console.log(hospitals)
             //console.log(hospitals)
             res.render('./userViews/profile', {
                 path: '/user/hospitalSearch',
@@ -602,7 +602,7 @@ module.exports.picupload_post = async (req, res) => {
                 res.redirect('/user/profile')
             }
 
-            console.log(doc)
+            // console.log(doc)
         }
     )
     res.redirect('/user/profile')

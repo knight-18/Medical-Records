@@ -1,10 +1,9 @@
 const mongoose = require('mongoose')
-const validator = require('validator')
 const jwt = require('jsonwebtoken')
 const crypto=require('crypto')
 const bcrypt = require('bcryptjs')
 const utilities = require('../utilities/Utilities')
-const { isEmail, isMobilePhone } = require('validator')
+const { isEmail } = require('validator')
 require('dotenv').config()
 
 const userSchema = mongoose.Schema(

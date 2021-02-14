@@ -10,10 +10,10 @@ const hospitalController = require('../controllers/hospitalController')
 const multer = require('multer')
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        console.log("in multer",file)
+        // console.log("in multer",file)
             const hospitalEmail = req.hospital.email.toLowerCase()
             var dir = `./public/uploads/${hospitalEmail}/hospital/${file.fieldname}`
-            console.log("dir:",dir)
+            // console.log("dir:",dir)
         
         if (!fs.existsSync(dir)) {
             //console.log("making files")

@@ -24,7 +24,7 @@ router.post('/contact',async(req,res)=>{
             req.flash('error_msg','Issue cannot be created');
             return res.redirect('/');
         }
-        console.log(newIssue);
+        // console.log(newIssue);
         contactMail(newIssue,'user');
         contactMail(newIssue,'admin');
         req.flash('success_msg','Your issue has been reported');

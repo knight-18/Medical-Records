@@ -1,4 +1,3 @@
-const validator = require('validator')
 
 const passwordStrength = (value) => {
     var strength = 0
