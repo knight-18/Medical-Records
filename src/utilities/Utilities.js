@@ -26,6 +26,20 @@ const phoneValidator = (value) =>
     
 }
 
+const generateShortId = (name, number)=>{
+    name = name.split(' ').join('');
+    let totalLength = 0, generatedId = "";
+    if(name.length < 4){
+        generatedId += name;
+        totalLength += name.length;
+    }
+    else{
+        generatedId = name.substring(0,4);
+        totalLength += 4;
+    }
+    generatedId += number.substring(0,8-totalLength);
+    return generatedId.toUpperCase();
+}
 
 const handleErrors = (err) => {
     let errors = { email: "", password: "" }
@@ -47,4 +61,5 @@ module.exports = {
     checkPasswordStrength: passwordStrength,
     phoneValidator : phoneValidator, 
     handleErrors:handleErrors, 
+    generateShortId
 }
