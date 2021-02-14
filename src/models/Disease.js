@@ -1,27 +1,39 @@
 const mongoose = require('mongoose')
+// const User = require('../models/User')
+
 
 const diseaseSchema = mongoose.Schema({
     name: {
         type: String,
         trim: true,
     },
-    duration: {
-        type: String,
-        trim: true,
-    },
-    description: {
-        type: String,
-    },
-    hospitalName: {
-        type: String,
-    },
-    images:[{
-        type: String
+    medicine:[{
+        originalName:{
+            type:String
+        },
+        filename:{
+            type:String
+        }
     }],
-    refDoctor: {
-        type: String,
-    },
+    document:[{
+        originalName:{
+            type:String
+        },
+        filename:{
+            type:String
+        }
+    }],
+    owner:{
+        type: mongoose.Schema.Types.ObjectId ,
+        ref:'User'
+    }
 })
+
+/*diseaseSchema.virtual('owner',{
+    ref:'User',
+    localField:'_id',
+    foreignField:'disease'
+})*/
 
 const Disease = mongoose.model('Disease', diseaseSchema)
 

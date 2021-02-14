@@ -10,14 +10,15 @@
     <!-- ====================================owl carousel css========================================================-->
     <!-- <link rel="stylesheet" href="owl-carousel/assets/owl.carousel.min.css" type="text/css">-->
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
 
     <!--=================================== Bootstrap CSS ==============================================================-->
     <!--================================================================================================================-->
 
     <!-- <link rel="stylesheet" href="css/bootstrap.min.css">-->
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
 
     <!--==================================== Font awesome CSS =============================================================-->
     <!--===================================================================================================================-->
@@ -116,7 +117,8 @@
                         <div class="line-mf1"></div>
 
                         <div class="card">
-                            <svg id="bg-services" width="100%" viewBox="0 0 1000 800">
+                            <img src="public\img\aboutus-logo-2.png">
+                            <!-- <svg id="bg-services" width="100%" viewBox="0 0 1000 800">
                                 <defs>
                                     <image id="clip-path" xlink:href="../img/aboutus-logo-2.png" width="100%"
                                         height="70%" class="svg__image"></image>
@@ -131,7 +133,7 @@
                                 <path fill-rule="evenodd" opacity="0.122" fill="url(#PSgrad_02)" ,
                                     d="M801.878,3.146 L116.381,128.537 C26.052,145.060 -21.235,229.535 9.856,312.073 L159.806,710.157 C184.515,775.753 264.901,810.334 338.020,792.380 L907.021,652.668 C972.912,636.489 1019.383,573.766 1011.301,510.470 L962.013,124.412 C951.950,45.594 881.254,-11.373 801.878,3.146 Z" />
 
-                            </svg>
+                            </svg> -->
 
                             <!--<svg width="100%" viewBox="0 0 730 500">
                     <clipPath id="clip-path">
@@ -395,10 +397,7 @@
             -ms-transform: translateY(-50%);
             transform: translateY(-50%);" class="line-mf3"></div>
 
-                    <div class="d-flex justify-content-center px-5">
-                        <div class="faqsearch"> <input type="text" class="faqsearch-input" placeholder="Search..."
-                                name=""> <a href=" " class="faqsearch-icon"><img src="../img/search.png" width=60%></a> </div>
-                    </div>
+
                     <div class="medss">
                         <div class="faqplacards">
                             <a href=" ">
@@ -731,13 +730,11 @@
     <section id="contact" class="contact">
         <div class="line-mf"></div>
         <div class="container" data-aos="fade-up">
-
             <div class="section-title">
                 <h2>Contact Us</h2>
             </div>
 
             <div class="row mt-1 d-flex justify-content-end" data-aos="fade-right" data-aos-delay="100">
-
                 <div class="col-lg-5">
                     <div class="info">
                         <div class="address">
@@ -745,7 +742,6 @@
                             <h4>Location:</h4>
                             <p>XYZ Street, Silchar,Cachar 783010</p>
                         </div>
-
                         <div class="email">
                             <i class="fa fa-envelope"></i>
                             <h4>Email:</h4>
@@ -757,49 +753,55 @@
                             <h4>Call:</h4>
                             <p>+91 000000000000</p>
                         </div>
-
                     </div>
-
                 </div>
-
                 <div class="col-lg-6 mt-5 mt-lg-0" data-aos="fade-left" data-aos-delay="100">
-
-                    <form action="contact.php" method="post" role="form" class="arogya-email-form">
+                    <form action="/contact" class="needs-validation" method="POST" novalidate>
                         <div class="form-row">
                             <div class="col-md-6 form-group">
                                 <input type="text" name="name" class="form-control" id="name" placeholder="Your Name"
-                                    data-rule="minlen:4" data-msg="Please enter at least 4 characters" />
-                                <div class="validate"></div>
+                                    minlength="2" aria-hidden="true" required />
+                                <div class="invalid-feedback">
+                                    Please choose a name !!
+                                </div>
                             </div>
                             <div class="col-md-6 form-group">
                                 <input type="email" class="form-control" name="email" id="email"
-                                    placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
-                                <div class="validate"></div>
+                                    placeholder="Your Email" required />
+                                <div class="valid-feedback">
+                                    Looks good !!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please provide a valid email !!
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject"
-                                data-rule="minlen:4" data-msg="Please enter at least 8 characters of subject" />
-                            <div class="validate"></div>
+                                minlength="4" required />
+                            <div class="valid-feedback">
+                                Good to go !!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please provide a subject of minimum length 4!!
+                            </div>
                         </div>
                         <div class="form-group">
-                            <textarea class="form-control" name="message" rows="5" data-rule="required"
-                                data-msg="Please write something for us" placeholder="Message"></textarea>
-                            <div class="validate"></div>
+                            <textarea class="form-control" name="message" rows="5" placeholder="Message" minlength="1"
+                                required></textarea>
+                            <div class="valid-feedback">
+                                Let's Go !!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please write something !!
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <div class="loading">Loading</div>
-                            <div class="error-message"></div>
-                            <div class="sent-message">Your message has been sent. Thank you!</div>
-                        </div>
-                        <div class="text-center"> <button type="submit"><i class="fa fa-paper-plane-o m-r-6"
-                                    aria-hidden="true"></i> Send Message</button></div>
+                        <div class="text-center"><button type="submit" style="outline: none !important;">
+                                <i class="fa fa-paper-plane-o m-r-6" aria-hidden="true"></i> Send
+                                Message</button></div>
                     </form>
-
                 </div>
-
             </div>
-
         </div>
     </section>
     <!-- End Contact Section -->
@@ -852,8 +854,8 @@
         </div>
 
     </footer>
-   
-   
+
+
 
     <!--================================================================-->
     <!-- Footer -->
@@ -867,7 +869,7 @@
 
 
     </footer>
-    
+
 
 
 

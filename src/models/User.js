@@ -1,34 +1,40 @@
 const mongoose = require('mongoose')
-const validator = require('validator')
 const jwt = require('jsonwebtoken')
+const crypto=require('crypto')
 const bcrypt = require('bcryptjs')
 const utilities = require('../utilities/Utilities')
-const { isEmail, isMobilePhone } = require('validator')
+const { isEmail } = require('validator')
 require('dotenv').config()
 
 const userSchema = mongoose.Schema(
     {
+        short_id: 
+        {
+            type: String, 
+            trim:true, 
+            required: [true, 'Short ID cannot be absent']
+        },
         name: {
             type: String,
             trim: true,
-            required: false,
+            required: [true, 'Name field cannot be empty']
         },
         email: {
             type: String,
             trim: true,
-            required: true,
             unique: true,
-            validate: [isEmail, 'Email is Invalid'],
+            required: [true, 'Email field cannot be empty'],
+            validate: [isEmail, 'Email is invalid'],
         },
         active: {
             type: Boolean,
-            default: false,
+            default:true,//to be changed to false after testing
         },
         password: {
             type: String,
             trim: true,
-            required: true,
             minlength: 8,
+            required: [true, 'Password field cannot be empty'],
             validate: [
                 (val) => {
                     var strength = utilities.checkPasswordStrength(val)
@@ -38,10 +44,10 @@ const userSchema = mongoose.Schema(
             ],
         },
         phoneNumber: {
+            required: [true, 'Phone number field cannot be empty'],
             type: String,
             trim: true,
-            required: true,
-            validate: [isMobilePhone, 'Phone Number is Invalid'],
+            validate: [utilities.phoneValidator, 'Phone number is invalid'],
         },
         disease: [
             {
@@ -49,17 +55,50 @@ const userSchema = mongoose.Schema(
                 ref: 'Disease',
             },
         ],
+        address:{
+            type:String
+        },
+        bloodGroup:{
+            type:String
+        },
+        nominee:{
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'Nominee'
+
+        },
+        profilePic: {
+            type: String,
+            trim: true,
+        },
+        passwordResetToken: String,
+        passwordResetExpires: Date,
     },
+    
     {
         timestamps: true,
-    }
+    },
+
 )
+// generate passwordResetToken
+userSchema.methods.createPasswordResetToken = function () {
+    const resetToken = crypto.randomBytes(32).toString('hex')
+    this.passwordResetToken = crypto
+        .createHash('sha256')
+        .update(resetToken)
+        .digest('hex')
+
+    this.passwordResetExpires = Date.now() + 10 * 60 * 1000
+
+    return resetToken
+}
 
 // static method to login user
 userSchema.statics.login = async function (email, password) {
     const user = await this.findOne({ email })
+    //console.log('log',user)
     if (user) {
         const auth = await bcrypt.compare(password, user.password)
+        //found bug have to fix the login 
         if (auth) {
             return user
         }

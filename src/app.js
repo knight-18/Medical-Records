@@ -64,21 +64,50 @@ app.use((req, res, next) => {
 //Routes
 const indexRoutes = require('./routes/index')
 const userRoutes = require('./routes/user')
+const hospitalRoutes = require('./routes/hospital')
 
 app.use('/',indexRoutes)
 app.use('/user',userRoutes)
+app.use('/hospital', hospitalRoutes)
 
 //Start the server
 app.listen(PORT, () => {
     console.log('Server listening on port', PORT)
 })
 
-// const Disease= require('./models/Disease')
+
+//  User = require('./models/User')
+//  const databasedlt= async()=>{
+//     const user = await User.find({email:"jainujjawal1999@gmail.com"})
+//     user.forEach(async(data)=>{
+//          await User.findByIdAndDelete(data._id)
+//     })
+//     console.log("deleted")
+//  }
+//  databasedlt()
+
+
+//  const User= require('./models/Hospital')
 // const databasedlt= async()=>{
-//    const user = await Disease.find()
+//    const user = await User.find({email:"gauravbhattacharjee_ug@cse.nits.ac.in"})
 //    user.forEach(async(data)=>{
-//         await Disease.findByIdAndDelete(data._id)
+//         await User.findByIdAndDelete(data._id)
 //    })
 //    console.log("deleted")
 // }
 // databasedlt()
+
+
+
+//  const Relations= require('./models/Relations')
+// const databasedlt= async()=>{
+//    const user = await Relations.find({_id: "60259290d60e72021ba9ed4a"})
+//    user.forEach(async(data)=>{
+//         await Relations.findByIdAndDelete(data._id)
+//    })
+//    console.log("deleted")
+// }
+// databasedlt()
+
+
+
