@@ -25,14 +25,14 @@ module.exports.document_get=async(req,res)=>{
     // console.log("hospital", res.locals.hospital)
     const patients = await Relations.find({ 'hospitalId': req.hospital._id}, "userId").populate('userId','name'); 
     //console.log('diseases of user',user)
-    console.log('dieasessssssssssssssss',disease)
+    // console.log('dieasessssssssssssssss',disease)
     if(!disease)
     {
         req.flash('error_msg','User not found')
         res.redirect('/hospital/profile')
     }
     //const diseases=await Disease.populate().execPopulate()
-    console.log('dieases',disease)
+    // console.log('dieases',disease)
     res.render("./hospitalViews/profile",{
         path:'/hospital/document',
         disease,
@@ -94,11 +94,11 @@ module.exports.patient_get= async (req,res)=>{
     const newId=params.get('id')
     //const newId=JSON.parse(userId,true)
     const user=await User.findOne({'_id':newId});
-    console.log('user details',)
+    // console.log('user details',)
     res.locals.hospital = req.hospital
     // console.log("hospital", res.locals.hospital)
     const patients = await Relations.find({ 'hospitalId': req.hospital._id}, "userId").populate('userId','name'); 
-    console.log('relation',patients)
+    // console.log('relation',patients)
     if(!user)
     {
         req.flash('error_msg','user not found')
@@ -124,7 +124,7 @@ module.exports.profile_get = async (req, res) => {
      //console.log("hospital", req.hospital)
     const patients = await Relations.find({'isPermitted': true, 'hospitalId': req.hospital._id},"userId").populate('userId','name'); 
     
-    console.log("patientssssss",patients)
+    // console.log("patientssssss",patients)
     res.render("./hospitalViews/profile",
     {path:'/hospital/profile',
     patients:patients, 
@@ -251,7 +251,7 @@ module.exports.login_post = async (req, res) => {
             const timeDiff = Math.abs(currDate.getTime() - initialUpdatedAt.getTime());
             if(timeDiff<=10800000)
             {
-                console.log("Email already sent check it")
+                // console.log("Email already sent check it")
                 req.flash(
                     'error_msg',
                     `${userExists.hospitalName}, we have already sent you a verify link please check your email`)
@@ -296,7 +296,7 @@ module.exports.relation_post=async (req,res)=>{
     try{
     const{shortId}=req.params; 
     const user=await User.findOne({short_id: shortId})
-    console.log('userRels',user)
+    // console.log('userRels',user)
     if(!user)
     {
         console.log('user not found')
@@ -307,16 +307,16 @@ module.exports.relation_post=async (req,res)=>{
     //console.log('user',user)
     const hospitalId=req.hospital._id
     const userId=user._id
-    console.log('hospital current',req.hospital)
+    // console.log('hospital current',req.hospital)
 
     const existRelation=await Relations.findOne({'userId':userId,'hospitalId':hospitalId})
     //const userRel= await Relations.findOne(userId)
     //console.log('userRel',userId)
-    console.log('existRelation',existRelation)
+    // console.log('existRelation',existRelation)
     if(existRelation) 
     {
 
-        console.log('relation already exists')
+        // console.log('relation already exists')
         if(existRelation.isPermitted)
         {
             console.log('The user already exists',existRelation) //NEED TO IMPLEMENT SEARCH 
@@ -324,7 +324,7 @@ module.exports.relation_post=async (req,res)=>{
             res.redirect('/hospital/profile')
         }
         else{
-            console.log('the user has not given access')
+            // console.log('the user has not given access')
             req.flash("error_msg", "The user is yet to respond to your request for access")
             res.redirect('/hospital/profile')
             //relationMail(existRelation,user,req.hostname,req.protocol)
@@ -338,7 +338,7 @@ module.exports.relation_post=async (req,res)=>{
     }).save()
     if(!relation)
     {
-        console.log('unable to create link')
+        // console.log('unable to create link')
         req.flash("error_msg", "There was an error in creating request link")
         return res.redirect('/hospital/profile')
     }
@@ -386,8 +386,8 @@ module.exports.patient_search = async (req, res) =>
            
             const patients = await Relations.find({'isPermitted': true, 'hospitalId': req.hospital._id}, "userId").populate('userId', 'name'); 
             const access= await Relations.find({'userId':result._id, 'hospitalId':req.hospital._id, 'isPermitted':true }).populate('userId','isPermitted'); 
-           console.log('searched patient',access);
-           console.log("Found patient that I am passing into the ejs file", result);
+        //    console.log('searched patient',access);
+        //    console.log("Found patient that I am passing into the ejs file", result);
            const custom_flash = "User found"; 
             res.render("./hospitalViews/profile", {path:'/hospital/search', patients:patients,access:access, foundUser:result, custom_flash:custom_flash });
             return 
@@ -408,7 +408,7 @@ module.exports.patient_search = async (req, res) =>
 module.exports.relationVerify_get = async (req, res) => {
     try {
         const relationID = req.params.id
-        console.log('relation',relationID)
+        // console.log('relation',relationID)
         const expiredTokenUser = await Relations.findOne({ _id: relationID })
         const token = req.query.tkn
         //console.log(token)
@@ -458,18 +458,18 @@ module.exports.mail_to_nominee =   async (req,res)=>{
     const{shortId}=req.params; 
     const user=await  User.findOne({short_id: shortId}).populate("nominee"); 
     const nominee = user.nominee; 
-    console.log(nominee);
-    console.log('user I found',user)
+    // console.log(nominee);
+    // console.log('user I found',user)
     if(!user)
     {
-        console.log('user not found')
+        // console.log('user not found')
         req.flash("error_msg", "User not found")
         res.redirect("/hospital/profile")
         return
     }
     if (!nominee)
     {
-        console.log('User has no nominee')
+        // console.log('User has no nominee')
         req.flash("error_msg", "User has no nominee")
         res.redirect("/hospital/profile")
         return
@@ -479,24 +479,24 @@ module.exports.mail_to_nominee =   async (req,res)=>{
     //console.log('user',user)
     const hospitalId=req.hospital._id
     const userId=user._id
-    console.log('hospital current',req.hospital)
+    // console.log('hospital current',req.hospital)
 
     const existRelation=await Relations.findOne({'userId':userId,'hospitalId':hospitalId})
     //const userRel= await Relations.findOne(userId)
     //console.log('userRel',userId)
-    console.log('existRelation',existRelation)
+    // console.log('existRelation',existRelation)
     if(existRelation) 
     {
 
-        console.log('relation already exists')
+        // console.log('relation already exists')
         if(existRelation.isPermitted)
         {
-            console.log('The user already exists',existRelation) //NEED TO IMPLEMENT SEARCH 
+            // console.log('The user already exists',existRelation) //NEED TO IMPLEMENT SEARCH 
             req.flash('error_msg','The user is already registered in your hospital')
             res.redirect('/hospital/profile')
         }
         else{
-            console.log('the user has not given access')
+            // console.log('the user has not given access')
             req.flash("error_msg", "The user is yet to respond to your request for access")
             res.redirect('/hospital/profile')
             //relationMail(existRelation,user,req.hostname,req.protocol)
@@ -510,7 +510,7 @@ module.exports.mail_to_nominee =   async (req,res)=>{
     }).save()
     if(!relation)
     {
-        console.log('unable to create link')
+        // console.log('unable to create link')
         req.flash("error_msg", "There was an error in creating request link")
         return res.redirect('/hospital/profile')
     }
@@ -531,7 +531,7 @@ module.exports.mail_to_nominee =   async (req,res)=>{
 module.exports.nomineeVerify_get = async (req, res) => {
     try {
         const relationID = req.params.id
-        console.log('relation',relationID)
+        // console.log('relation',relationID)
         const expiredTokenUser = await Relations.findOne({ _id: relationID }).populate('userId'); 
         
         const token = req.query.tkn
@@ -546,8 +546,8 @@ module.exports.nomineeVerify_get = async (req, res) => {
                 const user = expiredTokenUser.userId;
                 const userDetails = await user.populate('nominee').execPopulate(); 
                 const nominee = userDetails.nominee; 
-                console.log("nominee email fail ", nominee)
-                console.log("Not able to send mail to nominee again"); 
+                // console.log("nominee email fail ", nominee)
+                // console.log("Not able to send mail to nominee again"); 
                 relationMail(expiredTokenUser, nominee, req.hostname, req.protocol)
                 return res.redirect('/')
             }
@@ -590,7 +590,7 @@ module.exports.picupload_post=async(req,res)=>{
             res.redirect('/hospital/profile')
         }
         
-        console.log(doc);
+        // console.log(doc);
     });
     res.redirect('/hospital/profile')
 }

@@ -1,7 +1,4 @@
 const User= require('../models/User')
-const Hospital=require('../models/Hospitals')
-const Relations=require('../models/Relations')
-const jwt = require('jsonwebtoken')
 //const { isPermittedMail } = require('../config/nodemailer')
 
 module.exports.relation_post=async (req,res)=>{
@@ -14,7 +11,7 @@ module.exports.relation_post=async (req,res)=>{
         console.log('user not found')
         return
     }
-    console.log('user',user)
+    // console.log('user',user)
 
     }
     catch(e)

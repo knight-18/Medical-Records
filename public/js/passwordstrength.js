@@ -265,11 +265,11 @@ SignupButton.addEventListener("click", (e) => {
 		function checkNull(weaknesses){
 			return weaknesses.every(x => Object.is(null, x));
 		}
-		console.log(all);
+		// console.log(all);
 	if(all){
 		reasonsContainer.innerHTML = '';
 		reasonsContainer.style.display = 'none';
-		console.log(all);
+		// console.log(all);
 		if(SignupName.value.trim().length != 0 && SignupEmail.value.trim().length != 0 && SignupPhone.value.trim().length != 0)
 			document.forms["signUpform"].submit()
 	}

@@ -34,7 +34,7 @@ const signupMail = (data, host, protocol) => {
         if (error) {
             console.log('Error', error)
         } else {
-            console.log('Email sent: ' + info.response)
+            console.log('Email sent: ')
         }
     })
 }
@@ -84,7 +84,7 @@ const contactMail = (issue, type) => {
         if (error) {
             console.log('Error', error)
         } else {
-            console.log('Email sent: ' + info.response)
+            console.log('Email sent: ')
         }
     })
 }
@@ -122,7 +122,7 @@ const hospitalSignupMail = (data, host, protocol) => {
         if (error) {
             console.log('Error', error)
         } else {
-            console.log('Email sent: ' + info.response)
+            console.log('Email sent: ')
         }
     })
 }
@@ -159,7 +159,7 @@ const relationMail = (data,user, host, protocol) => {
         if (error) {
             console.log('Error', error)
         } else {
-            console.log('Email sent: ' + info.response)
+            console.log('Email sent: ')
         }
     })
 }
@@ -177,7 +177,6 @@ const passwordMail = (user,TOKEN,host,protocol)=>{
             pass: process.env.NODEMAILER_PASSWORD, // gmail password
         },
     })
-    console.log("Trying...")
     var mailOptions = {
         from: process.env.NODEMAILER_EMAIL,
         to: `${user.email}`,
@@ -191,7 +190,7 @@ const passwordMail = (user,TOKEN,host,protocol)=>{
         if (error) {
             console.log('Error', error)
         } else {
-            console.log('Email sent: ' + info.response)
+            console.log('Email sent: ')
         }
 })
 }
@@ -231,7 +230,7 @@ const nomineeMail = (ticket,nominee,user, host, protocol) => {
         if (error) {
             console.log('Error', error)
         } else {
-            console.log('Email sent: ' + info.response)
+            console.log('Email sent: ')
         }
     })
 }
